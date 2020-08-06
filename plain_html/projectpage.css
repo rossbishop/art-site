@@ -4,6 +4,7 @@
 
 body {
   color: #5a5a5a;
+  min-width: 512px;
 }
 
 
@@ -35,6 +36,8 @@ body {
 }
 
 .carousel-item > img {
+  max-width: max-content;
+  margin: auto;
   width: 100%;
   height: auto;
   display: block;
@@ -54,13 +57,13 @@ body {
 .carousel-container
 {
     max-width: 1140px;
-    background-color: #000;
+    background-color: #0f0f0f;
     margin-bottom: 2rem;
     padding-top: 20px;
     padding-bottom: 20px;
 }
 .container-wrap {
-    background-color: #000;
+    background-color: #0f0f0f;
 }
 
 /* MARKETING CONTENT
@@ -153,6 +156,5 @@ body {
 }
 
 .gallery-img {
-    width: 512px;
-    height: 512px;
+    max-width: 100%;
 }

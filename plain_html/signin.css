@@ -55,6 +55,14 @@ body {
   border-radius: 0;
 }
 
+.form-control:focus {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #fff;
+  border-radius: 0;
+  margin-right: 10px;  
+}
+
 .btn {
   border: 1px solid black;
     border-radius: 30px;

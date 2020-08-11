@@ -16,7 +16,11 @@ export default function Album() {
                   id={item.id}
                   name={item.name}
                   img={item.img}
-                  text={item.text}
+                  description={item.description}
+                  date={item.date}
+                  commentcount={item.commentcount}
+                  viewcount={item.viewcount}
+                  
                 />
               )
             }

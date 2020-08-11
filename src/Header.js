@@ -26,7 +26,7 @@ export default function Header()
                         </li>
                     </ul>
                     <form class="form-inline my-2 my-md-0">
-                        <input class="form-control" type="text" placeholder="Search">
+                        <input class="form-control" type="text" placeholder="Search"/>
                     </form>
                     <button type="button" class="btn btn-outline-info search-btn">Search</button>
                 </div>

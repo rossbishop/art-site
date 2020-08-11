@@ -1,6 +1,6 @@
 import React from 'react'
 import data from './data'
-import Card from './ProjectCard'
+import ProjectCard from './ProjectCard'
 
 export default function ProjectGrid() {
   console.log(data)

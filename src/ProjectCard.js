@@ -4,11 +4,8 @@ export default function ProjectCard(props) {
   return (
     <div className="col-md-4">
       <div className="card mb-4 shadow-sm">
-          <svg className="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
               <title>Placeholder</title>
               <img alt={props.name} className='card-img-top' src={props.img} />
-              <text x="50%" y="50%" fill="#eceeef" dy=".3em">{props.name}</text>
-          </svg>
           <div className="card-body">
               <p className="card-text project-description">{props.description}</p>
               <div className="card-text">
@@ -18,15 +15,15 @@ export default function ProjectCard(props) {
                   <div className="btn-group">
                       <button type="button" className="btn btn-sm btn-outline-secondary button-view">View</button>
                   </div>
-                  <small className="project-info-icons">{props.commentcount} 
-                      <img className="comms-img" src="https://systemuicons.com/images/icons/message_writing.svg"> / {props.revisioncount} 
-                      <img className="comms-img" src="https://systemuicons.com/images/icons/write.svg"> / {props.viewcount} 
-                      <img className="comms-img" src="https://systemuicons.com/images/icons/user_male.svg">
+                  <small className="project-info-icons"><span>{props.commentcount}</span> 
+                      <img className="comms-img" src="https://systemuicons.com/images/icons/message_writing.svg"/><span> / {props.revisioncount}</span> 
+                      <img className="comms-img" src="https://systemuicons.com/images/icons/write.svg"/><span>/ {props.viewcount}</span> 
+                      <img className="comms-img" src="https://systemuicons.com/images/icons/user_male.svg"/>
                   </small>
               </div>
-          </div>
         </div>
       </div>
     </div>
+    
   )
 }

@@ -1,5 +1,6 @@
-import Jumbotron from './Jumbotron'
-import Album from './Album'
 import Header from './Header'
+import ProjectGrid from './ProjectGrid'
+import Footer from './Footer'
 
-export {Jumbotron, Album, Header}
+
+export {Header, ProjectGrid, Footer}

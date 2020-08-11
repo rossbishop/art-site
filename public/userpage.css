@@ -166,6 +166,10 @@ a:hover {
     margin-bottom: 8px;
 }
 
-.footer-wip {
-    
+.project-name {
+    float: left;
+}
+
+.project-author {
+    float: inline;
 }

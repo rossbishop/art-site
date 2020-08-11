@@ -7,6 +7,10 @@ export default function ProjectCard(props) {
               <title>Placeholder</title>
               <img alt={props.name} className='card-img-top' src={props.img} />
           <div className="card-body">
+              <div>
+                <h5 className="project-name">{props.name} </h5>
+                <h5 className="project-author text-muted">&nbsp;by {props.username}</h5>
+              </div> 
               <p className="card-text project-description">{props.description}</p>
               <div className="card-text">
                   <small className="text-muted">{props.date}</small>

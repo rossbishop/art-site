@@ -21,6 +21,7 @@ export default function ProjectGrid() {
                 commentcount={item.commentcount}
                 viewcount={item.viewcount}
                 revisioncount={item.revisioncount}
+                username={item.username}
                 />
               )
             }

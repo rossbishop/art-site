@@ -1,9 +1,8 @@
 import React from 'react'
-import data from './data'
+import data from './FrontPageDummyData'
 import ProjectCard from './ProjectCard'
 
 export default function ProjectGrid() {
-  console.log(data)
   data.map(item => console.log(item.name))
   return (
     <div className="album py-5 bg-light">

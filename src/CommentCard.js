@@ -2,16 +2,16 @@ import React from 'react'
 
 export default function Comments(props) {
     return (
-        <div class="card comment d-flex">
-            <div class="card-header">
-                <div class="text-left"><b>"{props.shortcomment}"</b> - {props.username}</div>
-                <div class="text-right">{props.time} {props.date}</div>
+        <div className="card comment d-flex">
+            <div className="card-header">
+                <div className="text-left"><b>"{props.shortcomment}"</b> - {props.username}</div>
+                <div className="text-right">{props.time} {props.date}</div>
             </div>
-            <div class="card-body comment-text d-flex">
-                <img class="profile-img" src='https://via.placeholder.com/96' />
-                <div class="d-flex align-items-start flex-column" style="height: auto;">
-                <div class="mb-auto">{props.comment}</div>
-                    <div class="comment-reply">Like</div>
+            <div className="card-body comment-text d-flex">
+                <img className="profile-img" src='https://via.placeholder.com/96' />
+                <div className="d-flex align-items-start flex-column comment-card" />
+                <div className="mb-auto">{props.comment}
+                    <div className="comment-reply">Like</div>
                 </div>
             </div>
         </div>

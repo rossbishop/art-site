@@ -1,5 +1,7 @@
 import React from 'react'
 
+import {Link} from './Imports'
+
 export default function ProjectCard(props) {
   return (
     <div className="col-md-4">
@@ -17,7 +19,7 @@ export default function ProjectCard(props) {
               </div>
               <div className="d-flex justify-content-between align-items-center">
                   <div className="btn-group">
-                      <button type="button" className="btn btn-sm btn-outline-secondary button-view">View</button>
+                      <button type="button" className="btn btn-sm btn-outline-secondary button-view"><Link to="/projectpage">View</Link></button>
                   </div>
                   <small className="project-info-icons"><span>{props.commentcount}</span> 
                       <img className="comms-img" src="https://systemuicons.com/images/icons/message_writing.svg"/><span> / {props.revisioncount}</span> 

@@ -1,6 +1,7 @@
 import React from 'react'
 
-export default function Comments(props) {
+export default function CommentCard(props) {
+    console.log(props);
     return (
         <div className="card comment d-flex">
             <div className="card-header">

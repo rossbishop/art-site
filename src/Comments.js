@@ -1,9 +1,10 @@
 import React from 'react'
-import data from './FrontPageDummyData'
 import CommentCard from './CommentCard'
 
 export default function Comments(props) {
-    data.map(item => console.log(item.name))  
+
+console.log(props);
+
     return (
         <div class="container">
             <h3>Comments</h3>
@@ -14,7 +15,7 @@ export default function Comments(props) {
             <button type="button" class="btn btn-primary comment-button">Submit</button>
             <button type="button" class="btn btn-danger comment-button">Cancel</button>
             {
-                data.map(item => {
+                props.commentArray.map(item => {
                     return (
                         <CommentCard
                             id={item.id}

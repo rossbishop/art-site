@@ -12,15 +12,15 @@ export default function ProjectGrid() {
             data.map(item => {
               return (
                 <ProjectCard
-                id={item.id}
-                name={item.name}
-                img={item.img}
-                description={item.description}
-                date={item.date}
-                commentcount={item.commentcount}
-                viewcount={item.viewcount}
-                revisioncount={item.revisioncount}
-                username={item.username}
+                  id={item.id}
+                  name={item.name}
+                  img={item.img}
+                  description={item.description}
+                  date={item.date}
+                  commentcount={item.commentcount}
+                  viewcount={item.viewcount}
+                  revisioncount={item.revisioncount}
+                  username={item.username}
                 />
               )
             }

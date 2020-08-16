@@ -3,6 +3,7 @@ import ProjectGrid from './ProjectGrid'
 import Footer from './Footer'
 import Gallery from './Gallery'
 import Comments from './Comments'
+import ProjectModule from './ProjectModule'
 
 import {
     BrowserRouter as Router,
@@ -12,4 +13,4 @@ import {
 } from "react-router-dom";
 
 
-export {Header, ProjectGrid, Footer, Gallery, Comments, Router, Switch, Route, Link}
+export {Header, ProjectGrid, Footer, Gallery, Comments, ProjectModule, Router, Switch, Route, Link}

@@ -6,9 +6,9 @@ export default function Gallery(props) {
             <div className="container-fluid d-flex justify-content-center carousel-container">
                 <div id="myCarousel" className="carousel slide" data-ride="carousel" data-interval="0">
                     <ol className="carousel-indicators">
-                        <li data-target="#myCarousel" data-slide-to="0" className="active"><button type="button" className="btn btn-info btn-sm" onClick={ () => {props.projectCallback(10)} }>10</button></li>
-                        <li data-target="#myCarousel" data-slide-to="1"><button type="button" className="btn btn-secondary btn-sm" onClick={ () => {props.projectCallback(9)} }>9</button></li>
-                        <li data-target="#myCarousel" data-slide-to="2"><button type="button" className="btn btn-secondary btn-sm" onClick={ () => {props.projectCallback(8)} }>8</button></li>
+                        <li data-target="#myCarousel" data-slide-to="0" className="active"><button type="button" className="btn btn-info btn-sm" onClick={ () => {props.projectCallback(9)} }>10</button></li>
+                        <li data-target="#myCarousel" data-slide-to="1"><button type="button" className="btn btn-secondary btn-sm" onClick={ () => {props.projectCallback(8)} }>9</button></li>
+                        <li data-target="#myCarousel" data-slide-to="2"><button type="button" className="btn btn-secondary btn-sm" onClick={ () => {props.projectCallback(7)} }>8</button></li>
                     </ol>
                     <div className="carousel-inner">
                         <div className="carousel-item active">

@@ -14,9 +14,9 @@ export default function ProjectModule(props) {
                 <div className="container-fluid d-flex justify-content-center carousel-container">
                     <div id="myCarousel" className="carousel slide" data-ride="carousel" data-interval="0">
                         <ol className="carousel-indicators">
-                            <li data-target="#myCarousel" data-slide-to="0" className="active"><button type="button" className="btn btn-info btn-sm" onClick={ () => {updateCurrentProject({currentId: 9}); updateCurrentComments({currentComments: props.projectData[currentProjectState.currentId].comments})}}>10</button></li>
-                            <li data-target="#myCarousel" data-slide-to="1"><button type="button" className="btn btn-secondary btn-sm"               onClick={ () => {updateCurrentProject({currentId: 8}); updateCurrentComments({currentComments: props.projectData[currentProjectState.currentId].comments})}}>9</button></li>
-                            <li data-target="#myCarousel" data-slide-to="2"><button type="button" className="btn btn-secondary btn-sm"               onClick={ () => {updateCurrentProject({currentId: 7}); updateCurrentComments({currentComments: props.projectData[currentProjectState.currentId].comments})}}>8</button></li>
+                            <li data-target="#myCarousel" data-slide-to="0" className="active"><button type="button" className="btn btn-info btn-sm" onClick={ () => {updateCurrentProject({currentId: 9}); updateCurrentComments({currentComments: props.projectData[9].comments})}}>10</button></li>
+                            <li data-target="#myCarousel" data-slide-to="1"><button type="button" className="btn btn-secondary btn-sm"               onClick={ () => {updateCurrentProject({currentId: 8}); updateCurrentComments({currentComments: props.projectData[8].comments})}}>9</button></li>
+                            <li data-target="#myCarousel" data-slide-to="2"><button type="button" className="btn btn-secondary btn-sm"               onClick={ () => {updateCurrentProject({currentId: 7}); updateCurrentComments({currentComments: props.projectData[7].comments})}}>8</button></li>
                         </ol>
                         <div className="carousel-inner">
                             <div className="carousel-item active">
@@ -69,7 +69,6 @@ export default function ProjectModule(props) {
             <button type="button" class="btn btn-danger comment-button">Cancel</button>
             {
                 currentComments.currentComments.map(item => {
-                //props.projectData[currentProjectState.currentId].comments.map(item => {
                     return (
                         <CommentCard
                             id={item.id}
@@ -83,7 +82,7 @@ export default function ProjectModule(props) {
                     )
                 })
             }
-        </div>
+            </div>
         </Fragment>
     )
 }

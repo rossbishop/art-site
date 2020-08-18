@@ -1,7 +1,7 @@
 const data = [
   {
     id: 1,
-    name: 'Poo Morgan',
+    name: 'Meff Morgan',
     img: 'https://vignette.wikia.nocookie.net/reddeadredemption/images/5/52/RDR2_Arthur_Morgan_Default.jpg/revision/latest?cb=20200602191534',
     description: 'Arthur Morgan is the central character and main protagonist of Red Dead Redemption 2.',
     date: '5/4/19',

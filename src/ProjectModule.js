@@ -1,16 +1,22 @@
-import React, {Fragment} from 'react'
+import React, {Fragment, useState} from 'react'
 import CommentCard from './CommentCard'
+//import { render } from 'sass'
 
 export default function ProjectModule(props) {
+
+    const [currentProjectState, updateCurrentProject] = useState({currentId: props.initialProjectDataState})
+
+    const [currentComments, updateCurrentComments] = useState({currentComments: props.projectData[currentProjectState.currentId].comments})
+
     return (
         <Fragment>
             <div className="container-wrap">
                 <div className="container-fluid d-flex justify-content-center carousel-container">
                     <div id="myCarousel" className="carousel slide" data-ride="carousel" data-interval="0">
                         <ol className="carousel-indicators">
-                            <li data-target="#myCarousel" data-slide-to="0" className="active"><button type="button" className="btn btn-info btn-sm">9</button></li>
-                            <li data-target="#myCarousel" data-slide-to="1"><button type="button" className="btn btn-secondary btn-sm">8</button></li>
-                            <li data-target="#myCarousel" data-slide-to="2"><button type="button" className="btn btn-secondary btn-sm">7</button></li>
+                            <li data-target="#myCarousel" data-slide-to="0" className="active"><button type="button" className="btn btn-info btn-sm" onClick={ () => {updateCurrentProject({currentId: 9}); updateCurrentComments({currentComments: props.projectData[currentProjectState.currentId].comments})}}>10</button></li>
+                            <li data-target="#myCarousel" data-slide-to="1"><button type="button" className="btn btn-secondary btn-sm"               onClick={ () => {updateCurrentProject({currentId: 8}); updateCurrentComments({currentComments: props.projectData[currentProjectState.currentId].comments})}}>9</button></li>
+                            <li data-target="#myCarousel" data-slide-to="2"><button type="button" className="btn btn-secondary btn-sm"               onClick={ () => {updateCurrentProject({currentId: 7}); updateCurrentComments({currentComments: props.projectData[currentProjectState.currentId].comments})}}>8</button></li>
                         </ol>
                         <div className="carousel-inner">
                             <div className="carousel-item active">
@@ -62,7 +68,8 @@ export default function ProjectModule(props) {
             <button type="button" class="btn btn-primary comment-button">Submit</button>
             <button type="button" class="btn btn-danger comment-button">Cancel</button>
             {
-                props.commentArray.map(item => {
+                currentComments.currentComments.map(item => {
+                //props.projectData[currentProjectState.currentId].comments.map(item => {
                     return (
                         <CommentCard
                             id={item.id}
@@ -77,6 +84,6 @@ export default function ProjectModule(props) {
                 })
             }
         </div>
-    </Fragment>
+        </Fragment>
     )
 }

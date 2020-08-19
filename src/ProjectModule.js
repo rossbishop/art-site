@@ -1,12 +1,13 @@
 import React, {Fragment, useState} from 'react' 
 import CommentCard from './CommentCard'
-//import { render } from 'sass'
+import GalleryListItem from './GalleyListItem'
 
 export default function ProjectModule(props) {
 
     const [currentProjectState, updateCurrentProject] = useState({currentId: props.initialProjectDataState})
 
-    const [currentComments, updateCurrentComments] = useState({currentComments: props.projectData[currentProjectState.currentId].comments})
+    const [commentDataState, updateCommentData] = useState({commentData: props.projectData[currentProjectState.currentId].comments})
+    const [galleryDataState, updateGalleryData] = useState({galleryData: props.projectData})
 
     return (
         <Fragment>
@@ -14,12 +15,42 @@ export default function ProjectModule(props) {
                 <div className="container-fluid d-flex justify-content-center carousel-container">
                     <div id="myCarousel" className="carousel slide" data-ride="carousel" data-interval="0">
                         <ol className="carousel-indicators">
-                            <li data-target="#myCarousel" data-slide-to="0" className="active"><button type="button" className="btn btn-info btn-sm" onClick={ () => {updateCurrentProject({currentId: 9}); updateCurrentComments({currentComments: props.projectData[9].comments})}}>10</button></li>
+                            
+                            
+                            return (
+                                <GalleryListItem
+                                    id={currentProjectState.currentId}
+                                />
+                            )
+
+                            {
+                                galleryDataState.galleryData.map(item => {
+                                    return (
+                                        <GalleryListItem
+                                            id={(item.id)+1}
+                                        />
+                                    )
+                                })
+                            }
+                            {/*<li data-target="#myCarousel" data-slide-to="0" className="active"><button type="button" className="btn btn-info btn-sm" onClick={ () => {updateCurrentProject({currentId: 9}); updateCurrentComments({currentComments: props.projectData[9].comments})}}>10</button></li>
                             <li data-target="#myCarousel" data-slide-to="1"><button type="button" className="btn btn-secondary btn-sm"               onClick={ () => {updateCurrentProject({currentId: 8}); updateCurrentComments({currentComments: props.projectData[8].comments})}}>9</button></li>
-                            <li data-target="#myCarousel" data-slide-to="2"><button type="button" className="btn btn-secondary btn-sm"               onClick={ () => {updateCurrentProject({currentId: 7}); updateCurrentComments({currentComments: props.projectData[7].comments})}}>8</button></li>
+                            <li data-target="#myCarousel" data-slide-to="2"><button type="button" className="btn btn-secondary btn-sm"               onClick={ () => {updateCurrentProject({currentId: 7}); updateCurrentComments({currentComments: props.projectData[7].comments})}}>8</button></li>*/}
                         </ol>
                         <div className="carousel-inner">
-                            <div className="carousel-item active">
+                            {
+                                galleryDataState.galleryData.map(item => {
+                                    return (
+                                        <GalleryListItem
+                                            id={(item.id)+1}
+                                            imgSrc={item.imgSrc}
+                                            name={item.name}
+                                            description={item.description}
+                                        />
+                                    )
+                                })
+                            }   
+                            
+                            {/*<div className="carousel-item active">
                                 <img className="gallery-img" src={require("./img/destination_tokyo.jpg")} alt="..."/>
                                 <div className="container">
                                     <div className="carousel-caption">
@@ -45,7 +76,7 @@ export default function ProjectModule(props) {
                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam commodo nulla ut dictum venenatis. Etiam tincidunt est vestibulum orci lobortis, a vestibulum justo interdum. Nam non lacus mollis, maximus mauris sed, maximus lacus. Sed interdum efficitur tempor. Pellentesque nibh ipsum, accumsan vel augue vitae, posuere viverra nulla. Aliquam eu lacinia odio. Mauris congue dapibus eros et dapibus.</p>
                                     </div>
                                 </div>
-                            </div>
+                            </div>*/}
                         </div>
 
                         <a className="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
@@ -68,7 +99,7 @@ export default function ProjectModule(props) {
             <button type="button" class="btn btn-primary comment-button">Submit</button>
             <button type="button" class="btn btn-danger comment-button">Cancel</button>
             {
-                currentComments.currentComments.map(item => {
+                commentDataState.commentDataState.map(item => {
                     return (
                         <CommentCard
                             id={item.id}

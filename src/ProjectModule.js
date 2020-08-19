@@ -1,6 +1,7 @@
 import React, {Fragment, useState} from 'react' 
 import CommentCard from './CommentCard'
 import GalleryListItem from './GalleryListItem'
+import GalleryItem from './GalleryItem'
 
 export default function ProjectModule(props) {
 
@@ -14,24 +15,22 @@ export default function ProjectModule(props) {
                         <ol className="carousel-indicators">
 
                             {
-                                props.projectData.map(item => {
+                                props.projectData.slice().reverse().map(item => {
                                     return (
                                         <GalleryListItem
                                             id={item.id}
+                                            isLatest={props.projectData.length}
                                             projectUpdateState={updateCurrentProject}
                                         />
                                     )
                                 })
                             }
-                            {/*<li data-target="#myCarousel" data-slide-to="0" className="active"><button type="button" className="btn btn-info btn-sm" onClick={ () => {updateCurrentProject({currentId: 9}); updateCurrentComments({currentComments: props.projectData[9].comments})}}>10</button></li>
-                            <li data-target="#myCarousel" data-slide-to="1"><button type="button" className="btn btn-secondary btn-sm"               onClick={ () => {updateCurrentProject({currentId: 8}); updateCurrentComments({currentComments: props.projectData[8].comments})}}>9</button></li>
-                            <li data-target="#myCarousel" data-slide-to="2"><button type="button" className="btn btn-secondary btn-sm"               onClick={ () => {updateCurrentProject({currentId: 7}); updateCurrentComments({currentComments: props.projectData[7].comments})}}>8</button></li>*/}
                         </ol>
                         <div className="carousel-inner">
-                            {/*
-                                galleryDataState.galleryData.map(item => {
+                            {
+                                props.projectData.map(item => {
                                     return (
-                                        <GalleryListItem
+                                        <GalleryItem
                                             id={(item.id)+1}
                                             imgSrc={item.imgSrc}
                                             name={item.name}
@@ -39,7 +38,7 @@ export default function ProjectModule(props) {
                                         />
                                     )
                                 })
-                            */}   
+                            }   
                             
                             {/*<div className="carousel-item active">
                                 <img className="gallery-img" src={require("./img/destination_tokyo.jpg")} alt="..."/>

@@ -1,13 +1,10 @@
 import React, {Fragment, useState} from 'react' 
 import CommentCard from './CommentCard'
-import GalleryListItem from './GalleyListItem'
+import GalleryListItem from './GalleryListItem'
 
 export default function ProjectModule(props) {
 
     const [currentProjectState, updateCurrentProject] = useState({currentId: props.initialProjectDataState})
-
-    const [commentDataState, updateCommentData] = useState({commentData: props.projectData[currentProjectState.currentId].comments})
-    const [galleryDataState, updateGalleryData] = useState({galleryData: props.projectData})
 
     return (
         <Fragment>
@@ -15,19 +12,13 @@ export default function ProjectModule(props) {
                 <div className="container-fluid d-flex justify-content-center carousel-container">
                     <div id="myCarousel" className="carousel slide" data-ride="carousel" data-interval="0">
                         <ol className="carousel-indicators">
-                            
-                            
-                            return (
-                                <GalleryListItem
-                                    id={currentProjectState.currentId}
-                                />
-                            )
 
                             {
-                                galleryDataState.galleryData.map(item => {
+                                props.projectData.map(item => {
                                     return (
                                         <GalleryListItem
-                                            id={(item.id)+1}
+                                            id={item.id}
+                                            projectUpdateState={updateCurrentProject}
                                         />
                                     )
                                 })
@@ -37,7 +28,7 @@ export default function ProjectModule(props) {
                             <li data-target="#myCarousel" data-slide-to="2"><button type="button" className="btn btn-secondary btn-sm"               onClick={ () => {updateCurrentProject({currentId: 7}); updateCurrentComments({currentComments: props.projectData[7].comments})}}>8</button></li>*/}
                         </ol>
                         <div className="carousel-inner">
-                            {
+                            {/*
                                 galleryDataState.galleryData.map(item => {
                                     return (
                                         <GalleryListItem
@@ -48,7 +39,7 @@ export default function ProjectModule(props) {
                                         />
                                     )
                                 })
-                            }   
+                            */}   
                             
                             {/*<div className="carousel-item active">
                                 <img className="gallery-img" src={require("./img/destination_tokyo.jpg")} alt="..."/>
@@ -99,7 +90,7 @@ export default function ProjectModule(props) {
             <button type="button" class="btn btn-primary comment-button">Submit</button>
             <button type="button" class="btn btn-danger comment-button">Cancel</button>
             {
-                commentDataState.commentDataState.map(item => {
+                props.projectData[currentProjectState.currentId].comments.map(item => {
                     return (
                         <CommentCard
                             id={item.id}

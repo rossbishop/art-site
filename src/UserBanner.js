@@ -1,4 +1,5 @@
 import React from 'react'
+import UserSocialIcon from './UserSocialIcon'
 
 export default function UserBanner(props) {
 
@@ -21,7 +22,19 @@ export default function UserBanner(props) {
                             </div>
                         </div>
                         <div className="col-6 d-flex align-items-end flex-column">
-                            <div className="icon-container">
+                            {
+                                props.userData[0].social.map(item => {
+                                return (
+                                            <UserSocialIcon
+                                                socialtype={item.type}
+                                                username={item.username}
+                                            />
+                                        )
+                                    }
+                                )
+                            }
+                            
+                            {/*<div className="icon-container">
                                 <div className="row">
                                     <p className="icon-tag">social tag 1</p>
                                     <a href="instagram.com">
@@ -44,7 +57,7 @@ export default function UserBanner(props) {
                                         <img className="social-img" src="https://via.placeholder.com/48"/>
                                     </a>
                                 </div>
-                            </div>
+                            </div>*/}
                         </div>
                     </div>
                 </div>

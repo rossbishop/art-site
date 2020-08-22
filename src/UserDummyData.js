@@ -8,7 +8,11 @@ const userData =
         location: 'Jeffsville',
         description: 'I am an artist and I make art (also my id is 0)',
         projects:  { id: 1, id: 2 },
-        social: {instagram: 'jeffy', twitter: 'sneffy'},
+        social: [ 
+            {type: 'instagram', username: 'jeffy'},
+            {type: 'twitter', username: 'sneffy'},
+            {type: 'facebook', username: 'zucky'}
+        ]
     }, 
     {
         id: 1,
@@ -18,7 +22,10 @@ const userData =
         location: 'Sneffsonia',
         description: 'I am an artist and I make art (also my id is 1)',
         projects:  { id: 3, id: 4 },
-        social: {instagram: 'peffy', twitter: 'beffy'},
+        social: [ 
+            {type: 'instagram', username: 'jeffy'},
+            {type: 'twitter', username: 'sneffy'}
+        ]
     }, 
     {
         id: 2,
@@ -28,7 +35,10 @@ const userData =
         location: 'Weejusland',
         description: 'I am an artist and I make art (also my id is 2)',
         projects:  { id: 5, id: 6 },
-        social: {instagram: 'kreffy', twitter: 'teffy'},
+        social: [ 
+            {type: 'instagram', username: 'jeffy'},
+            {type: 'twitter', username: 'sneffy'}
+        ]
     }, 
     ]
 

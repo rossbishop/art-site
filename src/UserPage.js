@@ -3,7 +3,6 @@ import React, { useState, useCallback } from 'react';
 import data from './RevisionDummyData'
 import projectDataImport from './ProjectDummyData'
 import UserBanner from './UserBanner'
-import UserProjects from './UserProjects'
 import ProjectGrid from './ProjectGrid'
 import UserData from './UserDummyData'
 

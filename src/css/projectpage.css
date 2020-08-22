@@ -48,6 +48,7 @@ body {
 .carousel-indicators li {
     text-indent: 0px;
     color: #fff;
+    background-color: #ff0000;
     text-align: center;
     width: 0px;
     height: 0px;

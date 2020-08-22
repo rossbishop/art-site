@@ -2,7 +2,7 @@ const apiCall =
 [
   {
     id: 0,
-    imgrSrc: 'https://s.abcnews.com/images/International/GTY_putin_shirtless_horse_sk_140402_4x3_992.jpg',
+    imgSrc: 'https://s.abcnews.com/images/International/GTY_putin_shirtless_horse_sk_140402_4x3_992.jpg',
     name: 'name1',
     description: 'desc1',
     comments: [
@@ -13,7 +13,7 @@ const apiCall =
   }, 
   {
     id: 1,
-    imgrSrc: 'https://s.abcnews.com/images/International/GTY_putin_shirtless_horse_sk_140402_4x3_992.jpg',
+    imgSrc: 'https://s.abcnews.com/images/International/GTY_putin_shirtless_horse_sk_140402_4x3_992.jpg',
     name: 'name2',
     description: 'desc2',
     comments: [
@@ -24,7 +24,7 @@ const apiCall =
   },
   {
     id: 2,
-    imgrSrc: 'https://s.abcnews.com/images/International/GTY_putin_shirtless_horse_sk_140402_4x3_992.jpg',
+    imgSrc: 'https://s.abcnews.com/images/International/GTY_putin_shirtless_horse_sk_140402_4x3_992.jpg',
     name: 'name3',
     description: 'desc3',
     comments: [
@@ -35,7 +35,7 @@ const apiCall =
   },
   {
     id: 3,
-    imgrSrc: 'https://s.abcnews.com/images/International/GTY_putin_shirtless_horse_sk_140402_4x3_992.jpg',
+    imgSrc: 'https://s.abcnews.com/images/International/GTY_putin_shirtless_horse_sk_140402_4x3_992.jpg',
     name: 'name4',
     description: 'desc4',
     comments: [
@@ -46,7 +46,7 @@ const apiCall =
   },
   {
     id: 4,
-    imgrSrc: 'https://s.abcnews.com/images/International/GTY_putin_shirtless_horse_sk_140402_4x3_992.jpg',
+    imgSrc: 'https://s.abcnews.com/images/International/GTY_putin_shirtless_horse_sk_140402_4x3_992.jpg',
     name: 'name5',
     description: 'desc5',
     comments: [
@@ -57,7 +57,7 @@ const apiCall =
   },
   {
     id: 5,
-    imgrSrc: 'https://s.abcnews.com/images/International/GTY_putin_shirtless_horse_sk_140402_4x3_992.jpg',
+    imgSrc: 'https://s.abcnews.com/images/International/GTY_putin_shirtless_horse_sk_140402_4x3_992.jpg',
     name: 'name6',
     description: 'desc6',
     comments: [
@@ -68,7 +68,7 @@ const apiCall =
   },
    {
     id: 6,
-    imgrSrc: 'https://s.abcnews.com/images/International/GTY_putin_shirtless_horse_sk_140402_4x3_992.jpg',
+    imgSrc: 'https://s.abcnews.com/images/International/GTY_putin_shirtless_horse_sk_140402_4x3_992.jpg',
     name: 'name7',
     description: 'desc7',
     comments: [
@@ -79,7 +79,7 @@ const apiCall =
   },
   {
     id: 7,
-    imgrSrc: 'https://s.abcnews.com/images/International/GTY_putin_shirtless_horse_sk_140402_4x3_992.jpg',
+    imgSrc: 'https://s.abcnews.com/images/International/GTY_putin_shirtless_horse_sk_140402_4x3_992.jpg',
     name: 'name8',
     description: 'desc8',
     comments: [
@@ -90,7 +90,7 @@ const apiCall =
   },
   {
     id: 8,
-    imgrSrc: 'https://s.abcnews.com/images/International/GTY_putin_shirtless_horse_sk_140402_4x3_992.jpg',
+    imgSrc: 'https://s.abcnews.com/images/International/GTY_putin_shirtless_horse_sk_140402_4x3_992.jpg',
     name: 'name9',
     description: 'desc9',
     comments: [
@@ -101,7 +101,7 @@ const apiCall =
   },
   {
     id: 9,
-    imgrSrc: 'https://s.abcnews.com/images/International/GTY_putin_shirtless_horse_sk_140402_4x3_992.jpg',
+    imgSrc: 'https://s.abcnews.com/images/International/GTY_putin_shirtless_horse_sk_140402_4x3_992.jpg',
     name: 'name10',
     description: 'desc10',
     comments: [

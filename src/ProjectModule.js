@@ -2,6 +2,7 @@ import React, {Fragment, useState} from 'react'
 import CommentCard from './CommentCard'
 import GalleryListItem from './GalleryListItem'
 import GalleryItem from './GalleryItem'
+import TestCarousel from './TestCarousel'
 
 export default function ProjectModule(props) {
 
@@ -11,15 +12,16 @@ export default function ProjectModule(props) {
         <Fragment>
             <div className="container-wrap">
                 <div className="container-fluid d-flex justify-content-center carousel-container">
+
                     <div id="myCarousel" className="carousel slide" data-ride="carousel" data-interval="0">
                         <ol className="carousel-indicators">
-
                             {
-                                props.projectData.slice().reverse().map(item => {
+                                props.projectData.map(item => {
                                     return (
                                         <GalleryListItem
                                             id={item.id}
                                             isLatest={props.projectData.length}
+                                            selected={currentProjectState.currentId}
                                             projectUpdateState={updateCurrentProject}
                                         />
                                     )
@@ -32,6 +34,8 @@ export default function ProjectModule(props) {
                                     return (
                                         <GalleryItem
                                             id={(item.id)+1}
+                                            isLatest={props.projectData.length}
+                                            selected={currentProjectState.currentId}
                                             imgSrc={item.imgSrc}
                                             name={item.name}
                                             description={item.description}
@@ -40,33 +44,6 @@ export default function ProjectModule(props) {
                                 })
                             }   
                             
-                            {/*<div className="carousel-item active">
-                                <img className="gallery-img" src={require("./img/destination_tokyo.jpg")} alt="..."/>
-                                <div className="container">
-                                    <div className="carousel-caption">
-                                        <h5>Latest Revision</h5>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam commodo nulla ut dictum venenatis. Etiam tincidunt est vestibulum orci lobortis, a vestibulum justo interdum. Nam non lacus mollis, maximus mauris sed, maximus lacus. Sed interdum efficitur tempor. Pellentesque nibh ipsum, accumsan vel augue vitae, posuere viverra nulla. Aliquam eu lacinia odio. Mauris congue dapibus eros et dapibus.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="carousel-item">
-                                <img className="gallery-img" src={require("./img/mustard-chef.jpg")} alt="..."/>
-                                <div className="container">
-                                    <div className="carousel-caption">
-                                        <h5>Latest Revision</h5>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam commodo nulla ut dictum venenatis. Etiam tincidunt est vestibulum orci lobortis, a vestibulum justo interdum. Nam non lacus mollis, maximus mauris sed, maximus lacus. Sed interdum efficitur tempor. Pellentesque nibh ipsum, accumsan vel augue vitae, posuere viverra nulla. Aliquam eu lacinia odio. Mauris congue dapibus eros et dapibus.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="carousel-item">
-                                <img className="gallery-img" src={require("./img/pretty-pictchur.jpg")} alt="..."/>
-                                <div className="container">
-                                    <div className="carousel-caption">
-                                        <h5>Latest Revision</h5>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam commodo nulla ut dictum venenatis. Etiam tincidunt est vestibulum orci lobortis, a vestibulum justo interdum. Nam non lacus mollis, maximus mauris sed, maximus lacus. Sed interdum efficitur tempor. Pellentesque nibh ipsum, accumsan vel augue vitae, posuere viverra nulla. Aliquam eu lacinia odio. Mauris congue dapibus eros et dapibus.</p>
-                                    </div>
-                                </div>
-                            </div>*/}
                         </div>
 
                         <a className="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
@@ -77,7 +54,8 @@ export default function ProjectModule(props) {
                             <span className="carousel-control-next-icon" aria-hidden="true"></span>
                             <span className="sr-only">Next</span>
                         </a>
-                    </div>
+
+                        </div>
                 </div>
             </div>
             <div class="container">

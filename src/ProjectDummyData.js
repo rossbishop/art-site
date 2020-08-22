@@ -6,7 +6,7 @@ const apiCall =
     name: 'name1',
     description: 'desc1',
     comments: [
-      { id: 1, shortcomment: 'ONE!', username: 'Jeff', time: '10:01', date: '01/05/2020', likes: 10, comment: 'Manamajeb...' },
+      { id: 1, shortcomment: 'ONE!', username: 'Beff', time: '10:01', date: '01/05/2020', likes: 10, comment: 'Manamajeb...' },
       { id: 2, shortcomment: 'ONE!?', username: 'Sneff', time: '10:01', date: '01/05/2020', likes: 10, comment: 'Wooptie doo Basil!' },
       { id: 3, shortcomment: 'ONE!', username: 'Pneff', time: '10:01', date: '01/05/2020', likes: 10, comment: 'UUUNF' },
     ]

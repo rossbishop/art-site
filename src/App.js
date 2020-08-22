@@ -2,6 +2,7 @@ import React from 'react';
 import {Header, ProjectGrid, Footer} from './Imports.js'
 import Home from './Home'
 import ProjectPage from './ProjectPage'
+import UserPage from './UserPage'
 
 import {
   BrowserRouter as Router,
@@ -14,6 +15,10 @@ function App() {
   return (
     <>
       <Switch>
+        <Route path="/userpage">
+          <UserPage />
+        </Route>
+        
         <Route path="/projectpage">
           <ProjectPage />
         </Route>

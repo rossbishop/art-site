@@ -71,7 +71,6 @@ export default function ProjectModule(props) {
                     return (
                         <CommentCard
                             id={item.id}
-                            shortcomment={item.shortcomment}
                             username={item.username}
                             time={item.time}
                             date={item.date}

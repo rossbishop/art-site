@@ -1,11 +1,10 @@
 import React from 'react'
 
 export default function CommentCard(props) {
-    console.log(props);
     return (
         <div className="card comment d-flex">
             <div className="card-header">
-                <div className="text-left"><b>"{props.shortcomment}"</b> - {props.username}</div>
+                <div className="text-left">by <b>{props.username}</b></div>
                 <div className="text-right">{props.time} {props.date}</div>
             </div>
             <div className="card-body comment-text d-flex">

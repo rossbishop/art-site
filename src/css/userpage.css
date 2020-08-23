@@ -167,3 +167,11 @@ a:hover {
     width: 100%;
     border-radius: 5px;
 }
+
+.project-title {
+
+}
+
+.project-text {
+    font-size: 18px;
+}

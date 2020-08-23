@@ -16,11 +16,11 @@ export default function ProjectModule(props) {
                     <div id="myCarousel" className="carousel slide" data-ride="carousel" data-interval="0">
                         <ol className="carousel-indicators">
                             {
-                                props.projectData.map(item => {
+                                props.projectRevisionData.map(item => {
                                     return (
                                         <GalleryListItem
                                             id={item.id}
-                                            isLatest={props.projectData.length}
+                                            isLatest={props.projectRevisionData.length}
                                             selected={currentProjectState.currentId}
                                             projectUpdateState={updateCurrentProject}
                                         />
@@ -30,11 +30,11 @@ export default function ProjectModule(props) {
                         </ol>
                         <div className="carousel-inner">
                             {
-                                props.projectData.map(item => {
+                                props.projectRevisionData.map(item => {
                                     return (
                                         <GalleryItem
                                             id={(item.id)+1}
-                                            isLatest={props.projectData.length}
+                                            isLatest={props.projectRevisionData.length}
                                             selected={currentProjectState.currentId}
                                             imgSrc={item.imgSrc}
                                             name={item.name}
@@ -59,7 +59,9 @@ export default function ProjectModule(props) {
                 </div>
             </div>
             <div class="container">
-            <h3>Comments</h3>
+            <h3>{props.projectDetails.projectName} by <a href="/userpage">{props.projectDetails.userName}</a></h3>
+            <p class="project-text">{props.projectDetails.projectDescription}</p>
+            <h4>Comments</h4>
             <div class="form-group">
                 <label for="commentFormInput1">Type a comment:</label>
                 <textarea class="form-control comment-box" id="commentFormTextArea1" rows="1"></textarea>
@@ -67,7 +69,7 @@ export default function ProjectModule(props) {
             <button type="button" class="btn btn-primary comment-button">Submit</button>
             <button type="button" class="btn btn-danger comment-button">Cancel</button>
             {
-                props.projectData[currentProjectState.currentId].comments.map(item => {
+                props.projectRevisionData[currentProjectState.currentId].comments.map(item => {
                     return (
                         <CommentCard
                             id={item.id}

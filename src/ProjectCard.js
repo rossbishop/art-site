@@ -11,7 +11,7 @@ export default function ProjectCard(props) {
           <div className="card-body">
               <div>
                 <h5 className="project-name">{props.name} </h5>
-                <h5 className="project-author text-muted">&nbsp;by {props.username}</h5>
+                <h5 className="project-author text-muted">&nbsp;by <a href="/userpage">{props.username}</a></h5>
               </div> 
               <p className="card-text project-description">{props.description}</p>
               <div className="card-text">

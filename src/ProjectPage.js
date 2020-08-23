@@ -12,7 +12,8 @@ function ProjectPage() {
             <Header />
             <ProjectModule 
                 initialProjectDataState={(projectDataImport.length)-1}
-                projectData={projectDataImport}
+                projectRevisionData={projectDataImport[0].revisions}
+                projectDetails={projectDataImport[0]}
             />
             <Footer />
         </>

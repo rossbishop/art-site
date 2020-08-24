@@ -3,6 +3,7 @@ import {Header, ProjectGrid, Footer} from './Imports.js'
 import Home from './Home'
 import ProjectPage from './ProjectPage'
 import UserPage from './UserPage'
+import ProfileUpdatePage from './ProfileUpdatePage'
 
 import {
   BrowserRouter as Router,
@@ -15,6 +16,10 @@ function App() {
   return (
     <>
       <Switch>
+        <Route path="/updateprofile">
+          <ProfileUpdatePage />
+        </Route>
+
         <Route path="/userpage">
           <UserPage />
         </Route>

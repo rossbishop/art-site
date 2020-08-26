@@ -1,7 +1,7 @@
 import {Header, ProjectGrid, Footer} from './Imports.js'
 import React from 'react';
 
-import './css/userpage.css';
+import styleSheet from './css/userpage.css';
 
 function Home() {
     return (

@@ -13,7 +13,7 @@ export default function ControlledCarousel(props) {
     return (
             <Carousel id="galleryCarousel" activeIndex={index} onSelect={handleSelect} controls={true} interval={null} indicators={false}>
                 <ol className="carousel-indicators">
-                    <li data-target="#galleryCarousel" data-slide-to="1" class="active"></li>
+                    <li data-target="#galleryCarousel" data-slide-to="1" className="active"></li>
                     <li data-target="#galleryCarousel" data-slide-to="2"></li>
                     <li data-target="#galleryCarousel" data-slide-to="3"></li>
                 </ol>

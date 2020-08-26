@@ -58,16 +58,16 @@ export default function ProjectModule(props) {
                         </div>
                 </div>
             </div>
-            <div class="container">
+            <div className="container">
             <h3>{props.projectDetails.projectName} by <a href="/userpage">{props.projectDetails.userName}</a></h3>
-            <p class="project-text">{props.projectDetails.projectDescription}</p>
+            <p className="project-text">{props.projectDetails.projectDescription}</p>
             <h4>Comments</h4>
-            <div class="form-group">
+            <div className="form-group">
                 <label for="commentFormInput1">Type a comment:</label>
-                <textarea class="form-control comment-box" id="commentFormTextArea1" rows="1"></textarea>
+                <textarea className="form-control comment-box" id="commentFormTextArea1" rows="1"></textarea>
             </div>
-            <button type="button" class="btn btn-primary comment-button">Submit</button>
-            <button type="button" class="btn btn-danger comment-button">Cancel</button>
+            <button type="button" className="btn btn-primary comment-button">Submit</button>
+            <button type="button" className="btn btn-danger comment-button">Cancel</button>
             {
                 props.projectRevisionData[currentProjectState.currentId].comments.map(item => {
                     return (

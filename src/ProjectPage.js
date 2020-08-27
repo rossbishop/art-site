@@ -3,8 +3,6 @@ import React, { useState, useCallback } from 'react';
 import data from './RevisionDummyData'
 import projectDataImport from './ProjectDummyData'
 
-import './css/projectpage.css';
-
 function ProjectPage() {
 
     return (

@@ -1,0 +1,13 @@
+.projectText {
+    font-size: 18px;
+}
+
+.commentBox {
+    resize: none;
+    border-bottom: 1px solid #000;
+}
+
+.commentButton {
+    margin-bottom: 15px;
+    margin-right: 5px;
+}

@@ -1,13 +1,17 @@
 import React from 'react'
 
+import 'bootstrap/dist/css/bootstrap.css'
+import userSocialIconStyles from './css/usersocialicon.module.css'
+import cx from 'classnames'
+
 export default function UserSocialIcon(props) {
 
     return (
         <div className="icon-container">
             <div className="row">
-                <p className="icon-tag">{props.username}</p>
+                <p className={userSocialIconStyles.iconTag}>{props.username}</p>
                 <a href={socialString(props.socialtype)}>
-                    <img className="social-img" src={socialImage(props.socialtype)}/>
+                    <img className={userSocialIconStyles.socialImg} src={socialImage(props.socialtype)}/>
                 </a>
             </div>
         </div>

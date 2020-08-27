@@ -1,11 +1,19 @@
-//import {Header, ProjectGrid, Footer} from './Imports.js'
 import React from 'react';
-//import ProfileUpdate from './ProfileUpdate'
 import Header from './Header'
+import ProjectModule from './ProjectModule'
+
+import projectDataImport from './ProjectDummyData'
 
 function TestCss() {
     return (
-        <Header />
+        <>
+            <Header />
+            <ProjectModule 
+                initialProjectDataState={(projectDataImport.length)-1}
+                projectRevisionData={projectDataImport[0].revisions}
+                projectDetails={projectDataImport[0]}
+            />
+        </>
     )
 }
 

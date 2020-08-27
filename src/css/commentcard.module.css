@@ -1,0 +1,26 @@
+.profileImgSmall {
+    border-radius: 5px;
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 0px;
+    height: 100%;
+    width: auto;
+}
+
+.commentReply {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+}
+
+.commentText {
+    vertical-align: middle;
+}
+
+.comment {
+    margin-bottom: 10px;
+}

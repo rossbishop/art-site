@@ -6,8 +6,6 @@ import UserBanner from './UserBanner'
 import ProjectGrid from './ProjectGrid'
 import UserData from './UserDummyData'
 
-import './css/userpage.css';
-
 function UserPage() {
 
     return (

@@ -1,17 +1,21 @@
 import React from 'react'
 import UserSocialIcon from './UserSocialIcon'
 
+import 'bootstrap/dist/css/bootstrap.css'
+import userBannerStyles from './css/userbanner.module.css'
+import cx from 'classnames'
+
 export default function UserBanner(props) {
 
     return (
         <section className="jumbotron">
-            <div className='blur-profile-bg'>
+            <div className={userBannerStyles.blurProfileBg}>
                 <div className='container'>
                     <div className="row">
                         <div className="col-6">
                             <div className='row'>
                                 <div className='col-4 pr-3'>
-                                    <img className="profile-img" src={props.userData[0].profilepicsrc} />
+                                    <img className={userBannerStyles.profileImg} src={props.userData[0].profilepicsrc} />
                                 </div>
                                 <div className='col-8'>
                                     <h1>{props.userData[0].username}</h1>
@@ -34,30 +38,6 @@ export default function UserBanner(props) {
                                 )
                             }
                             
-                            {/*<div className="icon-container">
-                                <div className="row">
-                                    <p className="icon-tag">social tag 1</p>
-                                    <a href="instagram.com">
-                                        <img className="social-img" src="https://via.placeholder.com/48"/>
-                                    </a>
-                                </div>
-                            </div>
-                            <div className="icon-container">
-                                <div className="row">
-                                    <p className="icon-tag">social tag 2</p>
-                                    <a href="instagram.com">
-                                        <img className="social-img" src="https://via.placeholder.com/48"/>
-                                    </a>
-                                </div>
-                            </div>
-                            <div className="icon-container">
-                                <div className="row">
-                                    <p className="icon-tag">social tag 3</p>
-                                    <a href="instagram.com">
-                                        <img className="social-img" src="https://via.placeholder.com/48"/>
-                                    </a>
-                                </div>
-                            </div>*/}
                         </div>
                     </div>
                 </div>

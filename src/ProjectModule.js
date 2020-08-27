@@ -2,7 +2,10 @@ import React, {Fragment, useState} from 'react'
 import CommentCard from './CommentCard'
 import GalleryListItem from './GalleryListItem'
 import GalleryItem from './GalleryItem'
-import TestCarousel from './TestCarousel'
+
+import 'bootstrap/dist/css/bootstrap.css'
+import projectModuleStyles from './css/projectmodule.module.css'
+import cx from 'classnames'
 
 export default function ProjectModule(props) {
 
@@ -60,14 +63,14 @@ export default function ProjectModule(props) {
             </div>
             <div className="container">
             <h3>{props.projectDetails.projectName} by <a href="/userpage">{props.projectDetails.userName}</a></h3>
-            <p className="project-text">{props.projectDetails.projectDescription}</p>
+            <p className={projectModuleStyles.projectText}>{props.projectDetails.projectDescription}</p>
             <h4>Comments</h4>
             <div className="form-group">
                 <label for="commentFormInput1">Type a comment:</label>
-                <textarea className="form-control comment-box" id="commentFormTextArea1" rows="1"></textarea>
+                <textarea className={cx(projectModuleStyles.commentBox, "form-control")} id="commentFormTextArea1" rows="1"></textarea>
             </div>
-            <button type="button" className="btn btn-primary comment-button">Submit</button>
-            <button type="button" className="btn btn-danger comment-button">Cancel</button>
+            <button type="button" className={cx("btn", "btn-primary", projectModuleStyles.commentButton)}>Submit</button>
+            <button type="button" className={cx("btn", "btn-danger", projectModuleStyles.commentButton)}>Cancel</button>
             {
                 props.projectRevisionData[currentProjectState.currentId].comments.map(item => {
                     return (

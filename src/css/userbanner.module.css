@@ -1,0 +1,16 @@
+.blurProfileBg {
+    backdrop-filter: blur(5px);
+    width: 100;
+    height: 100;
+    align-items: stretch;
+    padding: 4rem;
+    background: rgba(0, 0, 0, 0.3);
+    text-shadow: 1px 1px #000;
+
+}
+
+.profileImg {
+    height: auto;
+    width: 100%;
+    border-radius: 5px;
+}

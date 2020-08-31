@@ -3,7 +3,7 @@ import {Header, ProjectGrid, Footer} from './Imports.js'
 import Home from './Home'
 import ProjectPage from './ProjectPage'
 import UserPage from './UserPage'
-//import ProfileUpdatePage from './ProfileUpdatePage'
+import ProfileUpdatePage from './ProfileUpdatePage'
 import TestCss from './TestCss'
 
 import {
@@ -29,14 +29,13 @@ function App() {
           <UserPage />
         </Route>
 
+        <Route path="/updateprofile">
+          <ProfileUpdatePage />
+        </Route>
+
         <Route path="/">
           <Home />
         </Route>
-        
-        {/*<Route path="/updateprofile">
-          <ProfileUpdatePage />
-        </Route>
-        */}
 
       </Switch>
     </>

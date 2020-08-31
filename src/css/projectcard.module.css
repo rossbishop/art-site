@@ -23,3 +23,12 @@
     font-size: 14px;
     color: black;
 }
+
+.links {
+    color: black;
+}
+
+.links:hover {
+    color: black;
+    text-decoration-line: none;
+}

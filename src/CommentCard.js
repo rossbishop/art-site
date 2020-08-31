@@ -7,7 +7,7 @@ import cx from 'classnames'
 export default function CommentCard(props) {
     return (
         <div className={cx(commentCardStyles.comment, "card", "d-flex")}>
-            <div className={commentCardStyles.cardHeader}>
+            <div className={cx(commentCardStyles.cardHeader, "card-header")}>
                 <div className="text-left">by <b>{props.username}</b></div>
                 <div className="text-right">{props.time} {props.date}</div>
             </div>

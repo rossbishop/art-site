@@ -1,8 +1,8 @@
 import React from 'react';
 import {Header, ProjectGrid, Footer} from './Imports.js'
-//import Home from './Home'
-//import ProjectPage from './ProjectPage'
-//import UserPage from './UserPage'
+import Home from './Home'
+import ProjectPage from './ProjectPage'
+import UserPage from './UserPage'
 //import ProfileUpdatePage from './ProfileUpdatePage'
 import TestCss from './TestCss'
 
@@ -20,22 +20,24 @@ function App() {
         <Route path="/testcss">
           <TestCss />
         </Route>
-        
-        {/*<Route path="/updateprofile">
-          <ProfileUpdatePage />
+
+        <Route path="/projectpage">
+          <ProjectPage />
         </Route>
 
         <Route path="/userpage">
           <UserPage />
         </Route>
-        
-        <Route path="/projectpage">
-          <ProjectPage />
-        </Route>
 
         <Route path="/">
           <Home />
-        </Route>*/}
+        </Route>
+        
+        {/*<Route path="/updateprofile">
+          <ProfileUpdatePage />
+        </Route>
+        */}
+
       </Switch>
     </>
   )

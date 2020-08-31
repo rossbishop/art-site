@@ -5,9 +5,16 @@
 .commentBox {
     resize: none;
     border-bottom: 1px solid #000;
+    border-top: none;
+    border-left: none;
+    border-right: none;
 }
 
 .commentButton {
     margin-bottom: 15px;
     margin-right: 5px;
+}
+
+.container-wrap {
+    background-color: #0f0f0f;
 }

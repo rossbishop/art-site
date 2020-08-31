@@ -4,6 +4,7 @@ import GalleryListItem from './GalleryListItem'
 import GalleryItem from './GalleryItem'
 
 import 'bootstrap/dist/css/bootstrap.css'
+import './css/carousel.css'
 import projectModuleStyles from './css/projectmodule.module.css'
 import cx from 'classnames'
 
@@ -13,9 +14,8 @@ export default function ProjectModule(props) {
 
     return (
         <Fragment>
-            <div className="container-wrap">
+            <div className={projectModuleStyles["container-wrap"]}>
                 <div className="container-fluid d-flex justify-content-center carousel-container">
-
                     <div id="myCarousel" className="carousel slide" data-ride="carousel" data-interval="0">
                         <ol className="carousel-indicators">
                             {
@@ -46,7 +46,6 @@ export default function ProjectModule(props) {
                                     )
                                 })
                             }   
-                            
                         </div>
 
                         <a className="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
@@ -66,7 +65,7 @@ export default function ProjectModule(props) {
             <p className={projectModuleStyles.projectText}>{props.projectDetails.projectDescription}</p>
             <h4>Comments</h4>
             <div className="form-group">
-                <label for="commentFormInput1">Type a comment:</label>
+                <label form="commentFormInput1">Type a comment:</label>
                 <textarea className={cx(projectModuleStyles.commentBox, "form-control")} id="commentFormTextArea1" rows="1"></textarea>
             </div>
             <button type="button" className={cx("btn", "btn-primary", projectModuleStyles.commentButton)}>Submit</button>

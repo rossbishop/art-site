@@ -2,6 +2,7 @@ import React from 'react'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import galleryItemStyles from './css/galleryitem.module.css'
+import './css/carousel.css'
 
 export default function GalleryItem(props) {
 

@@ -11,6 +11,11 @@
     color: black;
 }
 
+.card-body a {
+    color: black;
+}
+
+
 .searchBtn {
     margin-left: 5px;
 }

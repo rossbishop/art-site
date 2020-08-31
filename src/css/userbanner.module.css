@@ -14,3 +14,13 @@
     width: 100%;
     border-radius: 5px;
 }
+
+.jumbotron {
+    padding: 0;
+    margin-bottom: 0;
+    background-image: url("https://lh3.googleusercontent.com/proxy/uFZ-hev1hbm9hxEJvpftFYJdTfxqN6D-gtgOaIfSFITifY42yGuJFM83HimT4e6jTH1-CYXaodziXLsfHIiNA1nzGgX7ecCPR7mKxOKIsX4T-Gd3lbEArLFbwJgfmw=s0-d");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    color: #fff;
+
+}

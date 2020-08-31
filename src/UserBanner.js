@@ -8,16 +8,16 @@ import cx from 'classnames'
 export default function UserBanner(props) {
 
     return (
-        <section className="jumbotron">
+        <section className={userBannerStyles.jumbotron}>
             <div className={userBannerStyles.blurProfileBg}>
                 <div className='container'>
                     <div className="row">
                         <div className="col-6">
-                            <div className='row'>
-                                <div className='col-4 pr-3'>
+                            <div className="row">
+                                <div className="col-4 pr-3">
                                     <img className={userBannerStyles.profileImg} src={props.userData[0].profilepicsrc} />
                                 </div>
-                                <div className='col-8'>
+                                <div className="col-8">
                                     <h1>{props.userData[0].username}</h1>
                                     <h6>{props.userData[0].jobrole}</h6>
                                     <h6>{props.userData[0].location}</h6>

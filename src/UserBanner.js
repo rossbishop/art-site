@@ -15,19 +15,19 @@ export default function UserBanner(props) {
                         <div className="col-6">
                             <div className="row">
                                 <div className="col-4 pr-3">
-                                    <img className={userBannerStyles.profileImg} src={props.userData[0].profilepicsrc} />
+                                    <img className={userBannerStyles.profileImg} src={props.userData.profilepicsrc} />
                                 </div>
                                 <div className="col-8">
-                                    <h1>{props.userData[0].username}</h1>
-                                    <h6>{props.userData[0].jobrole}</h6>
-                                    <h6>{props.userData[0].location}</h6>
-                                    <p>{props.userData[0].description}</p>
+                                    <h1>{props.userData.username}</h1>
+                                    <h6>{props.userData.jobrole}</h6>
+                                    <h6>{props.userData.location}</h6>
+                                    <p>{props.userData.description}</p>
                                 </div>
                             </div>
                         </div>
                         <div className="col-6 d-flex align-items-end flex-column">
                             {
-                                props.userData[0].social.map(item => {
+                                props.userData.social.map(item => {
                                 return (
                                             <UserSocialIcon
                                                 socialtype={item.type}

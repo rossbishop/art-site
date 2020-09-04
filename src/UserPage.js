@@ -12,7 +12,7 @@ function UserPage() {
         <>
             <Header />
             <UserBanner 
-                userData={UserData}
+                userData={UserData[0]}
             />
             <ProjectGrid />
             <Footer />

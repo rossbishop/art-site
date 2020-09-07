@@ -21,6 +21,19 @@
     text-transform: uppercase;
 }
 
+.commentButton:hover a {
+    color: white;
+}
+
 .container-wrap {
     background-color: #0f0f0f;
+}
+
+.links {
+    color: black;
+}
+
+.links:hover {
+    color: white;
+    text-decoration-line: none;
 }

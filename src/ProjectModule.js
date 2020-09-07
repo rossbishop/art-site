@@ -3,6 +3,8 @@ import CommentCard from './CommentCard'
 import GalleryListItem from './GalleryListItem'
 import GalleryItem from './GalleryItem'
 
+import {Link} from "react-router-dom";
+
 import 'bootstrap/dist/css/bootstrap.css'
 import './css/carousel.css'
 import projectModuleStyles from './css/projectmodule.module.css'
@@ -62,6 +64,7 @@ export default function ProjectModule(props) {
             </div>
             <div className="container">
             <h3>{props.projectDetails.projectName} by <a href="/userpage">{props.projectDetails.userName}</a></h3>
+            <button type="button" className={cx("btn", "btn-success", projectModuleStyles.commentButton)}><Link className={projectModuleStyles.links} to="/newrevision">Add Revision</Link></button>
             <p className={projectModuleStyles.projectText}>{props.projectDetails.projectDescription}</p>
             <h4>Comments</h4>
             <div className="form-group">

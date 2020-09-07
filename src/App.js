@@ -4,6 +4,7 @@ import Home from './Home'
 import ProjectPage from './ProjectPage'
 import UserPage from './UserPage'
 import ProfileUpdatePage from './ProfileUpdatePage'
+import NewProjectPage from './NewProjectPage'
 import TestCss from './TestCss'
 
 import {
@@ -12,6 +13,7 @@ import {
   Route,
   Link
 } from"react-router-dom";
+import NewRevisionPage from './NewRevisionPage.js';
 
 function App() {
   return (
@@ -31,6 +33,14 @@ function App() {
 
         <Route path="/updateprofile">
           <ProfileUpdatePage />
+        </Route>
+
+        <Route path="/newproject">
+          <NewProjectPage />
+        </Route>
+
+        <Route path="/newrevision">
+          <NewRevisionPage />
         </Route>
 
         <Route path="/">

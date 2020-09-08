@@ -29,6 +29,12 @@ export default function Header()
                                 <a className="dropdown-item" href="/updateprofile">Update Profile</a>
                             </div>
                         </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/login">Login</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/register">Register</a>
+                        </li>
                     </ul>
                     <form className="form-inline my-2 my-md-0">
                         <input className={headerStyles.formControl} type="text" placeholder="Search"/>

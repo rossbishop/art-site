@@ -6,6 +6,8 @@ import UserPage from './UserPage'
 import ProfileUpdatePage from './ProfileUpdatePage'
 import NewProjectPage from './NewProjectPage'
 import TestCss from './TestCss'
+import LoginPage from './LoginPage'
+import RegisterPage from './RegisterPage'
 
 import {
   BrowserRouter as Router,
@@ -41,6 +43,14 @@ function App() {
 
         <Route path="/newrevision">
           <NewRevisionPage />
+        </Route>
+
+        <Route path="/login">
+          <LoginPage />
+        </Route>
+
+        <Route path="/register">
+          <RegisterPage />
         </Route>
 
         <Route path="/">

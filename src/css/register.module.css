@@ -1,0 +1,50 @@
+.formProfileUpdate {
+    width: 100%;
+    padding: 15px;
+    margin: auto;
+}
+
+.formProfileUpdate .formControl {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.formProfileUpdate input[type="username"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    width: 100%;
+}
+
+.formProfileUpdate input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    width: 100%;
+}
+
+.formProfileUpdate input[type="password"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    width: 100%;
+}
+
+.formControl {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #000000;
+    border-radius: 0;
+}
+
+.btnLogin {
+    border: 1px solid black;
+    border-radius: 30px;
+    text-transform: uppercase;
+    background-color: black;
+    font-size: 16px;
+    color: white;
+}

@@ -2,20 +2,22 @@ import {Header, Gallery, Comments, Footer, ProjectModule} from './Imports.js'
 import React, { useState, useCallback } from 'react';
 import data from './RevisionDummyData'
 import projectDataImport from './ProjectDummyData'
+import UserBanner from './UserBanner'
+import ProjectGrid from './ProjectGrid'
+import UserData from './UserDummyData'
 
-function ProjectPage() {
+function UserPage() {
 
     return (
         <>
             <Header />
-            <ProjectModule 
-                initialProjectDataState={(projectDataImport.length)-1}
-                projectRevisionData={projectDataImport[0].revisions}
-                projectDetails={projectDataImport[0]}
+            <UserBanner 
+                userData={UserData[0]}
             />
+            <ProjectGrid />
             <Footer />
         </>
     )
 }
 
-export default ProjectPage
+export default UserPage

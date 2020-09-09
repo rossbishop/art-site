@@ -6,12 +6,12 @@ export default function Gallery(props) {
             <div className="container-fluid d-flex justify-content-center carousel-container">
                 <div id="myCarousel" className="carousel slide" data-ride="carousel" data-interval="0">
                     <ol className="carousel-indicators">
-                        <li data-target="#myCarousel" data-slide-to="0" className="active"><button type="button" className="btn btn-info btn-sm" onClick={ () => {props.projectCallback(9)} }>10</button></li>
-                        <li data-target="#myCarousel" data-slide-to="1"><button type="button" className="btn btn-secondary btn-sm" onClick={ () => {props.projectCallback(8)} }>9</button></li>
-                        <li data-target="#myCarousel" data-slide-to="2"><button type="button" className="btn btn-secondary btn-sm" onClick={ () => {props.projectCallback(7)} }>8</button></li>
+                        {/*<li data-target="#myCarousel" data-slide-to="0" className="active"><button type="button" className="btn btn-info btn-sm" onClick={ () => {props.projectCallback(9)} }>10</button></li>*/}
+                        {/*<li data-target="#myCarousel" data-slide-to="1"><button type="button" className="btn btn-secondary btn-sm" onClick={ () => {props.projectCallback(8)} }>9</button></li>*/}
+                        {/*<li data-target="#myCarousel" data-slide-to="2"><button type="button" className="btn btn-secondary btn-sm" onClick={ () => {props.projectCallback(7)} }>8</button></li>*/}
                     </ol>
                     <div className="carousel-inner">
-                        <div className="carousel-item active">
+                        {/*<div className="carousel-item active">
                             <img className="gallery-img" src={require("./img/destination_tokyo.jpg")} alt="..."/>
                             <div className="container">
                                 <div className="carousel-caption">
@@ -37,7 +37,7 @@ export default function Gallery(props) {
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam commodo nulla ut dictum venenatis. Etiam tincidunt est vestibulum orci lobortis, a vestibulum justo interdum. Nam non lacus mollis, maximus mauris sed, maximus lacus. Sed interdum efficitur tempor. Pellentesque nibh ipsum, accumsan vel augue vitae, posuere viverra nulla. Aliquam eu lacinia odio. Mauris congue dapibus eros et dapibus.</p>
                                 </div>
                             </div>
-                        </div>
+                        </div>*/}
                     </div>
 
                     <a className="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">

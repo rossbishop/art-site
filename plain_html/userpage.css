@@ -88,6 +88,8 @@ p {
 
 .social-img {
     border-radius: 5px;
+    width: 48px;
+    height: 48px;
 }
 
 footer {

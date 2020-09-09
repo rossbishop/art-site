@@ -1,10 +1,11 @@
-import {Header, Gallery, Comments, Footer, ProjectModule} from './Imports.js'
-import React, { useState, useCallback } from 'react';
-import data from './RevisionDummyData'
+import React from 'react';
+import Header from './Header'
+import ProjectModule from './ProjectModule'
+import Footer from './Footer'
+
 import projectDataImport from './ProjectDummyData'
 
-function ProjectPage() {
-
+function TestCss() {
     return (
         <>
             <Header />
@@ -18,4 +19,4 @@ function ProjectPage() {
     )
 }
 
-export default ProjectPage
+export default TestCss

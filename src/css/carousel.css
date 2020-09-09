@@ -1,0 +1,48 @@
+.carousel {
+    width: 100%;
+    height: fit-content;
+}
+
+.carousel-inner {
+    height: fit-content;
+}
+
+.carousel-indicators li {
+    text-indent: 0px;
+    color: #fff;
+    background-color: #ff0000;
+    text-align: center;
+    width: 0px;
+    height: 0px;  
+    margin-right: 30px;
+    margin-bottom: 20px;
+}
+
+.carousel-container {
+    max-width: 1140px;
+    background-color: #0f0f0f;
+    margin-bottom: 2rem;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.carousel-item {
+    height: fit-content;
+
+}
+
+.carousel-item > img {
+    max-width: max-content;
+    margin: auto;
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.carousel-caption {
+    left: auto;
+    right: auto;
+    position: relative;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}

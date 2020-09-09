@@ -1,0 +1,39 @@
+.projectText {
+    font-size: 18px;
+}
+
+.commentBox {
+    resize: none;
+    border-bottom: 1px solid #000;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 0px;
+}
+
+.commentButton {
+    margin-bottom: 15px;
+    margin-right: 5px;
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    border-radius: 30px;
+    text-transform: uppercase;
+}
+
+.commentButton:hover a {
+    color: white;
+}
+
+.container-wrap {
+    background-color: #0f0f0f;
+}
+
+.links {
+    color: black;
+}
+
+.links:hover {
+    color: white;
+    text-decoration-line: none;
+}

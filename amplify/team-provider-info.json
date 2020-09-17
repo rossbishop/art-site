@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-artsite-dev-154407-authRole",
+      "UnauthRoleArn": "arn:aws:iam::381257970460:role/amplify-artsite-dev-154407-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::381257970460:role/amplify-artsite-dev-154407-authRole",
+      "Region": "eu-west-2",
+      "DeploymentBucketName": "amplify-artsite-dev-154407-deployment",
+      "UnauthRoleName": "amplify-artsite-dev-154407-unauthRole",
+      "StackName": "amplify-artsite-dev-154407",
+      "StackId": "arn:aws:cloudformation:eu-west-2:381257970460:stack/amplify-artsite-dev-154407/20cb7bb0-f82b-11ea-b532-02c3f93b4566",
+      "AmplifyAppId": "d382qvp3io2wvl"
+    }
+  }
+}

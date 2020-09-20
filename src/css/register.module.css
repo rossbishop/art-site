@@ -33,6 +33,13 @@
     width: 100%;
 }
 
+.formProfileUpdate input[type="confirmation"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    width: 100%;
+}
+
 .formControl {
     background-color: transparent;
     border: none;

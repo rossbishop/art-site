@@ -14,6 +14,7 @@ function RegisterPage() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmationCode, setConfirmationCode] = useState('')
+    const [user, setUser] = useState()
 
     const signUp = async (props) => {
         const { username, password, email } = props;
@@ -28,6 +29,7 @@ function RegisterPage() {
         },
         })
         .then((response) => {
+            setUser(response)
             setUserCreated(true);
             //setUsername(response.user.username)
             console.log(response);

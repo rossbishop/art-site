@@ -14,11 +14,12 @@ function LoginPage() {
 
         await Auth.signIn(username, password)
         .then((response) => {
-            console.log(response);
+            console.log('Signed out: ' + response);
         })
         .catch((error) => {
             console.log('error signing in', error);
-            setError({isError: true, message: error});
+            console.log(error.message)
+            setError({isError: true, message: error.message});
         });
     }
 

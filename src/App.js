@@ -8,6 +8,7 @@ import NewProjectPage from './NewProjectPage'
 import TestCss from './TestCss'
 import LoginPage from './LoginPage'
 import RegisterPage from './RegisterPage'
+import ForgotPage from './ForgotPage'
 import Amplify, { Auth } from 'aws-amplify';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
 //import awsconfig from './aws-exports';
@@ -116,6 +117,10 @@ function App() {
 
         <Route path="/register">
           <RegisterPage />
+        </Route>
+
+        <Route path="/forgot">
+          <ForgotPage />
         </Route>
 
         <Route path="/">

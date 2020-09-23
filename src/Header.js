@@ -4,8 +4,21 @@ import 'bootstrap/dist/css/bootstrap.css'
 import headerStyles from './css/header.module.css'
 import cx from 'classnames'
 
+import { Auth } from 'aws-amplify';
+
 export default function Header() 
 {
+    
+    const signOut = async (props) => {
+        await Auth.signOut()
+        .then((response) => {
+            console.log("Success: " + response)
+        })
+        .catch((error) => {
+            console.log('error signing out: ', error);
+        });
+    }
+
     return (
         <>
         <header>
@@ -31,6 +44,9 @@ export default function Header()
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="/login">Login</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="" onClick={(e) => {e.preventDefault();signOut();}}>Logout</a>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="/register">Register</a>

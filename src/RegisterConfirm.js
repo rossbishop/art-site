@@ -18,6 +18,10 @@ export default function RegisterUser(props) {
                         {props.getUserConfirmed && (
                             <div className="alert alert-success" role="alert">Your account is now confirmed. You may now login.</div>)
                         }
+                        {props.getError && (
+                            <div className="alert alert-danger" role="alert">{props.getErrorMessage}</div>
+                        )
+                        }
                         <label htmlFor="inputConfirmationCode" className="sr-only">Enter confirmation code</label>
                         <input type="confirmation" id="inputConfirmationCode" className={cx(RegisterStyles.formControl,"mb-3", "py-2", "pl-0")} placeholder="Confirmation Code" onChange={event => props.setConfirmationCode(event.target.value)} required autoFocus/>        
                         <button className={cx(RegisterStyles.btnLogin, "btn", "btn-lg", "btn-primary", "btn-block", "mt-4")} type="submit" onClick={(e) => {e.preventDefault();props.confirmSignUp({username,confirmationCode});}}>Confirm Account</button>

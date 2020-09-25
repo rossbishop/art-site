@@ -10,13 +10,20 @@ function ForgotPage() {
 
     const [isSuccess, setSuccess] = useState({isSuccess: false, message: ''})
     const [isError, setError] = useState({isError: false, message: ''})
+    const [isForgot, setForgot] = useState(true)
     const [isConfirm, setConfirm] = useState(false)
     const [isReset, setReset] = useState(false)
+    const [isResetComplete, setResetComplete] = useState(false)
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
     const [isUserConfirmed, setUserConfirmed] = useState(false)
     const [confirmationCode, setConfirmationCode] = useState('')
+
+    const forgotPasswordTest = (props) => {
+        setSuccess({isSuccess: true, message: "FORGOT TEST BYPASS!!!"});
+        setTimeout(() => {setSuccess({isSuccess: false, message: ""});setForgot(false);setReset(true)}, 1000);
+    }
 
     const forgotPassword = (props) => {
         console.log(props)
@@ -24,11 +31,16 @@ function ForgotPage() {
             .then((data) => {
                 console.log(data);
                 setSuccess({isSuccess: true, message: "Verification code resent successfully - Check your email"});
-                setTimeout(() => {setReset(true)}, 3000);
+                setTimeout(() => { setSuccess({isSuccess: false, message: ""});setForgot(false);setReset(true); }, 3000);
             })
             .catch((err) => {
                 console.log(err)
             });
+    }
+
+    const forgotPasswordSubmitTest = (props) => {
+        setSuccess({isSuccess: true, message: "FORGOT TEST BYPASS 2!!!"});
+        //setTimeout(() => { setResetComplete(true) }, 5000);
     }
 
     const forgotPasswordSubmit = (props) => {
@@ -37,6 +49,7 @@ function ForgotPage() {
             .then(data => { 
                 console.log(data);
                 setSuccess({isSuccess: true, message: "Password reset successfully - Login using new password"});
+                setTimeout(() => { setResetComplete(true) }, 3000);
             })
             .catch(err => { 
                 console.log(err);
@@ -49,11 +62,11 @@ function ForgotPage() {
         .then((response) => {
             console.log('code resent successfully');
             setSuccess({isSuccess: true, message: "Verification Code Resent Successfully - Check your email"});
-            setTimeout(() => { setConfirm(true) }, 3000);
+            setTimeout(() => { setForgot(false);setConfirm(true); }, 3000);
         })
         .catch((err) => {
             console.log('error resending code: ', err);
-            setError({isError: true, message: err});
+            setError({isError: true, message: err.message});
         });
     }
 
@@ -67,7 +80,7 @@ function ForgotPage() {
         })
         .catch((error) => {
             console.log('error confirming sign up: ', error);
-            setError({isError: true, message: error})
+            setError({isError: true, message: error.message})
         });
     }
 
@@ -83,9 +96,13 @@ function ForgotPage() {
                     getPassword={password}
                     getSuccess={isSuccess}
                     getError={isError}
+                    getUsername={username}
+                    isResetComplete={isResetComplete}
+                    setResetComplete={setResetComplete}
+                    forgotPasswordSubmitTest={forgotPasswordSubmitTest}
                 />
             }
-            {!isConfirm &&
+            {!isConfirm && isForgot &&
                 <Forgot 
                     getError={isError}
                     getSuccess={isSuccess}
@@ -93,6 +110,8 @@ function ForgotPage() {
                     setUsername={setUsername}
                     resendConfirmation={resendConfirmationCode}
                     forgotPassword={forgotPassword}
+                    forgotPasswordTest={forgotPasswordTest}
+                    setForgot={setForgot}
                 />
             }
             {isConfirm &&
@@ -101,7 +120,9 @@ function ForgotPage() {
                     getConfirmationCode={confirmationCode}
                     getUsername={username}
                     setConfirmationCode={setConfirmationCode}
-                    getUserConfirmed={isUserConfirmed}                    
+                    getUserConfirmed={isUserConfirmed}
+                    getErrorMessage={isError.message} 
+                    getError={isError.isError}                   
                 />
             }
 

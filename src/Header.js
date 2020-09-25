@@ -3,6 +3,7 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
 import headerStyles from './css/header.module.css'
 import cx from 'classnames'
+import {Link} from './Imports'
 
 import { Auth } from 'aws-amplify';
 
@@ -43,7 +44,7 @@ export default function Header()
                             </div>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="/login">Login</a>
+                            <Link className="nav-link" to={{pathname: '/login', state: {prevPath: window.location.pathname}}}>Login</Link>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="" onClick={(e) => {e.preventDefault();signOut();}}>Logout</a>

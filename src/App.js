@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Header, ProjectGrid, Footer} from './Imports.js'
 import Home from './Home'
 import ProjectPage from './ProjectPage'
@@ -84,6 +84,7 @@ Amplify.configure(
 const currentConfig = Auth.configure();
 
 function App() {
+
   return (
     <>
       <Switch>

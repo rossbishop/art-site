@@ -16,7 +16,7 @@ export default function Forgot(props) {
                     <form className={ForgotStyles.formProfileUpdate}>
                         <h1 className="h3 mb-3 mt-4 font-weight-normal">Forgot Password</h1>
                         {props.getError.isError && (
-                            <div className="alert alert-danger" role="alert">{props.getError.message.log}</div>)
+                            <div className="alert alert-danger" role="alert">{props.getError.message}</div>)
                         }
                         {props.getSuccess.isSuccess && (
                             <div className="alert alert-success" role="alert">{props.getSuccess.message}</div>)

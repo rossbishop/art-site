@@ -17,6 +17,10 @@ export default function Login(props) {
                 <div class="col-12">
                     <form className={LoginStyles.formProfileUpdate}>
                         <h1 className="h3 mb-3 mt-4 font-weight-normal">Login</h1>
+                        {props.getSuccess.isSuccess && (
+                            <div className="alert alert-success" role="alert">{props.getSuccess.message}</div>
+                        )
+                        }
                         {props.getError.isError && (
                             <div className="alert alert-danger" role="alert">{props.getError.message}</div>)
                         }

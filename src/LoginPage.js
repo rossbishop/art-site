@@ -11,22 +11,20 @@ function LoginPage(props) {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [success, setSuccess] = useState({isSuccess: false, message: ''})
+    const history=useHistory();
+
+    function getRedirectPage() {
+        history.goBack();
+    }
 
     const signIn = async (props) => {
-
-        function GetRedirectPage() {
-
-            const history=useHistory();
-            history.goBack();
-            
-        }
 
         await Auth.signIn(username, password)
         .then((response) => {
             console.log('Signed in: ');
             console.log(response);
             setSuccess({isSuccess: true, message: "You are now logged in. Redirecting to previous page..."})
-            setTimeout(() => {GetRedirectPage();}, 3000);
+            setTimeout(() => {getRedirectPage();}, 3000);
         })
         .catch((error) => {
             console.log('error signing in', error);

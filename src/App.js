@@ -7,6 +7,7 @@ import ProfileUpdatePage from './ProfileUpdatePage'
 import NewProjectPage from './NewProjectPage'
 import TestCss from './TestCss'
 import LoginPage from './LoginPage'
+import LogoutPage from './LogoutPage'
 import RegisterPage from './RegisterPage'
 import ForgotPage from './ForgotPage'
 import Amplify, { Auth } from 'aws-amplify';
@@ -116,6 +117,10 @@ function App() {
 
           <Route path="/login">
             <LoginPage />
+          </Route>
+
+          <Route path="/logout">
+            <LogoutPage />
           </Route>
 
           <Route path="/register">

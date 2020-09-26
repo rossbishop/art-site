@@ -17,7 +17,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  useHistory
 } from"react-router-dom";
 import NewRevisionPage from './NewRevisionPage.js';
 
@@ -86,49 +87,50 @@ const currentConfig = Auth.configure();
 function App() {
 
   return (
+    
     <>
-      <Switch>
-        <Route path="/testcss">
-          <TestCss />
-        </Route>
+        <Switch>
+          <Route path="/testcss">
+            <TestCss />
+          </Route>
 
-        <Route path="/projectpage">
-          <ProjectPage />
-        </Route>
+          <Route path="/projectpage">
+            <ProjectPage />
+          </Route>
 
-        <Route path="/userpage">
-          <UserPage />
-        </Route>
+          <Route path="/userpage">
+            <UserPage />
+          </Route>
 
-        <Route path="/updateprofile">
-          <ProfileUpdatePage />
-        </Route>
+          <Route path="/updateprofile">
+            <ProfileUpdatePage />
+          </Route>
 
-        <Route path="/newproject">
-          <NewProjectPage />
-        </Route>
+          <Route path="/newproject">
+            <NewProjectPage />
+          </Route>
 
-        <Route path="/newrevision">
-          <NewRevisionPage />
-        </Route>
+          <Route path="/newrevision">
+            <NewRevisionPage />
+          </Route>
 
-        <Route path="/login">
-          <LoginPage />
-        </Route>
+          <Route path="/login">
+            <LoginPage />
+          </Route>
 
-        <Route path="/register">
-          <RegisterPage />
-        </Route>
+          <Route path="/register">
+            <RegisterPage />
+          </Route>
 
-        <Route path="/forgot">
-          <ForgotPage />
-        </Route>
+          <Route path="/forgot">
+            <ForgotPage />
+          </Route>
 
-        <Route path="/">
-          <Home />
-        </Route>
+          <Route path="/">
+            <Home />
+          </Route>
 
-      </Switch>
+        </Switch>
     </>
   )
 }

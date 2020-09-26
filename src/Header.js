@@ -44,7 +44,7 @@ export default function Header()
                             </div>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to={{pathname: '/login', state: {prevPath: window.location.pathname}}}>Login</Link>
+                            <Link className="nav-link" to="/login">Login</Link>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="" onClick={(e) => {e.preventDefault();signOut();}}>Logout</a>

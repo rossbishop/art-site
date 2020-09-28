@@ -88,13 +88,13 @@ Amplify.configure(
 
 function App() {
 
-  const [isLoggedIn, setLoggedIn] = useState();
+  //const [isLoggedIn, setLoggedIn] = useState();
 
-  useEffect(() => {
-    console.log('Is Logged In Run 1: ' + isLoggedIn)
-    checkLoggedIn()
-    console.log('Is Logged In Run 2: ' + isLoggedIn)
-  }, [isLoggedIn])
+  // useEffect(() => {
+  //   console.log('Is Logged In Run 1: ' + isLoggedIn)
+  //   checkLoggedIn()
+  //   console.log('Is Logged In Run 2: ' + isLoggedIn)
+  // }, [isLoggedIn])
 
   function checkLoggedIn() {
     Auth.currentAuthenticatedUser({
@@ -102,13 +102,15 @@ function App() {
     })
     .then(user => {
         console.log(user);
-        setLoggedIn(true);
-        console.log('checkLoggedIn SUCCESS: ' + isLoggedIn)
+        return true;
+        //setLoggedIn(true);
+        //console.log('checkLoggedIn SUCCESS: ' + isLoggedIn)
     })
     .catch(err => {
         console.log(err);
-        setLoggedIn(false);
-        console.log('checkLoggedIn ERROR: ' + isLoggedIn)
+        return false;
+        //setLoggedIn(false);
+        //console.log('checkLoggedIn ERROR: ' + isLoggedIn)
     });
   }
 
@@ -117,8 +119,9 @@ function App() {
       <Route
         {...rest}
           render={({ location }) => {
-            //checkLoggedIn();
-            if(isLoggedIn) {
+            var isLoggedInVar = checkLoggedIn();
+            console.log(isLoggedInVar);
+            if(isLoggedInVar === 'yes') {
               console.log('RETURNING CHILDRENS!!!');
               return(children)
             }

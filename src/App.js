@@ -19,7 +19,8 @@ import {
   Switch,
   Route,
   Link,
-  useHistory
+  useHistory,
+  Redirect
 } from"react-router-dom";
 import NewRevisionPage from './NewRevisionPage.js';
 
@@ -84,8 +85,61 @@ Amplify.configure(
 );
 
 const currentConfig = Auth.configure();
+const [isLoggedIn, setLoggedIn] = useState(false);
 
 function App() {
+
+  
+
+  function checkLoggedIn() {
+    Auth.currentAuthenticatedUser({
+        bypassCache: false  // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
+    })
+    .then(user => {
+        console.log(user);
+        setLoggedIn(true);
+    })
+    .catch(err => {
+        console.log(err);
+        setLoggedIn(false)
+    });
+  }
+
+  function PrivateRoute({ children, ...rest }) {
+    return (
+      <Route
+        {...rest}
+        render={({ location }) => {
+          checkLoggedIn();
+
+          if (isLoggedIn) {
+            children;
+          }
+          else {
+            <Redirect
+              to={{
+                pathname: "/login",
+                state: { from: location }
+              }}
+            />            
+          }
+
+          // isLoggedIn ? 
+          // (
+          //   children
+          // ) : 
+          // (
+          //   <Redirect
+          //     to={{
+          //       pathname: "/login",
+          //       state: { from: location }
+          //     }}
+          //   />
+          // );
+        }}
+      />
+    );
+  }
 
   return (
     

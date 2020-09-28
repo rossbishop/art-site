@@ -1,5 +1,5 @@
 import {Header, ProjectGrid, Footer} from './Imports.js'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Logout from './Logout'
 import { useHistory } from "react-router-dom";
 
@@ -30,9 +30,12 @@ function LogoutPage(props) {
         });
     }
 
+    useEffect(() => {
+        setTimeout(() => {signOut();}, 3000);
+    })
+
     return (
         <>
-            {setTimeout(() => {signOut();}, 3000)}
             <Header />
             <Logout
                 setError={setError}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {Header, ProjectGrid, Footer} from './Imports.js'
 import Home from './Home'
 import ProjectPage from './ProjectPage'
@@ -84,12 +84,17 @@ Amplify.configure(
   }
 );
 
-const currentConfig = Auth.configure();
-const [isLoggedIn, setLoggedIn] = useState(false);
+//const currentConfig = Auth.configure();
 
 function App() {
 
-  
+  const [isLoggedIn, setLoggedIn] = useState();
+
+  useEffect(() => {
+    console.log('Is Logged In Run 1: ' + isLoggedIn)
+    checkLoggedIn()
+    console.log('Is Logged In Run 2: ' + isLoggedIn)
+  }, [isLoggedIn])
 
   function checkLoggedIn() {
     Auth.currentAuthenticatedUser({
@@ -98,10 +103,12 @@ function App() {
     .then(user => {
         console.log(user);
         setLoggedIn(true);
+        console.log('checkLoggedIn SUCCESS: ' + isLoggedIn)
     })
     .catch(err => {
         console.log(err);
-        setLoggedIn(false)
+        setLoggedIn(false);
+        console.log('checkLoggedIn ERROR: ' + isLoggedIn)
     });
   }
 
@@ -109,37 +116,29 @@ function App() {
     return (
       <Route
         {...rest}
-        render={({ location }) => {
-          checkLoggedIn();
-
-          if (isLoggedIn) {
-            children;
+          render={({ location }) => {
+            //checkLoggedIn();
+            if(isLoggedIn) {
+              console.log('RETURNING CHILDRENS!!!');
+              return(children)
+            }
+            else {
+              console.log('RETURNING LOGIN PAGE!!!');
+              return(
+                <Redirect
+                  to={{
+                    pathname: "/login",
+                    state: { from: location }
+                  }}
+                />
+              )
+            }
           }
-          else {
-            <Redirect
-              to={{
-                pathname: "/login",
-                state: { from: location }
-              }}
-            />            
-          }
-
-          // isLoggedIn ? 
-          // (
-          //   children
-          // ) : 
-          // (
-          //   <Redirect
-          //     to={{
-          //       pathname: "/login",
-          //       state: { from: location }
-          //     }}
-          //   />
-          // );
-        }}
+        }
       />
-    );
+    )
   }
+
 
   return (
     
@@ -157,9 +156,9 @@ function App() {
             <UserPage />
           </Route>
 
-          <Route path="/updateprofile">
+          <PrivateRoute path="/updateprofile">
             <ProfileUpdatePage />
-          </Route>
+          </PrivateRoute>
 
           <Route path="/newproject">
             <NewProjectPage />

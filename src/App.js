@@ -8,6 +8,7 @@ import NewProjectPage from './NewProjectPage'
 import TestCss from './TestCss'
 import LoginPage from './LoginPage'
 import LogoutPage from './LogoutPage'
+import LoadingPage from './Loading'
 import RegisterPage from './RegisterPage'
 import ForgotPage from './ForgotPage'
 import Amplify, { Auth } from 'aws-amplify';
@@ -84,17 +85,30 @@ Amplify.configure(
   }
 );
 
-//const currentConfig = Auth.configure();
-
 function App() {
 
-  //const [isLoggedIn, setLoggedIn] = useState();
+  const [isLoggedIn, setLoggedIn] = useState();
+  const [isLoaded, setLoaded] = useState();
+  const [isLoading, setLoading] = useState(true);
 
-  // useEffect(() => {
-  //   console.log('Is Logged In Run 1: ' + isLoggedIn)
-  //   checkLoggedIn()
-  //   console.log('Is Logged In Run 2: ' + isLoggedIn)
-  // }, [isLoggedIn])
+  //Invoke this function only once at first page load (hence empty deps array [])
+  useEffect(() => {
+    console.log("1. Start auth check")
+    checkLoggedIn()
+  }, [])
+
+  useEffect(() => {
+    console.log("2. Check if auth complete")
+    console.log("   isLoggedIn: " + isLoggedIn)
+    if(isLoggedIn != undefined) {
+      console.log("3. Auth complete")
+      setLoaded(true)
+      setLoading(false)
+    }
+    else{
+      console.log("Auth not yet complete...")
+    }
+  }, [isLoggedIn])
 
   function checkLoggedIn() {
     Auth.currentAuthenticatedUser({
@@ -102,15 +116,13 @@ function App() {
     })
     .then(user => {
         console.log(user);
-        return true;
-        //setLoggedIn(true);
-        //console.log('checkLoggedIn SUCCESS: ' + isLoggedIn)
+        setLoggedIn(true);
+        console.log('checkLoggedIn SUCCESS: ' + isLoggedIn)    
     })
     .catch(err => {
         console.log(err);
-        return false;
-        //setLoggedIn(false);
-        //console.log('checkLoggedIn ERROR: ' + isLoggedIn)
+        setLoggedIn(false);
+        console.log('checkLoggedIn ERROR: ' + isLoggedIn)
     });
   }
 
@@ -119,9 +131,7 @@ function App() {
       <Route
         {...rest}
           render={({ location }) => {
-            var isLoggedInVar = checkLoggedIn();
-            console.log(isLoggedInVar);
-            if(isLoggedInVar === 'yes') {
+            if(isLoggedIn) {
               console.log('RETURNING CHILDRENS!!!');
               return(children)
             }
@@ -159,9 +169,20 @@ function App() {
             <UserPage />
           </Route>
 
-          <PrivateRoute path="/updateprofile">
-            <ProfileUpdatePage />
-          </PrivateRoute>
+          {isLoading && (
+            <Route path="/updateprofile">
+              <LoadingPage />
+            </Route>
+          )}
+          {isLoaded && (
+            <PrivateRoute path="/updateprofile">
+              <ProfileUpdatePage />
+            </PrivateRoute>
+          )}
+
+          <Route path="/loading">
+              <LoadingPage/>
+          </Route>
 
           <Route path="/newproject">
             <NewProjectPage />

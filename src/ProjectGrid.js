@@ -3,7 +3,7 @@ import data from './FrontPageDummyData'
 import ProjectCard from './ProjectCard'
 
 export default function ProjectGrid() {
-  data.map(item => console.log(item.name))
+  //data.map(item => console.log(item.name))
   return (
     <div className="album py-5 bg-light">
       <div className="container">

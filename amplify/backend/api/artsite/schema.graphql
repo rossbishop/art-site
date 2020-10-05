@@ -1,0 +1,50 @@
+type Project @model(timestamps:{createdAt: "createdOn", updatedAt: "updatedOn"}) 
+  @auth(
+    rules: [ 
+        { allow: owner, provider: userPools, ownerField: "owner", operations: [create, update, delete] },
+        { allow: public, provider: iam, operations: [read] }
+      ]
+    ) 
+  {
+  id: ID!
+  userID: String!
+  userName: String!
+  projectName: String!
+  projectDescription: String!
+  revisions: [Revision] @connection(keyName: "byProject", fields: ["id"])
+}
+
+type Revision @model(timestamps:{createdAt: "createdOn", updatedAt: "updatedOn"}) 
+  @auth(
+    rules: [ 
+        { allow: owner, provider: userPools, ownerField: "owner", operations: [create, update, delete] },
+        { allow: public, provider: iam, operations: [read] }
+      ]
+  ) 
+  @key(name: "byProject", fields: ["projectID", "imgSrc", "name", "description"]) 
+  {
+  id: ID!
+  projectID: ID!
+  imgSrc: String!
+  name: String!
+  description: String!
+  #comments: [Comment] @connection(keyName: "byRevision", fields: ["id"])
+}
+
+# type Comment @model(timestamps:{createdAt: "createdOn", updatedAt: "updatedOn"})
+#   @auth(
+#     rules: [ 
+#         { allow: owner, ownerField: "owner", operations: [create, update, delete] },
+#         { allow: public, operations: [read] }
+#       ]
+#     )  
+#   @key(name: "byRevision", fields: ["revisionID", "userID", "userName", "time", "date", "likes"]) 
+#   {
+#   id: ID!
+#   revisionID: ID!
+#   userID: ID!
+#   userName: String!
+#   time: String!
+#   date: String!
+#   likes: String!
+# }

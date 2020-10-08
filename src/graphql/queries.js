@@ -6,7 +6,6 @@ export const getProject = /* GraphQL */ `
     getProject(id: $id) {
       id
       userID
-      userName
       projectName
       projectDescription
       createdOn
@@ -24,7 +23,6 @@ export const listProjects = /* GraphQL */ `
       items {
         id
         userID
-        userName
         projectName
         projectDescription
         createdOn

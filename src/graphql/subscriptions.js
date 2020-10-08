@@ -6,7 +6,6 @@ export const onCreateProject = /* GraphQL */ `
     onCreateProject {
       id
       userID
-      userName
       projectName
       projectDescription
       createdOn
@@ -19,7 +18,6 @@ export const onUpdateProject = /* GraphQL */ `
     onUpdateProject {
       id
       userID
-      userName
       projectName
       projectDescription
       createdOn
@@ -32,7 +30,6 @@ export const onDeleteProject = /* GraphQL */ `
     onDeleteProject {
       id
       userID
-      userName
       projectName
       projectDescription
       createdOn

@@ -28,12 +28,15 @@ function NewProjectPage() {
     )
 }
 
-const createNewProject = async (props) => {
+const createNewProject = async (projectName, projectDescription) => {
+
+    console.log('!!!!!!!!Project Name: ', projectName)
+    console.log('!!!!!!!!Project Description: ', projectDescription)
 
     const projectData = {
         userID: '1',
-        projectName: props.projectName,
-        projectDescription: props.projectDescription,
+        projectName: projectName,
+        projectDescription: projectDescription,
     }
 
     //await API.graphql(graphqlOperation(createProject, projectData))

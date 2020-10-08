@@ -14,18 +14,6 @@ export const createProject = /* GraphQL */ `
       projectDescription
       createdOn
       updatedOn
-      revisions {
-        items {
-          id
-          projectID
-          imgSrc
-          name
-          description
-          createdOn
-          updatedOn
-        }
-        nextToken
-      }
     }
   }
 `;
@@ -42,18 +30,6 @@ export const updateProject = /* GraphQL */ `
       projectDescription
       createdOn
       updatedOn
-      revisions {
-        items {
-          id
-          projectID
-          imgSrc
-          name
-          description
-          createdOn
-          updatedOn
-        }
-        nextToken
-      }
     }
   }
 `;
@@ -70,18 +46,6 @@ export const deleteProject = /* GraphQL */ `
       projectDescription
       createdOn
       updatedOn
-      revisions {
-        items {
-          id
-          projectID
-          imgSrc
-          name
-          description
-          createdOn
-          updatedOn
-        }
-        nextToken
-      }
     }
   }
 `;

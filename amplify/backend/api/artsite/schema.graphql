@@ -7,11 +7,10 @@ type Project @model(timestamps:{createdAt: "createdOn", updatedAt: "updatedOn"})
     ) 
   {
   id: ID!
-  userID: String!
-  userName: String!
-  projectName: String!
-  projectDescription: String!
-  revisions: [Revision] @connection(keyName: "byProject", fields: ["id"])
+  userID: String
+  projectName: String
+  projectDescription: String
+  #revisions: [Revision] @connection(keyName: "byProject", fields: ["id"])
 }
 
 type Revision @model(timestamps:{createdAt: "createdOn", updatedAt: "updatedOn"}) 

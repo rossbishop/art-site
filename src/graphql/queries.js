@@ -11,18 +11,6 @@ export const getProject = /* GraphQL */ `
       projectDescription
       createdOn
       updatedOn
-      revisions {
-        items {
-          id
-          projectID
-          imgSrc
-          name
-          description
-          createdOn
-          updatedOn
-        }
-        nextToken
-      }
     }
   }
 `;
@@ -41,9 +29,6 @@ export const listProjects = /* GraphQL */ `
         projectDescription
         createdOn
         updatedOn
-        revisions {
-          nextToken
-        }
       }
       nextToken
     }

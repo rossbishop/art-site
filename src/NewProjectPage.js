@@ -2,7 +2,8 @@ import { Header, ProjectGrid, Footer } from './Imports.js'
 import React, { useState } from 'react';
 import NewProject from './NewProject'
 import { API, graphqlOperation } from 'aws-amplify'
-import { createProject } from './graphql/mutations'
+//import { createProject } from './graphql/mutations'
+import * as mutations from './graphql/mutations'
 
 function NewProjectPage() {
 
@@ -31,12 +32,12 @@ const createNewProject = async (props) => {
 
     const projectData = {
         userID: '1',
-        userName: 'sneff',
         projectName: props.projectName,
         projectDescription: props.projectDescription,
     }
 
-    await API.graphql(graphqlOperation(createProject, {input: projectData}))
+    //await API.graphql(graphqlOperation(createProject, projectData))
+    await API.graphql({query: mutations.createProject, variables: {input: projectData}})
     .then((response) => {
         console.log('Success: ', response)
     })

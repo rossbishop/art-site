@@ -3,6 +3,7 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
 import NewProjectStyles from './css/newproject.module.css'
 import cx from 'classnames'
+import { createProject } from './graphql/mutations'
 
 export default function NewProject(props) {
 
@@ -26,13 +27,13 @@ export default function NewProject(props) {
                         </div>
                         <h4 className="mt-3">Project Name</h4>
                         <label for="inputProjectName" className="sr-only">Enter New Project Name</label>
-                        <input type="projectDetail" id="inputProjectName" className={cx(NewProjectStyles.formControl,"mb-3", "py-2", "pl-0")} placeholder="Enter new project name" required autofocus/>
+                        <input type="projectDetail" id="inputProjectName" className={cx(NewProjectStyles.formControl,"mb-3", "py-2", "pl-0")} placeholder="Enter new project name" onChange={event => props.setProjectName(event.target.value)} required autofocus/>
                         <h4>Project Description:</h4>
                         <label for="inputProjectDescription" className="sr-only">Enter Project Description</label>
-                        <input type="projectDetail" id="inputProjectDescription" className={cx(NewProjectStyles.formControl,"mb-3", "py-2", "pl-0")} placeholder="Enter new project description" required autofocus/>
+                        <input type="projectDetail" id="inputProjectDescription" className={cx(NewProjectStyles.formControl,"mb-3", "py-2", "pl-0")} placeholder="Enter new project description" onChange={event => props.setProjectDescription(event.target.value)} required autofocus/>
                         <h4>Initial Revision Description:</h4>
-                        <textarea className={cx(NewProjectStyles.formControl, NewProjectStyles.revDescBox)} id="bioTextArea" rows="5" placeholder="Enter a concise description for your initial revision"></textarea>
-                        <button className={cx(NewProjectStyles.btnProjectCreate, "btn", "btn-lg", "btn-primary", "btn-block", "mt-4")} type="submit">Create Project</button>
+                        <textarea className={cx(NewProjectStyles.formControl, NewProjectStyles.revDescBox)} id="bioTextArea" rows="5" placeholder="Enter a concise description for your initial revision" onChange={event => props.setRevDescription(event.target.value)}></textarea>
+                        <button className={cx(NewProjectStyles.btnProjectCreate, "btn", "btn-lg", "btn-primary", "btn-block", "mt-4")} type="submit" onClick={(e) => {e.preventDefault();props.createNewProject(props.projectName, props.projectDescription, props.revisionDescription);}}>Create Project</button>
                     </form>
                 </div>
             </div>

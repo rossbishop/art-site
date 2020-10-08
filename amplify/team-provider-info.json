@@ -12,8 +12,27 @@
       "AmplifyAppId": "d382qvp3io2wvl"
     },
     "categories": {
+      "function": {
+        "ArtSiteAPIAmplifyDefineAuthChallenge": {},
+        "ArtSiteAPIAmplifyCreateAuthChallenge": {},
+        "ArtSiteAPIAmplifyVerifyAuthChallengeResponse": {
+          "RECAPTCHASECRET": ""
+        },
+        "ArtSiteAPIAmplifyCustomMessage": {
+          "REDIRECTURL": "",
+          "EMAILSUBJECT": "",
+          "EMAILMESSAGE": ""
+        },
+        "ArtSiteAPIAmplifyPostConfirmation": {
+          "GROUP": ""
+        },
+        "ArtSiteAPIAmplifyPreSignup": {
+          "DOMAINWHITELIST": "",
+          "DOMAINBLACKLIST": ""
+        }
+      },
       "auth": {
-        "artsite57333d8f": {}
+        "ArtSiteAPIAmplify": {}
       }
     }
   }

@@ -11,8 +11,21 @@ export const createProject = /* GraphQL */ `
       userID
       projectName
       projectDescription
+      owner
       createdOn
       updatedOn
+      revisions {
+        items {
+          id
+          projectID
+          imgSrc
+          name
+          description
+          createdOn
+          updatedOn
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -26,8 +39,21 @@ export const updateProject = /* GraphQL */ `
       userID
       projectName
       projectDescription
+      owner
       createdOn
       updatedOn
+      revisions {
+        items {
+          id
+          projectID
+          imgSrc
+          name
+          description
+          createdOn
+          updatedOn
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -41,8 +67,21 @@ export const deleteProject = /* GraphQL */ `
       userID
       projectName
       projectDescription
+      owner
       createdOn
       updatedOn
+      revisions {
+        items {
+          id
+          projectID
+          imgSrc
+          name
+          description
+          createdOn
+          updatedOn
+        }
+        nextToken
+      }
     }
   }
 `;

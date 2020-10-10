@@ -1,7 +1,7 @@
 type Project @model(timestamps:{createdAt: "createdOn", updatedAt: "updatedOn"}) 
   @auth(
     rules: [ 
-        { allow: owner, provider: userPools, ownerField: "owner", operations: [create, update, delete] },
+        { allow: owner, provider: userPools, ownerField: "owner", operations: [create, update, delete, read] },
         { allow: public, provider: iam, operations: [read] }
       ]
     ) 
@@ -10,13 +10,14 @@ type Project @model(timestamps:{createdAt: "createdOn", updatedAt: "updatedOn"})
   userID: String
   projectName: String
   projectDescription: String
-  #revisions: [Revision] @connection(keyName: "byProject", fields: ["id"])
+  owner: ID
+  revisions: [Revision] @connection(keyName: "byProject", fields: ["id"])
 }
 
 type Revision @model(timestamps:{createdAt: "createdOn", updatedAt: "updatedOn"}) 
   @auth(
     rules: [ 
-        { allow: owner, provider: userPools, ownerField: "owner", operations: [create, update, delete] },
+        { allow: owner, provider: userPools, ownerField: "owner", operations: [create, update, delete, read] },
         { allow: public, provider: iam, operations: [read] }
       ]
   ) 

@@ -8,8 +8,21 @@ export const getProject = /* GraphQL */ `
       userID
       projectName
       projectDescription
+      owner
       createdOn
       updatedOn
+      revisions {
+        items {
+          id
+          projectID
+          imgSrc
+          name
+          description
+          createdOn
+          updatedOn
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -25,8 +38,12 @@ export const listProjects = /* GraphQL */ `
         userID
         projectName
         projectDescription
+        owner
         createdOn
         updatedOn
+        revisions {
+          nextToken
+        }
       }
       nextToken
     }

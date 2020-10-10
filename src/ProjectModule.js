@@ -21,10 +21,10 @@ export default function ProjectModule(props) {
                     <div id="myCarousel" className="carousel slide" data-ride="carousel" data-interval="0">
                         <ol className="carousel-indicators">
                             {
-                                props.projectRevisionData.map(item => {
+                                props.projectRevisionData.map((item, index) => {
                                     return (
                                         <GalleryListItem
-                                            id={item.id}
+                                            id={index}
                                             isLatest={props.projectRevisionData.length}
                                             selected={currentProjectState.currentId}
                                             projectUpdateState={updateCurrentProject}
@@ -35,10 +35,10 @@ export default function ProjectModule(props) {
                         </ol>
                         <div className="carousel-inner">
                             {
-                                props.projectRevisionData.map(item => {
+                                props.projectRevisionData.map((item, index) => {
                                     return (
                                         <GalleryItem
-                                            id={(item.id)+1}
+                                            id={(index)+1}
                                             isLatest={props.projectRevisionData.length}
                                             selected={currentProjectState.currentId}
                                             imgSrc={item.imgSrc}
@@ -63,7 +63,7 @@ export default function ProjectModule(props) {
                 </div>
             </div>
             <div className="container">
-            <h3>{props.projectDetails.projectName} by <a href="/userpage">{props.projectDetails.userName}</a></h3>
+            <h3>{props.projectDetails.projectName} by <a href="/userpage">{props.projectDetails.owner}</a></h3>
             <button type="button" className={cx("btn", "btn-success", projectModuleStyles.commentButton)}><Link className={projectModuleStyles.links} to="/newrevision">Add Revision</Link></button>
             <p className={projectModuleStyles.projectText}>{props.projectDetails.projectDescription}</p>
             <h4>Comments</h4>
@@ -73,7 +73,7 @@ export default function ProjectModule(props) {
             </div>
             <button type="button" className={cx("btn", "btn-primary", projectModuleStyles.commentButton)}>Submit</button>
             <button type="button" className={cx("btn", "btn-danger", projectModuleStyles.commentButton)}>Cancel</button>
-            {
+            {/* {
                 props.projectRevisionData[currentProjectState.currentId].comments.map(item => {
                     return (
                         <CommentCard
@@ -86,7 +86,7 @@ export default function ProjectModule(props) {
                         />
                     )
                 })
-            }
+            } */}
             </div>
         </Fragment>
     )

@@ -25,8 +25,6 @@ import {
 } from"react-router-dom";
 import NewRevisionPage from './NewRevisionPage.js';
 
-Amplify.configure(awsconfig);
-
 const client = new AWSAppSyncClient({
   url: awsconfig.aws_appsync_graphqlEndpoint,
   region: awsconfig.aws_appsync_region,
@@ -60,6 +58,27 @@ function App() {
       console.log("Auth not yet complete...")
     }
   }, [isLoggedIn])
+
+  //Amplify.configure(awsconfig);
+  Amplify.configure({
+    "aws_project_region": "eu-west-2",
+    "aws_cognito_identity_pool_id": "eu-west-2:d058ff0a-6b64-43f0-94a8-db6bd586c1df",
+    "aws_cognito_region": "eu-west-2",
+    "aws_user_pools_id": "eu-west-2_ajTX2hSlK",
+    "aws_user_pools_web_client_id": "7g5gsqmbbbah3p2laqihh1vd75",
+    "oauth": {},
+    "aws_appsync_graphqlEndpoint": "https://eghgopnuszhfvm4ncxdlb7ywtq.appsync-api.eu-west-2.amazonaws.com/graphql",
+    "aws_appsync_region": "eu-west-2",
+    "aws_appsync_authenticationType": isLoggedIn ? "AMAZON_COGNITO_USER_POOLS" : "AWS_IAM",
+    "aws_appsync_apiKey" : "config.aws_appsync_apiKey",
+    "aws_cloud_logic_custom": [
+        {
+            "name": "AdminQueries",
+            "endpoint": "https://fhjvobq522.execute-api.eu-west-2.amazonaws.com/dev",
+            "region": "eu-west-2"
+        }
+    ]
+  })
 
   function checkLoggedIn() {
     Auth.currentAuthenticatedUser({

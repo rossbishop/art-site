@@ -4,17 +4,16 @@ import data from './RevisionDummyData'
 import projectDataImport from './ProjectDummyData'
 import { API, graphqlOperation } from 'aws-amplify'
 import * as queries from './graphql/queries'
+import { propStyle } from 'aws-amplify-react';
 
-var projectDataVar = undefined
-var isResponded = false
-
-function ProjectPage() {
+function ProjectPage(props) {
 
     const [projectData, setProjectData] = useState(null)
 
     const getProject = async () => {
         try {
-            const apiCall = await API.graphql({query: queries.getProject, variables: {id: "431123e4-9658-4385-9d23-2b26a19e9d5d"}})
+            const uuid = (window.location.pathname.split('/'))[2]
+            const apiCall = await API.graphql({query: queries.getProject, variables: {id: uuid}})
             console.log(apiCall)
             setProjectData(apiCall.data.getProject)
         }
@@ -32,7 +31,7 @@ function ProjectPage() {
             <Header />
             {projectData &&
                 <ProjectModule 
-                initialProjectDataState={0}
+                initialProjectDataState={(projectData.revisions.items.length)-1}
                 projectRevisionData={projectData.revisions.items}
                 projectDetails={projectData}
                 />

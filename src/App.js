@@ -130,11 +130,11 @@ function App() {
             <TestCss />
           </Route>
 
-          <Route path="/projectpage">
+          <Route path="/project/:id">
             <ProjectPage />
           </Route>
 
-          <Route path="/userpage">
+          <Route path="/user/:id">
             <UserPage />
           </Route>
 

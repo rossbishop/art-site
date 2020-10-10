@@ -63,7 +63,7 @@ export default function ProjectModule(props) {
                 </div>
             </div>
             <div className="container">
-            <h3>{props.projectDetails.projectName} by <a href="/userpage">{props.projectDetails.owner}</a></h3>
+            <h3>{props.projectDetails.projectName} by <a href={`/user/${props.projectDetails.owner}`}>{props.projectDetails.owner}</a></h3>
             <button type="button" className={cx("btn", "btn-success", projectModuleStyles.commentButton)}><Link className={projectModuleStyles.links} to="/newrevision">Add Revision</Link></button>
             <p className={projectModuleStyles.projectText}>{props.projectDetails.projectDescription}</p>
             <h4>Comments</h4>

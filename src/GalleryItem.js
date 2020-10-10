@@ -8,7 +8,7 @@ export default function GalleryItem(props) {
 
     return (
         <div className={((props.selected)==(props.id-1)) ? "carousel-item active" : "carousel-item"}>
-            <img className={galleryItemStyles.galleryImg} src={require("./img/destination_tokyo.jpg")} alt="..."/>
+            <img className={galleryItemStyles.galleryImg} src={props.imgSrc} alt="..."/>
             <div className="container">
                 <div className="carousel-caption">
                     <h5>{props.name}</h5>

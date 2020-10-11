@@ -32,6 +32,7 @@ function ProjectPage(props) {
             {projectData &&
                 <ProjectModule 
                 userDetails={props.userDetails}
+                isLoggedIn={props.isLoggedIn}
                 initialProjectDataState={(projectData.revisions.items.length)-1}
                 projectRevisionData={projectData.revisions.items}
                 projectDetails={projectData}

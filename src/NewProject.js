@@ -31,6 +31,9 @@ export default function NewProject(props) {
                         <h4>Project Description:</h4>
                         <label for="inputProjectDescription" className="sr-only">Enter Project Description</label>
                         <input type="projectDetail" id="inputProjectDescription" className={cx(NewProjectStyles.formControl,"mb-3", "py-2", "pl-0")} placeholder="Enter new project description" onChange={event => props.setProjectDescription(event.target.value)} required autofocus/>
+                        <h4>Initial Revision Name:</h4>
+                        <label for="inputRevisionName" className="sr-only">Enter Revision Name</label>
+                        <input type="projectDetail" id="inputRevisionName" className={cx(NewProjectStyles.formControl,"mb-3", "py-2", "pl-0")} placeholder="Enter new project name" onChange={event => props.setRevName(event.target.value)} required autofocus/>
                         <h4>Initial Revision Description:</h4>
                         <textarea className={cx(NewProjectStyles.formControl, NewProjectStyles.revDescBox)} id="bioTextArea" rows="5" placeholder="Enter a concise description for your initial revision" onChange={event => props.setRevDescription(event.target.value)}></textarea>
                         <button className={cx(NewProjectStyles.btnProjectCreate, "btn", "btn-lg", "btn-primary", "btn-block", "mt-4")} type="submit" onClick={(e) => {e.preventDefault();props.createNewProject(props.projectName, props.projectDescription);}}>Create Project</button>

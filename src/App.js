@@ -125,6 +125,7 @@ function App() {
           <Route path="/project/:id">
             <ProjectPage 
             userDetails={userDetails}
+            isLoggedIn={isLoggedIn}
             />
           </Route>
 

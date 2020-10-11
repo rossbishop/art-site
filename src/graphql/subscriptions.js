@@ -5,7 +5,6 @@ export const onCreateProject = /* GraphQL */ `
   subscription OnCreateProject($owner: String) {
     onCreateProject(owner: $owner) {
       id
-      userID
       projectName
       projectDescription
       owner
@@ -18,8 +17,21 @@ export const onCreateProject = /* GraphQL */ `
           imgSrc
           name
           description
+          owner
           createdOn
           updatedOn
+          comments {
+            items {
+              id
+              revisionID
+              comment
+              likeCount
+              owner
+              createdOn
+              updatedOn
+            }
+            nextToken
+          }
         }
         nextToken
       }
@@ -30,7 +42,6 @@ export const onUpdateProject = /* GraphQL */ `
   subscription OnUpdateProject($owner: String) {
     onUpdateProject(owner: $owner) {
       id
-      userID
       projectName
       projectDescription
       owner
@@ -43,8 +54,21 @@ export const onUpdateProject = /* GraphQL */ `
           imgSrc
           name
           description
+          owner
           createdOn
           updatedOn
+          comments {
+            items {
+              id
+              revisionID
+              comment
+              likeCount
+              owner
+              createdOn
+              updatedOn
+            }
+            nextToken
+          }
         }
         nextToken
       }
@@ -55,7 +79,6 @@ export const onDeleteProject = /* GraphQL */ `
   subscription OnDeleteProject($owner: String) {
     onDeleteProject(owner: $owner) {
       id
-      userID
       projectName
       projectDescription
       owner
@@ -68,8 +91,21 @@ export const onDeleteProject = /* GraphQL */ `
           imgSrc
           name
           description
+          owner
           createdOn
           updatedOn
+          comments {
+            items {
+              id
+              revisionID
+              comment
+              likeCount
+              owner
+              createdOn
+              updatedOn
+            }
+            nextToken
+          }
         }
         nextToken
       }
@@ -84,8 +120,31 @@ export const onCreateRevision = /* GraphQL */ `
       imgSrc
       name
       description
+      owner
       createdOn
       updatedOn
+      comments {
+        items {
+          id
+          revisionID
+          comment
+          likeCount
+          owner
+          createdOn
+          updatedOn
+          likes {
+            items {
+              id
+              commentID
+              owner
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -97,8 +156,31 @@ export const onUpdateRevision = /* GraphQL */ `
       imgSrc
       name
       description
+      owner
       createdOn
       updatedOn
+      comments {
+        items {
+          id
+          revisionID
+          comment
+          likeCount
+          owner
+          createdOn
+          updatedOn
+          likes {
+            items {
+              id
+              commentID
+              owner
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -110,8 +192,133 @@ export const onDeleteRevision = /* GraphQL */ `
       imgSrc
       name
       description
+      owner
       createdOn
       updatedOn
+      comments {
+        items {
+          id
+          revisionID
+          comment
+          likeCount
+          owner
+          createdOn
+          updatedOn
+          likes {
+            items {
+              id
+              commentID
+              owner
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onCreateComment = /* GraphQL */ `
+  subscription OnCreateComment($owner: String) {
+    onCreateComment(owner: $owner) {
+      id
+      revisionID
+      comment
+      likeCount
+      owner
+      createdOn
+      updatedOn
+      likes {
+        items {
+          id
+          commentID
+          owner
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onUpdateComment = /* GraphQL */ `
+  subscription OnUpdateComment($owner: String) {
+    onUpdateComment(owner: $owner) {
+      id
+      revisionID
+      comment
+      likeCount
+      owner
+      createdOn
+      updatedOn
+      likes {
+        items {
+          id
+          commentID
+          owner
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onDeleteComment = /* GraphQL */ `
+  subscription OnDeleteComment($owner: String) {
+    onDeleteComment(owner: $owner) {
+      id
+      revisionID
+      comment
+      likeCount
+      owner
+      createdOn
+      updatedOn
+      likes {
+        items {
+          id
+          commentID
+          owner
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onCreateLike = /* GraphQL */ `
+  subscription OnCreateLike($owner: String) {
+    onCreateLike(owner: $owner) {
+      id
+      commentID
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateLike = /* GraphQL */ `
+  subscription OnUpdateLike($owner: String) {
+    onUpdateLike(owner: $owner) {
+      id
+      commentID
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteLike = /* GraphQL */ `
+  subscription OnDeleteLike($owner: String) {
+    onDeleteLike(owner: $owner) {
+      id
+      commentID
+      owner
+      createdAt
+      updatedAt
     }
   }
 `;

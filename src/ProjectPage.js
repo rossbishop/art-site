@@ -31,6 +31,7 @@ function ProjectPage(props) {
             <Header />
             {projectData &&
                 <ProjectModule 
+                userDetails={props.userDetails}
                 initialProjectDataState={(projectData.revisions.items.length)-1}
                 projectRevisionData={projectData.revisions.items}
                 projectDetails={projectData}

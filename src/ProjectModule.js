@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react' 
+import React, {Fragment, useState, useEffect} from 'react' 
 import CommentCard from './CommentCard'
 import GalleryListItem from './GalleryListItem'
 import GalleryItem from './GalleryItem'
@@ -13,6 +13,17 @@ import cx from 'classnames'
 export default function ProjectModule(props) {
 
     const [currentProjectState, updateCurrentProject] = useState({currentId: props.initialProjectDataState})
+    const [doesOwnProject, setOwnProject] = useState(false)
+
+    useEffect(() => {
+        if(props.userDetails != false)
+        {
+            if(props.userDetails.username==props.projectDetails.owner)
+            {
+                setOwnProject(true)
+            }
+        }
+    }, [])
 
     return (
         <Fragment>
@@ -64,7 +75,9 @@ export default function ProjectModule(props) {
             </div>
             <div className="container">
             <h3>{props.projectDetails.projectName} by <a href={`/user/${props.projectDetails.owner}`}>{props.projectDetails.owner}</a></h3>
-            <button type="button" className={cx("btn", "btn-success", projectModuleStyles.commentButton)}><Link className={projectModuleStyles.links} to="/newrevision">Add Revision</Link></button>
+            {doesOwnProject &&
+                <button type="button" className={cx("btn", "btn-success", projectModuleStyles.commentButton)}><Link className={projectModuleStyles.links} to="/newrevision">Add Revision</Link></button>
+            }
             <p className={projectModuleStyles.projectText}>{props.projectDetails.projectDescription}</p>
             <h4>Comments</h4>
             <div className="form-group">
@@ -73,12 +86,12 @@ export default function ProjectModule(props) {
             </div>
             <button type="button" className={cx("btn", "btn-primary", projectModuleStyles.commentButton)}>Submit</button>
             <button type="button" className={cx("btn", "btn-danger", projectModuleStyles.commentButton)}>Cancel</button>
-            {/* {
-                props.projectRevisionData[currentProjectState.currentId].comments.map(item => {
+            {
+                props.projectRevisionData[currentProjectState.currentId].comments.items.map(item => {
                     return (
                         <CommentCard
                             id={item.id}
-                            username={item.username}
+                            username={item.owner}
                             time={item.time}
                             date={item.date}
                             comment={item.comment}
@@ -86,7 +99,7 @@ export default function ProjectModule(props) {
                         />
                     )
                 })
-            } */}
+            }
             </div>
         </Fragment>
     )

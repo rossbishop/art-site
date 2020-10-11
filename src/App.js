@@ -37,8 +37,8 @@ const client = new AWSAppSyncClient({
 function App() {
 
   const [isLoggedIn, setLoggedIn] = useState();
-  const [isLoaded, setLoaded] = useState();
   const [isLoading, setLoading] = useState(true);
+  const [userDetails, setUserDetails] = useState(false);
 
   //Invoke this function only once at first page load (hence empty deps array [])
   useEffect(() => {
@@ -46,18 +46,26 @@ function App() {
     checkLoggedIn()
   }, [])
 
-  useEffect(() => {
-    console.log("2. Check if auth complete")
-    console.log("   isLoggedIn: " + isLoggedIn)
-    if(isLoggedIn != undefined) {
-      console.log("3. Auth complete")
-      setLoaded(true)
-      setLoading(false)
+  const checkLoggedIn = async() => {
+    try {
+      const user = await Auth.currentAuthenticatedUser({
+        bypassCache: false  // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
+      })
+      console.log(user);
+      setLoggedIn(true);
+      setLoading(false);
+      setUserDetails(user);
+      console.log('checkLoggedIn SUCCESS: ' + isLoggedIn)  
     }
-    else{
-      console.log("Auth not yet complete...")
+    catch(err) {
+      console.log(err);
+      setLoggedIn(false);
+      setLoading(false);
+      setUserDetails(false);
+      console.log('checkLoggedIn ERROR: ' + isLoggedIn)
     }
-  }, [isLoggedIn])
+
+  }
 
   //Amplify.configure(awsconfig);
   Amplify.configure({
@@ -79,22 +87,6 @@ function App() {
         }
     ]
   })
-
-  function checkLoggedIn() {
-    Auth.currentAuthenticatedUser({
-        bypassCache: false  // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
-    })
-    .then(user => {
-        console.log(user);
-        setLoggedIn(true);
-        console.log('checkLoggedIn SUCCESS: ' + isLoggedIn)    
-    })
-    .catch(err => {
-        console.log(err);
-        setLoggedIn(false);
-        console.log('checkLoggedIn ERROR: ' + isLoggedIn)
-    });
-  }
 
   function PrivateRoute({ children, ...rest }) {
     return (
@@ -131,7 +123,9 @@ function App() {
           </Route>
 
           <Route path="/project/:id">
-            <ProjectPage />
+            <ProjectPage 
+            userDetails={userDetails}
+            />
           </Route>
 
           <Route path="/user/:id">
@@ -143,7 +137,7 @@ function App() {
               <LoadingPage />
             </Route>
           )}
-          {isLoaded && (
+          {!isLoading && (
             <PrivateRoute path="/updateprofile">
               <ProfileUpdatePage />
             </PrivateRoute>

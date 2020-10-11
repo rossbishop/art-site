@@ -8,7 +8,6 @@ export const createProject = /* GraphQL */ `
   ) {
     createProject(input: $input, condition: $condition) {
       id
-      userID
       projectName
       projectDescription
       owner
@@ -21,8 +20,21 @@ export const createProject = /* GraphQL */ `
           imgSrc
           name
           description
+          owner
           createdOn
           updatedOn
+          comments {
+            items {
+              id
+              revisionID
+              comment
+              likeCount
+              owner
+              createdOn
+              updatedOn
+            }
+            nextToken
+          }
         }
         nextToken
       }
@@ -36,7 +48,6 @@ export const updateProject = /* GraphQL */ `
   ) {
     updateProject(input: $input, condition: $condition) {
       id
-      userID
       projectName
       projectDescription
       owner
@@ -49,8 +60,21 @@ export const updateProject = /* GraphQL */ `
           imgSrc
           name
           description
+          owner
           createdOn
           updatedOn
+          comments {
+            items {
+              id
+              revisionID
+              comment
+              likeCount
+              owner
+              createdOn
+              updatedOn
+            }
+            nextToken
+          }
         }
         nextToken
       }
@@ -64,7 +88,6 @@ export const deleteProject = /* GraphQL */ `
   ) {
     deleteProject(input: $input, condition: $condition) {
       id
-      userID
       projectName
       projectDescription
       owner
@@ -77,8 +100,21 @@ export const deleteProject = /* GraphQL */ `
           imgSrc
           name
           description
+          owner
           createdOn
           updatedOn
+          comments {
+            items {
+              id
+              revisionID
+              comment
+              likeCount
+              owner
+              createdOn
+              updatedOn
+            }
+            nextToken
+          }
         }
         nextToken
       }
@@ -96,8 +132,31 @@ export const createRevision = /* GraphQL */ `
       imgSrc
       name
       description
+      owner
       createdOn
       updatedOn
+      comments {
+        items {
+          id
+          revisionID
+          comment
+          likeCount
+          owner
+          createdOn
+          updatedOn
+          likes {
+            items {
+              id
+              commentID
+              owner
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -112,8 +171,31 @@ export const updateRevision = /* GraphQL */ `
       imgSrc
       name
       description
+      owner
       createdOn
       updatedOn
+      comments {
+        items {
+          id
+          revisionID
+          comment
+          likeCount
+          owner
+          createdOn
+          updatedOn
+          likes {
+            items {
+              id
+              commentID
+              owner
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -128,8 +210,151 @@ export const deleteRevision = /* GraphQL */ `
       imgSrc
       name
       description
+      owner
       createdOn
       updatedOn
+      comments {
+        items {
+          id
+          revisionID
+          comment
+          likeCount
+          owner
+          createdOn
+          updatedOn
+          likes {
+            items {
+              id
+              commentID
+              owner
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const createComment = /* GraphQL */ `
+  mutation CreateComment(
+    $input: CreateCommentInput!
+    $condition: ModelCommentConditionInput
+  ) {
+    createComment(input: $input, condition: $condition) {
+      id
+      revisionID
+      comment
+      likeCount
+      owner
+      createdOn
+      updatedOn
+      likes {
+        items {
+          id
+          commentID
+          owner
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const updateComment = /* GraphQL */ `
+  mutation UpdateComment(
+    $input: UpdateCommentInput!
+    $condition: ModelCommentConditionInput
+  ) {
+    updateComment(input: $input, condition: $condition) {
+      id
+      revisionID
+      comment
+      likeCount
+      owner
+      createdOn
+      updatedOn
+      likes {
+        items {
+          id
+          commentID
+          owner
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const deleteComment = /* GraphQL */ `
+  mutation DeleteComment(
+    $input: DeleteCommentInput!
+    $condition: ModelCommentConditionInput
+  ) {
+    deleteComment(input: $input, condition: $condition) {
+      id
+      revisionID
+      comment
+      likeCount
+      owner
+      createdOn
+      updatedOn
+      likes {
+        items {
+          id
+          commentID
+          owner
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const createLike = /* GraphQL */ `
+  mutation CreateLike(
+    $input: CreateLikeInput!
+    $condition: ModelLikeConditionInput
+  ) {
+    createLike(input: $input, condition: $condition) {
+      id
+      commentID
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateLike = /* GraphQL */ `
+  mutation UpdateLike(
+    $input: UpdateLikeInput!
+    $condition: ModelLikeConditionInput
+  ) {
+    updateLike(input: $input, condition: $condition) {
+      id
+      commentID
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteLike = /* GraphQL */ `
+  mutation DeleteLike(
+    $input: DeleteLikeInput!
+    $condition: ModelLikeConditionInput
+  ) {
+    deleteLike(input: $input, condition: $condition) {
+      id
+      commentID
+      owner
+      createdAt
+      updatedAt
     }
   }
 `;

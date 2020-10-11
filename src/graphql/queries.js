@@ -5,7 +5,6 @@ export const getProject = /* GraphQL */ `
   query GetProject($id: ID!) {
     getProject(id: $id) {
       id
-      userID
       projectName
       projectDescription
       owner
@@ -18,8 +17,21 @@ export const getProject = /* GraphQL */ `
           imgSrc
           name
           description
+          owner
           createdOn
           updatedOn
+          comments {
+            items {
+              id
+              revisionID
+              comment
+              likeCount
+              owner
+              createdOn
+              updatedOn
+            }
+            nextToken
+          }
         }
         nextToken
       }
@@ -35,13 +47,25 @@ export const listProjects = /* GraphQL */ `
     listProjects(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        userID
         projectName
         projectDescription
         owner
         createdOn
         updatedOn
         revisions {
+          items {
+            id
+            projectID
+            imgSrc
+            name
+            description
+            owner
+            createdOn
+            updatedOn
+            comments {
+              nextToken
+            }
+          }
           nextToken
         }
       }
@@ -57,8 +81,31 @@ export const getRevision = /* GraphQL */ `
       imgSrc
       name
       description
+      owner
       createdOn
       updatedOn
+      comments {
+        items {
+          id
+          revisionID
+          comment
+          likeCount
+          owner
+          createdOn
+          updatedOn
+          likes {
+            items {
+              id
+              commentID
+              owner
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -75,8 +122,106 @@ export const listRevisions = /* GraphQL */ `
         imgSrc
         name
         description
+        owner
         createdOn
         updatedOn
+        comments {
+          items {
+            id
+            revisionID
+            comment
+            likeCount
+            owner
+            createdOn
+            updatedOn
+            likes {
+              nextToken
+            }
+          }
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const getComment = /* GraphQL */ `
+  query GetComment($id: ID!) {
+    getComment(id: $id) {
+      id
+      revisionID
+      comment
+      likeCount
+      owner
+      createdOn
+      updatedOn
+      likes {
+        items {
+          id
+          commentID
+          owner
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const listComments = /* GraphQL */ `
+  query ListComments(
+    $filter: ModelCommentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        revisionID
+        comment
+        likeCount
+        owner
+        createdOn
+        updatedOn
+        likes {
+          items {
+            id
+            commentID
+            owner
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const getLike = /* GraphQL */ `
+  query GetLike($id: ID!) {
+    getLike(id: $id) {
+      id
+      commentID
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listLikes = /* GraphQL */ `
+  query ListLikes(
+    $filter: ModelLikeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listLikes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        commentID
+        owner
+        createdAt
+        updatedAt
       }
       nextToken
     }

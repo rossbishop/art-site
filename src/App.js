@@ -94,11 +94,9 @@ function App() {
         {...rest}
           render={({ location }) => {
             if(isLoggedIn) {
-              console.log('RETURNING CHILDRENS!!!');
               return(children)
             }
             else {
-              console.log('RETURNING LOGIN PAGE!!!');
               return(
                 <Redirect
                   to={{
@@ -118,62 +116,103 @@ function App() {
     
     <>
         <Switch>
-          <Route path="/testcss">
-            <TestCss />
-          </Route>
 
           <Route path="/project/:id">
             <ProjectPage 
-            userDetails={userDetails}
-            isLoggedIn={isLoggedIn}
+              userDetails={userDetails}
+              isLoggedIn={isLoggedIn}
             />
           </Route>
 
           <Route path="/user/:id">
-            <UserPage />
+            <UserPage 
+              userDetails={userDetails}
+              isLoggedIn={isLoggedIn}
+            />
           </Route>
 
           {isLoading && (
-            <Route path="/updateprofile">
+            <Route path="/profileupdate">
               <LoadingPage />
             </Route>
           )}
           {!isLoading && (
-            <PrivateRoute path="/updateprofile">
-              <ProfileUpdatePage />
+            <PrivateRoute path="/profileupdate">
+              <ProfileUpdatePage 
+                userDetails={userDetails}
+                isLoggedIn={isLoggedIn}
+              />
             </PrivateRoute>
           )}
 
           <Route path="/loading">
-              <LoadingPage/>
+            <LoadingPage
+              userDetails={userDetails}
+              isLoggedIn={isLoggedIn}              
+            />
           </Route>
 
-          <Route path="/newproject">
-            <NewProjectPage />
-          </Route>
+          {isLoading && (
+            <Route path="/new">
+              <LoadingPage />
+            </Route>
+          )}
+          {!isLoading && (
+            <PrivateRoute path="/new">
+              <NewProjectPage 
+                userDetails={userDetails}
+                isLoggedIn={isLoggedIn}            
+              />
+            </PrivateRoute>
+          )}
 
-          <Route path="/newrevision">
-            <NewRevisionPage />
-          </Route>
+          {isLoading && (
+            <Route path="/newrevision">
+              <LoadingPage />
+            </Route>
+          )}
+          {!isLoading && (
+            <PrivateRoute path="/newrevision">
+              <NewRevisionPage 
+                userDetails={userDetails}
+                isLoggedIn={isLoggedIn}
+              />
+            </PrivateRoute>
+          )}
 
           <Route path="/login">
-            <LoginPage />
+            <LoginPage
+              userDetails={userDetails}
+              isLoggedIn={isLoggedIn}            
+            />
           </Route>
 
           <Route path="/logout">
-            <LogoutPage />
+            <LogoutPage 
+              userDetails={userDetails}
+              isLoggedIn={isLoggedIn}             
+            />
           </Route>
 
           <Route path="/register">
-            <RegisterPage />
+            <RegisterPage 
+              userDetails={userDetails}
+              isLoggedIn={isLoggedIn}             
+            />
           </Route>
 
           <Route path="/forgot">
-            <ForgotPage />
+            <ForgotPage 
+              userDetails={userDetails}
+              isLoggedIn={isLoggedIn}             
+            />
           </Route>
 
           <Route path="/">
-            <Home />
+            <Home 
+              userDetails={userDetails}
+              isLoggedIn={isLoggedIn}             
+            />
           </Route>
 
         </Switch>

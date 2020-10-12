@@ -17,11 +17,14 @@ function checkLoggedIn() {
     });
 }
 
-function ProfileUpdatePage() {
+function ProfileUpdatePage(props) {
     return (
         <>
             {}
-            <Header />
+            <Header 
+                userDetails={props.userDetails}
+                isLoggedIn={props.isLoggedIn}            
+            />
             <ProfileUpdate 
                 userData={UserData[0]}
             />

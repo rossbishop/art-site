@@ -14,7 +14,8 @@ function LoginPage(props) {
     const history=useHistory();
 
     function getRedirectPage() {
-        history.goBack();
+        //history.goBack();
+        window.location.href="/"
     }
 
     const signIn = async (props) => {

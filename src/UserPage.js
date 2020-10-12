@@ -6,11 +6,14 @@ import UserBanner from './UserBanner'
 import ProjectGrid from './ProjectGrid'
 import UserData from './UserDummyData'
 
-function UserPage() {
+function UserPage(props) {
 
     return (
         <>
-            <Header />
+            <Header 
+                userDetails={props.userDetails}
+                isLoggedIn={props.isLoggedIn}
+            />
             <UserBanner 
                 userData={UserData[0]}
             />

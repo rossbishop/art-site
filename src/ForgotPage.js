@@ -6,7 +6,7 @@ import ForgotReset from './ForgotReset'
 
 import { Auth } from 'aws-amplify'
 
-function ForgotPage() {
+function ForgotPage(props) {
 
     const [isSuccess, setSuccess] = useState({isSuccess: false, message: ''})
     const [isError, setError] = useState({isError: false, message: ''})
@@ -86,7 +86,10 @@ function ForgotPage() {
 
     return (
         <>
-            <Header />
+            <Header 
+                userDetails={props.userDetails}
+                isLoggedIn={props.isLoggedIn}
+            />
             {isReset &&
                 <ForgotReset
                     setConfirmationCode={setConfirmationCode}

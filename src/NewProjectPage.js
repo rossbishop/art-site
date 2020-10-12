@@ -4,7 +4,7 @@ import NewProject from './NewProject'
 import { API, graphqlOperation } from 'aws-amplify'
 import * as mutations from './graphql/mutations'
 
-function NewProjectPage() {
+function NewProjectPage(props) {
 
     const [projectName, setProjectName] = useState('')
     const [projectDescription, setProjectDescription] = useState('')
@@ -54,7 +54,10 @@ function NewProjectPage() {
 
     return (
         <>
-            <Header />
+            <Header 
+                userDetails={props.userDetails}
+                isLoggedIn={props.isLoggedIn}            
+            />
             <NewProject 
                 projectName={projectName}
                 projectDescription={projectDescription}

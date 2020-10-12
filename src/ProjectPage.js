@@ -28,7 +28,10 @@ function ProjectPage(props) {
 
     return (
         <>
-            <Header />
+            <Header 
+                userDetails={props.userDetails}
+                isLoggedIn={props.isLoggedIn}
+            />
             {projectData &&
                 <ProjectModule 
                 userDetails={props.userDetails}

@@ -7,7 +7,7 @@ import {Link} from './Imports'
 
 import { Auth } from 'aws-amplify';
 
-export default function Header() 
+export default function Header(props) 
 {
     
     const signOut = async (props) => {
@@ -33,25 +33,35 @@ export default function Header()
                         <li className="nav-item">
                             <a className="nav-link" href="/">Browse</a>
                         </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="/newproject">Create</a>
-                        </li>
-                        <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profile</a>
-                            <div className="dropdown-menu" aria-labelledby="dropdown05">
-                                <a className="dropdown-item" href="/userpage">Your Page</a>
-                                <a className="dropdown-item" href="/updateprofile">Update Profile</a>
-                            </div>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/login">Login</Link>
-                        </li>
-                        <li className="nav-item">
+                        {props.isLoggedIn &&
+                            <>
+                            <li className="nav-item">
+                            <a className="nav-link" href="/new">Create</a>
+                            </li>
+                            <li className="nav-item dropdown">
+                                <a className="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{props.userDetails.username}</a>
+                                <div className="dropdown-menu" aria-labelledby="dropdown05">
+                                    <a className="dropdown-item" href={`/user/${props.userDetails.username}`}>Your Page</a>
+                                    <a className="dropdown-item" href="/profileupdate">Update Profile</a>
+                                </div>
+                            </li>
+                            </>
+                        }
+                        {!props.isLoggedIn &&
+                            <>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/login">Login</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <a className="nav-link" href="/register">Register</a>
+                                </li>
+                            </>                      
+                        }
+                        {props.isLoggedIn &&
+                            <li className="nav-item">
                             <Link className="nav-link" to="/logout">Logout</Link>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="/register">Register</a>
-                        </li>
+                            </li>
+                        }
                     </ul>
                     <form className="form-inline my-2 my-md-0">
                         <input className={headerStyles.formControl} type="text" placeholder="Search"/>

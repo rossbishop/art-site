@@ -3,10 +3,13 @@ import React from 'react';
 import NewRevision from './NewRevision'
 import UserData from './UserDummyData' 
 
-function NewRevisionPage() {
+function NewRevisionPage(props) {
     return (
         <>
-            <Header />
+            <Header 
+                userDetails={props.userDetails}
+                isLoggedIn={props.isLoggedIn}
+            />
             <NewRevision 
                 userData={UserData[0]}
             />

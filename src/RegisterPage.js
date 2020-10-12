@@ -5,7 +5,7 @@ import RegisterConfirm from './RegisterConfirm'
 
 import { Auth } from 'aws-amplify';
 
-function RegisterPage() {
+function RegisterPage(props) {
     
     const [isError, setError] = useState({isError: false, message: ''})
     const [isUserCreated, setUserCreated] = useState(false)
@@ -56,7 +56,10 @@ function RegisterPage() {
 
     return (
         <>
-            <Header />
+            <Header 
+                userDetails={props.userDetails}
+                isLoggedIn={props.isLoggedIn}
+            />
             {!isUserCreated && (
                 <Register
                     setUsername={setUsername}

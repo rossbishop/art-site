@@ -37,7 +37,10 @@ function LogoutPage(props) {
 
     return (
         <>
-            <Header />
+            <Header 
+                userDetails={props.userDetails}
+                isLoggedIn={props.isLoggedIn}            
+            />
             <Logout
                 setError={setError}
                 getError={isError}

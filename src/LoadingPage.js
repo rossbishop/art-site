@@ -6,7 +6,10 @@ function LoadingPage(props) {
 
     return (
         <>
-            <Header />
+            <Header 
+                userDetails={props.userDetails}
+                isLoggedIn={props.isLoggedIn}            
+            />
             <Loading />
             <Footer /> 
         </>

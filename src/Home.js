@@ -3,10 +3,13 @@ import Header from './Header'
 import ProjectGrid from './ProjectGrid'
 import Footer from './Footer'
 
-function Home() {
+function Home(props) {
     return (
         <>
-            <Header />
+            <Header 
+                userDetails={props.userDetails}
+                isLoggedIn={props.isLoggedIn}            
+            />
             <ProjectGrid />
             <Footer /> 
         </>

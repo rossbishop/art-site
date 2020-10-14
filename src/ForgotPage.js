@@ -87,6 +87,7 @@ function ForgotPage(props) {
     return (
         <>
             <Header 
+                userAttribs={props.userAttribs}
                 userDetails={props.userDetails}
                 isLoggedIn={props.isLoggedIn}
             />

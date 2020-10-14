@@ -32,7 +32,8 @@
         }
       },
       "auth": {
-        "ArtSiteAPIAmplify": {}
+        "ArtSiteAPIAmplify": {},
+        "userPoolGroups": {}
       }
     }
   }

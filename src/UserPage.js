@@ -13,6 +13,7 @@ function UserPage(props) {
             <Header 
                 userDetails={props.userDetails}
                 isLoggedIn={props.isLoggedIn}
+                userAttribs={props.userAttribs}
             />
             <UserBanner 
                 userData={UserData[0]}

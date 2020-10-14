@@ -38,7 +38,8 @@ function App() {
 
   const [isLoggedIn, setLoggedIn] = useState();
   const [isLoading, setLoading] = useState(true);
-  const [userDetails, setUserDetails] = useState(false);
+  const [userDetails, setUserDetails] = useState();
+  const [userAttribs, setUserAttribs] = useState();
 
   //Invoke this function only once at first page load (hence empty deps array [])
   useEffect(() => {
@@ -46,16 +47,23 @@ function App() {
     checkLoggedIn()
   }, [])
 
+  //Use effect dep is userAttribs as was getting odd issues trying to grab them from the full userDetails state
+  useEffect(() => {
+    if(userAttribs != undefined){
+      setLoggedIn(true);
+      setLoading(false);
+      console.log('checkLoggedIn SUCCESS: ' + isLoggedIn)  
+    }
+  },[userAttribs])
+
   const checkLoggedIn = async() => {
     try {
       const user = await Auth.currentAuthenticatedUser({
         bypassCache: false  // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
       })
       console.log(user);
-      setLoggedIn(true);
-      setLoading(false);
       setUserDetails(user);
-      console.log('checkLoggedIn SUCCESS: ' + isLoggedIn)  
+      setUserAttribs(user.attributes);
     }
     catch(err) {
       console.log(err);
@@ -119,13 +127,15 @@ function App() {
 
           <Route path="/project/:id">
             <ProjectPage 
+              userAttribs={userAttribs}
               userDetails={userDetails}
               isLoggedIn={isLoggedIn}
             />
           </Route>
 
           <Route path="/user/:id">
-            <UserPage 
+            <UserPage
+              userAttribs={userAttribs} 
               userDetails={userDetails}
               isLoggedIn={isLoggedIn}
             />
@@ -133,13 +143,18 @@ function App() {
 
           {isLoading && (
             <Route path="/profileupdate">
-              <LoadingPage />
+              <LoadingPage 
+                userDetails={userDetails}
+                userAttribs={userAttribs}
+                isLoggedIn={isLoggedIn}              
+              />
             </Route>
           )}
           {!isLoading && (
             <PrivateRoute path="/profileupdate">
               <ProfileUpdatePage 
                 userDetails={userDetails}
+                userAttribs={userAttribs}
                 isLoggedIn={isLoggedIn}
               />
             </PrivateRoute>
@@ -147,6 +162,7 @@ function App() {
 
           <Route path="/loading">
             <LoadingPage
+              userAttribs={userAttribs}
               userDetails={userDetails}
               isLoggedIn={isLoggedIn}              
             />
@@ -154,12 +170,17 @@ function App() {
 
           {isLoading && (
             <Route path="/new">
-              <LoadingPage />
+              <LoadingPage 
+                userDetails={userDetails}
+                userAttribs={userAttribs}
+                isLoggedIn={isLoggedIn}              
+              />
             </Route>
           )}
           {!isLoading && (
             <PrivateRoute path="/new">
-              <NewProjectPage 
+              <NewProjectPage
+                userAttribs={userAttribs} 
                 userDetails={userDetails}
                 isLoggedIn={isLoggedIn}            
               />
@@ -168,12 +189,17 @@ function App() {
 
           {isLoading && (
             <Route path="/newrevision">
-              <LoadingPage />
+              <LoadingPage 
+                userDetails={userDetails}
+                userAttribs={userAttribs}
+                isLoggedIn={isLoggedIn}              
+              />
             </Route>
           )}
           {!isLoading && (
             <PrivateRoute path="/newrevision">
-              <NewRevisionPage 
+              <NewRevisionPage
+                userAttribs={userAttribs} 
                 userDetails={userDetails}
                 isLoggedIn={isLoggedIn}
               />
@@ -182,34 +208,39 @@ function App() {
 
           <Route path="/login">
             <LoginPage
+              userAttribs={userAttribs}
               userDetails={userDetails}
               isLoggedIn={isLoggedIn}            
             />
           </Route>
 
           <Route path="/logout">
-            <LogoutPage 
+            <LogoutPage
+              userAttribs={userAttribs} 
               userDetails={userDetails}
               isLoggedIn={isLoggedIn}             
             />
           </Route>
 
           <Route path="/register">
-            <RegisterPage 
+            <RegisterPage
+              userAttribs={userAttribs} 
               userDetails={userDetails}
               isLoggedIn={isLoggedIn}             
             />
           </Route>
 
           <Route path="/forgot">
-            <ForgotPage 
+            <ForgotPage
+              userAttribs={userAttribs} 
               userDetails={userDetails}
               isLoggedIn={isLoggedIn}             
             />
           </Route>
 
           <Route path="/">
-            <Home 
+            <Home
+              userAttribs={userAttribs} 
               userDetails={userDetails}
               isLoggedIn={isLoggedIn}             
             />

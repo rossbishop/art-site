@@ -39,7 +39,7 @@ export default function Header(props)
                             <a className="nav-link" href="/new">Create</a>
                             </li>
                             <li className="nav-item dropdown">
-                                <a className="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{props.userDetails.username}</a>
+                                <a className="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{props.userAttribs.preferred_username}</a>
                                 <div className="dropdown-menu" aria-labelledby="dropdown05">
                                     <a className="dropdown-item" href={`/user/${props.userDetails.username}`}>Your Page</a>
                                     <a className="dropdown-item" href="/profileupdate">Update Profile</a>

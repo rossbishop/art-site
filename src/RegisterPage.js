@@ -15,10 +15,11 @@ function RegisterPage(props) {
     const [password, setPassword] = useState('')
     const [confirmationCode, setConfirmationCode] = useState('')
     const [user, setUser] = useState()
+    const [birthdate, setBirthdate] = useState('')
 
     const signUp = async (props) => {
         const { username, password, email } = props;
-        const birthdate = "01/01/1970";
+        //const birthdate = "01/01/1970";
         await Auth.signUp({
         username,
         password,
@@ -26,6 +27,11 @@ function RegisterPage(props) {
             email,
             birthdate,
             preferred_username: username,
+            "custom:instagram":"Enter Instagram Account",
+            "custom:facebook":"Enter Facebook Account",
+            "custom:twitter":"Enter Twitter Account",
+            "custom:job":"Enter Job Title",
+            "custom:bio":"Tell everyone about yourself"
         },
         })
         .then((response) => {
@@ -59,16 +65,19 @@ function RegisterPage(props) {
             <Header 
                 userDetails={props.userDetails}
                 isLoggedIn={props.isLoggedIn}
+                userAttribs={props.userAttribs}
             />
             {!isUserCreated && (
                 <Register
                     setUsername={setUsername}
                     setEmail={setEmail}
                     setPassword={setPassword}
+                    setBirthdate={setBirthdate}
                     getUsername={username}
                     getEmail={email}
                     getPassword={password}
                     getError={isError}
+                    getBirthdate={birthdate}
                     signUp={signUp}
                 />)
             }

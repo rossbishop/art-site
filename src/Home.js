@@ -8,7 +8,8 @@ function Home(props) {
         <>
             <Header 
                 userDetails={props.userDetails}
-                isLoggedIn={props.isLoggedIn}            
+                userAttribs={props.userAttribs}
+                isLoggedIn={props.isLoggedIn}          
             />
             <ProjectGrid />
             <Footer /> 

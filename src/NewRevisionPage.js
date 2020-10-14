@@ -9,6 +9,7 @@ function NewRevisionPage(props) {
             <Header 
                 userDetails={props.userDetails}
                 isLoggedIn={props.isLoggedIn}
+                userAttribs={props.userAttribs}
             />
             <NewRevision 
                 userData={UserData[0]}

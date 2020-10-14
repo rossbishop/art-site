@@ -6,7 +6,8 @@ function LoadingPage(props) {
 
     return (
         <>
-            <Header 
+            <Header
+                userAttribs={props.userAttribs} 
                 userDetails={props.userDetails}
                 isLoggedIn={props.isLoggedIn}            
             />

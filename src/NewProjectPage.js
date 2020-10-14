@@ -56,7 +56,8 @@ function NewProjectPage(props) {
         <>
             <Header 
                 userDetails={props.userDetails}
-                isLoggedIn={props.isLoggedIn}            
+                isLoggedIn={props.isLoggedIn}
+                userAttribs={props.userAttribs}            
             />
             <NewProject 
                 projectName={projectName}

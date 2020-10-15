@@ -26,10 +26,17 @@ export default function NewRevision(props) {
                         </div>
                         <h4 className="mt-3">New Revision Name</h4>
                         <label for="inputProjectName" className="sr-only">Enter New Project Name</label>
-                        <input type="projectDetail" id="inputProjectName" className={cx(NewProjectStyles.formControl,"mb-3", "py-2", "pl-0")} placeholder="Enter new revision name" required autofocus/>
+                        <input type="projectDetail" id="inputProjectName" className={cx(NewProjectStyles.formControl,"mb-3", "py-2", "pl-0")} placeholder="Enter new revision name" onChange={event => props.setRevisionName(event.target.value)} required autofocus/>
                         <h4>New Revision Description:</h4>
-                        <textarea className={cx(NewProjectStyles.formControl, NewProjectStyles.revDescBox)} id="bioTextArea" rows="5" placeholder="Enter a concise description for your new revision"></textarea>
-                        <button className={cx(NewProjectStyles.btnProjectCreate, "btn", "btn-lg", "btn-primary", "btn-block", "mt-4")} type="submit">Create Revision</button>
+                        <textarea className={cx(NewProjectStyles.formControl, NewProjectStyles.revDescBox)} id="bioTextArea" rows="5" placeholder="Enter a concise description for your new revision" onChange={event => props.setRevisionDescription(event.target.value)}></textarea>
+                        {props.revisionSuccess.isSuccess && (
+                            <div className="alert alert-success" role="alert">Revision created successfully - redirecting to project...</div>
+                        )
+                        }
+                        {props.revisionError.isError && (
+                            <div className="alert alert-danger" role="alert">{props.revisionError.message}</div>)
+                        }
+                        <button className={cx(NewProjectStyles.btnProjectCreate, "btn", "btn-lg", "btn-primary", "btn-block", "mt-4")} type="submit" onClick={(e) => {e.preventDefault();props.createNewRevision(props.revisionName, props.revisionDescription);}}>Create Revision</button>
                     </form>
                 </div>
             </div>

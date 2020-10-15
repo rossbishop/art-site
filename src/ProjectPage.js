@@ -9,6 +9,7 @@ import { propStyle } from 'aws-amplify-react';
 function ProjectPage(props) {
 
     const [projectData, setProjectData] = useState(null)
+    const [comment, setComment] = useState()
 
     const getProject = async () => {
         try {
@@ -40,6 +41,8 @@ function ProjectPage(props) {
                 initialProjectDataState={(projectData.revisions.items.length)-1}
                 projectRevisionData={projectData.revisions.items}
                 projectDetails={projectData}
+                setComment={setComment}
+                comment={comment}
                 />
             }
             <Footer />

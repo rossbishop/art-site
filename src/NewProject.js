@@ -36,6 +36,13 @@ export default function NewProject(props) {
                         <input type="projectDetail" id="inputRevisionName" className={cx(NewProjectStyles.formControl,"mb-3", "py-2", "pl-0")} placeholder="Enter new project name" onChange={event => props.setRevName(event.target.value)} required autofocus/>
                         <h4>Initial Revision Description:</h4>
                         <textarea className={cx(NewProjectStyles.formControl, NewProjectStyles.revDescBox)} id="bioTextArea" rows="5" placeholder="Enter a concise description for your initial revision" onChange={event => props.setRevDescription(event.target.value)}></textarea>
+                        {props.projectSuccess.isSuccess && (
+                            <div className="alert alert-success" role="alert">Created project successfully - redirecting to project...</div>
+                        )
+                        }
+                        {props.projectError.isError && (
+                            <div className="alert alert-danger" role="alert">{props.projectError.message}</div>)
+                        }
                         <button className={cx(NewProjectStyles.btnProjectCreate, "btn", "btn-lg", "btn-primary", "btn-block", "mt-4")} type="submit" onClick={(e) => {e.preventDefault();props.createNewProject(props.projectName, props.projectDescription);}}>Create Project</button>
                     </form>
                 </div>

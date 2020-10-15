@@ -2,6 +2,8 @@ import React, {Fragment, useState, useEffect} from 'react'
 import CommentCard from './CommentCard'
 import GalleryListItem from './GalleryListItem'
 import GalleryItem from './GalleryItem'
+import { API, graphqlOperation } from 'aws-amplify'
+import * as mutations from './graphql/mutations'
 
 import {Link} from "react-router-dom";
 
@@ -14,8 +16,15 @@ export default function ProjectModule(props) {
 
     const [currentProjectState, updateCurrentProject] = useState({currentId: props.initialProjectDataState})
     const [doesOwnProject, setOwnProject] = useState(false)
+    const [commentSuccess, setCommentSuccess] = useState({isSuccess: false, message: ""})
+    const [commentError, setCommentError] = useState({isError: false, message: ""})
+
+    function reloadPage() {
+        window.location.reload()
+    }
 
     useEffect(() => {
+
         if(props.userDetails != false)
         {
             if(props.userDetails.username==props.projectDetails.owner)
@@ -24,6 +33,24 @@ export default function ProjectModule(props) {
             }
         }
     }, [])
+
+    const createNewComment = async () => {
+        try {
+            const commentData = {
+                revisionID: props.projectDetails.revisions.items[currentProjectState.currentId].id,
+                comment: props.comment,
+                likeCount: 0
+            }
+            const commentCall = await API.graphql({query: mutations.createComment, variables: {input: commentData}})
+            console.log('Success creating comment: ', commentCall)
+            setCommentSuccess({isSuccess: true, message: "Success!"})
+            setTimeout(() => {reloadPage();}, 3000);
+        }
+        catch (error) {
+            console.log('Error creating comment: ', error)
+            setCommentError({isError: true, message: error})
+        }
+    }
 
     return (
         <Fragment>
@@ -76,18 +103,25 @@ export default function ProjectModule(props) {
             <div className="container">
             <h3>{props.projectDetails.projectName} by <a href={`/user/${props.projectDetails.owner}`}>{props.projectDetails.owner}</a></h3>
             {doesOwnProject &&
-                <button type="button" className={cx("btn", "btn-success", projectModuleStyles.commentButton)}><Link className={projectModuleStyles.links} to="/newrevision">Add Revision</Link></button>
+                <button type="button" className={cx("btn", "btn-success", projectModuleStyles.commentButton)}><Link className={projectModuleStyles.links} to={`/newrevision/${window.location.pathname.split('/')[2]}`}>Add Revision</Link></button>
             }
             <p className={projectModuleStyles.projectText}>{props.projectDetails.projectDescription}</p>
             <h4>Comments</h4>
             {props.isLoggedIn &&
                 <>
-                <div className="form-group">
-                <label form="commentFormInput1">Type a comment:</label>
-                <textarea className={cx(projectModuleStyles.commentBox, "form-control")} id="commentFormTextArea1" rows="1"></textarea>
-                </div>
-                <button type="button" className={cx("btn", "btn-primary", projectModuleStyles.commentButton)}>Submit</button>
-                <button type="button" className={cx("btn", "btn-danger", projectModuleStyles.commentButton)}>Cancel</button>
+                    <div className="form-group">
+                    <label form="commentFormInput1">Type a comment:</label>
+                    <textarea className={cx(projectModuleStyles.commentBox, "form-control")} id="commentFormTextArea1" rows="1" onChange={event => props.setComment(event.target.value)}></textarea>
+                    </div>
+                    {commentSuccess.isSuccess && (
+                            <div className="alert alert-success" role="alert">Comment posted successfully</div>
+                        )
+                    }
+                    {commentError.isError && (
+                        <div className="alert alert-danger" role="alert">{commentError.message}</div>)
+                    }
+                    <button type="button" className={cx("btn", "btn-primary", projectModuleStyles.commentButton)} type="submit" onClick={(e) => {e.preventDefault();createNewComment();}}>Submit</button>
+                    {/*<button type="button" className={cx("btn", "btn-danger", projectModuleStyles.commentButton)}>Cancel</button>*/}
                 </>
             }
             {

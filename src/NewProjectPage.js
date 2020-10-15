@@ -11,7 +11,14 @@ function NewProjectPage(props) {
     const [revisionName, setRevName] = useState('')
     const [revisionDescription, setRevDescription] = useState('')
     const [createdProject, setCreatedProject] = useState()
-    const [isProjCreated, setIsProjCreated] = useState(false)
+    const [projectSuccess, setProjectSuccess] = useState({isSuccess: false, message: ""})
+    const [projectError, setProjectError] = useState({isError: false, message: ""})
+
+    const[redirectLoc, setRedirectLoc] = useState("")
+
+    function getRedirectPage() {
+        window.location.href=`/project/${createdProject.data.createProject.id}`
+    }
 
     const createNewProject = async () => {
         try {
@@ -23,9 +30,15 @@ function NewProjectPage(props) {
             const projectCall = await API.graphql({query: mutations.createProject, variables: {input: projectData}})
             console.log('Success creating project: ', projectCall)
             setCreatedProject(projectCall)
+            setProjectSuccess({isSuccess: true, message: "Success!"})
+            //setTimeout(() => {getRedirectPage();}, 3000);
         }
         catch (error) {
             console.log('Error creating project: ', error)
+            setProjectError({isError: true, message: error})
+        }
+        finally {
+            setTimeout(() => {getRedirectPage();}, 3000);
         }
     }
 
@@ -37,6 +50,7 @@ function NewProjectPage(props) {
                 name: revisionName,
                 description: revisionDescription,
             }
+            setRedirectLoc(`/project/${createdProject.data.createProject.id}`)
             const revisionCall = await API.graphql({query: mutations.createRevision, variables: {input: revisionData}})
             console.log('Success creating revision: ', revisionCall)
         }
@@ -64,6 +78,8 @@ function NewProjectPage(props) {
                 projectDescription={projectDescription}
                 revisionName={revisionName}
                 revisionDescription={revisionDescription}
+                projectSuccess={projectSuccess}
+                projectError={projectError}
                 setProjectName={setProjectName}
                 setProjectDescription={setProjectDescription}
                 setRevName={setRevName}

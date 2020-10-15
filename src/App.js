@@ -188,7 +188,7 @@ function App() {
           )}
 
           {isLoading && (
-            <Route path="/newrevision">
+            <Route path="/newrevision/:id">
               <LoadingPage 
                 userDetails={userDetails}
                 userAttribs={userAttribs}

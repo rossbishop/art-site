@@ -8,8 +8,8 @@ export const onCreateProject = /* GraphQL */ `
       projectName
       projectDescription
       owner
-      createdOn
-      updatedOn
+      createdAt
+      updatedAt
       revisions {
         items {
           id
@@ -18,8 +18,8 @@ export const onCreateProject = /* GraphQL */ `
           name
           description
           owner
-          createdOn
-          updatedOn
+          createdAt
+          updatedAt
           comments {
             items {
               id
@@ -27,8 +27,18 @@ export const onCreateProject = /* GraphQL */ `
               comment
               likeCount
               owner
-              createdOn
-              updatedOn
+              createdAt
+              updatedAt
+              likes {
+                items {
+                  id
+                  commentID
+                  owner
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
             }
             nextToken
           }
@@ -45,8 +55,8 @@ export const onUpdateProject = /* GraphQL */ `
       projectName
       projectDescription
       owner
-      createdOn
-      updatedOn
+      createdAt
+      updatedAt
       revisions {
         items {
           id
@@ -55,8 +65,8 @@ export const onUpdateProject = /* GraphQL */ `
           name
           description
           owner
-          createdOn
-          updatedOn
+          createdAt
+          updatedAt
           comments {
             items {
               id
@@ -64,8 +74,18 @@ export const onUpdateProject = /* GraphQL */ `
               comment
               likeCount
               owner
-              createdOn
-              updatedOn
+              createdAt
+              updatedAt
+              likes {
+                items {
+                  id
+                  commentID
+                  owner
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
             }
             nextToken
           }
@@ -82,8 +102,8 @@ export const onDeleteProject = /* GraphQL */ `
       projectName
       projectDescription
       owner
-      createdOn
-      updatedOn
+      createdAt
+      updatedAt
       revisions {
         items {
           id
@@ -92,8 +112,8 @@ export const onDeleteProject = /* GraphQL */ `
           name
           description
           owner
-          createdOn
-          updatedOn
+          createdAt
+          updatedAt
           comments {
             items {
               id
@@ -101,8 +121,18 @@ export const onDeleteProject = /* GraphQL */ `
               comment
               likeCount
               owner
-              createdOn
-              updatedOn
+              createdAt
+              updatedAt
+              likes {
+                items {
+                  id
+                  commentID
+                  owner
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
             }
             nextToken
           }
@@ -121,8 +151,8 @@ export const onCreateRevision = /* GraphQL */ `
       name
       description
       owner
-      createdOn
-      updatedOn
+      createdAt
+      updatedAt
       comments {
         items {
           id
@@ -130,8 +160,8 @@ export const onCreateRevision = /* GraphQL */ `
           comment
           likeCount
           owner
-          createdOn
-          updatedOn
+          createdAt
+          updatedAt
           likes {
             items {
               id
@@ -157,8 +187,8 @@ export const onUpdateRevision = /* GraphQL */ `
       name
       description
       owner
-      createdOn
-      updatedOn
+      createdAt
+      updatedAt
       comments {
         items {
           id
@@ -166,8 +196,8 @@ export const onUpdateRevision = /* GraphQL */ `
           comment
           likeCount
           owner
-          createdOn
-          updatedOn
+          createdAt
+          updatedAt
           likes {
             items {
               id
@@ -193,8 +223,8 @@ export const onDeleteRevision = /* GraphQL */ `
       name
       description
       owner
-      createdOn
-      updatedOn
+      createdAt
+      updatedAt
       comments {
         items {
           id
@@ -202,8 +232,8 @@ export const onDeleteRevision = /* GraphQL */ `
           comment
           likeCount
           owner
-          createdOn
-          updatedOn
+          createdAt
+          updatedAt
           likes {
             items {
               id
@@ -228,8 +258,8 @@ export const onCreateComment = /* GraphQL */ `
       comment
       likeCount
       owner
-      createdOn
-      updatedOn
+      createdAt
+      updatedAt
       likes {
         items {
           id
@@ -251,8 +281,8 @@ export const onUpdateComment = /* GraphQL */ `
       comment
       likeCount
       owner
-      createdOn
-      updatedOn
+      createdAt
+      updatedAt
       likes {
         items {
           id
@@ -274,8 +304,8 @@ export const onDeleteComment = /* GraphQL */ `
       comment
       likeCount
       owner
-      createdOn
-      updatedOn
+      createdAt
+      updatedAt
       likes {
         items {
           id

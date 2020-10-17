@@ -1,26 +1,29 @@
-type Project @model(timestamps:{createdAt: "createdOn", updatedAt: "updatedOn"}) 
+type Project @model 
   @auth(
     rules: [ 
         { allow: owner, provider: userPools, ownerField: "owner", operations: [create, update, delete, read] },
         { allow: public, provider: iam, operations: [read] }
       ]
-    ) 
+    )
+  @key(name: "projectByOwnerByDate", fields: ["owner", "createdAt"], queryField: "projectByOwnerByDate")  
   {
   id: ID!
   projectName: String!
   projectDescription: String!
   owner: ID
-  revisions: [Revision] @connection(keyName: "byProject", fields: ["id"])
+  createdAt: AWSDateTime
+  revisions: [Revision] @connection(keyName: "revisionByProjectByDate", fields: ["id"])
 }
 
-type Revision @model(timestamps:{createdAt: "createdOn", updatedAt: "updatedOn"}) 
+type Revision @model
   @auth(
     rules: [ 
         { allow: owner, provider: userPools, ownerField: "owner", operations: [create, update, delete, read] },
         { allow: public, provider: iam, operations: [read] }
       ]
   ) 
-  @key(name: "byProject", fields: ["projectID", "id"]) 
+  #@key(name: "revisionByProject", fields: ["projectID", "id"], queryField: "revisionByProject") 
+  @key(name: "revisionByProjectByDate", fields: ["projectID", "createdAt"], queryField: "revisionByProjectByDate")
   {
   id: ID!
   projectID: ID!
@@ -28,23 +31,26 @@ type Revision @model(timestamps:{createdAt: "createdOn", updatedAt: "updatedOn"}
   name: String!
   description: String!
   owner: ID
-  comments: [Comment] @connection(keyName: "byRevision", fields: ["id"])
+  createdAt: AWSDateTime
+  comments: [Comment] @connection(keyName: "commentByRevisionByDate", fields: ["id"])
 }
 
-type Comment @model(timestamps:{createdAt: "createdOn", updatedAt: "updatedOn"})
+type Comment @model
   @auth(
     rules: [ 
         { allow: owner, provider: userPools, ownerField: "owner", operations: [create, update, delete, read] },
         { allow: public, provider: iam, operations: [read] }
       ]
   )
-  @key(name: "byRevision", fields: ["revisionID", "id"])
+  #@key(name: "commentByRevision", fields: ["revisionID", "id"], queryField: "commentByRevision")
+  @key(name: "commentByRevisionByDate", fields: ["revisionID", "createdAt"], queryField: "commentByRevisionByDate")
   {
     id: ID!
     revisionID: ID!
     comment: String!
     likeCount: Int
     owner: ID
+    createdAt: AWSDateTime
     likes: [Like] @connection(keyName: "byUser", fields: ["id"])
 }
 

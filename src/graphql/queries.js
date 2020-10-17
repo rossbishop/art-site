@@ -8,8 +8,8 @@ export const getProject = /* GraphQL */ `
       projectName
       projectDescription
       owner
-      createdOn
-      updatedOn
+      createdAt
+      updatedAt
       revisions {
         items {
           id
@@ -18,8 +18,8 @@ export const getProject = /* GraphQL */ `
           name
           description
           owner
-          createdOn
-          updatedOn
+          createdAt
+          updatedAt
           comments {
             items {
               id
@@ -27,8 +27,18 @@ export const getProject = /* GraphQL */ `
               comment
               likeCount
               owner
-              createdOn
-              updatedOn
+              createdAt
+              updatedAt
+              likes {
+                items {
+                  id
+                  commentID
+                  owner
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
             }
             nextToken
           }
@@ -50,8 +60,8 @@ export const listProjects = /* GraphQL */ `
         projectName
         projectDescription
         owner
-        createdOn
-        updatedOn
+        createdAt
+        updatedAt
         revisions {
           items {
             id
@@ -60,9 +70,92 @@ export const listProjects = /* GraphQL */ `
             name
             description
             owner
-            createdOn
-            updatedOn
+            createdAt
+            updatedAt
             comments {
+              items {
+                id
+                revisionID
+                comment
+                likeCount
+                owner
+                createdAt
+                updatedAt
+                likes {
+                  items {
+                    id
+                    commentID
+                    owner
+                    createdAt
+                    updatedAt
+                  }
+                  nextToken
+                }
+              }
+              nextToken
+            }
+          }
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const projectByOwnerByDate = /* GraphQL */ `
+  query ProjectByOwnerByDate(
+    $owner: ID
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelProjectFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    projectByOwnerByDate(
+      owner: $owner
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        projectName
+        projectDescription
+        owner
+        createdAt
+        updatedAt
+        revisions {
+          items {
+            id
+            projectID
+            imgSrc
+            name
+            description
+            owner
+            createdAt
+            updatedAt
+            comments {
+              items {
+                id
+                revisionID
+                comment
+                likeCount
+                owner
+                createdAt
+                updatedAt
+                likes {
+                  items {
+                    id
+                    commentID
+                    owner
+                    createdAt
+                    updatedAt
+                  }
+                  nextToken
+                }
+              }
               nextToken
             }
           }
@@ -82,8 +175,8 @@ export const getRevision = /* GraphQL */ `
       name
       description
       owner
-      createdOn
-      updatedOn
+      createdAt
+      updatedAt
       comments {
         items {
           id
@@ -91,8 +184,8 @@ export const getRevision = /* GraphQL */ `
           comment
           likeCount
           owner
-          createdOn
-          updatedOn
+          createdAt
+          updatedAt
           likes {
             items {
               id
@@ -123,8 +216,8 @@ export const listRevisions = /* GraphQL */ `
         name
         description
         owner
-        createdOn
-        updatedOn
+        createdAt
+        updatedAt
         comments {
           items {
             id
@@ -132,9 +225,69 @@ export const listRevisions = /* GraphQL */ `
             comment
             likeCount
             owner
-            createdOn
-            updatedOn
+            createdAt
+            updatedAt
             likes {
+              items {
+                id
+                commentID
+                owner
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+          }
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const revisionByProjectByDate = /* GraphQL */ `
+  query RevisionByProjectByDate(
+    $projectID: ID
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelRevisionFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    revisionByProjectByDate(
+      projectID: $projectID
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        projectID
+        imgSrc
+        name
+        description
+        owner
+        createdAt
+        updatedAt
+        comments {
+          items {
+            id
+            revisionID
+            comment
+            likeCount
+            owner
+            createdAt
+            updatedAt
+            likes {
+              items {
+                id
+                commentID
+                owner
+                createdAt
+                updatedAt
+              }
               nextToken
             }
           }
@@ -153,8 +306,8 @@ export const getComment = /* GraphQL */ `
       comment
       likeCount
       owner
-      createdOn
-      updatedOn
+      createdAt
+      updatedAt
       likes {
         items {
           id
@@ -181,8 +334,48 @@ export const listComments = /* GraphQL */ `
         comment
         likeCount
         owner
-        createdOn
-        updatedOn
+        createdAt
+        updatedAt
+        likes {
+          items {
+            id
+            commentID
+            owner
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const commentByRevisionByDate = /* GraphQL */ `
+  query CommentByRevisionByDate(
+    $revisionID: ID
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelCommentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    commentByRevisionByDate(
+      revisionID: $revisionID
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        revisionID
+        comment
+        likeCount
+        owner
+        createdAt
+        updatedAt
         likes {
           items {
             id

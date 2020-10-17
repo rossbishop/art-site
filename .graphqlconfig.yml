@@ -1,6 +1,6 @@
 projects:
   artsite:
-    schemaPath: src/graphql/schema.json
+    schemaPath: amplify/backend/api/artsite/build/schema.graphql
     includes:
       - src/graphql/**/*.js
     excludes:
@@ -10,7 +10,7 @@ projects:
         codeGenTarget: javascript
         generatedFileName: ''
         docsFilePath: src/graphql
-        maxDepth: 5
+        maxDepth: 10
 extensions:
   amplify:
     version: 3

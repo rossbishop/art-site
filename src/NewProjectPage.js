@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import NewProject from './NewProject'
 import { API, graphqlOperation } from 'aws-amplify'
 import * as mutations from './graphql/mutations'
+import { Redirect } from "react-router-dom";
 
 function NewProjectPage(props) {
 
@@ -13,12 +14,7 @@ function NewProjectPage(props) {
     const [createdProject, setCreatedProject] = useState()
     const [projectSuccess, setProjectSuccess] = useState({isSuccess: false, message: ""})
     const [projectError, setProjectError] = useState({isError: false, message: ""})
-
-    const[redirectLoc, setRedirectLoc] = useState("")
-
-    function getRedirectPage() {
-        window.location.href=`/project/${createdProject.data.createProject.id}`
-    }
+    const [shouldRedirect, setRedirect] = useState(false)
 
     const createNewProject = async () => {
         try {
@@ -31,14 +27,13 @@ function NewProjectPage(props) {
             console.log('Success creating project: ', projectCall)
             setCreatedProject(projectCall)
             setProjectSuccess({isSuccess: true, message: "Success!"})
-            //setTimeout(() => {getRedirectPage();}, 3000);
         }
         catch (error) {
             console.log('Error creating project: ', error)
             setProjectError({isError: true, message: error})
         }
         finally {
-            setTimeout(() => {getRedirectPage();}, 3000);
+            setTimeout(() => {setRedirect(true);}, 3000);
         }
     }
 
@@ -50,7 +45,6 @@ function NewProjectPage(props) {
                 name: revisionName,
                 description: revisionDescription,
             }
-            setRedirectLoc(`/project/${createdProject.data.createProject.id}`)
             const revisionCall = await API.graphql({query: mutations.createRevision, variables: {input: revisionData}})
             console.log('Success creating revision: ', revisionCall)
         }
@@ -73,7 +67,8 @@ function NewProjectPage(props) {
                 isLoggedIn={props.isLoggedIn}
                 userAttribs={props.userAttribs}            
             />
-            <NewProject 
+            {!shouldRedirect &&(
+                <NewProject 
                 projectName={projectName}
                 projectDescription={projectDescription}
                 revisionName={revisionName}
@@ -85,7 +80,15 @@ function NewProjectPage(props) {
                 setRevName={setRevName}
                 setRevDescription={setRevDescription}
                 createNewProject={createNewProject}
-            />
+                />
+            )}
+            {shouldRedirect &&(
+                <Redirect
+                to={{
+                    pathname: `/project/${createdProject.data.createProject.id}`
+                }}
+                />
+            )}
             <Footer /> 
         </>
     )

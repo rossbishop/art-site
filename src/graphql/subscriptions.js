@@ -352,3 +352,57 @@ export const onDeleteLike = /* GraphQL */ `
     }
   }
 `;
+export const onCreatePublicUserProfile = /* GraphQL */ `
+  subscription OnCreatePublicUserProfile($owner: String) {
+    onCreatePublicUserProfile(owner: $owner) {
+      id
+      owner
+      username
+      position
+      location
+      bio
+      instagram
+      twitter
+      facebook
+      avatarImg
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdatePublicUserProfile = /* GraphQL */ `
+  subscription OnUpdatePublicUserProfile($owner: String) {
+    onUpdatePublicUserProfile(owner: $owner) {
+      id
+      owner
+      username
+      position
+      location
+      bio
+      instagram
+      twitter
+      facebook
+      avatarImg
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeletePublicUserProfile = /* GraphQL */ `
+  subscription OnDeletePublicUserProfile($owner: String) {
+    onDeletePublicUserProfile(owner: $owner) {
+      id
+      owner
+      username
+      position
+      location
+      bio
+      instagram
+      twitter
+      facebook
+      avatarImg
+      createdAt
+      updatedAt
+    }
+  }
+`;

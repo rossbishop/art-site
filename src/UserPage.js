@@ -24,16 +24,7 @@ function UserPage(props) {
             console.log('Error getting project: ', error)
         }
     }
-
-    // const getRevisionComments = async () => {
-    //     try {
-    //         const apiCall = await API.graphql({query: queries.projectByOwnerByDate, variables: {owner: owner, limit: 10}})
-    //     }
-    //     catch (error) {
-
-    //     }
-    // }
-
+    
     useEffect(() => {
         getUserProjects()
     }, [])

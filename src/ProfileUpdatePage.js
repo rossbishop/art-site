@@ -56,6 +56,7 @@ function ProfileUpdatePage(props) {
                 'custom:bio': bio
             });
             console.log(result)
+            //const publicProfileUpdate = await API.graphql({ query: mutations.updatePublicUserProfile, variables: {input: todoDetails}})
             setProfileSuccess({isSuccess: true, message: result})
         }
         catch(err) {

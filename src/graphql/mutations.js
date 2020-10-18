@@ -388,3 +388,66 @@ export const deleteLike = /* GraphQL */ `
     }
   }
 `;
+export const createPublicUserProfile = /* GraphQL */ `
+  mutation CreatePublicUserProfile(
+    $input: CreatePublicUserProfileInput!
+    $condition: ModelPublicUserProfileConditionInput
+  ) {
+    createPublicUserProfile(input: $input, condition: $condition) {
+      id
+      owner
+      username
+      position
+      location
+      bio
+      instagram
+      twitter
+      facebook
+      avatarImg
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updatePublicUserProfile = /* GraphQL */ `
+  mutation UpdatePublicUserProfile(
+    $input: UpdatePublicUserProfileInput!
+    $condition: ModelPublicUserProfileConditionInput
+  ) {
+    updatePublicUserProfile(input: $input, condition: $condition) {
+      id
+      owner
+      username
+      position
+      location
+      bio
+      instagram
+      twitter
+      facebook
+      avatarImg
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deletePublicUserProfile = /* GraphQL */ `
+  mutation DeletePublicUserProfile(
+    $input: DeletePublicUserProfileInput!
+    $condition: ModelPublicUserProfileConditionInput
+  ) {
+    deletePublicUserProfile(input: $input, condition: $condition) {
+      id
+      owner
+      username
+      position
+      location
+      bio
+      instagram
+      twitter
+      facebook
+      avatarImg
+      createdAt
+      updatedAt
+    }
+  }
+`;

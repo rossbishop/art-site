@@ -22,7 +22,6 @@ type Revision @model
         { allow: public, provider: iam, operations: [read] }
       ]
   ) 
-  #@key(name: "revisionByProject", fields: ["projectID", "id"], queryField: "revisionByProject") 
   @key(name: "revisionByProjectByDate", fields: ["projectID", "createdAt"], queryField: "revisionByProjectByDate")
   {
   id: ID!
@@ -42,7 +41,6 @@ type Comment @model
         { allow: public, provider: iam, operations: [read] }
       ]
   )
-  #@key(name: "commentByRevision", fields: ["revisionID", "id"], queryField: "commentByRevision")
   @key(name: "commentByRevisionByDate", fields: ["revisionID", "createdAt"], queryField: "commentByRevisionByDate")
   {
     id: ID!
@@ -67,3 +65,24 @@ type Like @model
     commentID: ID!
     owner: ID
 }
+
+type PublicUserProfile @model
+  @auth(
+    rules: [ 
+        { allow: owner, provider: userPools, ownerField: "owner", operations: [create, update, delete, read] },
+        { allow: public, provider: iam, operations: [read] }
+      ]
+  )
+  @key(name: "publicUserProfileByUser", fields: ["owner"])
+  {
+    id: ID!
+    owner: ID
+    username: String
+    position: String
+    location: String
+    bio: String
+    instagram: String
+    twitter: String
+    facebook: String
+    avatarImg: String
+  } 

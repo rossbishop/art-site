@@ -420,3 +420,50 @@ export const listLikes = /* GraphQL */ `
     }
   }
 `;
+export const getPublicUserProfile = /* GraphQL */ `
+  query GetPublicUserProfile($id: ID!) {
+    getPublicUserProfile(id: $id) {
+      id
+      owner
+      username
+      position
+      location
+      bio
+      instagram
+      twitter
+      facebook
+      avatarImg
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listPublicUserProfiles = /* GraphQL */ `
+  query ListPublicUserProfiles(
+    $filter: ModelPublicUserProfileFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPublicUserProfiles(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        owner
+        username
+        position
+        location
+        bio
+        instagram
+        twitter
+        facebook
+        avatarImg
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;

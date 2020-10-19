@@ -40,6 +40,8 @@ function ProfileUpdatePage(props) {
                 'custom:twitter': twitter
             });
             console.log(result)
+            const publicDetails = {id: user.attributes.sub, facebook: facebook, instagram: instagram, twitter: twitter}
+            const publicProfileUpdate = await API.graphql({ query: mutations.updatePublicUserProfile, variables: {input: publicDetails}})
             setSocialSuccess({isSuccess: true, message: result})
         }
         catch(err) {
@@ -51,6 +53,7 @@ function ProfileUpdatePage(props) {
     const updateProfile = async() => {
         try {
             let user = await Auth.currentAuthenticatedUser()
+            console.log(user)
             let result = await Auth.updateUserAttributes(user, {
                 'preferred_username': username,
                 'custom:job': job,
@@ -58,7 +61,7 @@ function ProfileUpdatePage(props) {
                 'custom:bio': bio
             });
             console.log(result)
-            const publicDetails = {username: username, position: job, location: location, bio: bio}
+            const publicDetails = {id: user.attributes.sub, username: username, position: job, location: location, bio: bio}
             const publicProfileUpdate = await API.graphql({ query: mutations.updatePublicUserProfile, variables: {input: publicDetails}})
             setProfileSuccess({isSuccess: true, message: result})
         }

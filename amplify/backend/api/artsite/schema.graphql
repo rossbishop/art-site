@@ -73,7 +73,7 @@ type PublicUserProfile @model
         { allow: public, provider: iam, operations: [read] }
       ]
   )
-  @key(name: "publicUserProfileByUser", fields: ["owner"])
+  @key(name: "publicUserProfileByUser", fields: ["owner"], queryField: "publicUserProfileByUser")
   {
     id: ID!
     owner: ID

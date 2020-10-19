@@ -11,6 +11,7 @@ import UserData from './UserDummyData'
 function UserPage(props) {
 
     const [projectData, setProjectData] = useState(null)
+    const [profileData, setProfileData] = useState(null)
     const [isLoaded, setLoaded] = useState(false)
 
     const getUserProjects = async () => {
@@ -25,8 +26,21 @@ function UserPage(props) {
         }
     }
     
+    const getUserProfileData = async () => {
+        try {
+            const owner = (window.location.pathname.split('/'))[2]
+            const apiCall = await API.graphql({query: queries.publicUserProfileByUser, variables: {owner: owner}})
+            console.log(apiCall)
+            setProfileData(apiCall.data.publicUserProfileByUser.items[0])
+        }
+        catch (error) {
+            console.log('Error getting project: ', error)
+        }
+    }
+
     useEffect(() => {
         getUserProjects()
+        getUserProfileData()
     }, [])
 
     return (
@@ -36,12 +50,16 @@ function UserPage(props) {
                 isLoggedIn={props.isLoggedIn}
                 userAttribs={props.userAttribs}
             />
-            <UserBanner 
+            {profileData &&
+                <UserBanner 
                 userData={UserData[0]}
-            />
+                profileData={profileData}
+                />
+            }
             {projectData &&
                 <ProjectGrid 
                     projectData={projectData}
+                    
                 />
             }
             <Footer />

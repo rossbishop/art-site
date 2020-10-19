@@ -467,3 +467,36 @@ export const listPublicUserProfiles = /* GraphQL */ `
     }
   }
 `;
+export const publicUserProfileByUser = /* GraphQL */ `
+  query PublicUserProfileByUser(
+    $owner: ID
+    $sortDirection: ModelSortDirection
+    $filter: ModelPublicUserProfileFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    publicUserProfileByUser(
+      owner: $owner
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        owner
+        username
+        position
+        location
+        bio
+        instagram
+        twitter
+        facebook
+        avatarImg
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;

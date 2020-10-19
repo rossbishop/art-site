@@ -69,7 +69,7 @@ type Like @model
 type PublicUserProfile @model
   @auth(
     rules: [ 
-        { allow: owner, provider: userPools, ownerField: "owner", operations: [create, update, delete, read] },
+        { allow: owner, provider: userPools, ownerField: "owner", operations: [update, read] },
         { allow: public, provider: iam, operations: [read] }
       ]
   )
@@ -85,4 +85,4 @@ type PublicUserProfile @model
     twitter: String
     facebook: String
     avatarImg: String
-  } 
+  }

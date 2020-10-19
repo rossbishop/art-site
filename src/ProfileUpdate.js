@@ -38,6 +38,9 @@ export default function ProfileUpdate(props) {
                         <h6>Change Position:</h6>
                         <label for="inputPosition" className="sr-only">Current Position Title</label>
                         <input type="userDetail" id="inputPosition" className={cx(ProfileUpdateStyles.formControl,"mb-3", "py-2", "pl-0")} placeholder="Enter new position title" onChange={event => props.setJob(event.target.value)} defaultValue={props.userAttribs["custom:job"]} required autofocus/>
+                        <h6>Change Location:</h6>
+                        <label for="inputLocation" className="sr-only">Current Location</label>
+                        <input type="userDetail" id="inputLocation" className={cx(ProfileUpdateStyles.formControl,"mb-3", "py-2", "pl-0")} placeholder="Enter new location" onChange={event => props.setLocation(event.target.value)} defaultValue={props.userAttribs["custom:location"]} required autofocus/>
                         <h6>Change Bio:</h6>
                         <textarea className={cx(ProfileUpdateStyles.formControl, ProfileUpdateStyles.bioBox)} id="bioTextArea" rows="5" onChange={event => props.setBio(event.target.value)}>{props.userAttribs["custom:bio"]}</textarea>
                         {props.profileSuccess.isSuccess && (

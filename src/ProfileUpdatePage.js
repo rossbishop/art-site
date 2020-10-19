@@ -4,13 +4,14 @@ import ProfileUpdate from './ProfileUpdate'
 import UserData from './UserDummyData'
 
 import { Auth } from 'aws-amplify';
-
-
+import { API, graphqlOperation } from 'aws-amplify'
+import * as mutations from './graphql/mutations'
 
 function ProfileUpdatePage(props) {
 
     const [username, setUsername] = useState(props.userAttribs["preferred_username"])
     const [job, setJob] = useState(props.userAttribs["custom:job"])
+    const [location, setLocation] = useState(props.userAttribs["custom:location"])
     const [bio, setBio] = useState(props.userAttribs["custom:bio"])
 
     const [instagram, setInstagram] = useState(props.userAttribs["custom:instagram"])
@@ -53,10 +54,12 @@ function ProfileUpdatePage(props) {
             let result = await Auth.updateUserAttributes(user, {
                 'preferred_username': username,
                 'custom:job': job,
+                'custom:location' : location,
                 'custom:bio': bio
             });
             console.log(result)
-            //const publicProfileUpdate = await API.graphql({ query: mutations.updatePublicUserProfile, variables: {input: todoDetails}})
+            const publicDetails = {username: username, position: job, location: location, bio: bio}
+            const publicProfileUpdate = await API.graphql({ query: mutations.updatePublicUserProfile, variables: {input: publicDetails}})
             setProfileSuccess({isSuccess: true, message: result})
         }
         catch(err) {
@@ -114,6 +117,7 @@ function ProfileUpdatePage(props) {
                 updateSocial={updateSocial}
                 updateProfile={updateProfile}
                 updatePassword={updatePassword}
+                setLocation={setLocation}
                 socialSuccess={socialSuccess}
                 socialError={socialError}
                 profileSuccess={profileSuccess}

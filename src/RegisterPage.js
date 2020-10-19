@@ -4,6 +4,8 @@ import Register from './Register'
 import RegisterConfirm from './RegisterConfirm'
 
 import { Auth } from 'aws-amplify';
+import { API, graphqlOperation } from 'aws-amplify'
+import * as mutations from './graphql/mutations'
 
 function RegisterPage(props) {
     
@@ -19,31 +21,31 @@ function RegisterPage(props) {
 
     const signUp = async (props) => {
         const { username, password, email } = props;
-        //const birthdate = "01/01/1970";
-        await Auth.signUp({
-        username,
-        password,
-        attributes: {
-            email,
-            birthdate,
-            preferred_username: username,
-            "custom:instagram":"Enter Instagram Account",
-            "custom:facebook":"Enter Facebook Account",
-            "custom:twitter":"Enter Twitter Account",
-            "custom:job":"Enter Job Title",
-            "custom:bio":"Tell everyone about yourself"
-        },
-        })
-        .then((response) => {
+        try {
+            
+            let response = await Auth.signUp({
+                username,
+                password,
+                attributes: {
+                    email,
+                    birthdate,
+                    preferred_username: username,
+                    "custom:instagram":"Enter Instagram Account",
+                    "custom:facebook":"Enter Facebook Account",
+                    "custom:twitter":"Enter Twitter Account",
+                    "custom:job":"Enter Job Title",
+                    "custom:bio":"Tell everyone about yourself"
+                },
+            })
+
             setUser(response)
             setUserCreated(true);
-            //setUsername(response.user.username)
             console.log(response);
-        })
-        .catch((error) => {
+        }
+        catch (error) {
             console.log("Error: ", error);
             setError({isError: true, message: error});
-        });
+        }
     };   
 
     const confirmSignUp = async (props) => {

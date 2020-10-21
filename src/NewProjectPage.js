@@ -4,6 +4,7 @@ import NewProject from './NewProject'
 import { API, graphqlOperation } from 'aws-amplify'
 import * as mutations from './graphql/mutations'
 import { Redirect } from "react-router-dom";
+import { v4 as uuidv4 } from 'uuid';
 
 function NewProjectPage(props) {
 
@@ -19,6 +20,7 @@ function NewProjectPage(props) {
     const createNewProject = async () => {
         try {
             const projectData = {
+                projectId: uuidv4(),
                 projectName: projectName,
                 projectDescription: projectDescription,
             }
@@ -40,7 +42,8 @@ function NewProjectPage(props) {
     const createNewRevision = async () => {
         try {
             const revisionData = {
-                projectID: createdProject.data.createProject.id,
+                revisionId: uuidv4(),
+                projectConnID: createdProject.data.createProject.projectId,
                 imgSrc: "https://i.imgur.com/BlbUQz7.jpg",
                 name: revisionName,
                 description: revisionDescription,
@@ -85,7 +88,7 @@ function NewProjectPage(props) {
             {shouldRedirect &&(
                 <Redirect
                 to={{
-                    pathname: `/project/${createdProject.data.createProject.id}`
+                    pathname: `/project/${createdProject.data.createProject.projectId}`
                 }}
                 />
             )}

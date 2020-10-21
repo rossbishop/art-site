@@ -1,7 +1,7 @@
 {
     "identityPoolName": "ArtSiteIdentityPoolAmplify",
     "allowUnauthenticatedIdentities": true,
-    "resourceNameTruncated": "artsita71fff9f",
+    "resourceNameTruncated": "artsita6920f31",
     "userPoolName": "ArtSiteUserPoolAmplify",
     "autoVerifiedAttributes": [
         "email"
@@ -67,9 +67,9 @@
         "email_verified",
         "phone_number_verified"
     ],
-    "userpoolClientLambdaRole": "ArtSita71fff9f_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "ArtSita6920f31_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": true,
-    "sharedId": "a71fff9f",
+    "sharedId": "a6920f31",
     "resourceName": "ArtSiteAPIAmplify",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
@@ -86,19 +86,26 @@
     },
     "useDefault": "manual",
     "thirdPartyAuth": false,
-    "userPoolGroups": true,
+    "userPoolGroups": false,
     "adminQueries": true,
-    "triggers": "{}",
+    "triggers": "{\n  \"PostConfirmation\": [\n    \"custom\"\n  ]\n}",
     "hostedUI": false,
-    "userPoolGroupList": [
-        "Users",
-        "Admins"
-    ],
-    "adminQueryGroup": "Admins",
+    "userPoolGroupList": [],
+    "adminQueryGroup": "Admin",
     "serviceName": "Cognito",
     "parentStack": {
         "Ref": "AWS::StackId"
     },
     "permissions": [],
-    "dependsOn": []
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "ArtSiteAPIAmplifyPostConfirmation",
+            "triggerProvider": "Cognito",
+            "attributes": [
+                "Arn",
+                "Name"
+            ]
+        }
+    ]
 }

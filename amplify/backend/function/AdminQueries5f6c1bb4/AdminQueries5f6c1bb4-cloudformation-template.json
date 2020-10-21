@@ -32,12 +32,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "AdminQueries3507051e",
+            "AdminQueries5f6c1bb4",
             {
               "Fn::Join": [
                 "",
                 [
-                  "AdminQueries3507051e",
+                  "AdminQueries5f6c1bb4",
                   "-",
                   {
                     "Ref": "env"
@@ -52,7 +52,7 @@
             "ENV": {
               "Ref": "env"
             },
-            "GROUP": "Admins",
+            "GROUP": "Admin",
             "USERPOOL": {
               "Ref": "authArtSiteAPIAmplifyUserPoolId"
             }
@@ -67,8 +67,8 @@
         "Runtime": "nodejs10.x",
         "Timeout": "25",
         "Code": {
-          "S3Bucket": "amplify-artsite-dev-154407-deployment",
-          "S3Key": "amplify-builds/AdminQueries3507051e-356468336e786972444e-build.zip"
+          "S3Bucket": "amplify-artsite-dev-210725-deployment",
+          "S3Key": "amplify-builds/AdminQueries5f6c1bb4-44373853776163446433-build.zip"
         }
       }
     },
@@ -78,12 +78,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "AdminQueries3507051eLambdaRole",
+            "AdminQueries5f6c1bb4LambdaRole",
             {
               "Fn::Join": [
                 "",
                 [
-                  "AdminQueries3507051eLambdaRole",
+                  "AdminQueries5f6c1bb4LambdaRole",
                   "-",
                   {
                     "Ref": "env"

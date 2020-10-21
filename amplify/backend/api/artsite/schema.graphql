@@ -1,81 +1,95 @@
+# type AllProject @model
+#   @auth(
+#   rules: [ 
+#       { allow: owner, provider: userPools, ownerField: "owner" },
+#       { allow: public, provider: iam, operations: [read] }
+#     ]
+#   )
+# {
+#   allProjectId: ID!
+
+# }
+
 type Project @model 
   @auth(
     rules: [ 
-        { allow: owner, provider: userPools, ownerField: "owner", operations: [create, update, delete, read] },
+        { allow: owner, provider: userPools, ownerField: "owner" },
+        { allow: private, provider: userPools, operations: [read]},
         { allow: public, provider: iam, operations: [read] }
       ]
     )
-  @key(name: "projectByOwnerByDate", fields: ["owner", "createdAt"], queryField: "projectByOwnerByDate")  
+  @key(fields: ["projectId", "createdAt"])
+  #@key(name: "projectByIdByDate", fields: ["createdAt"], queryField: "projectByIdByDate")
+  @key(name: "projectByOwnerByDate", fields: ["owner"], queryField: "projectByOwnerByDate")
+  # @key(name: "projectByAllProjectByDate", fields: ["allProjectConnId", "createdAt"], queryField: "projectByAllProjectByDate") 
   {
-  id: ID!
+  projectId: ID!
+  # allProjectConnId: ID!
   projectName: String!
   projectDescription: String!
   owner: ID
-  createdAt: AWSDateTime
-  revisions: [Revision] @connection(keyName: "revisionByProjectByDate", fields: ["id"])
+  createdAt: AWSDateTime!
+  revisions: [Revision] @connection(keyName: "revisionByProjectByDate", fields: ["projectId"])
+    # @auth(rules: [
+    #   { allow: owner, ownerField: "owner"},
+    #   { allow: public, provider: iam, operations: [read]}
+    #   ]
+    # )
 }
 
 type Revision @model
   @auth(
     rules: [ 
-        { allow: owner, provider: userPools, ownerField: "owner", operations: [create, update, delete, read] },
+        { allow: owner, provider: userPools, ownerField: "owner" },
+        { allow: private, provider: userPools, operations: [read]},
         { allow: public, provider: iam, operations: [read] }
       ]
-  ) 
-  @key(name: "revisionByProjectByDate", fields: ["projectID", "createdAt"], queryField: "revisionByProjectByDate")
+  )
+  @key(fields: ["revisionId"]) 
+  @key(name: "revisionByProjectByDate", fields: ["projectConnID", "createdAt"], queryField: "revisionByProjectByDate")
   {
-  id: ID!
-  projectID: ID!
+  revisionId: ID!
+  projectConnID: ID!
   imgSrc: String!
   name: String!
   description: String!
   owner: ID
   createdAt: AWSDateTime
-  comments: [Comment] @connection(keyName: "commentByRevisionByDate", fields: ["id"])
+  comments: [Comment] @connection(keyName: "commentByRevisionByDate", fields: ["revisionId"])
 }
 
 type Comment @model
   @auth(
     rules: [ 
-        { allow: owner, provider: userPools, ownerField: "owner", operations: [create, update, delete, read] },
+        { allow: owner, provider: userPools, ownerField: "owner" },
+        { allow: private, provider: userPools, operations: [read]},
         { allow: public, provider: iam, operations: [read] }
       ]
   )
-  @key(name: "commentByRevisionByDate", fields: ["revisionID", "createdAt"], queryField: "commentByRevisionByDate")
+  @key(fields: ["commentId"])
+  @key(name: "commentByRevisionByDate", fields: ["revisionConnID", "createdAt"], queryField: "commentByRevisionByDate")
   {
-    id: ID!
-    revisionID: ID!
+    commentId: ID!
+    revisionConnID: ID!
     comment: String!
     likeCount: Int
     owner: ID
     createdAt: AWSDateTime
-    likes: [Like] @connection(keyName: "byUser", fields: ["id"])
+    likes: [Like] @connection(keyName: "byUser", fields: ["commentId"])
 }
-
-type Like @model
-  @auth(
-    rules: [ 
-        { allow: owner, provider: userPools, ownerField: "owner", operations: [create, update, delete, read] },
-        { allow: public, provider: iam, operations: [read] }
-      ]
-  )
-  @key(name: "byUser", fields: ["commentID", "owner"])
-  {
-    id: ID!
-    commentID: ID!
-    owner: ID
-}
-
+ 
 type PublicUserProfile @model
   @auth(
     rules: [ 
         { allow: owner, provider: userPools, ownerField: "owner", operations: [update, read] },
+        { allow: private, provider: userPools, operations: [read] },
         { allow: public, provider: iam, operations: [read] }
       ]
   )
+  @key(fields: ["publicUserProfileId"])
   @key(name: "publicUserProfileByUser", fields: ["owner"], queryField: "publicUserProfileByUser")
   {
-    id: ID!
+    publicUserProfileId: ID!
     owner: ID
     username: String
     position: String
@@ -85,4 +99,23 @@ type PublicUserProfile @model
     twitter: String
     facebook: String
     avatarImg: String
+  }
+
+type Like @model
+  @auth(
+    rules: [ 
+        { allow: owner, provider: userPools, ownerField: "owner" },
+        { allow: public, provider: iam, operations: [read] }
+      ]
+  )
+  @key(name: "byUser", fields: ["commentConnID", "owner"])
+  {
+    id: ID!
+    commentConnID: ID!
+    owner: ID
+}
+
+type PlaceHolder @model
+  {
+    placeHolderID: ID!
   }

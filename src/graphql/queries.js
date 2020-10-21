@@ -1,10 +1,37 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getProject = /* GraphQL */ `
-  query GetProject($id: ID!) {
-    getProject(id: $id) {
+export const getPlaceHolder = /* GraphQL */ `
+  query GetPlaceHolder($id: ID!) {
+    getPlaceHolder(id: $id) {
       id
+      placeHolderID
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listPlaceHolders = /* GraphQL */ `
+  query ListPlaceHolders(
+    $filter: ModelPlaceHolderFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPlaceHolders(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        placeHolderID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getProject = /* GraphQL */ `
+  query GetProject($projectId: ID!, $createdAt: AWSDateTime!) {
+    getProject(projectId: $projectId, createdAt: $createdAt) {
+      projectId
       projectName
       projectDescription
       owner
@@ -12,8 +39,8 @@ export const getProject = /* GraphQL */ `
       updatedAt
       revisions {
         items {
-          id
-          projectID
+          revisionId
+          projectConnID
           imgSrc
           name
           description
@@ -22,8 +49,8 @@ export const getProject = /* GraphQL */ `
           updatedAt
           comments {
             items {
-              id
-              revisionID
+              commentId
+              revisionConnID
               comment
               likeCount
               owner
@@ -32,7 +59,7 @@ export const getProject = /* GraphQL */ `
               likes {
                 items {
                   id
-                  commentID
+                  commentConnID
                   owner
                   createdAt
                   updatedAt
@@ -50,13 +77,23 @@ export const getProject = /* GraphQL */ `
 `;
 export const listProjects = /* GraphQL */ `
   query ListProjects(
+    $projectId: ID
+    $createdAt: ModelStringKeyConditionInput
     $filter: ModelProjectFilterInput
     $limit: Int
     $nextToken: String
+    $sortDirection: ModelSortDirection
   ) {
-    listProjects(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listProjects(
+      projectId: $projectId
+      createdAt: $createdAt
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
       items {
-        id
+        projectId
         projectName
         projectDescription
         owner
@@ -64,8 +101,8 @@ export const listProjects = /* GraphQL */ `
         updatedAt
         revisions {
           items {
-            id
-            projectID
+            revisionId
+            projectConnID
             imgSrc
             name
             description
@@ -74,8 +111,8 @@ export const listProjects = /* GraphQL */ `
             updatedAt
             comments {
               items {
-                id
-                revisionID
+                commentId
+                revisionConnID
                 comment
                 likeCount
                 owner
@@ -84,7 +121,7 @@ export const listProjects = /* GraphQL */ `
                 likes {
                   items {
                     id
-                    commentID
+                    commentConnID
                     owner
                     createdAt
                     updatedAt
@@ -105,7 +142,6 @@ export const listProjects = /* GraphQL */ `
 export const projectByOwnerByDate = /* GraphQL */ `
   query ProjectByOwnerByDate(
     $owner: ID
-    $createdAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelProjectFilterInput
     $limit: Int
@@ -113,14 +149,13 @@ export const projectByOwnerByDate = /* GraphQL */ `
   ) {
     projectByOwnerByDate(
       owner: $owner
-      createdAt: $createdAt
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
       nextToken: $nextToken
     ) {
       items {
-        id
+        projectId
         projectName
         projectDescription
         owner
@@ -128,8 +163,8 @@ export const projectByOwnerByDate = /* GraphQL */ `
         updatedAt
         revisions {
           items {
-            id
-            projectID
+            revisionId
+            projectConnID
             imgSrc
             name
             description
@@ -138,8 +173,8 @@ export const projectByOwnerByDate = /* GraphQL */ `
             updatedAt
             comments {
               items {
-                id
-                revisionID
+                commentId
+                revisionConnID
                 comment
                 likeCount
                 owner
@@ -148,7 +183,7 @@ export const projectByOwnerByDate = /* GraphQL */ `
                 likes {
                   items {
                     id
-                    commentID
+                    commentConnID
                     owner
                     createdAt
                     updatedAt
@@ -167,10 +202,10 @@ export const projectByOwnerByDate = /* GraphQL */ `
   }
 `;
 export const getRevision = /* GraphQL */ `
-  query GetRevision($id: ID!) {
-    getRevision(id: $id) {
-      id
-      projectID
+  query GetRevision($revisionId: ID!) {
+    getRevision(revisionId: $revisionId) {
+      revisionId
+      projectConnID
       imgSrc
       name
       description
@@ -179,8 +214,8 @@ export const getRevision = /* GraphQL */ `
       updatedAt
       comments {
         items {
-          id
-          revisionID
+          commentId
+          revisionConnID
           comment
           likeCount
           owner
@@ -189,7 +224,7 @@ export const getRevision = /* GraphQL */ `
           likes {
             items {
               id
-              commentID
+              commentConnID
               owner
               createdAt
               updatedAt
@@ -204,14 +239,22 @@ export const getRevision = /* GraphQL */ `
 `;
 export const listRevisions = /* GraphQL */ `
   query ListRevisions(
+    $revisionId: ID
     $filter: ModelRevisionFilterInput
     $limit: Int
     $nextToken: String
+    $sortDirection: ModelSortDirection
   ) {
-    listRevisions(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listRevisions(
+      revisionId: $revisionId
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
       items {
-        id
-        projectID
+        revisionId
+        projectConnID
         imgSrc
         name
         description
@@ -220,8 +263,8 @@ export const listRevisions = /* GraphQL */ `
         updatedAt
         comments {
           items {
-            id
-            revisionID
+            commentId
+            revisionConnID
             comment
             likeCount
             owner
@@ -230,7 +273,7 @@ export const listRevisions = /* GraphQL */ `
             likes {
               items {
                 id
-                commentID
+                commentConnID
                 owner
                 createdAt
                 updatedAt
@@ -247,7 +290,7 @@ export const listRevisions = /* GraphQL */ `
 `;
 export const revisionByProjectByDate = /* GraphQL */ `
   query RevisionByProjectByDate(
-    $projectID: ID
+    $projectConnID: ID
     $createdAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelRevisionFilterInput
@@ -255,7 +298,7 @@ export const revisionByProjectByDate = /* GraphQL */ `
     $nextToken: String
   ) {
     revisionByProjectByDate(
-      projectID: $projectID
+      projectConnID: $projectConnID
       createdAt: $createdAt
       sortDirection: $sortDirection
       filter: $filter
@@ -263,8 +306,8 @@ export const revisionByProjectByDate = /* GraphQL */ `
       nextToken: $nextToken
     ) {
       items {
-        id
-        projectID
+        revisionId
+        projectConnID
         imgSrc
         name
         description
@@ -273,8 +316,8 @@ export const revisionByProjectByDate = /* GraphQL */ `
         updatedAt
         comments {
           items {
-            id
-            revisionID
+            commentId
+            revisionConnID
             comment
             likeCount
             owner
@@ -283,7 +326,7 @@ export const revisionByProjectByDate = /* GraphQL */ `
             likes {
               items {
                 id
-                commentID
+                commentConnID
                 owner
                 createdAt
                 updatedAt
@@ -299,10 +342,10 @@ export const revisionByProjectByDate = /* GraphQL */ `
   }
 `;
 export const getComment = /* GraphQL */ `
-  query GetComment($id: ID!) {
-    getComment(id: $id) {
-      id
-      revisionID
+  query GetComment($commentId: ID!) {
+    getComment(commentId: $commentId) {
+      commentId
+      revisionConnID
       comment
       likeCount
       owner
@@ -311,7 +354,7 @@ export const getComment = /* GraphQL */ `
       likes {
         items {
           id
-          commentID
+          commentConnID
           owner
           createdAt
           updatedAt
@@ -323,14 +366,22 @@ export const getComment = /* GraphQL */ `
 `;
 export const listComments = /* GraphQL */ `
   query ListComments(
+    $commentId: ID
     $filter: ModelCommentFilterInput
     $limit: Int
     $nextToken: String
+    $sortDirection: ModelSortDirection
   ) {
-    listComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listComments(
+      commentId: $commentId
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
       items {
-        id
-        revisionID
+        commentId
+        revisionConnID
         comment
         likeCount
         owner
@@ -339,7 +390,7 @@ export const listComments = /* GraphQL */ `
         likes {
           items {
             id
-            commentID
+            commentConnID
             owner
             createdAt
             updatedAt
@@ -353,7 +404,7 @@ export const listComments = /* GraphQL */ `
 `;
 export const commentByRevisionByDate = /* GraphQL */ `
   query CommentByRevisionByDate(
-    $revisionID: ID
+    $revisionConnID: ID
     $createdAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelCommentFilterInput
@@ -361,7 +412,7 @@ export const commentByRevisionByDate = /* GraphQL */ `
     $nextToken: String
   ) {
     commentByRevisionByDate(
-      revisionID: $revisionID
+      revisionConnID: $revisionConnID
       createdAt: $createdAt
       sortDirection: $sortDirection
       filter: $filter
@@ -369,8 +420,8 @@ export const commentByRevisionByDate = /* GraphQL */ `
       nextToken: $nextToken
     ) {
       items {
-        id
-        revisionID
+        commentId
+        revisionConnID
         comment
         likeCount
         owner
@@ -379,7 +430,7 @@ export const commentByRevisionByDate = /* GraphQL */ `
         likes {
           items {
             id
-            commentID
+            commentConnID
             owner
             createdAt
             updatedAt
@@ -391,39 +442,10 @@ export const commentByRevisionByDate = /* GraphQL */ `
     }
   }
 `;
-export const getLike = /* GraphQL */ `
-  query GetLike($id: ID!) {
-    getLike(id: $id) {
-      id
-      commentID
-      owner
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listLikes = /* GraphQL */ `
-  query ListLikes(
-    $filter: ModelLikeFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listLikes(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        commentID
-        owner
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
 export const getPublicUserProfile = /* GraphQL */ `
-  query GetPublicUserProfile($id: ID!) {
-    getPublicUserProfile(id: $id) {
-      id
+  query GetPublicUserProfile($publicUserProfileId: ID!) {
+    getPublicUserProfile(publicUserProfileId: $publicUserProfileId) {
+      publicUserProfileId
       owner
       username
       position
@@ -440,17 +462,21 @@ export const getPublicUserProfile = /* GraphQL */ `
 `;
 export const listPublicUserProfiles = /* GraphQL */ `
   query ListPublicUserProfiles(
+    $publicUserProfileId: ID
     $filter: ModelPublicUserProfileFilterInput
     $limit: Int
     $nextToken: String
+    $sortDirection: ModelSortDirection
   ) {
     listPublicUserProfiles(
+      publicUserProfileId: $publicUserProfileId
       filter: $filter
       limit: $limit
       nextToken: $nextToken
+      sortDirection: $sortDirection
     ) {
       items {
-        id
+        publicUserProfileId
         owner
         username
         position
@@ -483,7 +509,7 @@ export const publicUserProfileByUser = /* GraphQL */ `
       nextToken: $nextToken
     ) {
       items {
-        id
+        publicUserProfileId
         owner
         username
         position
@@ -493,6 +519,35 @@ export const publicUserProfileByUser = /* GraphQL */ `
         twitter
         facebook
         avatarImg
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getLike = /* GraphQL */ `
+  query GetLike($id: ID!) {
+    getLike(id: $id) {
+      id
+      commentConnID
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listLikes = /* GraphQL */ `
+  query ListLikes(
+    $filter: ModelLikeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listLikes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        commentConnID
+        owner
         createdAt
         updatedAt
       }

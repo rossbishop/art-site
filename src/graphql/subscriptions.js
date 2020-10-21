@@ -1,10 +1,40 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateProject = /* GraphQL */ `
-  subscription OnCreateProject($owner: String) {
-    onCreateProject(owner: $owner) {
+export const onCreatePlaceHolder = /* GraphQL */ `
+  subscription OnCreatePlaceHolder {
+    onCreatePlaceHolder {
       id
+      placeHolderID
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdatePlaceHolder = /* GraphQL */ `
+  subscription OnUpdatePlaceHolder {
+    onUpdatePlaceHolder {
+      id
+      placeHolderID
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeletePlaceHolder = /* GraphQL */ `
+  subscription OnDeletePlaceHolder {
+    onDeletePlaceHolder {
+      id
+      placeHolderID
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateProject = /* GraphQL */ `
+  subscription OnCreateProject {
+    onCreateProject {
+      projectId
       projectName
       projectDescription
       owner
@@ -12,8 +42,8 @@ export const onCreateProject = /* GraphQL */ `
       updatedAt
       revisions {
         items {
-          id
-          projectID
+          revisionId
+          projectConnID
           imgSrc
           name
           description
@@ -22,8 +52,8 @@ export const onCreateProject = /* GraphQL */ `
           updatedAt
           comments {
             items {
-              id
-              revisionID
+              commentId
+              revisionConnID
               comment
               likeCount
               owner
@@ -32,7 +62,7 @@ export const onCreateProject = /* GraphQL */ `
               likes {
                 items {
                   id
-                  commentID
+                  commentConnID
                   owner
                   createdAt
                   updatedAt
@@ -49,9 +79,9 @@ export const onCreateProject = /* GraphQL */ `
   }
 `;
 export const onUpdateProject = /* GraphQL */ `
-  subscription OnUpdateProject($owner: String) {
-    onUpdateProject(owner: $owner) {
-      id
+  subscription OnUpdateProject {
+    onUpdateProject {
+      projectId
       projectName
       projectDescription
       owner
@@ -59,8 +89,8 @@ export const onUpdateProject = /* GraphQL */ `
       updatedAt
       revisions {
         items {
-          id
-          projectID
+          revisionId
+          projectConnID
           imgSrc
           name
           description
@@ -69,8 +99,8 @@ export const onUpdateProject = /* GraphQL */ `
           updatedAt
           comments {
             items {
-              id
-              revisionID
+              commentId
+              revisionConnID
               comment
               likeCount
               owner
@@ -79,7 +109,7 @@ export const onUpdateProject = /* GraphQL */ `
               likes {
                 items {
                   id
-                  commentID
+                  commentConnID
                   owner
                   createdAt
                   updatedAt
@@ -96,9 +126,9 @@ export const onUpdateProject = /* GraphQL */ `
   }
 `;
 export const onDeleteProject = /* GraphQL */ `
-  subscription OnDeleteProject($owner: String) {
-    onDeleteProject(owner: $owner) {
-      id
+  subscription OnDeleteProject {
+    onDeleteProject {
+      projectId
       projectName
       projectDescription
       owner
@@ -106,8 +136,8 @@ export const onDeleteProject = /* GraphQL */ `
       updatedAt
       revisions {
         items {
-          id
-          projectID
+          revisionId
+          projectConnID
           imgSrc
           name
           description
@@ -116,8 +146,8 @@ export const onDeleteProject = /* GraphQL */ `
           updatedAt
           comments {
             items {
-              id
-              revisionID
+              commentId
+              revisionConnID
               comment
               likeCount
               owner
@@ -126,7 +156,7 @@ export const onDeleteProject = /* GraphQL */ `
               likes {
                 items {
                   id
-                  commentID
+                  commentConnID
                   owner
                   createdAt
                   updatedAt
@@ -143,10 +173,10 @@ export const onDeleteProject = /* GraphQL */ `
   }
 `;
 export const onCreateRevision = /* GraphQL */ `
-  subscription OnCreateRevision($owner: String) {
-    onCreateRevision(owner: $owner) {
-      id
-      projectID
+  subscription OnCreateRevision {
+    onCreateRevision {
+      revisionId
+      projectConnID
       imgSrc
       name
       description
@@ -155,8 +185,8 @@ export const onCreateRevision = /* GraphQL */ `
       updatedAt
       comments {
         items {
-          id
-          revisionID
+          commentId
+          revisionConnID
           comment
           likeCount
           owner
@@ -165,7 +195,7 @@ export const onCreateRevision = /* GraphQL */ `
           likes {
             items {
               id
-              commentID
+              commentConnID
               owner
               createdAt
               updatedAt
@@ -179,10 +209,10 @@ export const onCreateRevision = /* GraphQL */ `
   }
 `;
 export const onUpdateRevision = /* GraphQL */ `
-  subscription OnUpdateRevision($owner: String) {
-    onUpdateRevision(owner: $owner) {
-      id
-      projectID
+  subscription OnUpdateRevision {
+    onUpdateRevision {
+      revisionId
+      projectConnID
       imgSrc
       name
       description
@@ -191,8 +221,8 @@ export const onUpdateRevision = /* GraphQL */ `
       updatedAt
       comments {
         items {
-          id
-          revisionID
+          commentId
+          revisionConnID
           comment
           likeCount
           owner
@@ -201,7 +231,7 @@ export const onUpdateRevision = /* GraphQL */ `
           likes {
             items {
               id
-              commentID
+              commentConnID
               owner
               createdAt
               updatedAt
@@ -215,10 +245,10 @@ export const onUpdateRevision = /* GraphQL */ `
   }
 `;
 export const onDeleteRevision = /* GraphQL */ `
-  subscription OnDeleteRevision($owner: String) {
-    onDeleteRevision(owner: $owner) {
-      id
-      projectID
+  subscription OnDeleteRevision {
+    onDeleteRevision {
+      revisionId
+      projectConnID
       imgSrc
       name
       description
@@ -227,8 +257,8 @@ export const onDeleteRevision = /* GraphQL */ `
       updatedAt
       comments {
         items {
-          id
-          revisionID
+          commentId
+          revisionConnID
           comment
           likeCount
           owner
@@ -237,7 +267,7 @@ export const onDeleteRevision = /* GraphQL */ `
           likes {
             items {
               id
-              commentID
+              commentConnID
               owner
               createdAt
               updatedAt
@@ -251,10 +281,10 @@ export const onDeleteRevision = /* GraphQL */ `
   }
 `;
 export const onCreateComment = /* GraphQL */ `
-  subscription OnCreateComment($owner: String) {
-    onCreateComment(owner: $owner) {
-      id
-      revisionID
+  subscription OnCreateComment {
+    onCreateComment {
+      commentId
+      revisionConnID
       comment
       likeCount
       owner
@@ -263,7 +293,7 @@ export const onCreateComment = /* GraphQL */ `
       likes {
         items {
           id
-          commentID
+          commentConnID
           owner
           createdAt
           updatedAt
@@ -274,10 +304,10 @@ export const onCreateComment = /* GraphQL */ `
   }
 `;
 export const onUpdateComment = /* GraphQL */ `
-  subscription OnUpdateComment($owner: String) {
-    onUpdateComment(owner: $owner) {
-      id
-      revisionID
+  subscription OnUpdateComment {
+    onUpdateComment {
+      commentId
+      revisionConnID
       comment
       likeCount
       owner
@@ -286,7 +316,7 @@ export const onUpdateComment = /* GraphQL */ `
       likes {
         items {
           id
-          commentID
+          commentConnID
           owner
           createdAt
           updatedAt
@@ -297,10 +327,10 @@ export const onUpdateComment = /* GraphQL */ `
   }
 `;
 export const onDeleteComment = /* GraphQL */ `
-  subscription OnDeleteComment($owner: String) {
-    onDeleteComment(owner: $owner) {
-      id
-      revisionID
+  subscription OnDeleteComment {
+    onDeleteComment {
+      commentId
+      revisionConnID
       comment
       likeCount
       owner
@@ -309,7 +339,7 @@ export const onDeleteComment = /* GraphQL */ `
       likes {
         items {
           id
-          commentID
+          commentConnID
           owner
           createdAt
           updatedAt
@@ -319,43 +349,10 @@ export const onDeleteComment = /* GraphQL */ `
     }
   }
 `;
-export const onCreateLike = /* GraphQL */ `
-  subscription OnCreateLike($owner: String) {
-    onCreateLike(owner: $owner) {
-      id
-      commentID
-      owner
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateLike = /* GraphQL */ `
-  subscription OnUpdateLike($owner: String) {
-    onUpdateLike(owner: $owner) {
-      id
-      commentID
-      owner
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteLike = /* GraphQL */ `
-  subscription OnDeleteLike($owner: String) {
-    onDeleteLike(owner: $owner) {
-      id
-      commentID
-      owner
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const onCreatePublicUserProfile = /* GraphQL */ `
-  subscription OnCreatePublicUserProfile($owner: String) {
-    onCreatePublicUserProfile(owner: $owner) {
-      id
+  subscription OnCreatePublicUserProfile {
+    onCreatePublicUserProfile {
+      publicUserProfileId
       owner
       username
       position
@@ -371,9 +368,9 @@ export const onCreatePublicUserProfile = /* GraphQL */ `
   }
 `;
 export const onUpdatePublicUserProfile = /* GraphQL */ `
-  subscription OnUpdatePublicUserProfile($owner: String) {
-    onUpdatePublicUserProfile(owner: $owner) {
-      id
+  subscription OnUpdatePublicUserProfile {
+    onUpdatePublicUserProfile {
+      publicUserProfileId
       owner
       username
       position
@@ -389,9 +386,9 @@ export const onUpdatePublicUserProfile = /* GraphQL */ `
   }
 `;
 export const onDeletePublicUserProfile = /* GraphQL */ `
-  subscription OnDeletePublicUserProfile($owner: String) {
-    onDeletePublicUserProfile(owner: $owner) {
-      id
+  subscription OnDeletePublicUserProfile {
+    onDeletePublicUserProfile {
+      publicUserProfileId
       owner
       username
       position
@@ -401,6 +398,39 @@ export const onDeletePublicUserProfile = /* GraphQL */ `
       twitter
       facebook
       avatarImg
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateLike = /* GraphQL */ `
+  subscription OnCreateLike($owner: String) {
+    onCreateLike(owner: $owner) {
+      id
+      commentConnID
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateLike = /* GraphQL */ `
+  subscription OnUpdateLike($owner: String) {
+    onUpdateLike(owner: $owner) {
+      id
+      commentConnID
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteLike = /* GraphQL */ `
+  subscription OnDeleteLike($owner: String) {
+    onDeleteLike(owner: $owner) {
+      id
+      commentConnID
+      owner
       createdAt
       updatedAt
     }

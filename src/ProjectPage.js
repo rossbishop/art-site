@@ -8,18 +8,22 @@ import { propStyle } from 'aws-amplify-react';
 
 function ProjectPage(props) {
 
-    const [projectData, setProjectData] = useState(null)
+    const [projectData, setProjectData] = useState(false)
     const [comment, setComment] = useState()
 
     const getProject = async () => {
         try {
-            const uuid = (window.location.pathname.split('/'))[2]
-            const apiCall = await API.graphql({query: queries.getProject, variables: {id: uuid}})
+            const uuid = await (window.location.pathname.split('/'))[2]
+            console.log(uuid)
+            const apiCall = await API.graphql({query: queries.getProject, variables: {projectId: uuid}})
             console.log(apiCall)
             setProjectData(apiCall.data.getProject)
         }
         catch (error) {
             console.log('Error getting project: ', error)
+        }
+        finally {
+            
         }
     }
 

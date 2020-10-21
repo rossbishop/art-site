@@ -38,7 +38,7 @@ export default function ProjectGrid(props) {
                   //viewcount={item.viewcount}
                   revisioncount={item.revisions.items.length}
                   username={item.owner}
-                  link={`/project/${item.id}`}
+                  link={`/project/${item.projectId}`}
                 />
               )
             }

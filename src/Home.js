@@ -13,9 +13,10 @@ function Home(props) {
     const getUserProjects = async () => {
         try {
             //const owner = (window.location.pathname.split('/'))[2]
-            const apiCall = await API.graphql({query: queries.projectByOwnerByDate, variables: {owner: "Russbo", limit: 10, sortDirection: "DESC"}})
+            //const apiCall = await API.graphql({query: queries.projectByOwnerByDate, variables: {owner: "Russbo", limit: 10, sortDirection: "DESC"}})
+            const apiCall = await API.graphql({query: queries.listProjects, variables: {limit: 10}})
             console.log(apiCall)
-            setProjectData(apiCall.data.projectByOwnerByDate.items)
+            setProjectData(apiCall.data.listProjects.items)
         }
         catch (error) {
             console.log('Error getting project: ', error)

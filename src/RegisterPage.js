@@ -29,12 +29,12 @@ function RegisterPage(props) {
                 attributes: {
                     email,
                     birthdate,
-                    preferred_username: username,
-                    "custom:instagram":"Enter Instagram Account",
-                    "custom:facebook":"Enter Facebook Account",
-                    "custom:twitter":"Enter Twitter Account",
-                    "custom:job":"Enter Job Title",
-                    "custom:bio":"Tell everyone about yourself"
+                    preferred_username: username
+                    //"custom:instagram":"Enter Instagram Account",
+                    //"custom:facebook":"Enter Facebook Account",
+                    //"custom:twitter":"Enter Twitter Account",
+                    //"custom:job":"Enter Job Title",
+                    //"custom:bio":"Tell everyone about yourself"
                 },
             })
 

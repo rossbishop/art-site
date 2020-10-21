@@ -1,48 +1,26 @@
 {
-  "auth": {
-    "userPoolGroups": {
-      "service": "Cognito-UserPool-Groups",
+  "function": {
+    "ArtSiteAPIAmplifyPostConfirmation": {
+      "build": true,
       "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "AdminQueries5f6c1bb4": {
+      "service": "Lambda",
+      "providerPlugin": "awscloudformation",
+      "build": true,
       "dependsOn": [
         {
           "category": "auth",
           "resourceName": "ArtSiteAPIAmplify",
           "attributes": [
-            "UserPoolId",
-            "AppClientIDWeb",
-            "AppClientID",
-            "IdentityPoolId"
+            "UserPoolId"
           ]
         }
       ]
-    },
-    "ArtSiteAPIAmplify": {
-      "service": "Cognito",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [],
-      "customAuth": false
     }
   },
   "api": {
-    "artsite": {
-      "service": "AppSync",
-      "providerPlugin": "awscloudformation",
-      "output": {
-        "authConfig": {
-          "defaultAuthentication": {
-            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-            "userPoolConfig": {
-              "userPoolId": "authartsite57333d8f"
-            }
-          },
-          "additionalAuthenticationProviders": [
-            {
-              "authenticationType": "AWS_IAM"
-            }
-          ]
-        }
-      }
-    },
     "AdminQueries": {
       "service": "API Gateway",
       "providerPlugin": "awscloudformation",
@@ -56,44 +34,50 @@
         },
         {
           "category": "function",
-          "resourceName": "AdminQueries3507051e",
+          "resourceName": "AdminQueries5f6c1bb4",
           "attributes": [
             "Arn",
             "Name"
           ]
         }
       ]
+    },
+    "artsite": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authArtSiteAPIAmplify"
+            }
+          },
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AWS_IAM"
+            }
+          ]
+        }
+      }
     }
   },
-  "function": {
-    "AdminQueries3507051e": {
-      "service": "Lambda",
+  "auth": {
+    "ArtSiteAPIAmplify": {
+      "service": "Cognito",
       "providerPlugin": "awscloudformation",
-      "build": true,
       "dependsOn": [
         {
-          "category": "auth",
-          "resourceName": "ArtSiteAPIAmplify",
+          "category": "function",
+          "resourceName": "ArtSiteAPIAmplifyPostConfirmation",
+          "triggerProvider": "Cognito",
           "attributes": [
-            "UserPoolId"
+            "Arn",
+            "Name"
           ]
         }
-      ]
-    },
-    "createPublicUserLambda": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "api",
-          "resourceName": "artsite",
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput"
-          ]
-        }
-      ]
+      ],
+      "customAuth": false
     }
   }
 }

@@ -7,7 +7,7 @@ export const createProject = /* GraphQL */ `
     $condition: ModelProjectConditionInput
   ) {
     createProject(input: $input, condition: $condition) {
-      id
+      projectId
       projectName
       projectDescription
       owner
@@ -15,8 +15,8 @@ export const createProject = /* GraphQL */ `
       updatedAt
       revisions {
         items {
-          id
-          projectID
+          revisionId
+          projectConnID
           imgSrc
           name
           description
@@ -25,8 +25,8 @@ export const createProject = /* GraphQL */ `
           updatedAt
           comments {
             items {
-              id
-              revisionID
+              commentId
+              revisionConnID
               comment
               likeCount
               owner
@@ -35,7 +35,7 @@ export const createProject = /* GraphQL */ `
               likes {
                 items {
                   id
-                  commentID
+                  commentConnID
                   owner
                   createdAt
                   updatedAt
@@ -57,7 +57,7 @@ export const updateProject = /* GraphQL */ `
     $condition: ModelProjectConditionInput
   ) {
     updateProject(input: $input, condition: $condition) {
-      id
+      projectId
       projectName
       projectDescription
       owner
@@ -65,8 +65,8 @@ export const updateProject = /* GraphQL */ `
       updatedAt
       revisions {
         items {
-          id
-          projectID
+          revisionId
+          projectConnID
           imgSrc
           name
           description
@@ -75,8 +75,8 @@ export const updateProject = /* GraphQL */ `
           updatedAt
           comments {
             items {
-              id
-              revisionID
+              commentId
+              revisionConnID
               comment
               likeCount
               owner
@@ -85,7 +85,7 @@ export const updateProject = /* GraphQL */ `
               likes {
                 items {
                   id
-                  commentID
+                  commentConnID
                   owner
                   createdAt
                   updatedAt
@@ -107,7 +107,7 @@ export const deleteProject = /* GraphQL */ `
     $condition: ModelProjectConditionInput
   ) {
     deleteProject(input: $input, condition: $condition) {
-      id
+      projectId
       projectName
       projectDescription
       owner
@@ -115,8 +115,8 @@ export const deleteProject = /* GraphQL */ `
       updatedAt
       revisions {
         items {
-          id
-          projectID
+          revisionId
+          projectConnID
           imgSrc
           name
           description
@@ -125,8 +125,8 @@ export const deleteProject = /* GraphQL */ `
           updatedAt
           comments {
             items {
-              id
-              revisionID
+              commentId
+              revisionConnID
               comment
               likeCount
               owner
@@ -135,7 +135,7 @@ export const deleteProject = /* GraphQL */ `
               likes {
                 items {
                   id
-                  commentID
+                  commentConnID
                   owner
                   createdAt
                   updatedAt
@@ -157,8 +157,8 @@ export const createRevision = /* GraphQL */ `
     $condition: ModelRevisionConditionInput
   ) {
     createRevision(input: $input, condition: $condition) {
-      id
-      projectID
+      revisionId
+      projectConnID
       imgSrc
       name
       description
@@ -167,8 +167,8 @@ export const createRevision = /* GraphQL */ `
       updatedAt
       comments {
         items {
-          id
-          revisionID
+          commentId
+          revisionConnID
           comment
           likeCount
           owner
@@ -177,7 +177,7 @@ export const createRevision = /* GraphQL */ `
           likes {
             items {
               id
-              commentID
+              commentConnID
               owner
               createdAt
               updatedAt
@@ -196,8 +196,8 @@ export const updateRevision = /* GraphQL */ `
     $condition: ModelRevisionConditionInput
   ) {
     updateRevision(input: $input, condition: $condition) {
-      id
-      projectID
+      revisionId
+      projectConnID
       imgSrc
       name
       description
@@ -206,8 +206,8 @@ export const updateRevision = /* GraphQL */ `
       updatedAt
       comments {
         items {
-          id
-          revisionID
+          commentId
+          revisionConnID
           comment
           likeCount
           owner
@@ -216,7 +216,7 @@ export const updateRevision = /* GraphQL */ `
           likes {
             items {
               id
-              commentID
+              commentConnID
               owner
               createdAt
               updatedAt
@@ -235,8 +235,8 @@ export const deleteRevision = /* GraphQL */ `
     $condition: ModelRevisionConditionInput
   ) {
     deleteRevision(input: $input, condition: $condition) {
-      id
-      projectID
+      revisionId
+      projectConnID
       imgSrc
       name
       description
@@ -245,8 +245,8 @@ export const deleteRevision = /* GraphQL */ `
       updatedAt
       comments {
         items {
-          id
-          revisionID
+          commentId
+          revisionConnID
           comment
           likeCount
           owner
@@ -255,7 +255,7 @@ export const deleteRevision = /* GraphQL */ `
           likes {
             items {
               id
-              commentID
+              commentConnID
               owner
               createdAt
               updatedAt
@@ -274,8 +274,8 @@ export const createComment = /* GraphQL */ `
     $condition: ModelCommentConditionInput
   ) {
     createComment(input: $input, condition: $condition) {
-      id
-      revisionID
+      commentId
+      revisionConnID
       comment
       likeCount
       owner
@@ -284,7 +284,7 @@ export const createComment = /* GraphQL */ `
       likes {
         items {
           id
-          commentID
+          commentConnID
           owner
           createdAt
           updatedAt
@@ -300,8 +300,8 @@ export const updateComment = /* GraphQL */ `
     $condition: ModelCommentConditionInput
   ) {
     updateComment(input: $input, condition: $condition) {
-      id
-      revisionID
+      commentId
+      revisionConnID
       comment
       likeCount
       owner
@@ -310,7 +310,7 @@ export const updateComment = /* GraphQL */ `
       likes {
         items {
           id
-          commentID
+          commentConnID
           owner
           createdAt
           updatedAt
@@ -326,8 +326,8 @@ export const deleteComment = /* GraphQL */ `
     $condition: ModelCommentConditionInput
   ) {
     deleteComment(input: $input, condition: $condition) {
-      id
-      revisionID
+      commentId
+      revisionConnID
       comment
       likeCount
       owner
@@ -336,7 +336,7 @@ export const deleteComment = /* GraphQL */ `
       likes {
         items {
           id
-          commentID
+          commentConnID
           owner
           createdAt
           updatedAt
@@ -346,55 +346,13 @@ export const deleteComment = /* GraphQL */ `
     }
   }
 `;
-export const createLike = /* GraphQL */ `
-  mutation CreateLike(
-    $input: CreateLikeInput!
-    $condition: ModelLikeConditionInput
-  ) {
-    createLike(input: $input, condition: $condition) {
-      id
-      commentID
-      owner
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateLike = /* GraphQL */ `
-  mutation UpdateLike(
-    $input: UpdateLikeInput!
-    $condition: ModelLikeConditionInput
-  ) {
-    updateLike(input: $input, condition: $condition) {
-      id
-      commentID
-      owner
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteLike = /* GraphQL */ `
-  mutation DeleteLike(
-    $input: DeleteLikeInput!
-    $condition: ModelLikeConditionInput
-  ) {
-    deleteLike(input: $input, condition: $condition) {
-      id
-      commentID
-      owner
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const createPublicUserProfile = /* GraphQL */ `
   mutation CreatePublicUserProfile(
     $input: CreatePublicUserProfileInput!
     $condition: ModelPublicUserProfileConditionInput
   ) {
     createPublicUserProfile(input: $input, condition: $condition) {
-      id
+      publicUserProfileId
       owner
       username
       position
@@ -415,7 +373,7 @@ export const updatePublicUserProfile = /* GraphQL */ `
     $condition: ModelPublicUserProfileConditionInput
   ) {
     updatePublicUserProfile(input: $input, condition: $condition) {
-      id
+      publicUserProfileId
       owner
       username
       position
@@ -436,7 +394,7 @@ export const deletePublicUserProfile = /* GraphQL */ `
     $condition: ModelPublicUserProfileConditionInput
   ) {
     deletePublicUserProfile(input: $input, condition: $condition) {
-      id
+      publicUserProfileId
       owner
       username
       position
@@ -446,6 +404,87 @@ export const deletePublicUserProfile = /* GraphQL */ `
       twitter
       facebook
       avatarImg
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createLike = /* GraphQL */ `
+  mutation CreateLike(
+    $input: CreateLikeInput!
+    $condition: ModelLikeConditionInput
+  ) {
+    createLike(input: $input, condition: $condition) {
+      id
+      commentConnID
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateLike = /* GraphQL */ `
+  mutation UpdateLike(
+    $input: UpdateLikeInput!
+    $condition: ModelLikeConditionInput
+  ) {
+    updateLike(input: $input, condition: $condition) {
+      id
+      commentConnID
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteLike = /* GraphQL */ `
+  mutation DeleteLike(
+    $input: DeleteLikeInput!
+    $condition: ModelLikeConditionInput
+  ) {
+    deleteLike(input: $input, condition: $condition) {
+      id
+      commentConnID
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createPlaceHolder = /* GraphQL */ `
+  mutation CreatePlaceHolder(
+    $input: CreatePlaceHolderInput!
+    $condition: ModelPlaceHolderConditionInput
+  ) {
+    createPlaceHolder(input: $input, condition: $condition) {
+      id
+      placeHolderID
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updatePlaceHolder = /* GraphQL */ `
+  mutation UpdatePlaceHolder(
+    $input: UpdatePlaceHolderInput!
+    $condition: ModelPlaceHolderConditionInput
+  ) {
+    updatePlaceHolder(input: $input, condition: $condition) {
+      id
+      placeHolderID
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deletePlaceHolder = /* GraphQL */ `
+  mutation DeletePlaceHolder(
+    $input: DeletePlaceHolderInput!
+    $condition: ModelPlaceHolderConditionInput
+  ) {
+    deletePlaceHolder(input: $input, condition: $condition) {
+      id
+      placeHolderID
       createdAt
       updatedAt
     }

@@ -34,15 +34,9 @@ function ProfileUpdatePage(props) {
     const updateSocial = async() => {
         try {
             let user = await Auth.currentAuthenticatedUser()
-            let result = await Auth.updateUserAttributes(user, {
-                'custom:instagram': instagram,
-                'custom:facebook': facebook,
-                'custom:twitter': twitter
-            });
-            console.log(result)
-            const publicDetails = {id: user.attributes.sub, facebook: facebook, instagram: instagram, twitter: twitter}
+            const publicDetails = {publicUserProfileId: user.attributes.sub, facebook: facebook, instagram: instagram, twitter: twitter}
             const publicProfileUpdate = await API.graphql({ query: mutations.updatePublicUserProfile, variables: {input: publicDetails}})
-            setSocialSuccess({isSuccess: true, message: result})
+            setSocialSuccess({isSuccess: true, message: "Social details updated successfully"})
         }
         catch(err) {
             console.log(err)
@@ -53,17 +47,9 @@ function ProfileUpdatePage(props) {
     const updateProfile = async() => {
         try {
             let user = await Auth.currentAuthenticatedUser()
-            console.log(user)
-            let result = await Auth.updateUserAttributes(user, {
-                'preferred_username': username,
-                'custom:job': job,
-                'custom:location' : location,
-                'custom:bio': bio
-            });
-            console.log(result)
-            const publicDetails = {id: user.attributes.sub, username: username, position: job, location: location, bio: bio}
+            const publicDetails = {publicUserProfileId: user.attributes.sub, username: username, position: job, location: location, bio: bio}
             const publicProfileUpdate = await API.graphql({ query: mutations.updatePublicUserProfile, variables: {input: publicDetails}})
-            setProfileSuccess({isSuccess: true, message: result})
+            setProfileSuccess({isSuccess: true, message: "Profile details updated successfully"})
         }
         catch(err) {
             console.log(err)
@@ -79,23 +65,6 @@ function ProfileUpdatePage(props) {
             .then(data => {console.log(data); setPasswordSuccess({isSuccess: true, message: data});})
             .catch(err => {console.log(err); setPasswordError({isSuccess: true, message: err});});
     }
-
-
-    // const updatePassword = async() => {
-    //     try {
-    //         const curruser = await Auth.currentAuthenticatedUser()
-    //         const changepass = await (user => {
-    //             return Auth.changePassword(curruser, currPassword, newPassword);
-    //         })
-    //         console.log(changepass)
-    //         setPasswordSuccess(changepass)
-    //     }
-    //     catch(err) {
-    //         console.log(err)
-    //         setPasswordError(err)
-    //     }
-
-    // }
 
     return (
         <>

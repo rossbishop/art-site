@@ -7,41 +7,33 @@ export const createProject = /* GraphQL */ `
     $condition: ModelProjectConditionInput
   ) {
     createProject(input: $input, condition: $condition) {
-      projectId
+      id
       projectName
       projectDescription
       owner
       createdAt
+      contentType
       updatedAt
       revisions {
         items {
-          revisionId
-          projectConnID
+          id
+          projectID
           imgSrc
           name
           description
           owner
           createdAt
+          contentType
           updatedAt
           comments {
             items {
-              commentId
-              revisionConnID
+              id
+              revisionID
               comment
               likeCount
               owner
               createdAt
               updatedAt
-              likes {
-                items {
-                  id
-                  commentConnID
-                  owner
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
             }
             nextToken
           }
@@ -57,41 +49,33 @@ export const updateProject = /* GraphQL */ `
     $condition: ModelProjectConditionInput
   ) {
     updateProject(input: $input, condition: $condition) {
-      projectId
+      id
       projectName
       projectDescription
       owner
       createdAt
+      contentType
       updatedAt
       revisions {
         items {
-          revisionId
-          projectConnID
+          id
+          projectID
           imgSrc
           name
           description
           owner
           createdAt
+          contentType
           updatedAt
           comments {
             items {
-              commentId
-              revisionConnID
+              id
+              revisionID
               comment
               likeCount
               owner
               createdAt
               updatedAt
-              likes {
-                items {
-                  id
-                  commentConnID
-                  owner
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
             }
             nextToken
           }
@@ -107,41 +91,33 @@ export const deleteProject = /* GraphQL */ `
     $condition: ModelProjectConditionInput
   ) {
     deleteProject(input: $input, condition: $condition) {
-      projectId
+      id
       projectName
       projectDescription
       owner
       createdAt
+      contentType
       updatedAt
       revisions {
         items {
-          revisionId
-          projectConnID
+          id
+          projectID
           imgSrc
           name
           description
           owner
           createdAt
+          contentType
           updatedAt
           comments {
             items {
-              commentId
-              revisionConnID
+              id
+              revisionID
               comment
               likeCount
               owner
               createdAt
               updatedAt
-              likes {
-                items {
-                  id
-                  commentConnID
-                  owner
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
             }
             nextToken
           }
@@ -157,33 +133,24 @@ export const createRevision = /* GraphQL */ `
     $condition: ModelRevisionConditionInput
   ) {
     createRevision(input: $input, condition: $condition) {
-      revisionId
-      projectConnID
+      id
+      projectID
       imgSrc
       name
       description
       owner
       createdAt
+      contentType
       updatedAt
       comments {
         items {
-          commentId
-          revisionConnID
+          id
+          revisionID
           comment
           likeCount
           owner
           createdAt
           updatedAt
-          likes {
-            items {
-              id
-              commentConnID
-              owner
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
         }
         nextToken
       }
@@ -196,33 +163,24 @@ export const updateRevision = /* GraphQL */ `
     $condition: ModelRevisionConditionInput
   ) {
     updateRevision(input: $input, condition: $condition) {
-      revisionId
-      projectConnID
+      id
+      projectID
       imgSrc
       name
       description
       owner
       createdAt
+      contentType
       updatedAt
       comments {
         items {
-          commentId
-          revisionConnID
+          id
+          revisionID
           comment
           likeCount
           owner
           createdAt
           updatedAt
-          likes {
-            items {
-              id
-              commentConnID
-              owner
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
         }
         nextToken
       }
@@ -235,33 +193,24 @@ export const deleteRevision = /* GraphQL */ `
     $condition: ModelRevisionConditionInput
   ) {
     deleteRevision(input: $input, condition: $condition) {
-      revisionId
-      projectConnID
+      id
+      projectID
       imgSrc
       name
       description
       owner
       createdAt
+      contentType
       updatedAt
       comments {
         items {
-          commentId
-          revisionConnID
+          id
+          revisionID
           comment
           likeCount
           owner
           createdAt
           updatedAt
-          likes {
-            items {
-              id
-              commentConnID
-              owner
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
         }
         nextToken
       }
@@ -274,23 +223,13 @@ export const createComment = /* GraphQL */ `
     $condition: ModelCommentConditionInput
   ) {
     createComment(input: $input, condition: $condition) {
-      commentId
-      revisionConnID
+      id
+      revisionID
       comment
       likeCount
       owner
       createdAt
       updatedAt
-      likes {
-        items {
-          id
-          commentConnID
-          owner
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
     }
   }
 `;
@@ -300,23 +239,13 @@ export const updateComment = /* GraphQL */ `
     $condition: ModelCommentConditionInput
   ) {
     updateComment(input: $input, condition: $condition) {
-      commentId
-      revisionConnID
+      id
+      revisionID
       comment
       likeCount
       owner
       createdAt
       updatedAt
-      likes {
-        items {
-          id
-          commentConnID
-          owner
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
     }
   }
 `;
@@ -326,23 +255,13 @@ export const deleteComment = /* GraphQL */ `
     $condition: ModelCommentConditionInput
   ) {
     deleteComment(input: $input, condition: $condition) {
-      commentId
-      revisionConnID
+      id
+      revisionID
       comment
       likeCount
       owner
       createdAt
       updatedAt
-      likes {
-        items {
-          id
-          commentConnID
-          owner
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
     }
   }
 `;
@@ -404,48 +323,6 @@ export const deletePublicUserProfile = /* GraphQL */ `
       twitter
       facebook
       avatarImg
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const createLike = /* GraphQL */ `
-  mutation CreateLike(
-    $input: CreateLikeInput!
-    $condition: ModelLikeConditionInput
-  ) {
-    createLike(input: $input, condition: $condition) {
-      id
-      commentConnID
-      owner
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateLike = /* GraphQL */ `
-  mutation UpdateLike(
-    $input: UpdateLikeInput!
-    $condition: ModelLikeConditionInput
-  ) {
-    updateLike(input: $input, condition: $condition) {
-      id
-      commentConnID
-      owner
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteLike = /* GraphQL */ `
-  mutation DeleteLike(
-    $input: DeleteLikeInput!
-    $condition: ModelLikeConditionInput
-  ) {
-    deleteLike(input: $input, condition: $condition) {
-      id
-      commentConnID
-      owner
       createdAt
       updatedAt
     }

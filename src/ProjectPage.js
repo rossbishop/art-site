@@ -15,7 +15,7 @@ function ProjectPage(props) {
         try {
             const uuid = await (window.location.pathname.split('/'))[2]
             console.log(uuid)
-            const apiCall = await API.graphql({query: queries.getProject, variables: {projectId: uuid}})
+            const apiCall = await API.graphql({query: queries.getProject, variables: {id: uuid}})
             console.log(apiCall)
             setProjectData(apiCall.data.getProject)
         }

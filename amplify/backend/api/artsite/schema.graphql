@@ -10,26 +10,52 @@
 
 # }
 
-type Project @model 
-  @auth(
-    rules: [ 
-        { allow: owner, provider: userPools, ownerField: "owner" },
-        { allow: private, provider: userPools, operations: [read]},
-        { allow: public, provider: iam, operations: [read] }
+# type Project @model 
+#   @auth(
+#     rules: [ 
+#         { allow: owner, provider: userPools, ownerField: "owner" },
+#         { allow: private, provider: userPools, operations: [read]},
+#         { allow: public, provider: iam, operations: [read] }
+#       ]
+#     )
+#   @key(fields: ["projectId", "createdAt"])
+#   #@key(name: "projectByIdByDate", fields: ["createdAt"], queryField: "projectByIdByDate")
+#   @key(name: "projectByOwnerByDate", fields: ["owner"], queryField: "projectByOwnerByDate")
+#   # @key(name: "projectByAllProjectByDate", fields: ["allProjectConnId", "createdAt"], queryField: "projectByAllProjectByDate") 
+#   {
+#   projectId: ID!
+#   # allProjectConnId: ID!
+#   projectName: String!
+#   projectDescription: String!
+#   owner: ID
+#   createdAt: AWSDateTime!
+#   revisions: [Revision] @connection(keyName: "revisionByProjectByDate", fields: ["projectId"])
+#     # @auth(rules: [
+#     #   { allow: owner, ownerField: "owner"},
+#     #   { allow: public, provider: iam, operations: [read]}
+#     #   ]
+#     # )
+# }
+
+type Project @model
+  @auth(rules: [
+      { allow: owner, provider: userPools },
+      { allow: private, provider: userPools, operations: [read] },
+      { allow: public, provider: iam, operations: [read] }
       ]
     )
-  @key(fields: ["projectId", "createdAt"])
-  #@key(name: "projectByIdByDate", fields: ["createdAt"], queryField: "projectByIdByDate")
-  @key(name: "projectByOwnerByDate", fields: ["owner"], queryField: "projectByOwnerByDate")
-  # @key(name: "projectByAllProjectByDate", fields: ["allProjectConnId", "createdAt"], queryField: "projectByAllProjectByDate") 
+    # get posts by a user ID ordered by date
+    @key(name: "projectsByUserByDate", fields: ["owner", "createdAt"], queryField: "projectsByUserByDate")
+    # get all posts ordered by date, all items need to have the contentType set to "Project"
+    @key(name: "projectsByDate", fields: ["contentType", "createdAt"], queryField: "projectsByDate") 
   {
-  projectId: ID!
-  # allProjectConnId: ID!
+  id: ID!
   projectName: String!
   projectDescription: String!
-  owner: ID
-  createdAt: AWSDateTime!
-  revisions: [Revision] @connection(keyName: "revisionByProjectByDate", fields: ["projectId"])
+  owner: String
+  createdAt: String
+  contentType: String
+  revisions: [Revision] @connection(keyName: "revisionByProjectByDate", fields: ["id"])
     # @auth(rules: [
     #   { allow: owner, ownerField: "owner"},
     #   { allow: public, provider: iam, operations: [read]}
@@ -40,44 +66,47 @@ type Project @model
 type Revision @model
   @auth(
     rules: [ 
-        { allow: owner, provider: userPools, ownerField: "owner" },
+        { allow: owner, provider: userPools },
         { allow: private, provider: userPools, operations: [read]},
         { allow: public, provider: iam, operations: [read] }
       ]
   )
-  @key(fields: ["revisionId"]) 
-  @key(name: "revisionByProjectByDate", fields: ["projectConnID", "createdAt"], queryField: "revisionByProjectByDate")
+  #@key(fields: ["revisionId"]) 
+  @key(name: "revisionByProjectByDate", fields: ["projectID", "createdAt"], queryField: "revisionsByProjectByDate")
+  #@key(name: "revisionByProjectByDate", fields: ["contentType", "createdAt"], queryField: "revisionByProjectByDate")
   {
-  revisionId: ID!
-  projectConnID: ID!
+  id: ID!
+  projectID: ID!
   imgSrc: String!
   name: String!
   description: String!
-  owner: ID
-  createdAt: AWSDateTime
-  comments: [Comment] @connection(keyName: "commentByRevisionByDate", fields: ["revisionId"])
+  owner: String
+  createdAt: String
+  contentType: String
+  #createdAt: AWSDateTime
+  comments: [Comment] @connection(keyName: "commentByRevisionByDate", fields: ["id"])
 }
 
 type Comment @model
   @auth(
     rules: [ 
-        { allow: owner, provider: userPools, ownerField: "owner" },
+        { allow: owner, provider: userPools },
         { allow: private, provider: userPools, operations: [read]},
         { allow: public, provider: iam, operations: [read] }
       ]
   )
-  @key(fields: ["commentId"])
-  @key(name: "commentByRevisionByDate", fields: ["revisionConnID", "createdAt"], queryField: "commentByRevisionByDate")
+  #@key(fields: ["commentId"])
+  @key(name: "commentByRevisionByDate", fields: ["revisionID", "createdAt"], queryField: "commentsByRevisionByDate")
   {
-    commentId: ID!
-    revisionConnID: ID!
+    id: ID!
+    revisionID: ID!
     comment: String!
     likeCount: Int
-    owner: ID
-    createdAt: AWSDateTime
-    likes: [Like] @connection(keyName: "byUser", fields: ["commentId"])
+    owner: String
+    createdAt: String
+    #likes: [Like] @connection(keyName: "byUser", fields: ["commentId"])
 }
- 
+
 type PublicUserProfile @model
   @auth(
     rules: [ 
@@ -101,19 +130,19 @@ type PublicUserProfile @model
     avatarImg: String
   }
 
-type Like @model
-  @auth(
-    rules: [ 
-        { allow: owner, provider: userPools, ownerField: "owner" },
-        { allow: public, provider: iam, operations: [read] }
-      ]
-  )
-  @key(name: "byUser", fields: ["commentConnID", "owner"])
-  {
-    id: ID!
-    commentConnID: ID!
-    owner: ID
-}
+# type Like @model
+#   @auth(
+#     rules: [ 
+#         { allow: owner, provider: userPools, ownerField: "owner" },
+#         { allow: public, provider: iam, operations: [read] }
+#       ]
+#   )
+#   @key(name: "byUser", fields: ["commentConnID", "owner"])
+#   {
+#     id: ID!
+#     commentConnID: ID!
+#     owner: ID
+# }
 
 type PlaceHolder @model
   {

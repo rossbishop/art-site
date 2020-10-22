@@ -20,9 +20,10 @@ function NewProjectPage(props) {
     const createNewProject = async () => {
         try {
             const projectData = {
-                projectId: uuidv4(),
+                //projectId: uuidv4(),
                 projectName: projectName,
                 projectDescription: projectDescription,
+                contentType: "project"
             }
         
             const projectCall = await API.graphql({query: mutations.createProject, variables: {input: projectData}})
@@ -42,8 +43,8 @@ function NewProjectPage(props) {
     const createNewRevision = async () => {
         try {
             const revisionData = {
-                revisionId: uuidv4(),
-                projectConnID: createdProject.data.createProject.projectId,
+                //revisionId: uuidv4(),
+                projectID: createdProject.data.createProject.id,
                 imgSrc: "https://i.imgur.com/BlbUQz7.jpg",
                 name: revisionName,
                 description: revisionDescription,
@@ -88,7 +89,7 @@ function NewProjectPage(props) {
             {shouldRedirect &&(
                 <Redirect
                 to={{
-                    pathname: `/project/${createdProject.data.createProject.projectId}`
+                    pathname: `/project/${createdProject.data.createProject.id}`
                 }}
                 />
             )}

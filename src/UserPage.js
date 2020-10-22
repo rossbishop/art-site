@@ -17,9 +17,9 @@ function UserPage(props) {
     const getUserProjects = async () => {
         try {
             const owner = (window.location.pathname.split('/'))[2]
-            const apiCall = await API.graphql({query: queries.projectByOwnerByDate, variables: {owner: owner, limit: 20, sortDirection: "DESC"}})
+            const apiCall = await API.graphql({query: queries.projectsByUserByDate, variables: {owner: owner, limit: 20, sortDirection: "DESC"}})
             console.log(apiCall)
-            setProjectData(apiCall.data.projectByOwnerByDate.items)
+            setProjectData(apiCall.data.projectsByUserByDate.items)
         }
         catch (error) {
             console.log('Error getting project: ', error)
@@ -34,7 +34,7 @@ function UserPage(props) {
             setProfileData(apiCall.data.publicUserProfileByUser.items[0])
         }
         catch (error) {
-            console.log('Error getting project: ', error)
+            console.log('Error getting profile: ', error)
         }
     }
 

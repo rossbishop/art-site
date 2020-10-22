@@ -34,41 +34,33 @@ export const onDeletePlaceHolder = /* GraphQL */ `
 export const onCreateProject = /* GraphQL */ `
   subscription OnCreateProject {
     onCreateProject {
-      projectId
+      id
       projectName
       projectDescription
       owner
       createdAt
+      contentType
       updatedAt
       revisions {
         items {
-          revisionId
-          projectConnID
+          id
+          projectID
           imgSrc
           name
           description
           owner
           createdAt
+          contentType
           updatedAt
           comments {
             items {
-              commentId
-              revisionConnID
+              id
+              revisionID
               comment
               likeCount
               owner
               createdAt
               updatedAt
-              likes {
-                items {
-                  id
-                  commentConnID
-                  owner
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
             }
             nextToken
           }
@@ -81,41 +73,33 @@ export const onCreateProject = /* GraphQL */ `
 export const onUpdateProject = /* GraphQL */ `
   subscription OnUpdateProject {
     onUpdateProject {
-      projectId
+      id
       projectName
       projectDescription
       owner
       createdAt
+      contentType
       updatedAt
       revisions {
         items {
-          revisionId
-          projectConnID
+          id
+          projectID
           imgSrc
           name
           description
           owner
           createdAt
+          contentType
           updatedAt
           comments {
             items {
-              commentId
-              revisionConnID
+              id
+              revisionID
               comment
               likeCount
               owner
               createdAt
               updatedAt
-              likes {
-                items {
-                  id
-                  commentConnID
-                  owner
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
             }
             nextToken
           }
@@ -128,41 +112,33 @@ export const onUpdateProject = /* GraphQL */ `
 export const onDeleteProject = /* GraphQL */ `
   subscription OnDeleteProject {
     onDeleteProject {
-      projectId
+      id
       projectName
       projectDescription
       owner
       createdAt
+      contentType
       updatedAt
       revisions {
         items {
-          revisionId
-          projectConnID
+          id
+          projectID
           imgSrc
           name
           description
           owner
           createdAt
+          contentType
           updatedAt
           comments {
             items {
-              commentId
-              revisionConnID
+              id
+              revisionID
               comment
               likeCount
               owner
               createdAt
               updatedAt
-              likes {
-                items {
-                  id
-                  commentConnID
-                  owner
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
             }
             nextToken
           }
@@ -175,33 +151,24 @@ export const onDeleteProject = /* GraphQL */ `
 export const onCreateRevision = /* GraphQL */ `
   subscription OnCreateRevision {
     onCreateRevision {
-      revisionId
-      projectConnID
+      id
+      projectID
       imgSrc
       name
       description
       owner
       createdAt
+      contentType
       updatedAt
       comments {
         items {
-          commentId
-          revisionConnID
+          id
+          revisionID
           comment
           likeCount
           owner
           createdAt
           updatedAt
-          likes {
-            items {
-              id
-              commentConnID
-              owner
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
         }
         nextToken
       }
@@ -211,33 +178,24 @@ export const onCreateRevision = /* GraphQL */ `
 export const onUpdateRevision = /* GraphQL */ `
   subscription OnUpdateRevision {
     onUpdateRevision {
-      revisionId
-      projectConnID
+      id
+      projectID
       imgSrc
       name
       description
       owner
       createdAt
+      contentType
       updatedAt
       comments {
         items {
-          commentId
-          revisionConnID
+          id
+          revisionID
           comment
           likeCount
           owner
           createdAt
           updatedAt
-          likes {
-            items {
-              id
-              commentConnID
-              owner
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
         }
         nextToken
       }
@@ -247,33 +205,24 @@ export const onUpdateRevision = /* GraphQL */ `
 export const onDeleteRevision = /* GraphQL */ `
   subscription OnDeleteRevision {
     onDeleteRevision {
-      revisionId
-      projectConnID
+      id
+      projectID
       imgSrc
       name
       description
       owner
       createdAt
+      contentType
       updatedAt
       comments {
         items {
-          commentId
-          revisionConnID
+          id
+          revisionID
           comment
           likeCount
           owner
           createdAt
           updatedAt
-          likes {
-            items {
-              id
-              commentConnID
-              owner
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
         }
         nextToken
       }
@@ -283,69 +232,39 @@ export const onDeleteRevision = /* GraphQL */ `
 export const onCreateComment = /* GraphQL */ `
   subscription OnCreateComment {
     onCreateComment {
-      commentId
-      revisionConnID
+      id
+      revisionID
       comment
       likeCount
       owner
       createdAt
       updatedAt
-      likes {
-        items {
-          id
-          commentConnID
-          owner
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
     }
   }
 `;
 export const onUpdateComment = /* GraphQL */ `
   subscription OnUpdateComment {
     onUpdateComment {
-      commentId
-      revisionConnID
+      id
+      revisionID
       comment
       likeCount
       owner
       createdAt
       updatedAt
-      likes {
-        items {
-          id
-          commentConnID
-          owner
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
     }
   }
 `;
 export const onDeleteComment = /* GraphQL */ `
   subscription OnDeleteComment {
     onDeleteComment {
-      commentId
-      revisionConnID
+      id
+      revisionID
       comment
       likeCount
       owner
       createdAt
       updatedAt
-      likes {
-        items {
-          id
-          commentConnID
-          owner
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
     }
   }
 `;
@@ -398,39 +317,6 @@ export const onDeletePublicUserProfile = /* GraphQL */ `
       twitter
       facebook
       avatarImg
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onCreateLike = /* GraphQL */ `
-  subscription OnCreateLike($owner: String) {
-    onCreateLike(owner: $owner) {
-      id
-      commentConnID
-      owner
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateLike = /* GraphQL */ `
-  subscription OnUpdateLike($owner: String) {
-    onUpdateLike(owner: $owner) {
-      id
-      commentConnID
-      owner
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteLike = /* GraphQL */ `
-  subscription OnDeleteLike($owner: String) {
-    onDeleteLike(owner: $owner) {
-      id
-      commentConnID
-      owner
       createdAt
       updatedAt
     }

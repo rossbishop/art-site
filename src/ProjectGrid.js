@@ -26,8 +26,6 @@ export default function ProjectGrid(props) {
           {
             props.projectData.map((item, index) => {
 
-              //console.log("INDEX: " + index) 
-
               return (
                 <ProjectCard
                   name={item.projectName}
@@ -38,7 +36,7 @@ export default function ProjectGrid(props) {
                   //viewcount={item.viewcount}
                   revisioncount={item.revisions.items.length}
                   username={item.owner}
-                  link={`/project/${item.projectId}`}
+                  link={`/project/${item.id}`}
                 />
               )
             }

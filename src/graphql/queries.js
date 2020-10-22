@@ -29,43 +29,35 @@ export const listPlaceHolders = /* GraphQL */ `
   }
 `;
 export const getProject = /* GraphQL */ `
-  query GetProject($projectId: ID!, $createdAt: AWSDateTime!) {
-    getProject(projectId: $projectId, createdAt: $createdAt) {
-      projectId
+  query GetProject($id: ID!) {
+    getProject(id: $id) {
+      id
       projectName
       projectDescription
       owner
       createdAt
+      contentType
       updatedAt
       revisions {
         items {
-          revisionId
-          projectConnID
+          id
+          projectID
           imgSrc
           name
           description
           owner
           createdAt
+          contentType
           updatedAt
           comments {
             items {
-              commentId
-              revisionConnID
+              id
+              revisionID
               comment
               likeCount
               owner
               createdAt
               updatedAt
-              likes {
-                items {
-                  id
-                  commentConnID
-                  owner
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
             }
             nextToken
           }
@@ -77,57 +69,39 @@ export const getProject = /* GraphQL */ `
 `;
 export const listProjects = /* GraphQL */ `
   query ListProjects(
-    $projectId: ID
-    $createdAt: ModelStringKeyConditionInput
     $filter: ModelProjectFilterInput
     $limit: Int
     $nextToken: String
-    $sortDirection: ModelSortDirection
   ) {
-    listProjects(
-      projectId: $projectId
-      createdAt: $createdAt
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      sortDirection: $sortDirection
-    ) {
+    listProjects(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
-        projectId
+        id
         projectName
         projectDescription
         owner
         createdAt
+        contentType
         updatedAt
         revisions {
           items {
-            revisionId
-            projectConnID
+            id
+            projectID
             imgSrc
             name
             description
             owner
             createdAt
+            contentType
             updatedAt
             comments {
               items {
-                commentId
-                revisionConnID
+                id
+                revisionID
                 comment
                 likeCount
                 owner
                 createdAt
                 updatedAt
-                likes {
-                  items {
-                    id
-                    commentConnID
-                    owner
-                    createdAt
-                    updatedAt
-                  }
-                  nextToken
-                }
               }
               nextToken
             }
@@ -139,57 +113,107 @@ export const listProjects = /* GraphQL */ `
     }
   }
 `;
-export const projectByOwnerByDate = /* GraphQL */ `
-  query ProjectByOwnerByDate(
-    $owner: ID
+export const projectsByUserByDate = /* GraphQL */ `
+  query ProjectsByUserByDate(
+    $owner: String
+    $createdAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelProjectFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    projectByOwnerByDate(
+    projectsByUserByDate(
       owner: $owner
+      createdAt: $createdAt
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
       nextToken: $nextToken
     ) {
       items {
-        projectId
+        id
         projectName
         projectDescription
         owner
         createdAt
+        contentType
         updatedAt
         revisions {
           items {
-            revisionId
-            projectConnID
+            id
+            projectID
             imgSrc
             name
             description
             owner
             createdAt
+            contentType
             updatedAt
             comments {
               items {
-                commentId
-                revisionConnID
+                id
+                revisionID
                 comment
                 likeCount
                 owner
                 createdAt
                 updatedAt
-                likes {
-                  items {
-                    id
-                    commentConnID
-                    owner
-                    createdAt
-                    updatedAt
-                  }
-                  nextToken
-                }
+              }
+              nextToken
+            }
+          }
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const projectsByDate = /* GraphQL */ `
+  query ProjectsByDate(
+    $contentType: String
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelProjectFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    projectsByDate(
+      contentType: $contentType
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        projectName
+        projectDescription
+        owner
+        createdAt
+        contentType
+        updatedAt
+        revisions {
+          items {
+            id
+            projectID
+            imgSrc
+            name
+            description
+            owner
+            createdAt
+            contentType
+            updatedAt
+            comments {
+              items {
+                id
+                revisionID
+                comment
+                likeCount
+                owner
+                createdAt
+                updatedAt
               }
               nextToken
             }
@@ -202,35 +226,26 @@ export const projectByOwnerByDate = /* GraphQL */ `
   }
 `;
 export const getRevision = /* GraphQL */ `
-  query GetRevision($revisionId: ID!) {
-    getRevision(revisionId: $revisionId) {
-      revisionId
-      projectConnID
+  query GetRevision($id: ID!) {
+    getRevision(id: $id) {
+      id
+      projectID
       imgSrc
       name
       description
       owner
       createdAt
+      contentType
       updatedAt
       comments {
         items {
-          commentId
-          revisionConnID
+          id
+          revisionID
           comment
           likeCount
           owner
           createdAt
           updatedAt
-          likes {
-            items {
-              id
-              commentConnID
-              owner
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
         }
         nextToken
       }
@@ -239,47 +254,30 @@ export const getRevision = /* GraphQL */ `
 `;
 export const listRevisions = /* GraphQL */ `
   query ListRevisions(
-    $revisionId: ID
     $filter: ModelRevisionFilterInput
     $limit: Int
     $nextToken: String
-    $sortDirection: ModelSortDirection
   ) {
-    listRevisions(
-      revisionId: $revisionId
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      sortDirection: $sortDirection
-    ) {
+    listRevisions(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
-        revisionId
-        projectConnID
+        id
+        projectID
         imgSrc
         name
         description
         owner
         createdAt
+        contentType
         updatedAt
         comments {
           items {
-            commentId
-            revisionConnID
+            id
+            revisionID
             comment
             likeCount
             owner
             createdAt
             updatedAt
-            likes {
-              items {
-                id
-                commentConnID
-                owner
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
           }
           nextToken
         }
@@ -288,17 +286,17 @@ export const listRevisions = /* GraphQL */ `
     }
   }
 `;
-export const revisionByProjectByDate = /* GraphQL */ `
-  query RevisionByProjectByDate(
-    $projectConnID: ID
+export const revisionsByProjectByDate = /* GraphQL */ `
+  query RevisionsByProjectByDate(
+    $projectID: ID
     $createdAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelRevisionFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    revisionByProjectByDate(
-      projectConnID: $projectConnID
+    revisionsByProjectByDate(
+      projectID: $projectID
       createdAt: $createdAt
       sortDirection: $sortDirection
       filter: $filter
@@ -306,33 +304,24 @@ export const revisionByProjectByDate = /* GraphQL */ `
       nextToken: $nextToken
     ) {
       items {
-        revisionId
-        projectConnID
+        id
+        projectID
         imgSrc
         name
         description
         owner
         createdAt
+        contentType
         updatedAt
         comments {
           items {
-            commentId
-            revisionConnID
+            id
+            revisionID
             comment
             likeCount
             owner
             createdAt
             updatedAt
-            likes {
-              items {
-                id
-                commentConnID
-                owner
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
           }
           nextToken
         }
@@ -342,77 +331,49 @@ export const revisionByProjectByDate = /* GraphQL */ `
   }
 `;
 export const getComment = /* GraphQL */ `
-  query GetComment($commentId: ID!) {
-    getComment(commentId: $commentId) {
-      commentId
-      revisionConnID
+  query GetComment($id: ID!) {
+    getComment(id: $id) {
+      id
+      revisionID
       comment
       likeCount
       owner
       createdAt
       updatedAt
-      likes {
-        items {
-          id
-          commentConnID
-          owner
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
     }
   }
 `;
 export const listComments = /* GraphQL */ `
   query ListComments(
-    $commentId: ID
     $filter: ModelCommentFilterInput
     $limit: Int
     $nextToken: String
-    $sortDirection: ModelSortDirection
   ) {
-    listComments(
-      commentId: $commentId
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      sortDirection: $sortDirection
-    ) {
+    listComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
-        commentId
-        revisionConnID
+        id
+        revisionID
         comment
         likeCount
         owner
         createdAt
         updatedAt
-        likes {
-          items {
-            id
-            commentConnID
-            owner
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
       }
       nextToken
     }
   }
 `;
-export const commentByRevisionByDate = /* GraphQL */ `
-  query CommentByRevisionByDate(
-    $revisionConnID: ID
+export const commentsByRevisionByDate = /* GraphQL */ `
+  query CommentsByRevisionByDate(
+    $revisionID: ID
     $createdAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelCommentFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    commentByRevisionByDate(
-      revisionConnID: $revisionConnID
+    commentsByRevisionByDate(
+      revisionID: $revisionID
       createdAt: $createdAt
       sortDirection: $sortDirection
       filter: $filter
@@ -420,23 +381,13 @@ export const commentByRevisionByDate = /* GraphQL */ `
       nextToken: $nextToken
     ) {
       items {
-        commentId
-        revisionConnID
+        id
+        revisionID
         comment
         likeCount
         owner
         createdAt
         updatedAt
-        likes {
-          items {
-            id
-            commentConnID
-            owner
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
       }
       nextToken
     }
@@ -519,35 +470,6 @@ export const publicUserProfileByUser = /* GraphQL */ `
         twitter
         facebook
         avatarImg
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const getLike = /* GraphQL */ `
-  query GetLike($id: ID!) {
-    getLike(id: $id) {
-      id
-      commentConnID
-      owner
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listLikes = /* GraphQL */ `
-  query ListLikes(
-    $filter: ModelLikeFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listLikes(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        commentConnID
-        owner
         createdAt
         updatedAt
       }

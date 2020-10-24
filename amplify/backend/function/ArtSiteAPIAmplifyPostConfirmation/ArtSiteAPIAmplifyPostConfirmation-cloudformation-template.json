@@ -100,9 +100,10 @@
         },
         "Runtime": "nodejs10.x",
         "Timeout": "25",
+        "Layers": [],
         "Code": {
-          "S3Bucket": "amplify-artsite-dev-210725-deployment",
-          "S3Key": "amplify-builds/ArtSiteAPIAmplifyPostConfirmation-64567155506853625259-build.zip"
+          "S3Bucket": "amplify-artsite-devnew-214504-deployment",
+          "S3Key": "amplify-builds/ArtSiteAPIAmplifyPostConfirmation-4947667a3362457a6850-build.zip"
         }
       }
     },

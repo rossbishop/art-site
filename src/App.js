@@ -76,25 +76,44 @@ function App() {
   }
 
   //Amplify.configure(awsconfig);
+  // Amplify.configure({
+  //   "aws_project_region": "eu-west-2",
+  //   "aws_cognito_identity_pool_id": "eu-west-2:1b6cba9b-86c2-4801-8fe1-f65c9fb7137a",
+  //   "aws_cognito_region": "eu-west-2",
+  //   "aws_user_pools_id": "eu-west-2_jjmGjKRfN",
+  //   "aws_user_pools_web_client_id": "35bhchbkg3g73ipjahfuqoe097",
+  //   "oauth": {},
+  //   "aws_appsync_graphqlEndpoint": "https://b5yt7lrlsbbwpbjwk47la7zjgy.appsync-api.eu-west-2.amazonaws.com/graphql",
+  //   "aws_appsync_region": "eu-west-2",
+  //   "aws_appsync_authenticationType": isLoggedIn ? "AMAZON_COGNITO_USER_POOLS" : "AWS_IAM",
+  //   "aws_appsync_apiKey" : "config.aws_appsync_apiKey",
+  //   "aws_cloud_logic_custom": [
+  //       {
+  //           "name": "AdminQueries",
+  //           "endpoint": "https://qkp4snpqb6.execute-api.eu-west-2.amazonaws.com/dev",
+  //           "region": "eu-west-2"
+  //       }
+  //   ]
+  // })
+
   Amplify.configure({
     "aws_project_region": "eu-west-2",
-    "aws_cognito_identity_pool_id": "eu-west-2:1b6cba9b-86c2-4801-8fe1-f65c9fb7137a",
-    "aws_cognito_region": "eu-west-2",
-    "aws_user_pools_id": "eu-west-2_jjmGjKRfN",
-    "aws_user_pools_web_client_id": "35bhchbkg3g73ipjahfuqoe097",
-    "oauth": {},
-    "aws_appsync_graphqlEndpoint": "https://snc74rybivhphklmfyoqh3vyxm.appsync-api.eu-west-2.amazonaws.com/graphql",
-    "aws_appsync_region": "eu-west-2",
-    "aws_appsync_authenticationType": isLoggedIn ? "AMAZON_COGNITO_USER_POOLS" : "AWS_IAM",
-    "aws_appsync_apiKey" : "config.aws_appsync_apiKey",
     "aws_cloud_logic_custom": [
         {
             "name": "AdminQueries",
-            "endpoint": "https://qkp4snpqb6.execute-api.eu-west-2.amazonaws.com/dev",
+            "endpoint": "https://kmyvxsvwaj.execute-api.eu-west-2.amazonaws.com/devnew",
             "region": "eu-west-2"
         }
-    ]
-  })
+    ],
+    "aws_appsync_graphqlEndpoint": "https://b5yt7lrlsbbwpbjwk47la7zjgy.appsync-api.eu-west-2.amazonaws.com/graphql",
+    "aws_appsync_region": "eu-west-2",
+    "aws_appsync_authenticationType": isLoggedIn ? "AMAZON_COGNITO_USER_POOLS" : "AWS_IAM",
+    "aws_cognito_identity_pool_id": "eu-west-2:b084fc1e-fdae-4ddc-a13b-587ca1f5f550",
+    "aws_cognito_region": "eu-west-2",
+    "aws_user_pools_id": "eu-west-2_60hxfeWpC",
+    "aws_user_pools_web_client_id": "3cmddfi26mh03clu3pjqilslh9",
+    "oauth": {}
+});
 
   function PrivateRoute({ children, ...rest }) {
     return (

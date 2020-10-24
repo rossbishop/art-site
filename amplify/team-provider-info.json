@@ -12,11 +12,31 @@
       "AmplifyAppId": "d2cqkv8axy8sys"
     },
     "categories": {
-      "function": {
-        "ArtSiteAPIAmplifyPostConfirmation": {}
-      },
       "auth": {
         "ArtSiteAPIAmplify": {}
+      }
+    }
+  },
+  "devnew": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-artsite-devnew-214504-authRole",
+      "UnauthRoleArn": "arn:aws:iam::381257970460:role/amplify-artsite-devnew-214504-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::381257970460:role/amplify-artsite-devnew-214504-authRole",
+      "Region": "eu-west-2",
+      "DeploymentBucketName": "amplify-artsite-devnew-214504-deployment",
+      "UnauthRoleName": "amplify-artsite-devnew-214504-unauthRole",
+      "StackName": "amplify-artsite-devnew-214504",
+      "StackId": "arn:aws:cloudformation:eu-west-2:381257970460:stack/amplify-artsite-devnew-214504/cc03cc40-1639-11eb-9c6a-0aabefb3624a",
+      "AmplifyAppId": "d2cqkv8axy8sys"
+    },
+    "categories": {
+      "auth": {
+        "ArtSiteAPIAmplify": {}
+      },
+      "function": {
+        "AdminQueries5f6c1bb4": {},
+        "ArtSiteAPIAmplifyCreatePublicUserProfile": {},
+        "ArtSiteAPIAmplifyPostConfirmation": {}
       }
     }
   }

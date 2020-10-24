@@ -108,8 +108,8 @@
         "Layers": [],
         "Timeout": "25",
         "Code": {
-          "S3Bucket": "amplify-artsite-dev-210725-deployment",
-          "S3Key": "amplify-builds/ArtSiteAPIAmplifyCreatePublicUserProfile-79626a69476841525978-build.zip"
+          "S3Bucket": "amplify-artsite-devnew-214504-deployment",
+          "S3Key": "amplify-builds/ArtSiteAPIAmplifyCreatePublicUserProfile-366a6c7666355a6d4841-build.zip"
         }
       }
     },

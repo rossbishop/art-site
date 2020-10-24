@@ -271,7 +271,7 @@ export const onDeleteComment = /* GraphQL */ `
 export const onCreatePublicUserProfile = /* GraphQL */ `
   subscription OnCreatePublicUserProfile {
     onCreatePublicUserProfile {
-      publicUserProfileId
+      id
       owner
       username
       position
@@ -289,7 +289,7 @@ export const onCreatePublicUserProfile = /* GraphQL */ `
 export const onUpdatePublicUserProfile = /* GraphQL */ `
   subscription OnUpdatePublicUserProfile {
     onUpdatePublicUserProfile {
-      publicUserProfileId
+      id
       owner
       username
       position
@@ -307,7 +307,7 @@ export const onUpdatePublicUserProfile = /* GraphQL */ `
 export const onDeletePublicUserProfile = /* GraphQL */ `
   subscription OnDeletePublicUserProfile {
     onDeletePublicUserProfile {
-      publicUserProfileId
+      id
       owner
       username
       position

@@ -37,12 +37,12 @@ export default function ProfileUpdate(props) {
                         <input type="userDetail" id="inputUsername" className={cx(ProfileUpdateStyles.formControl,"mb-3", "py-2", "pl-0")} placeholder="Enter new username" onChange={event => props.setUsername(event.target.value)} defaultValue={props.userAttribs.preferred_username} required autofocus/>
                         <h6>Change Position:</h6>
                         <label for="inputPosition" className="sr-only">Current Position Title</label>
-                        <input type="userDetail" id="inputPosition" className={cx(ProfileUpdateStyles.formControl,"mb-3", "py-2", "pl-0")} placeholder="Enter new position title" onChange={event => props.setJob(event.target.value)} defaultValue={props.userAttribs["custom:job"]} required autofocus/>
+                        <input type="userDetail" id="inputPosition" className={cx(ProfileUpdateStyles.formControl,"mb-3", "py-2", "pl-0")} placeholder="Enter new position title" onChange={event => props.setJob(event.target.value)} defaultValue={props.publicUserAttribs.position} required autofocus/>
                         <h6>Change Location:</h6>
                         <label for="inputLocation" className="sr-only">Current Location</label>
-                        <input type="userDetail" id="inputLocation" className={cx(ProfileUpdateStyles.formControl,"mb-3", "py-2", "pl-0")} placeholder="Enter new location" onChange={event => props.setLocation(event.target.value)} defaultValue={props.userAttribs["custom:location"]} required autofocus/>
+                        <input type="userDetail" id="inputLocation" className={cx(ProfileUpdateStyles.formControl,"mb-3", "py-2", "pl-0")} placeholder="Enter new location" onChange={event => props.setLocation(event.target.value)} defaultValue={props.publicUserAttribs.location} required autofocus/>
                         <h6>Change Bio:</h6>
-                        <textarea className={cx(ProfileUpdateStyles.formControl, ProfileUpdateStyles.bioBox)} id="bioTextArea" rows="5" onChange={event => props.setBio(event.target.value)}>{props.userAttribs["custom:bio"]}</textarea>
+                        <textarea className={cx(ProfileUpdateStyles.formControl, ProfileUpdateStyles.bioBox)} id="bioTextArea" rows="5" onChange={event => props.setBio(event.target.value)}>{props.publicUserAttribs.bio}</textarea>
                         {props.profileSuccess.isSuccess && (
                             <div className="alert alert-success" role="alert">Updated profile details successfully</div>
                         )
@@ -58,13 +58,13 @@ export default function ProfileUpdate(props) {
                         <h2 className="h3 mb-3 mt-4 font-weight-normal">Update Social Media</h2>
                         <h6 className="mt-3">Change Instagram Handle:</h6>
                         <label for="inputInstagram" className="sr-only">Instagram</label>
-                        <input type="userDetail" id="inputInstagram" className={cx(ProfileUpdateStyles.formControl,"mb-3", "py-2", "pl-0")} placeholder="Enter Instagram Handle" onChange={event => props.setInstagram(event.target.value)} defaultValue={props.userAttribs["custom:instagram"]} required/>
+                        <input type="userDetail" id="inputInstagram" className={cx(ProfileUpdateStyles.formControl,"mb-3", "py-2", "pl-0")} placeholder="Enter Instagram Handle" onChange={event => props.setInstagram(event.target.value)} defaultValue={props.publicUserAttribs.instagram} required/>
                         <h6>Change Twitter Handle:</h6>
                         <label for="inputTwitter" className="sr-only">Twitter</label>
-                        <input type="userDetail" id="inputTwitter" className={cx(ProfileUpdateStyles.formControl,"mb-3", "py-2", "pl-0")} placeholder="Enter Twitter Handle" onChange={event => props.setTwitter(event.target.value)} defaultValue={props.userAttribs["custom:twitter"]} required/>
+                        <input type="userDetail" id="inputTwitter" className={cx(ProfileUpdateStyles.formControl,"mb-3", "py-2", "pl-0")} placeholder="Enter Twitter Handle" onChange={event => props.setTwitter(event.target.value)} defaultValue={props.publicUserAttribs.twitter} required/>
                         <h6>Change Facebook Handle:</h6>
                         <label for="inputFacebook" className="sr-only">Facebook</label>
-                        <input type="userDetail" id="inputFacebook" className={cx(ProfileUpdateStyles.formControl,"mb-3", "py-2", "pl-0")} placeholder="Enter Facebook Handle" onChange={event => props.setFacebook(event.target.value)} defaultValue={props.userAttribs["custom:facebook"]} required/>
+                        <input type="userDetail" id="inputFacebook" className={cx(ProfileUpdateStyles.formControl,"mb-3", "py-2", "pl-0")} placeholder="Enter Facebook Handle" onChange={event => props.setFacebook(event.target.value)} defaultValue={props.publicUserAttribs.facebook} required/>
                         {props.socialSuccess.isSuccess && (
                             <div className="alert alert-success" role="alert">Updated social details successfully</div>
                         )

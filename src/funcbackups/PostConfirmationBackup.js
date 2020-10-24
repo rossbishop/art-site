@@ -1,6 +1,8 @@
 /* Amplify Params - DO NOT EDIT
-	ENV
-	REGION
+	API_ARTSITE_GRAPHQLAPIENDPOINTOUTPUT
+	API_ARTSITE_GRAPHQLAPIIDOUTPUT
+	API_ARTSITE_PUBLICUSERPROFILETABLE_ARN
+	API_ARTSITE_PUBLICUSERPROFILETABLE_NAME
 Amplify Params - DO NOT EDIT */
 
 /*
@@ -27,5 +29,18 @@ exports.handler = async (event, context, callback) => {
                 lambdaReturn = JSON.parse(response0.Payload)
             })
     context.done(null, event)
+    // const response = {
+    //     statusCode: 201,
+    //     body: lambdaReturn,
+    // };
+    // return response;
     
 };
+
+// exports.handler = (event, context, callback) => {
+//   const modules = process.env.MODULES.split(',');
+//   for (let i = 0; i < modules.length; i += 1) {
+//     const { handler } = require(`./${modules[i]}`);
+//     handler(event, context, callback);
+//   }
+// };

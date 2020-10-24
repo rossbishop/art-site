@@ -271,7 +271,7 @@ export const createPublicUserProfile = /* GraphQL */ `
     $condition: ModelPublicUserProfileConditionInput
   ) {
     createPublicUserProfile(input: $input, condition: $condition) {
-      publicUserProfileId
+      id
       owner
       username
       position
@@ -292,7 +292,7 @@ export const updatePublicUserProfile = /* GraphQL */ `
     $condition: ModelPublicUserProfileConditionInput
   ) {
     updatePublicUserProfile(input: $input, condition: $condition) {
-      publicUserProfileId
+      id
       owner
       username
       position
@@ -313,7 +313,7 @@ export const deletePublicUserProfile = /* GraphQL */ `
     $condition: ModelPublicUserProfileConditionInput
   ) {
     deletePublicUserProfile(input: $input, condition: $condition) {
-      publicUserProfileId
+      id
       owner
       username
       position

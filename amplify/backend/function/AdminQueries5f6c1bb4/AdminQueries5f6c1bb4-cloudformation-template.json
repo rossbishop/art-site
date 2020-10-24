@@ -67,7 +67,7 @@
         "Runtime": "nodejs10.x",
         "Timeout": "25",
         "Code": {
-          "S3Bucket": "amplify-artsite-dev-210725-deployment",
+          "S3Bucket": "amplify-artsite-devnew-214504-deployment",
           "S3Key": "amplify-builds/AdminQueries5f6c1bb4-44373853776163446433-build.zip"
         }
       }

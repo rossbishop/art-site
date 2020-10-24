@@ -1,23 +1,10 @@
 {
   "function": {
-    "ArtSiteAPIAmplifyPostConfirmation": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
     "AdminQueries5f6c1bb4": {
       "service": "Lambda",
       "providerPlugin": "awscloudformation",
       "build": true,
-      "dependsOn": [
-        {
-          "category": "auth",
-          "resourceName": "ArtSiteAPIAmplify",
-          "attributes": [
-            "UserPoolId"
-          ]
-        }
-      ]
+      "dependsOn": []
     },
     "ArtSiteAPIAmplifyCreatePublicUserProfile": {
       "build": true,
@@ -33,6 +20,12 @@
           ]
         }
       ]
+    },
+    "ArtSiteAPIAmplifyPostConfirmation": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": []
     }
   },
   "api": {

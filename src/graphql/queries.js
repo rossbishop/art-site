@@ -394,9 +394,9 @@ export const commentsByRevisionByDate = /* GraphQL */ `
   }
 `;
 export const getPublicUserProfile = /* GraphQL */ `
-  query GetPublicUserProfile($publicUserProfileId: ID!) {
-    getPublicUserProfile(publicUserProfileId: $publicUserProfileId) {
-      publicUserProfileId
+  query GetPublicUserProfile($id: ID!) {
+    getPublicUserProfile(id: $id) {
+      id
       owner
       username
       position
@@ -413,21 +413,17 @@ export const getPublicUserProfile = /* GraphQL */ `
 `;
 export const listPublicUserProfiles = /* GraphQL */ `
   query ListPublicUserProfiles(
-    $publicUserProfileId: ID
     $filter: ModelPublicUserProfileFilterInput
     $limit: Int
     $nextToken: String
-    $sortDirection: ModelSortDirection
   ) {
     listPublicUserProfiles(
-      publicUserProfileId: $publicUserProfileId
       filter: $filter
       limit: $limit
       nextToken: $nextToken
-      sortDirection: $sortDirection
     ) {
       items {
-        publicUserProfileId
+        id
         owner
         username
         position
@@ -460,7 +456,7 @@ export const publicUserProfileByUser = /* GraphQL */ `
       nextToken: $nextToken
     ) {
       items {
-        publicUserProfileId
+        id
         owner
         username
         position

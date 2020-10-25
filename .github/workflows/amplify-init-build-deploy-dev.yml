@@ -35,7 +35,8 @@ jobs:
         version: ${{ matrix.node_version }}
 
     - name: Install Amplify CLI & Deploy Project
-      run:  |     
+      run:  |
+        set -x     
         npm install -g @aws-amplify/cli --unsafe-perm=true
         bash amplify_init_dev.sh
         bash amplify_push_dev.sh

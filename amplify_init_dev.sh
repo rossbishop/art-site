@@ -18,7 +18,7 @@ AWSCLOUDFORMATIONCONFIG="{\
 }"
 AMPLIFY="{\
 \"projectName\":\"artsite\",\
-\"envName\":\"dev_github\",\
+\"envName\":\"devgithub\",\
 \"defaultEditor\":\"vscode\"\
 }"
 FRONTEND="{\

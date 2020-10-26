@@ -44,11 +44,11 @@ jobs:
         bash amplify_push_dev.sh
         amplify codegen
 
-    #- name: Commit Amplify Files
-    #  uses: stefanzweifel/git-auto-commit-action@v4.2.0
-    #  with:
-    #    commit_message: Apply automatic changes
-    #    file_pattern: amplify/* src/graphql/* # amplifyconfiguration.json awsconfiguration.json API
+    - name: Commit Amplify Files
+      uses: stefanzweifel/git-auto-commit-action@v4.2.0
+      with:
+        commit_message: Apply automatic changes
+        file_pattern: . # amplify/* src/graphql/* # amplifyconfiguration.json awsconfiguration.json API
     
 
 

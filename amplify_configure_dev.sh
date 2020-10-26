@@ -1,6 +1,10 @@
 #!/bin/bash
 set -e
+set -x
 IFS='|'
+
+echo aws access key: $AWS_ACCESS_KEY_ID
+echo aws secret key: $AWS_SECRET_ACCESS_KEY
 
 REACTCONFIG="{\
 \"SourceDir\":\"src\",\
@@ -12,13 +16,13 @@ AWSCLOUDFORMATIONCONFIG="{\
 \"configLevel\":\"project\",\
 \"useProfile\":false,\
 \"profileName\":\"default\",\
-\"accessKeyId\":$AWS_ACCESS_KEY_ID,\
-\"secretAccessKey\":$AWS_SECRET_ACCESS_KEY,\
+\"accessKeyId\":\"$AWS_ACCESS_KEY_ID\",\
+\"secretAccessKey\":\"$AWS_SECRET_ACCESS_KEY\",\
 \"region\":\"eu-west-2\"\
 }"
 AMPLIFY="{\
 \"projectName\":\"artsite\",\
-\"envName\":\"dev\",\
+\"envName\":\"devgithub\",\
 \"defaultEditor\":\"vscode\"\
 }"
 FRONTEND="{\
@@ -34,3 +38,4 @@ amplify configure project \
 --amplify $AMPLIFY \
 --frontend $FRONTEND \
 --providers $PROVIDERS \
+--yes

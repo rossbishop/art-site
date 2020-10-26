@@ -39,10 +39,7 @@ jobs:
         set -x     
         npm install -g @aws-amplify/cli --unsafe-perm=true
         # bash amplify_init_dev.sh
-<<<<<<< HEAD
         bash amplify_configure_dev.sh
-=======
->>>>>>> e15bbfdc1bd024cb88e9c386637ba80f35895da1
         bash amplify_push_dev.sh
         amplify codegen
 

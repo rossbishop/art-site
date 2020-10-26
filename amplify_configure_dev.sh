@@ -3,9 +3,6 @@ set -e
 set -x
 IFS='|'
 
-echo aws access key: $AWS_ACCESS_KEY_ID
-echo aws secret key: $AWS_SECRET_ACCESS_KEY
-
 REACTCONFIG="{\
 \"SourceDir\":\"src\",\
 \"DistributionDir\":\"build\",\

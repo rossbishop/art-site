@@ -14,6 +14,7 @@ import ForgotPage from './ForgotPage'
 import Amplify, { Auth, API, graphqlOperation } from 'aws-amplify';
 import awsconfig from './aws-exports';
 import AWSAppSyncClient, { AUTH_TYPE } from 'aws-appsync';
+import * as queries from './graphql/queries'
 
 import {
   BrowserRouter as Router,
@@ -40,11 +41,17 @@ function App() {
   const [isLoading, setLoading] = useState(true);
   const [userDetails, setUserDetails] = useState();
   const [userAttribs, setUserAttribs] = useState();
+  const [projectData, setProjectData] = useState();
+  const [projectDataLoaded, setProjectDataLoaded] = useState();
 
   //Invoke this function only once at first page load (hence empty deps array [])
   useEffect(() => {
     console.log("1. Start auth check")
     checkLoggedIn()
+    if(window.location.pathname.split('/')[1] == "newrevision")
+    {
+      getProject()
+    }
   }, [])
 
   //Use effect dep is userAttribs as was getting odd issues trying to grab them from the full userDetails state
@@ -54,7 +61,11 @@ function App() {
       setLoading(false);
       console.log('checkLoggedIn SUCCESS: ' + isLoggedIn)  
     }
-  },[userAttribs])
+    
+    if(projectData != undefined){
+      setProjectDataLoaded(true);
+    }
+  },[userAttribs,projectData])
 
   const checkLoggedIn = async() => {
     try {
@@ -139,6 +150,58 @@ function App() {
     )
   }
 
+  function PrivatePermissionRoute({ children, ...rest }) {
+    return (
+      <Route
+        {...rest}
+          render={({ location }) => {
+            if(isLoggedIn) {
+              if(userDetails.username == projectData.owner) {
+                return(children)
+              }
+              else {
+                return(
+                  <Redirect
+                    to={{
+                      pathname: "/",
+                      state: { from: location }
+                    }}
+                  />
+                )
+              }
+            }
+            else {
+              return(
+                <Redirect
+                  to={{
+                    pathname: "/login",
+                    state: { from: location }
+                  }}
+                />
+              )
+            }
+          }
+        }
+      />
+    )
+  }
+
+  const getProject = async (uuid) => {
+    try {
+        uuid = await (window.location.pathname.split('/'))[2]
+        console.log(uuid)
+        const apiCall = await API.graphql({query: queries.getProject, variables: {id: uuid}})
+        console.log(apiCall)
+        setProjectData(apiCall.data.getProject)
+    }
+    catch (error) {
+        console.log('Error getting project: ', error)
+    }
+    finally {
+        
+    }
+}
+
   return (
     
     <>
@@ -215,14 +278,14 @@ function App() {
               />
             </Route>
           )}
-          {!isLoading && (
-            <PrivateRoute path="/newrevision">
+          {!isLoading && projectDataLoaded && (
+            <PrivatePermissionRoute path="/newrevision">
               <NewRevisionPage
                 userAttribs={userAttribs} 
                 userDetails={userDetails}
                 isLoggedIn={isLoggedIn}
               />
-            </PrivateRoute>
+            </PrivatePermissionRoute>
           )}
 
           <Route path="/login">

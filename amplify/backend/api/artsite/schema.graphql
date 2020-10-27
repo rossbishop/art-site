@@ -83,7 +83,7 @@ type Revision @model
   owner: String
   createdAt: String
   contentType: String
-  #createdAt: AWSDateTime
+  imgFile: S3Object
   comments: [Comment] @connection(keyName: "commentByRevisionByDate", fields: ["id"])
 }
 
@@ -144,6 +144,12 @@ type PublicUserProfile @model
 #     commentConnID: ID!
 #     owner: ID
 # }
+
+type S3Object {
+  bucket: String!
+  region: String!
+  key: String!
+}
 
 type PlaceHolder @model
   {

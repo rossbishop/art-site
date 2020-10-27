@@ -1,10 +1,11 @@
 import { Header, ProjectGrid, Footer } from './Imports.js'
 import React, { useState, useEffect } from 'react';
 import NewProject from './NewProject'
-import { API, graphqlOperation } from 'aws-amplify'
+import { API, graphqlOperation, Storage } from 'aws-amplify'
 import * as mutations from './graphql/mutations'
 import { Redirect } from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
+import awsconfig from './aws-exports';
 
 function NewProjectPage(props) {
 
@@ -15,7 +16,44 @@ function NewProjectPage(props) {
     const [createdProject, setCreatedProject] = useState()
     const [projectSuccess, setProjectSuccess] = useState({isSuccess: false, message: ""})
     const [projectError, setProjectError] = useState({isError: false, message: ""})
+    const [revisionImageKey, setRevisionImageKey] = useState()
+    const [revisionImageURL, setRevisionImageURL] = useState()
+    const [revisionFile, setRevisionFile] = useState()
     const [shouldRedirect, setRedirect] = useState(false)
+
+    const getNewProjectImage = async() => {
+        try {
+            const signedURL = await Storage.get(revisionImageKey, {level: 'public'})
+            setRevisionImageURL(signedURL)
+        }
+        catch (error) {
+            console.log("Error getting project image: " + error)
+        }
+    }
+
+    const uploadNewProjectImage = async(inputFile) => {
+        console.log("Start Image Upload")
+        //const file = e.target.files[0];
+        const file = inputFile;
+        const imageuuid = uuidv4();
+        try {
+            let result = await Storage.put(`${imageuuid}.png`, file, {
+                level: 'public',
+                contentType: 'image/png',
+                progressCallback(progress) {
+                    console.log(`Uploaded: ${progress.loaded}/${progress.total}`)
+                }
+            });
+            console.log(result)
+            setRevisionImageKey(result.key)
+        }
+        catch (error) {
+            console.log(error)
+        }
+        // finally {
+        //     console.log(result)
+        // }
+    }
 
     const createNewProject = async () => {
         try {
@@ -48,6 +86,12 @@ function NewProjectPage(props) {
                 imgSrc: "https://i.imgur.com/BlbUQz7.jpg",
                 name: revisionName,
                 description: revisionDescription,
+                contentType: "revision",
+                imgFile: {
+                    bucket: awsconfig.aws_user_files_s3_bucket,
+                    key: revisionImageKey,
+                    region: awsconfig.aws_user_files_s3_bucket_region
+                }
             }
             const revisionCall = await API.graphql({query: mutations.createRevision, variables: {input: revisionData}})
             console.log('Success creating revision: ', revisionCall)
@@ -62,7 +106,12 @@ function NewProjectPage(props) {
         {
             createNewRevision()
         }
-    }, [createdProject])
+
+        if(revisionImageKey != undefined)
+        {
+            getNewProjectImage()
+        }
+    }, [createdProject, revisionImageKey])
 
     return (
         <>
@@ -73,17 +122,22 @@ function NewProjectPage(props) {
             />
             {!shouldRedirect &&(
                 <NewProject 
-                projectName={projectName}
-                projectDescription={projectDescription}
-                revisionName={revisionName}
-                revisionDescription={revisionDescription}
-                projectSuccess={projectSuccess}
-                projectError={projectError}
-                setProjectName={setProjectName}
-                setProjectDescription={setProjectDescription}
-                setRevName={setRevName}
-                setRevDescription={setRevDescription}
-                createNewProject={createNewProject}
+                    projectName={projectName}
+                    projectDescription={projectDescription}
+                    revisionName={revisionName}
+                    revisionDescription={revisionDescription}
+                    projectSuccess={projectSuccess}
+                    projectError={projectError}
+                    setProjectName={setProjectName}
+                    setProjectDescription={setProjectDescription}
+                    setRevName={setRevName}
+                    setRevDescription={setRevDescription}
+                    createNewProject={createNewProject}
+                    uploadNewProjectImage={uploadNewProjectImage}
+                    revisionImageKey={revisionImageKey}
+                    revisionFile={revisionFile}
+                    setRevisionFile={setRevisionFile}
+                    revisionImageURL={revisionImageURL}
                 />
             )}
             {shouldRedirect &&(

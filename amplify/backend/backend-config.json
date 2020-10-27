@@ -87,5 +87,11 @@
       ],
       "customAuth": false
     }
+  },
+  "storage": {
+    "artsiteimages": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
   }
 }

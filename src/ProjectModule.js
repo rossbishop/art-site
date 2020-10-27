@@ -82,6 +82,7 @@ export default function ProjectModule(props) {
                                             imgSrc={item.imgSrc}
                                             name={item.name}
                                             description={item.description}
+                                            imgKey={item.imgFile.key}
                                         />
                                     )
                                 })

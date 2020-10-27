@@ -48,6 +48,11 @@ export const getProject = /* GraphQL */ `
           owner
           createdAt
           contentType
+          imgFile {
+            bucket
+            region
+            key
+          }
           updatedAt
           comments {
             items {
@@ -92,6 +97,11 @@ export const listProjects = /* GraphQL */ `
             owner
             createdAt
             contentType
+            imgFile {
+              bucket
+              region
+              key
+            }
             updatedAt
             comments {
               items {
@@ -148,6 +158,11 @@ export const projectsByUserByDate = /* GraphQL */ `
             owner
             createdAt
             contentType
+            imgFile {
+              bucket
+              region
+              key
+            }
             updatedAt
             comments {
               items {
@@ -204,6 +219,11 @@ export const projectsByDate = /* GraphQL */ `
             owner
             createdAt
             contentType
+            imgFile {
+              bucket
+              region
+              key
+            }
             updatedAt
             comments {
               items {
@@ -236,6 +256,11 @@ export const getRevision = /* GraphQL */ `
       owner
       createdAt
       contentType
+      imgFile {
+        bucket
+        region
+        key
+      }
       updatedAt
       comments {
         items {
@@ -268,6 +293,11 @@ export const listRevisions = /* GraphQL */ `
         owner
         createdAt
         contentType
+        imgFile {
+          bucket
+          region
+          key
+        }
         updatedAt
         comments {
           items {
@@ -312,6 +342,11 @@ export const revisionsByProjectByDate = /* GraphQL */ `
         owner
         createdAt
         contentType
+        imgFile {
+          bucket
+          region
+          key
+        }
         updatedAt
         comments {
           items {

@@ -107,24 +107,47 @@ function App() {
   //   ]
   // })
 
-  Amplify.configure({
+//   Amplify.configure({
+//     "aws_project_region": "eu-west-2",
+//     "aws_cloud_logic_custom": [
+//         {
+//             "name": "AdminQueries",
+//             "endpoint": "https://kmyvxsvwaj.execute-api.eu-west-2.amazonaws.com/devnew",
+//             "region": "eu-west-2"
+//         }
+//     ],
+//     "aws_appsync_graphqlEndpoint": "https://b5yt7lrlsbbwpbjwk47la7zjgy.appsync-api.eu-west-2.amazonaws.com/graphql",
+//     "aws_appsync_region": "eu-west-2",
+//     "aws_appsync_authenticationType": isLoggedIn ? "AMAZON_COGNITO_USER_POOLS" : "AWS_IAM",
+//     "aws_cognito_identity_pool_id": "eu-west-2:b084fc1e-fdae-4ddc-a13b-587ca1f5f550",
+//     "aws_cognito_region": "eu-west-2",
+//     "aws_user_pools_id": "eu-west-2_60hxfeWpC",
+//     "aws_user_pools_web_client_id": "3cmddfi26mh03clu3pjqilslh9",
+//     "oauth": {},
+//     "aws_user_files_s3_bucket": "artsiteimagebucket193639-devgithub",
+//     "aws_user_files_s3_bucket_region": "eu-west-2"
+// });
+
+  Amplify.configure({    
     "aws_project_region": "eu-west-2",
     "aws_cloud_logic_custom": [
         {
             "name": "AdminQueries",
-            "endpoint": "https://kmyvxsvwaj.execute-api.eu-west-2.amazonaws.com/devnew",
+            "endpoint": "https://35wfco8lk0.execute-api.eu-west-2.amazonaws.com/devgithub",
             "region": "eu-west-2"
         }
     ],
-    "aws_appsync_graphqlEndpoint": "https://b5yt7lrlsbbwpbjwk47la7zjgy.appsync-api.eu-west-2.amazonaws.com/graphql",
+    "aws_appsync_graphqlEndpoint": "https://nljmq4ky4bfavb43bjic7t5ohe.appsync-api.eu-west-2.amazonaws.com/graphql",
     "aws_appsync_region": "eu-west-2",
     "aws_appsync_authenticationType": isLoggedIn ? "AMAZON_COGNITO_USER_POOLS" : "AWS_IAM",
-    "aws_cognito_identity_pool_id": "eu-west-2:b084fc1e-fdae-4ddc-a13b-587ca1f5f550",
+    "aws_cognito_identity_pool_id": "eu-west-2:22687550-9667-4484-844b-dbbdcef04dc9",
     "aws_cognito_region": "eu-west-2",
-    "aws_user_pools_id": "eu-west-2_60hxfeWpC",
-    "aws_user_pools_web_client_id": "3cmddfi26mh03clu3pjqilslh9",
-    "oauth": {}
-});
+    "aws_user_pools_id": "eu-west-2_coy8PlFAm",
+    "aws_user_pools_web_client_id": "45n017qv1agn40ppl2mt2l45n5",
+    "oauth": {},
+    "aws_user_files_s3_bucket": "artsiteimagebucket193639-devgithub",
+    "aws_user_files_s3_bucket_region": "eu-west-2"
+})
 
   function PrivateRoute({ children, ...rest }) {
     return (
@@ -157,9 +180,11 @@ function App() {
           render={({ location }) => {
             if(isLoggedIn) {
               if(userDetails.username == projectData.owner) {
+                console.log("IS PROJECT OWNER!!!")
                 return(children)
               }
               else {
+                console.log("NOT PROJECT OWNER!!!")
                 return(
                   <Redirect
                     to={{
@@ -195,12 +220,14 @@ function App() {
         setProjectData(apiCall.data.getProject)
     }
     catch (error) {
-        console.log('Error getting project: ', error)
+        console.log('Error getting project REVISIONPAGE: ', error)
     }
     finally {
         
     }
 }
+
+  
 
   return (
     
@@ -279,7 +306,7 @@ function App() {
             </Route>
           )}
           {!isLoading && projectDataLoaded && (
-            <PrivatePermissionRoute path="/newrevision">
+            <PrivatePermissionRoute path="/newrevision/:id">
               <NewRevisionPage
                 userAttribs={userAttribs} 
                 userDetails={userDetails}

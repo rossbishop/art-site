@@ -51,6 +51,11 @@ export const onCreateProject = /* GraphQL */ `
           owner
           createdAt
           contentType
+          imgFile {
+            bucket
+            region
+            key
+          }
           updatedAt
           comments {
             items {
@@ -90,6 +95,11 @@ export const onUpdateProject = /* GraphQL */ `
           owner
           createdAt
           contentType
+          imgFile {
+            bucket
+            region
+            key
+          }
           updatedAt
           comments {
             items {
@@ -129,6 +139,11 @@ export const onDeleteProject = /* GraphQL */ `
           owner
           createdAt
           contentType
+          imgFile {
+            bucket
+            region
+            key
+          }
           updatedAt
           comments {
             items {
@@ -159,6 +174,11 @@ export const onCreateRevision = /* GraphQL */ `
       owner
       createdAt
       contentType
+      imgFile {
+        bucket
+        region
+        key
+      }
       updatedAt
       comments {
         items {
@@ -186,6 +206,11 @@ export const onUpdateRevision = /* GraphQL */ `
       owner
       createdAt
       contentType
+      imgFile {
+        bucket
+        region
+        key
+      }
       updatedAt
       comments {
         items {
@@ -213,6 +238,11 @@ export const onDeleteRevision = /* GraphQL */ `
       owner
       createdAt
       contentType
+      imgFile {
+        bucket
+        region
+        key
+      }
       updatedAt
       comments {
         items {

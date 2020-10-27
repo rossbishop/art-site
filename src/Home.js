@@ -19,7 +19,7 @@ function Home(props) {
             setProjectData(apiCall.data.listProjects.items)
         }
         catch (error) {
-            console.log('Error getting project: ', error)
+            console.log('Error getting list of projects: ', error)
         }
     }
 

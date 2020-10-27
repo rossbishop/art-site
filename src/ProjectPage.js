@@ -10,6 +10,31 @@ function ProjectPage(props) {
 
     const [projectData, setProjectData] = useState(false)
     const [comment, setComment] = useState()
+    const [revisionImages, setRevisionImages] = useState()
+    const [revisionImageKey, setRevisionImageKey] = useState()
+    const [publicImage, setPublicImage] = useState()
+
+
+    const getRevisionImages = async() => {
+        var revisionKeys;
+        for(var i = 0; i < projectData.revisions.items.length; i++){
+            revisionKeys[i] = projectData.revisions.items[i].imgFile.key;
+        }
+
+        try {
+            const signedURL = await Storage.get(revisionImageKey, {level: 'public'})
+            //setRevisionImageURL(signedURL)
+        }
+        catch (error) {
+            console.log("Error getting project image: " + error)
+        }
+    }
+
+    // const getArbitraryImage = async () => {
+    //     const URL = await Storage.get("788cef31-2791-445f-a348-51608cf8103a.png")
+    //     setPublicImage(URL)
+    // }
+
 
     const getProject = async () => {
         try {
@@ -23,7 +48,7 @@ function ProjectPage(props) {
             console.log('Error getting project: ', error)
         }
         finally {
-            
+    
         }
     }
 
@@ -38,16 +63,17 @@ function ProjectPage(props) {
                 isLoggedIn={props.isLoggedIn}
                 userAttribs={props.userAttribs}
             />
-            {projectData &&
+            {projectData && (                
                 <ProjectModule 
-                userDetails={props.userDetails}
-                isLoggedIn={props.isLoggedIn}
-                initialProjectDataState={(projectData.revisions.items.length)-1}
-                projectRevisionData={projectData.revisions.items}
-                projectDetails={projectData}
-                setComment={setComment}
-                comment={comment}
+                    userDetails={props.userDetails}
+                    isLoggedIn={props.isLoggedIn}
+                    initialProjectDataState={(projectData.revisions.items.length)-1}
+                    projectRevisionData={projectData.revisions.items}
+                    projectDetails={projectData}
+                    setComment={setComment}
+                    comment={comment}
                 />
+                )
             }
             <Footer />
         </>

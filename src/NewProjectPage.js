@@ -67,15 +67,12 @@ function NewProjectPage(props) {
             const projectCall = await API.graphql({query: mutations.createProject, variables: {input: projectData}})
             console.log('Success creating project: ', projectCall)
             setCreatedProject(projectCall)
-            setProjectSuccess({isSuccess: true, message: "Success!"})
         }
         catch (error) {
             console.log('Error creating project: ', error)
             setProjectError({isError: true, message: error})
         }
-        finally {
-            setTimeout(() => {setRedirect(true);}, 3000);
-        }
+
     }
 
     const createNewRevision = async () => {
@@ -94,10 +91,15 @@ function NewProjectPage(props) {
                 }
             }
             const revisionCall = await API.graphql({query: mutations.createRevision, variables: {input: revisionData}})
+            setProjectSuccess({isSuccess: true, message: "Success!"})
             console.log('Success creating revision: ', revisionCall)
         }
         catch (error) {
             console.log('Error creating revision: ', error)
+            setProjectError({isError: true, message: error})
+        }
+        finally {
+            setTimeout(() => {setRedirect(true);}, 3000);
         }
     }
 

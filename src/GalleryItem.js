@@ -24,7 +24,7 @@ export default function GalleryItem(props) {
         {
             console.log("AMPLIFY IMAGE DOESN'T EXIST!!!")
         }
-    })
+    },[])
 
     return (
         <div className={((props.selected)==(props.id-1)) ? "carousel-item active" : "carousel-item"}>

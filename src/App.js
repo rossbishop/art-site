@@ -43,6 +43,7 @@ function App() {
   const [userAttribs, setUserAttribs] = useState();
   const [projectData, setProjectData] = useState();
   const [projectDataLoaded, setProjectDataLoaded] = useState();
+  const [isNewRevisionPage, setIsNewRevisionPage] = useState(false);
 
   //Invoke this function only once at first page load (hence empty deps array [])
   useEffect(() => {
@@ -50,6 +51,7 @@ function App() {
     checkLoggedIn()
     if(window.location.pathname.split('/')[1] == "newrevision")
     {
+      setIsNewRevisionPage(true)
       getProject()
     }
   }, [])
@@ -58,13 +60,23 @@ function App() {
   useEffect(() => {
     if(userAttribs != undefined){
       setLoggedIn(true);
-      setLoading(false);
+      if(isNewRevisionPage)
+      {
+        if(projectData != undefined)
+        {
+          setLoading(false);
+        }
+      }
+      else
+      {
+        setLoading(false);
+      }
       console.log('checkLoggedIn SUCCESS: ' + isLoggedIn)  
     }
     
-    if(projectData != undefined){
-      setProjectDataLoaded(true);
-    }
+    // if(projectData != undefined){
+    //   setProjectDataLoaded(true);
+    // }
   },[userAttribs,projectData])
 
   const checkLoggedIn = async() => {
@@ -235,6 +247,25 @@ function App() {
     <>
         <Switch>
 
+        {isLoading && (
+            <Route path="/newrevision/:id">
+              <LoadingPage 
+                userDetails={userDetails}
+                userAttribs={userAttribs}
+                isLoggedIn={isLoggedIn}              
+              />
+            </Route>
+          )}
+          {!isLoading && (
+            <PrivatePermissionRoute path="/newrevision/:id">
+              <NewRevisionPage
+                userAttribs={userAttribs} 
+                userDetails={userDetails}
+                isLoggedIn={isLoggedIn}
+              />
+            </PrivatePermissionRoute>
+          )}
+
           <Route path="/project/:id">
             <ProjectPage 
               userAttribs={userAttribs}
@@ -295,25 +326,6 @@ function App() {
                 isLoggedIn={isLoggedIn}            
               />
             </PrivateRoute>
-          )}
-
-          {isLoading && (
-            <Route path="/newrevision/:id">
-              <LoadingPage 
-                userDetails={userDetails}
-                userAttribs={userAttribs}
-                isLoggedIn={isLoggedIn}              
-              />
-            </Route>
-          )}
-          {!isLoading && projectDataLoaded && (
-            <PrivatePermissionRoute path="/newrevision/:id">
-              <NewRevisionPage
-                userAttribs={userAttribs} 
-                userDetails={userDetails}
-                isLoggedIn={isLoggedIn}
-              />
-            </PrivatePermissionRoute>
           )}
 
           <Route path="/login">

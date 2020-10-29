@@ -59,7 +59,8 @@ export default function ProjectModule(props) {
                 <Redirect
                     to={{
                     //pathname: `/newrevision/${window.location.pathname.split('/')[2]}`
-                        pathname: `/newrevision/${props.projectDetails.id}`
+                        pathname: `/newrevision/${props.projectDetails.id}`,
+                        state: { from: location }
                     }}
                 />
             )

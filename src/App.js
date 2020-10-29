@@ -179,6 +179,7 @@ function App() {
         {...rest}
           render={({ location }) => {
             if(isLoggedIn) {
+              console.log("CONFIRMED LOGGED IN!")
               if(userDetails.username == projectData.owner) {
                 console.log("IS PROJECT OWNER!!!")
                 return(children)

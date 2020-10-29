@@ -14,7 +14,6 @@ function ProjectPage(props) {
     const [revisionImageKey, setRevisionImageKey] = useState()
     const [publicImage, setPublicImage] = useState()
 
-
     const getRevisionImages = async() => {
         var revisionKeys;
         for(var i = 0; i < projectData.revisions.items.length; i++){

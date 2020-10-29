@@ -5,7 +5,7 @@ import GalleryItem from './GalleryItem'
 import { API, graphqlOperation } from 'aws-amplify'
 import * as mutations from './graphql/mutations'
 
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 
 import 'bootstrap/dist/css/bootstrap.css'
 import './css/carousel.css'
@@ -18,6 +18,7 @@ export default function ProjectModule(props) {
     const [doesOwnProject, setOwnProject] = useState(false)
     const [commentSuccess, setCommentSuccess] = useState({isSuccess: false, message: ""})
     const [commentError, setCommentError] = useState({isError: false, message: ""})
+    const [shouldRevisionRedirect, setRedirect] = useState(false)
 
     function reloadPage() {
         window.location.reload()
@@ -54,6 +55,15 @@ export default function ProjectModule(props) {
 
     return (
         <Fragment>
+            {shouldRevisionRedirect && (
+                <Redirect
+                    to={{
+                    //pathname: `/newrevision/${window.location.pathname.split('/')[2]}`
+                        pathname: `/newrevision/${props.projectDetails.id}`
+                    }}
+                />
+            )
+            }
             <div className={projectModuleStyles["container-wrap"]}>
                 <div className="container-fluid d-flex justify-content-center carousel-container">
                     <div id="myCarousel" className="carousel slide" data-ride="carousel" data-interval="0">
@@ -104,7 +114,7 @@ export default function ProjectModule(props) {
             <div className="container">
             <h3>{props.projectDetails.projectName} by <a href={`/user/${props.projectDetails.owner}`}>{props.projectDetails.owner}</a></h3>
             {doesOwnProject &&
-                <button type="button" className={cx("btn", "btn-success", projectModuleStyles.commentButton)}><Link className={projectModuleStyles.links} to={`/newrevision/${window.location.pathname.split('/')[2]}`}>Add Revision</Link></button>
+                <button type="button" className={cx("btn", "btn-success", projectModuleStyles.commentButton)} onClick={event => setRedirect(true)}>{/*<Link className={projectModuleStyles.links} to={`/newrevision/${window.location.pathname.split('/')[2]}`}>Add Revision</Link>*/}Add Revision</button>
             }
             <p className={projectModuleStyles.projectText}>{props.projectDetails.projectDescription}</p>
             <h4>Comments</h4>

@@ -18,7 +18,7 @@ export default function GalleryItem(props) {
             setTimeout(() => {
                 let shadowRootStyles = s3Image.shadowRoot.adoptedStyleSheets
                 shadowRootStyles[0].replace("img {max-width: max-content; margin: auto; width: 100%; height: auto; display: block;}", 1)
-            }, [100])
+            }, [250])
         }
         else
         {

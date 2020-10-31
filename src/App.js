@@ -22,9 +22,11 @@ import {
   Route,
   Link,
   useHistory,
-  Redirect
+  Redirect,
+  withRouter
 } from"react-router-dom";
 import NewRevisionPage from './NewRevisionPage.js';
+import Loading from './Loading';
 
 const client = new AWSAppSyncClient({
   url: awsconfig.aws_appsync_graphqlEndpoint,
@@ -44,20 +46,36 @@ function App() {
   const [projectData, setProjectData] = useState();
   const [projectDataLoaded, setProjectDataLoaded] = useState();
   const [isNewRevisionPage, setIsNewRevisionPage] = useState(false);
+  const [isRedirecting, setIsRedirecting] = useState(false);
+  //const [isNavigating, setIsNavigating] = useState(false);
+  const [destinationPage, setDestinationPage] = useState();
 
   //Invoke this function only once at first page load (hence empty deps array [])
   useEffect(() => {
-    console.log("1. Start auth check")
-    checkLoggedIn()
-    if(window.location.pathname.split('/')[1] == "newrevision")
+    if(isLoggedIn == undefined)
+    {
+      console.log("1. Start auth check")
+      checkLoggedIn()
+    }
+    if(destinationPage != undefined)
+    {
+      if(destinationPage.split('/')[1] == "newrevision")
+      {
+        console.log("GETTING PROJECT!!!!")
+        setIsNewRevisionPage(true)
+        getProject()
+      }
+    }
+    else if(window.location.pathname.split('/')[1] == "newrevision")
     {
       setIsNewRevisionPage(true)
       getProject()
     }
-  }, [])
+  }, [isLoading])
 
   //Use effect dep is userAttribs as was getting odd issues trying to grab them from the full userDetails state
   useEffect(() => {
+    console.log("USEEFFECT RUNNING!!!")
     if(userAttribs != undefined){
       setLoggedIn(true);
       if(isNewRevisionPage)
@@ -65,11 +83,13 @@ function App() {
         if(projectData != undefined)
         {
           setLoading(false);
+          //setIsNavigating(false);
         }
       }
       else
       {
         setLoading(false);
+        //setIsNavigating(false);
       }
       console.log('checkLoggedIn SUCCESS: ' + isLoggedIn)  
     }
@@ -85,6 +105,7 @@ function App() {
         bypassCache: false  // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
       })
       console.log(user);
+      console.log("CHECKING LOGGED IN!!!")
       setUserDetails(user);
       setUserAttribs(user.attributes);
     }
@@ -189,7 +210,12 @@ function App() {
     return (
       <Route
         {...rest}
-          render={({ location }) => {
+          render={({ props }) => {
+
+            // if(props.isRedirecting == true) {
+
+            // }
+
             if(isLoggedIn) {
               console.log("CONFIRMED LOGGED IN!")
               if(userDetails.username == projectData.owner) {
@@ -202,7 +228,7 @@ function App() {
                   <Redirect
                     to={{
                       pathname: "/",
-                      state: { from: location }
+                      state: {  }
                     }}
                   />
                 )
@@ -213,7 +239,7 @@ function App() {
                 <Redirect
                   to={{
                     pathname: "/login",
-                    state: { from: location }
+                    state: {  }
                   }}
                 />
               )
@@ -224,9 +250,18 @@ function App() {
     )
   }
 
-  const getProject = async (uuid) => {
+  const getProject = async () => {
     try {
-        uuid = await (window.location.pathname.split('/'))[2]
+        let uuid = ""
+        if(destinationPage != undefined)
+        {
+          uuid = await destinationPage.split('/')[2]
+        }
+        else
+        {
+          uuid = await window.location.pathname.split('/')[2]
+          //console.log("UUID: " + uuid)
+        }
         console.log(uuid)
         const apiCall = await API.graphql({query: queries.getProject, variables: {id: uuid}})
         console.log(apiCall)
@@ -240,12 +275,47 @@ function App() {
     }
 }
 
-  
-
   return (
     
     <>
         <Switch>
+
+        <Route 
+          path="/loading"
+          render={({props}) => {
+            //setDestinationPage(props.state.routePath)
+            if(window.location.state != undefined)
+            {
+              console.log("ROUTEPATH: " + window.location.state.routePath)
+            }
+
+            // return(
+            // <LoadingPage
+            //   userDetails={userDetails}
+            //   userAttribs={userAttribs}
+            //   isLoggedIn={isLoggedIn}
+            // />)
+            if(isLoading){
+              return(
+                <LoadingPage
+                  userDetails={userDetails}
+                  userAttribs={userAttribs}
+                  isLoggedIn={isLoggedIn}
+                />)
+            }
+            if(!isLoading){
+              return(
+                <Redirect
+                  to={{
+                    pathname: destinationPage//,
+                    //state: { from: location }
+                  }}
+                />
+              )
+            }
+          }}
+
+        />
 
         {isLoading && (
             <Route path="/newrevision/:id">
@@ -262,25 +332,52 @@ function App() {
                 userAttribs={userAttribs} 
                 userDetails={userDetails}
                 isLoggedIn={isLoggedIn}
+                setLoading={setLoading}
               />
             </PrivatePermissionRoute>
           )}
 
-          <Route path="/project/:id">
-            <ProjectPage 
-              userAttribs={userAttribs}
-              userDetails={userDetails}
-              isLoggedIn={isLoggedIn}
-            />
-          </Route>
+          {isLoading && (
+            <Route path="/project/:id">
+              <LoadingPage 
+                userDetails={userDetails}
+                userAttribs={userAttribs}
+                isLoggedIn={isLoggedIn}              
+              />
+            </Route>
+          )}
+          {!isLoading && (
+            <Route path="/project/:id">
+              <ProjectPage 
+                userAttribs={userAttribs}
+                userDetails={userDetails}
+                isLoggedIn={isLoggedIn}
+                setLoading={setLoading}
+                setDestinationPage={setDestinationPage}
+              />
+            </Route>
+          )}
 
-          <Route path="/user/:id">
-            <UserPage
-              userAttribs={userAttribs} 
-              userDetails={userDetails}
-              isLoggedIn={isLoggedIn}
-            />
-          </Route>
+          {isLoading && (
+            <Route path="/user/:id">
+              <LoadingPage 
+                userDetails={userDetails}
+                userAttribs={userAttribs}
+                isLoggedIn={isLoggedIn}              
+              />
+            </Route>
+          )}
+          {!isLoading && (
+            <Route path="/user/:id">
+              <UserPage
+                userAttribs={userAttribs} 
+                userDetails={userDetails}
+                isLoggedIn={isLoggedIn}
+                setLoading={setLoading}
+              />
+            </Route>
+          )}
+
 
           {isLoading && (
             <Route path="/profileupdate">
@@ -297,6 +394,7 @@ function App() {
                 userDetails={userDetails}
                 userAttribs={userAttribs}
                 isLoggedIn={isLoggedIn}
+                setLoading={setLoading}
               />
             </PrivateRoute>
           )}
@@ -323,18 +421,31 @@ function App() {
               <NewProjectPage
                 userAttribs={userAttribs} 
                 userDetails={userDetails}
-                isLoggedIn={isLoggedIn}            
+                isLoggedIn={isLoggedIn}
+                setLoading={setLoading}            
               />
             </PrivateRoute>
           )}
 
-          <Route path="/login">
-            <LoginPage
-              userAttribs={userAttribs}
-              userDetails={userDetails}
-              isLoggedIn={isLoggedIn}            
-            />
-          </Route>
+          {isLoading && (
+            <Route path="/login">
+              <LoadingPage 
+                userDetails={userDetails}
+                userAttribs={userAttribs}
+                isLoggedIn={isLoggedIn}              
+              />
+            </Route>            
+          )}
+          {!isLoading && (
+            <Route path="/login">
+              <LoginPage
+                userAttribs={userAttribs}
+                userDetails={userDetails}
+                isLoggedIn={isLoggedIn}
+                setLoading={setLoading}            
+              />
+            </Route>            
+          )}
 
           <Route path="/logout">
             <LogoutPage
@@ -344,33 +455,70 @@ function App() {
             />
           </Route>
 
-          <Route path="/register">
-            <RegisterPage
-              userAttribs={userAttribs} 
-              userDetails={userDetails}
-              isLoggedIn={isLoggedIn}             
-            />
-          </Route>
+          {isLoading && (
+            <Route path="/register">
+              <LoadingPage 
+                userDetails={userDetails}
+                userAttribs={userAttribs}
+                isLoggedIn={isLoggedIn}              
+              />
+            </Route>
+          )}
+          {!isLoading && (
+            <Route path="/register">
+              <RegisterPage
+                userAttribs={userAttribs} 
+                userDetails={userDetails}
+                isLoggedIn={isLoggedIn}
+                setLoading={setLoading}            
+              />
+            </Route>            
+          )}
 
-          <Route path="/forgot">
-            <ForgotPage
-              userAttribs={userAttribs} 
-              userDetails={userDetails}
-              isLoggedIn={isLoggedIn}             
-            />
-          </Route>
+          {isLoading && (
+            <Route path="/forgot">
+              <LoadingPage 
+                userDetails={userDetails}
+                userAttribs={userAttribs}
+                isLoggedIn={isLoggedIn}              
+              />
+            </Route>
+          )}
+          {!isLoading && (
+            <Route path="/forgot">
+              <ForgotPage
+                userAttribs={userAttribs} 
+                userDetails={userDetails}
+                isLoggedIn={isLoggedIn}
+                setLoading={setLoading}             
+              />
+            </Route>            
+          )}
 
-          <Route path="/">
-            <Home
-              userAttribs={userAttribs} 
-              userDetails={userDetails}
-              isLoggedIn={isLoggedIn}             
-            />
-          </Route>
+          {isLoading && (
+            <Route path="/">
+              <LoadingPage 
+                userDetails={userDetails}
+                userAttribs={userAttribs}
+                isLoggedIn={isLoggedIn}              
+              />
+            </Route>
+          )}
+          {!isLoading && (
+            <Route path="/">
+              <Home
+                userAttribs={userAttribs} 
+                userDetails={userDetails}
+                isLoggedIn={isLoggedIn}
+                setLoading={setLoading}            
+              />
+            </Route>            
+          )}
+
 
         </Switch>
     </>
   )
 }
 
-export default App
+export default withRouter(App)

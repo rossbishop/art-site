@@ -20,6 +20,7 @@ export default function ProjectModule(props) {
     const [commentError, setCommentError] = useState({isError: false, message: ""})
     const [shouldRevisionRedirect, setRedirect] = useState(false)
 
+
     function reloadPage() {
         window.location.reload()
     }
@@ -55,7 +56,7 @@ export default function ProjectModule(props) {
 
     return (
         <Fragment>
-            {shouldRevisionRedirect && (
+            {/* {shouldRevisionRedirect && (
                 <Redirect
                     to={{
                     //pathname: `/newrevision/${window.location.pathname.split('/')[2]}`
@@ -64,7 +65,7 @@ export default function ProjectModule(props) {
                     }}
                 />
             )
-            }
+            } */}
             <div className={projectModuleStyles["container-wrap"]}>
                 <div className="container-fluid d-flex justify-content-center carousel-container">
                     <div id="myCarousel" className="carousel slide" data-ride="carousel" data-interval="0">
@@ -115,7 +116,7 @@ export default function ProjectModule(props) {
             <div className="container">
             <h3>{props.projectDetails.projectName} by <a href={`/user/${props.projectDetails.owner}`}>{props.projectDetails.owner}</a></h3>
             {doesOwnProject &&
-                <button type="button" className={cx("btn", "btn-success", projectModuleStyles.commentButton)} onClick={event => setRedirect(true)}>{/*<Link className={projectModuleStyles.links} to={`/newrevision/${window.location.pathname.split('/')[2]}`}>Add Revision</Link>*/}Add Revision</button>
+                <button type="button" className={cx("btn", "btn-success", projectModuleStyles.commentButton)} onClick={event => {props.setLoading(true);props.setDestinationPage(`/newrevision/${props.projectDetails.id}`)}}><Link className={projectModuleStyles.links} to={{pathname: "/loading", state: {routePath: `/newrevision/${window.location.pathname.split('/')[2]}`}}}>Add Revision</Link></button>
             }
             <p className={projectModuleStyles.projectText}>{props.projectDetails.projectDescription}</p>
             <h4>Comments</h4>

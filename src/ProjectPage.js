@@ -5,6 +5,7 @@ import projectDataImport from './ProjectDummyData'
 import { API, graphqlOperation } from 'aws-amplify'
 import * as queries from './graphql/queries'
 import { propStyle } from 'aws-amplify-react';
+import { withRouter } from 'react-router-dom'
 
 function ProjectPage(props) {
 
@@ -71,6 +72,8 @@ function ProjectPage(props) {
                     projectDetails={projectData}
                     setComment={setComment}
                     comment={comment}
+                    setLoading={props.setLoading}
+                    setDestinationPage={props.setDestinationPage}
                 />
                 )
             }
@@ -79,4 +82,4 @@ function ProjectPage(props) {
     )
 }
 
-export default ProjectPage
+export default withRouter(ProjectPage)

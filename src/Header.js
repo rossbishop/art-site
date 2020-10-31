@@ -31,32 +31,33 @@ export default function Header(props)
                 <div className="collapse navbar-collapse" id="navbarsExample05">
                     <ul className="navbar-nav mr-auto">
                         <li className="nav-item">
-                            <a className="nav-link" href="/">Browse</a>
+                            <Link className="nav-link" to="/">Browse</Link>
                         </li>
                         {props.isLoggedIn &&
                             <>
                             <li className="nav-item">
-                            <a className="nav-link" href="/new">Create</a>
+                            <Link className="nav-link" to="/new">Create</Link>
                             </li>
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{props.userAttribs.preferred_username}</a>
                                 <div className="dropdown-menu" aria-labelledby="dropdown05">
-                                    <a className="dropdown-item" href={`/user/${props.userDetails.username}`}>Your Page</a>
-                                    <a className="dropdown-item" href="/profileupdate">Update Profile</a>
+                                    <Link className="dropdown-item" to={`/user/${props.userDetails.username}`}>Your Page</Link>
+                                    <Link className="dropdown-item" to="/profileupdate">Update Profile</Link>
                                 </div>
                             </li>
                             </>
                         }
-                        {!props.isLoggedIn &&
+                        {!props.isLoggedIn && 
                             <>
                                 <li className="nav-item">
                                     <Link className="nav-link" to="/login">Login</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="/register">Register</a>
+                                    <Link className="nav-link" to="/register">Register</Link>
                                 </li>
-                            </>                      
-                        }
+                            </>
+                        }                   
+        
                         {props.isLoggedIn &&
                             <li className="nav-item">
                             <Link className="nav-link" to="/logout">Logout</Link>

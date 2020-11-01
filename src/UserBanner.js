@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import UserSocialIcon from './UserSocialIcon'
 
 import 'bootstrap/dist/css/bootstrap.css'
@@ -7,15 +7,28 @@ import cx from 'classnames'
 
 export default function UserBanner(props) {
 
+    useEffect(() => {
+        if(((document.getElementById('banner')) != null) && (props.bannerURL != null))
+        {
+            console.log("AMPLIFY IMAGE EXISTS!!!!")
+            let banner = document.getElementById('banner')
+            banner.style = "padding: 0; margin-bottom: 0; background-image: url(" + props.bannerURL + "); background-repeat: no-repeat; background-size: 100%; color: #fff;"
+        }
+        else
+        {
+            console.log("AMPLIFY IMAGE DOESN'T EXIST!!!")
+        }
+    },[props.bannerURL])
+
     return (
-        <section className={userBannerStyles.jumbotron}>
+        <section id="banner">
             <div className={userBannerStyles.blurProfileBg}>
                 <div className='container'>
                     <div className="row">
                         <div className="col-6">
                             <div className="row">
                                 <div className="col-4 pr-3">
-                                    <img className={userBannerStyles.profileImg} src={props.userData.profilepicsrc} />
+                                    <img className={userBannerStyles.profileImg} src={props.avatarURL} />
                                 </div>
                                 <div className="col-8">
                                     <h1>{props.profileData.username}</h1>
@@ -44,18 +57,6 @@ export default function UserBanner(props) {
                                     username={props.profileData.twitter}
                                 />
                             }
-                            {/* {
-                                props.userData.social.map(item => {
-                                return (
-                                            <UserSocialIcon
-                                                socialtype={item.type}
-                                                username={item.username}
-                                            />
-                                        )
-                                    }
-                                )
-                            } */}
-                            
                         </div>
                     </div>
                 </div>

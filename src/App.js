@@ -52,7 +52,7 @@ function App() {
 
   //Invoke this function only once at first page load (hence empty deps array [])
   useEffect(() => {
-    if(isLoggedIn == undefined)
+    if(isLoggedIn == undefined || isLoading)
     {
       console.log("1. Start auth check")
       checkLoggedIn()
@@ -83,20 +83,15 @@ function App() {
         if(projectData != undefined)
         {
           setLoading(false);
-          //setIsNavigating(false);
         }
       }
       else
       {
         setLoading(false);
-        //setIsNavigating(false);
       }
       console.log('checkLoggedIn SUCCESS: ' + isLoggedIn)  
     }
     
-    // if(projectData != undefined){
-    //   setProjectDataLoaded(true);
-    // }
   },[userAttribs,projectData])
 
   const checkLoggedIn = async() => {
@@ -284,17 +279,10 @@ function App() {
           path="/loading"
           render={({props}) => {
             //setDestinationPage(props.state.routePath)
-            if(window.location.state != undefined)
-            {
-              console.log("ROUTEPATH: " + window.location.state.routePath)
-            }
-
-            // return(
-            // <LoadingPage
-            //   userDetails={userDetails}
-            //   userAttribs={userAttribs}
-            //   isLoggedIn={isLoggedIn}
-            // />)
+            // if(window.location.state != undefined)
+            // {
+            //   console.log("ROUTEPATH: " + window.location.state.routePath)
+            // }
             if(isLoading){
               return(
                 <LoadingPage
@@ -333,6 +321,7 @@ function App() {
                 userDetails={userDetails}
                 isLoggedIn={isLoggedIn}
                 setLoading={setLoading}
+                setDestinationPage={setDestinationPage}
               />
             </PrivatePermissionRoute>
           )}
@@ -374,6 +363,7 @@ function App() {
                 userDetails={userDetails}
                 isLoggedIn={isLoggedIn}
                 setLoading={setLoading}
+                setDestinationPage={setDestinationPage}
               />
             </Route>
           )}
@@ -395,6 +385,7 @@ function App() {
                 userAttribs={userAttribs}
                 isLoggedIn={isLoggedIn}
                 setLoading={setLoading}
+                setDestinationPage={setDestinationPage}
               />
             </PrivateRoute>
           )}
@@ -422,7 +413,8 @@ function App() {
                 userAttribs={userAttribs} 
                 userDetails={userDetails}
                 isLoggedIn={isLoggedIn}
-                setLoading={setLoading}            
+                setLoading={setLoading}
+                setDestinationPage={setDestinationPage}            
               />
             </PrivateRoute>
           )}
@@ -442,7 +434,8 @@ function App() {
                 userAttribs={userAttribs}
                 userDetails={userDetails}
                 isLoggedIn={isLoggedIn}
-                setLoading={setLoading}            
+                setLoading={setLoading}
+                setDestinationPage={setDestinationPage}            
               />
             </Route>            
           )}
@@ -470,7 +463,8 @@ function App() {
                 userAttribs={userAttribs} 
                 userDetails={userDetails}
                 isLoggedIn={isLoggedIn}
-                setLoading={setLoading}            
+                setLoading={setLoading}
+                setDestinationPage={setDestinationPage}            
               />
             </Route>            
           )}
@@ -490,7 +484,8 @@ function App() {
                 userAttribs={userAttribs} 
                 userDetails={userDetails}
                 isLoggedIn={isLoggedIn}
-                setLoading={setLoading}             
+                setLoading={setLoading}
+                setDestinationPage={setDestinationPage}             
               />
             </Route>            
           )}
@@ -510,7 +505,8 @@ function App() {
                 userAttribs={userAttribs} 
                 userDetails={userDetails}
                 isLoggedIn={isLoggedIn}
-                setLoading={setLoading}            
+                setLoading={setLoading}
+                setDestinationPage={setDestinationPage}            
               />
             </Route>            
           )}

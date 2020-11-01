@@ -10,9 +10,9 @@ export default function UserSocialIcon(props) {
         <div className="icon-container">
             <div className="row">
                 <p className={userSocialIconStyles.iconTag}>{props.username}</p>
-                <a href={socialString(props.socialtype)}>
+                {/* <a href={socialString(props.socialtype)}> */}
                     <img className={userSocialIconStyles.socialImg} src={socialImage(props.socialtype)}/>
-                </a>
+                {/* </a> */}
             </div>
         </div>
     )

@@ -114,7 +114,7 @@ export default function ProjectModule(props) {
                 </div>
             </div>
             <div className="container">
-            <h3>{props.projectDetails.projectName} by <a href={`/user/${props.projectDetails.owner}`}>{props.projectDetails.owner}</a></h3>
+            <h3>{props.projectDetails.projectName} by <Link to="/loading" onClick={event => {props.setLoading(true);props.setDestinationPage(`/user/${props.projectDetails.owner}`)}}>{props.projectDetails.owner}</Link></h3>
             {doesOwnProject &&
                 <button type="button" className={cx("btn", "btn-success", projectModuleStyles.commentButton)} onClick={event => {props.setLoading(true);props.setDestinationPage(`/newrevision/${props.projectDetails.id}`)}}><Link className={projectModuleStyles.links} to={{pathname: "/loading", state: {routePath: `/newrevision/${window.location.pathname.split('/')[2]}`}}}>Add Revision</Link></button>
             }

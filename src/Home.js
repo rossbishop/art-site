@@ -32,11 +32,15 @@ function Home(props) {
             <Header 
                 userDetails={props.userDetails}
                 userAttribs={props.userAttribs}
-                isLoggedIn={props.isLoggedIn}          
+                isLoggedIn={props.isLoggedIn}
+                setLoading={props.setLoading}
+                setDestinationPage={props.setDestinationPage}          
             />
             {projectData &&
                 <ProjectGrid 
                     projectData={projectData}
+                    setLoading={props.setLoading}
+                    setDestinationPage={props.setDestinationPage}                        
                 />
             }
             <Footer /> 

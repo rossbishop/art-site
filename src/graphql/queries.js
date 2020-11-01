@@ -440,7 +440,16 @@ export const getPublicUserProfile = /* GraphQL */ `
       instagram
       twitter
       facebook
-      avatarImg
+      avatarImgFile {
+        bucket
+        region
+        key
+      }
+      bannerImgFile {
+        bucket
+        region
+        key
+      }
       createdAt
       updatedAt
     }
@@ -467,7 +476,16 @@ export const listPublicUserProfiles = /* GraphQL */ `
         instagram
         twitter
         facebook
-        avatarImg
+        avatarImgFile {
+          bucket
+          region
+          key
+        }
+        bannerImgFile {
+          bucket
+          region
+          key
+        }
         createdAt
         updatedAt
       }
@@ -500,7 +518,16 @@ export const publicUserProfileByUser = /* GraphQL */ `
         instagram
         twitter
         facebook
-        avatarImg
+        avatarImgFile {
+          bucket
+          region
+          key
+        }
+        bannerImgFile {
+          bucket
+          region
+          key
+        }
         createdAt
         updatedAt
       }

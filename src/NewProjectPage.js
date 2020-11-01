@@ -120,7 +120,9 @@ function NewProjectPage(props) {
             <Header 
                 userDetails={props.userDetails}
                 isLoggedIn={props.isLoggedIn}
-                userAttribs={props.userAttribs}            
+                userAttribs={props.userAttribs}
+                setLoading={props.setLoading}
+                setDestinationPage={props.setDestinationPage}                               
             />
             {!shouldRedirect &&(
                 <NewProject 

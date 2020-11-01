@@ -14,22 +14,50 @@ export default function ProfileUpdate(props) {
                         <h1 className="h3 mb-3 mt-4 font-weight-normal">Update Profile Details</h1>
                         <div className="row d-flex align-items-center">
                             <div className="d-flex flex-column col-4">
-                                <h6>Current Image:</h6>
-                                <img className={ProfileUpdateStyles.profileImgSmall} src={props.userData.profilepicsrc} />
+                                <h6>Avatar Image:</h6>
+                                {/* <img className={ProfileUpdateStyles.profileImgSmall} src={props.userData.profilepicsrc} /> */}
+                                {props.avatarImageURL && (
+                                    <img className={ProfileUpdateStyles.profileImgSmall} src={props.avatarImageURL} />
+                                )}
                             </div>
                             <div className="d-flex flex-column col-8">
                                 <div className="d-flex flex-row">
-                                    <div className="d-flex flex-column col-6">
-                                        <input type="userDetail" id="inputUsername" className={cx(ProfileUpdateStyles.formControl,"my-3", "py-2", "pl-0")} placeholder="Local Path" defaultValue="" required autofocus/>
-                                        <button type="button" className={cx('btn', 'btn-secondary', ProfileUpdateStyles.imgButton)}>Choose</button>
+                                    <div className="d-flex flex-column col-12">
+                                        {/* <input type="userDetail" id="inputUsername" className={cx(ProfileUpdateStyles.formControl,"my-3", "py-2", "pl-0")} placeholder="Local Path" defaultValue="" required autofocus/> */}
+                                        <input type="userDetail" type="file" accept="image/png" onChange={event => props.setAvatarFile(event.target.files[0])} id="inputFile" className={cx(ProfileUpdateStyles.formControl,"my-3", "py-2", "pl-0")} placeholder="Local Path" defaultValue="" required autofocus/>
+                                        <button type="button" className={cx('btn', 'btn-secondary', ProfileUpdateStyles.imgButton)} onClick={(e) => {e.preventDefault();props.uploadNewAvatarImage(props.avatarFile);}} >Upload</button>
                                     </div>
-                                    <div className="d-flex flex-column col-6">
+                                    {/* <div className="d-flex flex-column col-6">
                                         <input type="userDetail" id="inputUsername" className={cx(ProfileUpdateStyles.formControl,"my-3", "py-2", "pl-0")} placeholder="Web Path" defaultValue="" required autofocus/>
-                                    </div>
+                                    </div> */}
                                 </div>
-                                <div className="d-flex flex-row justify-content-center">
+                                {/* <div className="d-flex flex-row justify-content-center">
                                     <button type="button" className={cx('btn', 'btn-info', ProfileUpdateStyles.imgButton)}>Save</button>
+                                </div> */}
+                            </div>
+                        </div>
+                        <div className="row d-flex align-items-center">
+                            <div className="d-flex flex-column col-4">
+                                <h6>Banner Image:</h6>
+                                {/* <img className={ProfileUpdateStyles.profileImgSmall} src={props.userData.profilepicsrc} /> */}
+                                {props.bannerImageURL && (
+                                    <img className={ProfileUpdateStyles.profileImgSmall} src={props.bannerImageURL} />
+                                )}
+                            </div>
+                            <div className="d-flex flex-column col-8">
+                                <div className="d-flex flex-row">
+                                    <div className="d-flex flex-column col-12">
+                                        {/* <input type="userDetail" id="inputUsername" className={cx(ProfileUpdateStyles.formControl,"my-3", "py-2", "pl-0")} placeholder="Local Path" defaultValue="" required autofocus/> */}
+                                        <input type="userDetail" type="file" accept="image/png" onChange={event => props.setBannerFile(event.target.files[0])} id="inputFile" className={cx(ProfileUpdateStyles.formControl,"my-3", "py-2", "pl-0")} placeholder="Local Path" defaultValue="" required autofocus/>
+                                        <button type="button" className={cx('btn', 'btn-secondary', ProfileUpdateStyles.imgButton)} onClick={(e) => {e.preventDefault();props.uploadNewBannerImage(props.bannerFile);}} >Upload</button>
+                                    </div>
+                                    {/* <div className="d-flex flex-column col-6">
+                                        <input type="userDetail" id="inputUsername" className={cx(ProfileUpdateStyles.formControl,"my-3", "py-2", "pl-0")} placeholder="Web Path" defaultValue="" required autofocus/>
+                                    </div> */}
                                 </div>
+                                {/* <div className="d-flex flex-row justify-content-center">
+                                    <button type="button" className={cx('btn', 'btn-info', ProfileUpdateStyles.imgButton)}>Save</button>
+                                </div> */}
                             </div>
                         </div>
                         <h6 className="mt-3">Change Username:</h6>
@@ -74,10 +102,6 @@ export default function ProfileUpdate(props) {
                         }
                         <button className={cx(ProfileUpdateStyles.btnProfileUpdate, "btn", "btn-lg", "btn-primary", "btn-block", "mt-4")} onClick={(e) => {e.preventDefault();props.updateSocial();}} type="submit">Update Social Media</button>
                     </form>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-6">
                     <form className={ProfileUpdateStyles.formProfileUpdate}>
                         <h2 className="h3 mb-3 mt-4 font-weight-normal">Update Password</h2>
                         <label for="inputCurrentPassword" className="sr-only">Current Password</label>
@@ -97,6 +121,11 @@ export default function ProfileUpdate(props) {
                     </form>
                 </div>
             </div>
+            {/* <div class="row">
+                <div class="col-6">
+
+                </div>
+            </div> */}
         </div>
     )
 }

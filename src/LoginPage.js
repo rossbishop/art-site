@@ -39,7 +39,9 @@ function LoginPage(props) {
             <Header 
                 userAttribs={props.userAttribs}
                 userDetails={props.userDetails}
-                isLoggedIn={props.isLoggedIn} 
+                isLoggedIn={props.isLoggedIn}
+                setLoading={props.setLoading}
+                setDestinationPage={props.setDestinationPage}                    
             />
             <Login 
                 setUsername={setUsername}
@@ -48,6 +50,8 @@ function LoginPage(props) {
                 getError={isError}
                 signIn={signIn}
                 getSuccess={success}
+                setLoading={props.setLoading}
+                setDestinationPage={props.setDestinationPage}
             />
             <Footer /> 
         </>

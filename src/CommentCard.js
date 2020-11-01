@@ -16,7 +16,7 @@ export default function CommentCard(props) {
                 <img className={commentCardStyles.profileImgSmall} src='https://via.placeholder.com/96' />
                 <div className="d-flex align-items-start flex-column" />
                 <div className="mb-auto">{props.comment}
-                    <div className={commentCardStyles.commentReply}>Like</div>
+                    {/* <div className={commentCardStyles.commentReply}>Like</div> */}
                 </div>
             </div>
         </div>

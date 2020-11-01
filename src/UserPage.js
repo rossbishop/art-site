@@ -2,7 +2,7 @@ import {Header, Gallery, Comments, Footer, ProjectModule} from './Imports.js'
 import React, { useState, useCallback, useEffect } from 'react';
 import data from './RevisionDummyData'
 import projectDataImport from './ProjectDummyData'
-import { API, graphqlOperation } from 'aws-amplify'
+import { API, graphqlOperation, Storage } from 'aws-amplify'
 import * as queries from './graphql/queries'
 import UserBanner from './UserBanner'
 import ProjectGrid from './ProjectGrid'
@@ -12,6 +12,8 @@ function UserPage(props) {
 
     const [projectData, setProjectData] = useState(null)
     const [profileData, setProfileData] = useState(null)
+    const [avatarURL, setAvatarURL] = useState()
+    const [bannerURL, setBannerURL] = useState()
     const [isLoaded, setLoaded] = useState(false)
 
     const getUserProjects = async () => {
@@ -38,10 +40,30 @@ function UserPage(props) {
         }
     }
 
+    const getProfileImages = async() => {
+        try {
+            const signedAvatarURL = await Storage.get(profileData.avatarImgFile.key, {level: 'public'})
+            setAvatarURL(signedAvatarURL)
+            const signedBannerURL = await Storage.get(profileData.bannerImgFile.key, {level: 'public'})
+            setBannerURL(signedBannerURL)
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
     useEffect(() => {
         getUserProjects()
         getUserProfileData()
     }, [])
+
+    useEffect(() => {
+        console.log("GETTING PROFILE IMAGES")
+        if(profileData != undefined)
+        {
+            getProfileImages()
+        }
+    }, [profileData])
 
     return (
         <>
@@ -49,17 +71,22 @@ function UserPage(props) {
                 userDetails={props.userDetails}
                 isLoggedIn={props.isLoggedIn}
                 userAttribs={props.userAttribs}
+                setLoading={props.setLoading}
+                setDestinationPage={props.setDestinationPage}                   
             />
             {profileData &&
                 <UserBanner 
                 userData={UserData[0]}
                 profileData={profileData}
+                avatarURL={avatarURL}
+                bannerURL={bannerURL}
                 />
             }
             {projectData &&
                 <ProjectGrid 
                     projectData={projectData}
-                    
+                    setLoading={props.setLoading}
+                    setDestinationPage={props.setDestinationPage}
                 />
             }
             <Footer />

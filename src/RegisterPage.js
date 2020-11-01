@@ -68,6 +68,8 @@ function RegisterPage(props) {
                 userDetails={props.userDetails}
                 isLoggedIn={props.isLoggedIn}
                 userAttribs={props.userAttribs}
+                setLoading={props.setLoading}
+                setDestinationPage={props.setDestinationPage}                   
             />
             {!isUserCreated && (
                 <Register

@@ -128,7 +128,8 @@ type PublicUserProfile @model
     instagram: String
     twitter: String
     facebook: String
-    avatarImg: String
+    avatarImgFile: S3Object
+    bannerImgFile: S3Object
   }
 
 # type Like @model

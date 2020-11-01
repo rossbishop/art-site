@@ -30,12 +30,6 @@ function ProjectPage(props) {
         }
     }
 
-    // const getArbitraryImage = async () => {
-    //     const URL = await Storage.get("788cef31-2791-445f-a348-51608cf8103a.png")
-    //     setPublicImage(URL)
-    // }
-
-
     const getProject = async () => {
         try {
             const uuid = await (window.location.pathname.split('/'))[2]
@@ -46,9 +40,6 @@ function ProjectPage(props) {
         }
         catch (error) {
             console.log('Error getting project: ', error)
-        }
-        finally {
-    
         }
     }
 
@@ -62,6 +53,8 @@ function ProjectPage(props) {
                 userDetails={props.userDetails}
                 isLoggedIn={props.isLoggedIn}
                 userAttribs={props.userAttribs}
+                setLoading={props.setLoading}
+                setDestinationPage={props.setDestinationPage}                   
             />
             {projectData && (                
                 <ProjectModule 

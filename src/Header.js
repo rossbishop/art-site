@@ -24,25 +24,26 @@ export default function Header(props)
         <>
         <header>
             <nav className={cx('navbar', 'navbar-expand-lg', 'navbar-dark', headerStyles.bgWip)}>
-                <a className="navbar-brand" href="/">WorkInProgress</a>
+                <Link className="navbar-brand" to="/loading" onClick={event => {props.setLoading(true);props.setDestinationPage('/')}}>WorkInProgress</Link>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarsExample05">
                     <ul className="navbar-nav mr-auto">
                         <li className="nav-item">
-                            <Link className="nav-link" to="/">Browse</Link>
+                            <Link className="nav-link" to="/loading" onClick={event => {props.setLoading(true);props.setDestinationPage('/')}}>Browse</Link>
                         </li>
                         {props.isLoggedIn &&
                             <>
                             <li className="nav-item">
-                            <Link className="nav-link" to="/new">Create</Link>
+                            <Link className="nav-link" to="/loading" onClick={event => {props.setLoading(true);props.setDestinationPage('/new')}}>Create</Link>
                             </li>
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{props.userAttribs.preferred_username}</a>
                                 <div className="dropdown-menu" aria-labelledby="dropdown05">
-                                    <Link className="dropdown-item" to={`/user/${props.userDetails.username}`}>Your Page</Link>
-                                    <Link className="dropdown-item" to="/profileupdate">Update Profile</Link>
+                                    <Link className="dropdown-item" to="/loading" onClick={event => {props.setLoading(true);props.setDestinationPage(`/user/${props.userDetails.username}`)}}>Your Page</Link>
+                                    
+                                    <Link className="dropdown-item" to="/loading" onClick={event => {props.setLoading(true);props.setDestinationPage('/profileupdate')}}>Update Profile</Link>
                                 </div>
                             </li>
                             </>
@@ -50,24 +51,24 @@ export default function Header(props)
                         {!props.isLoggedIn && 
                             <>
                                 <li className="nav-item">
-                                    <Link className="nav-link" to="/login">Login</Link>
+                                    <Link className="nav-link" to="/loading" onClick={event => {props.setLoading(true);props.setDestinationPage('/login')}}>Login</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" to="/register">Register</Link>
+                                    <Link className="nav-link" to="/loading" onClick={event => {props.setLoading(true);props.setDestinationPage('/register')}}>Register</Link>
                                 </li>
                             </>
                         }                   
         
                         {props.isLoggedIn &&
                             <li className="nav-item">
-                            <Link className="nav-link" to="/logout">Logout</Link>
+                            <Link className="nav-link" to="/loading" onClick={event => {props.setLoading(true);props.setDestinationPage('/logout')}}>Logout</Link>
                             </li>
                         }
                     </ul>
-                    <form className="form-inline my-2 my-md-0">
+                    {/* <form className="form-inline my-2 my-md-0">
                         <input className={headerStyles.formControl} type="text" placeholder="Search"/>
                     </form>
-                    <button type="button" className={cx('btn', 'btn-outline-info', headerStyles.btnMod, headerStyles.searchBtn)}>Search</button>
+                    <button type="button" className={cx('btn', 'btn-outline-info', headerStyles.btnMod, headerStyles.searchBtn)}>Search</button> */}
                 </div>
             </nav>
         </header>

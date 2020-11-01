@@ -37,6 +37,9 @@ export default function ProjectGrid(props) {
                   revisioncount={item.revisions.items.length}
                   username={item.owner}
                   link={`/project/${item.id}`}
+                  setLoading={props.setLoading}
+                  setDestinationPage={props.setDestinationPage}
+                  imgKey={item.revisions.items[0].imgFile.key}    
                 />
               )
             }

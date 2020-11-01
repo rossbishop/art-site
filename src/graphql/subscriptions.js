@@ -310,7 +310,16 @@ export const onCreatePublicUserProfile = /* GraphQL */ `
       instagram
       twitter
       facebook
-      avatarImg
+      avatarImgFile {
+        bucket
+        region
+        key
+      }
+      bannerImgFile {
+        bucket
+        region
+        key
+      }
       createdAt
       updatedAt
     }
@@ -328,7 +337,16 @@ export const onUpdatePublicUserProfile = /* GraphQL */ `
       instagram
       twitter
       facebook
-      avatarImg
+      avatarImgFile {
+        bucket
+        region
+        key
+      }
+      bannerImgFile {
+        bucket
+        region
+        key
+      }
       createdAt
       updatedAt
     }
@@ -346,7 +364,16 @@ export const onDeletePublicUserProfile = /* GraphQL */ `
       instagram
       twitter
       facebook
-      avatarImg
+      avatarImgFile {
+        bucket
+        region
+        key
+      }
+      bannerImgFile {
+        bucket
+        region
+        key
+      }
       createdAt
       updatedAt
     }

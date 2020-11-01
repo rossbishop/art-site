@@ -90,6 +90,8 @@ function ForgotPage(props) {
                 userAttribs={props.userAttribs}
                 userDetails={props.userDetails}
                 isLoggedIn={props.isLoggedIn}
+                setLoading={props.setLoading}
+                setDestinationPage={props.setDestinationPage}                   
             />
             {isReset &&
                 <ForgotReset

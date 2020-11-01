@@ -18,7 +18,7 @@ export default function ProjectCard(props) {
           console.log(s3Image)
           setTimeout(() => {
               let shadowRootStyles = s3Image.shadowRoot.adoptedStyleSheets
-              shadowRootStyles[0].replace("img {border-top-left-radius: calc(0.25rem - 1px);border-top-right-radius: calc(0.25rem - 1px);flex-shrink: 0;width: 100%;vertical-align: middle;border-style: none;max-height: 200px;}", 1)
+              shadowRootStyles[0].replace("img {border-top-left-radius: calc(0.25rem - 1px);border-top-right-radius: calc(0.25rem - 1px);flex-shrink: 0;width: 100%;vertical-align: middle;border-style: none;max-height: 200px; object-fit: cover}", 1)
           }, [250])
       }
       else

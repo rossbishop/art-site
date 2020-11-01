@@ -16,12 +16,16 @@ export default function NewRevision(props) {
                         <div className="row d-flex align-items-center">
                             <div className="d-flex flex-column col-4">
                                 <h6>Uploaded Content:</h6>
-                                <img className={NewProjectStyles.profileImgSmall} src="https://via.placeholder.com/150" />
+                                {/* <img className={NewProjectStyles.profileImgSmall} src="https://via.placeholder.com/150" /> */}
+                                {props.revisionImageURL && (
+                                    <img className={NewProjectStyles.profileImgSmall} src={props.revisionImageURL} />
+                                )}                                
                             </div>
                             <div className="d-flex flex-column col-12">
-                                <input type="userDetail" id="inputUsername" className={cx(NewProjectStyles.formControl,"my-3", "py-2", "pl-0")} placeholder="Local Path" defaultValue="" required autofocus/>
-                                <button type="button" className={cx('btn', 'btn-secondary', NewProjectStyles.imgButton)}>Choose</button>
-                                <button type="button" className={cx('btn', 'btn-info', NewProjectStyles.imgButton)}>Upload</button>
+                                {/* <input type="userDetail" id="inputUsername" className={cx(NewProjectStyles.formControl,"my-3", "py-2", "pl-0")} placeholder="Local Path" defaultValue="" required autofocus/> */}
+                                <input type="userDetail" type="file" accept="image/png" onChange={event => props.setRevisionFile(event.target.files[0])} id="inputFile" className={cx(NewProjectStyles.formControl,"my-3", "py-2", "pl-0")} placeholder="Local Path" defaultValue="" required autofocus/>
+                                {/* <button type="button" className={cx('btn', 'btn-secondary', NewProjectStyles.imgButton)}>Choose</button> */}
+                                <button type="button" className={cx('btn', 'btn-info', NewProjectStyles.imgButton)} onClick={(e) => {e.preventDefault();props.uploadNewRevisionImage(props.revisionFile);}}>Upload</button>
                             </div>
                         </div>
                         <h4 className="mt-3">New Revision Name</h4>
@@ -36,7 +40,7 @@ export default function NewRevision(props) {
                         {props.revisionError.isError && (
                             <div className="alert alert-danger" role="alert">{props.revisionError.message}</div>)
                         }
-                        <button className={cx(NewProjectStyles.btnProjectCreate, "btn", "btn-lg", "btn-primary", "btn-block", "mt-4")} type="submit" onClick={(e) => {e.preventDefault();props.createNewRevision(props.revisionName, props.revisionDescription);}}>Create Revision</button>
+                        <button className={cx(NewProjectStyles.btnProjectCreate, "btn", "btn-lg", "btn-primary", "btn-block", "mt-4")} type="submit" onClick={(e) => {e.preventDefault();props.createNewRevision();}}>Create Revision</button>
                     </form>
                 </div>
             </div>

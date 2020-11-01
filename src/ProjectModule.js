@@ -56,16 +56,6 @@ export default function ProjectModule(props) {
 
     return (
         <Fragment>
-            {/* {shouldRevisionRedirect && (
-                <Redirect
-                    to={{
-                    //pathname: `/newrevision/${window.location.pathname.split('/')[2]}`
-                        pathname: `/newrevision/${props.projectDetails.id}`,
-                        state: { from: location }
-                    }}
-                />
-            )
-            } */}
             <div className={projectModuleStyles["container-wrap"]}>
                 <div className="container-fluid d-flex justify-content-center carousel-container">
                     <div id="myCarousel" className="carousel slide" data-ride="carousel" data-interval="0">

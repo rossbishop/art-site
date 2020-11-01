@@ -24,7 +24,7 @@ export default function Header(props)
         <>
         <header>
             <nav className={cx('navbar', 'navbar-expand-lg', 'navbar-dark', headerStyles.bgWip)}>
-                <Link className="navbar-brand" to="/loading" onClick={event => {props.setLoading(true);props.setDestinationPage('/')}}>WorkInProgress</Link>
+                <Link className="navbar-brand" to="/loading" onClick={event => {props.setLoading(true);props.setDestinationPage('/')}}>ArtShare</Link>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>

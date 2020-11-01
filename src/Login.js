@@ -16,9 +16,6 @@ export default function Login(props) {
 
     return (
         <>
-        {redirectRegister && (
-            <Redirect to="/loading" /> 
-        )}
         <div className="container">
             <div className="row">
                 <div className="col-12">
@@ -36,7 +33,7 @@ export default function Login(props) {
                         <label htmlFor="inputPassword" className="sr-only">Enter password</label>
                         <input type="password" id="inputPassword" className={cx(LoginStyles.formControl,"mb-3", "py-2", "pl-0")} placeholder="Enter Password" onChange={event => props.setPassword(event.target.value)} required autoFocus/>
                         <button className={cx(LoginStyles.btnLogin, "btn", "btn-lg", "btn-primary", "btn-block", "mt-4")} type="submit" onClick={(e) => {e.preventDefault();props.signIn({username,password});}}>Login</button>
-                        <button className={cx(LoginStyles.btnLogin, "btn", "btn-lg", "btn-primary", "btn-block", "mt-4")} type="submit" onClick={(e) => {e.preventDefault();props.setDestinationPage('/register');props.setLoading(true);setRedirectRegister(true);}}>Register</button>
+                        <Link to="/loading" onClick={event => {props.setLoading(true);props.setDestinationPage('/register')}}><button className={cx(LoginStyles.btnLogin, "btn", "btn-lg", "btn-primary", "btn-block", "mt-4")} type="submit" >Register</button></Link>
                     </form>
                     <div className={cx(LoginStyles.forgotPassword, "mt-2", "mb-3")}><Link to="/loading" onClick={event => {props.setLoading(true);props.setDestinationPage('/forgot')}}>Forgot Password</Link></div>
                 </div>

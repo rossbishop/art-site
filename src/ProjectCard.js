@@ -46,12 +46,12 @@ export default function ProjectCard(props) {
               </div>
               <div className="d-flex justify-content-between align-items-center">
                   <div className="btn-group">
-                      <button type="button" className={cx(projectCardStyles.buttonView, "btn", "btn-sm", "btn-outline-secondary", projectCardStyles.btnMod)}><Link className={projectCardStyles.links} to="/loading" onClick={event => {props.setLoading(true);props.setDestinationPage(props.link)}}>View</Link></button>
+                  <Link className={projectCardStyles.links} to="/loading" onClick={event => {props.setLoading(true);props.setDestinationPage(props.link)}}><button type="button" className={cx(projectCardStyles.buttonView, "btn", "btn-sm", "btn-outline-secondary", projectCardStyles.btnMod)}>View</button></Link>
                   </div>
                   <small className={projectCardStyles.projectInfoIcons}><span>{props.commentcount}</span> 
                       <img className={projectCardStyles.commsImg} src="https://systemuicons.com/images/icons/message_writing.svg"/><span> / {props.revisioncount}</span> 
-                      <img className={projectCardStyles.commsImg} src="https://systemuicons.com/images/icons/write.svg"/><span>/ {props.viewcount}</span> 
-                      <img className={projectCardStyles.commsImg} src="https://systemuicons.com/images/icons/user_male.svg"/>
+                      <img className={projectCardStyles.commsImg} src="https://systemuicons.com/images/icons/write.svg"/> {/*<span> / {props.viewcount}</span>*/}  
+                      {/*<img className={projectCardStyles.commsImg} src="https://systemuicons.com/images/icons/user_male.svg"/>*/}
                   </small>
               </div>
         </div>

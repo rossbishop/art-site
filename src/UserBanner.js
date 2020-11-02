@@ -4,6 +4,7 @@ import UserSocialIcon from './UserSocialIcon'
 import 'bootstrap/dist/css/bootstrap.css'
 import userBannerStyles from './css/userbanner.module.css'
 import cx from 'classnames'
+import { Checkbox } from 'aws-amplify-react'
 
 export default function UserBanner(props) {
 
@@ -12,7 +13,7 @@ export default function UserBanner(props) {
         {
             console.log("AMPLIFY IMAGE EXISTS!!!!")
             let banner = document.getElementById('banner')
-            banner.style = "padding: 0; margin-bottom: 0; background-image: url(" + props.bannerURL + "); background-repeat: no-repeat; background-size: 100%; color: #fff;"
+            banner.style = "padding: 0; margin-bottom: 3em; background-image: url(" + props.bannerURL + "); background-repeat: no-repeat; background-size: 100%; color: #fff;"
         }
         else
         {
@@ -22,7 +23,7 @@ export default function UserBanner(props) {
 
     return (
         <section id="banner">
-            <div className={userBannerStyles.blurProfileBg}>
+            <div className= {userBannerStyles.blurProfileBg}>
                 <div className='container'>
                     <div className="row">
                         <div className="col-6">

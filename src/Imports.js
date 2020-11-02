@@ -12,5 +12,4 @@ import {
     Link
 } from "react-router-dom";
 
-
 export {Header, ProjectGrid, Footer, Gallery, Comments, ProjectModule, Router, Switch, Route, Link}

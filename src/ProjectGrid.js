@@ -20,7 +20,7 @@ export default function ProjectGrid(props) {
   }
 
   return (
-    <div className="album py-5 bg-light">
+    <div className="album mt-3 mb-5 bg-light">
       <div className="container">
         <div className="row">
           {

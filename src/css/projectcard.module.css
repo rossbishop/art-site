@@ -32,3 +32,14 @@
     color: black;
     text-decoration-line: none;
 }
+
+.cardImage {
+    border-top-left-radius: calc(0.25rem - 1px);
+    border-top-right-radius: calc(0.25rem - 1px);
+    flex-shrink: 0;
+    width: 100%;
+    vertical-align: middle;
+    border-style: none;
+    max-height: 200px; 
+    object-fit: cover;
+}

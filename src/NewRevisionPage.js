@@ -65,22 +65,33 @@ function NewRevisionPage(props) {
 
     const createNewRevision = async () => {
         try {
-            const revisionData = {
-                projectID: projectID,
-                imgSrc: "https://i.imgur.com/BlbUQz7.jpg",
-                name: revisionName,
-                description: revisionDescription,
-                contentType: "revision",
-                imgFile: {
-                    bucket: awsconfig.aws_user_files_s3_bucket,
-                    key: revisionImageKey,
-                    region: awsconfig.aws_user_files_s3_bucket_region
-                }
+            if (revisionName == '') {
+                throw "Provide a revision name"
             }
-            const revisionCall = await API.graphql({query: mutations.createRevision, variables: {input: revisionData}})
-            console.log('Success creating revision: ', revisionCall)
-            setRevisionSuccess({isSuccess: true, message: "Success!"})
-            setTimeout(() => {getRedirectPage();}, 3000);
+            else if (revisionDescription == '') {
+                throw "Provide a revision description"
+            }
+            else if (revisionImageURL == undefined) {
+                throw "Provide a revision image"
+            }
+            else {
+                const revisionData = {
+                    projectID: projectID,
+                    imgSrc: "https://i.imgur.com/BlbUQz7.jpg",
+                    name: revisionName,
+                    description: revisionDescription,
+                    contentType: "revision",
+                    imgFile: {
+                        bucket: awsconfig.aws_user_files_s3_bucket,
+                        key: revisionImageKey,
+                        region: awsconfig.aws_user_files_s3_bucket_region
+                    }
+                }
+                const revisionCall = await API.graphql({query: mutations.createRevision, variables: {input: revisionData}})
+                console.log('Success creating revision: ', revisionCall)
+                setRevisionSuccess({isSuccess: true, message: "Success!"})
+                setTimeout(() => {getRedirectPage();}, 3000);
+            }
         }
         catch (error) {
             console.log('Error creating revision: ', error)

@@ -23,6 +23,7 @@ function ProfileUpdatePage(props) {
 
     const [currPassword, setCurrPassword] = useState()
     const [newPassword, setNewPassword] = useState()
+    const [newPasswordConfirm, setNewPasswordConfirm] = useState()
 
     const [loadProfileSuccess, setLoadProfileSuccess] = useState({isSuccess: false, message: ""})
     const [loadProfileError, setLoadProfileError] = useState({isError: false, message: ""})
@@ -44,6 +45,8 @@ function ProfileUpdatePage(props) {
     const [bannerImageKey, setBannerImageKey] = useState()
     const [bannerImageURL, setBannerImageURL] = useState()
     const [bannerFile, setBannerFile] = useState()
+
+    const [errorType, setErrorType] = useState("local")
 
     const getUserProfileData = async () => {
         try {
@@ -74,60 +77,109 @@ function ProfileUpdatePage(props) {
 
     const updateProfile = async() => {
         try {
-            let user = await Auth.currentAuthenticatedUser()
-            let cognitoUpdate = await Auth.updateUserAttributes(user, {
-                'preferred_username': username
-            });
-
-            let avatarImgJson = ""
-            let bannerImgJson = ""
-
-            if(avatarImageKey != undefined)
-            {
-                avatarImgJson = {
-                        bucket: awsconfig.aws_user_files_s3_bucket,
-                        key: avatarImageKey,
-                        region: awsconfig.aws_user_files_s3_bucket_region
-                    }
+            if(username == undefined || username == "") {
+                throw "You must enter a username"
             }
-
-            if(bannerImageKey != undefined)
-            {
-                bannerImgJson = {
-                        bucket: awsconfig.aws_user_files_s3_bucket,
-                        key: bannerImageKey,
-                        region: awsconfig.aws_user_files_s3_bucket_region
-                    }
+            else if(avatarImageURL == undefined || avatarImageURL == ""){
+                throw "You must provide an avatar image"
             }
-
-            const publicDetails = {
-                id: user.attributes.sub, 
-                username: username, 
-                position: job, 
-                location: location, 
-                bio: bio,
-                avatarImgFile: ((avatarImgJson != "") ? avatarImgJson : loadProfileData.avatarImgFile ),
-                bannerImgFile: ((bannerImgJson != "") ? bannerImgJson : loadProfileData.bannerImgFile )
+            else if(bannerImageURL == undefined || bannerImageURL == ""){
+                throw "You must provide a banner image"
             }
-
-            // console.log(publicDetails)
-
-            const publicProfileUpdate = await API.graphql({ query: mutations.updatePublicUserProfile, variables: {input: publicDetails}})
-            setProfileSuccess({isSuccess: true, message: "Profile details updated successfully"})
+            else {
+                let user = await Auth.currentAuthenticatedUser()
+                let cognitoUpdate = await Auth.updateUserAttributes(user, {
+                    'preferred_username': username
+                });
+    
+                let avatarImgJson = ""
+                let bannerImgJson = ""
+    
+                if(avatarImageKey != undefined)
+                {
+                    avatarImgJson = {
+                            bucket: awsconfig.aws_user_files_s3_bucket,
+                            key: avatarImageKey,
+                            region: awsconfig.aws_user_files_s3_bucket_region
+                        }
+                }
+    
+                if(bannerImageKey != undefined)
+                {
+                    bannerImgJson = {
+                            bucket: awsconfig.aws_user_files_s3_bucket,
+                            key: bannerImageKey,
+                            region: awsconfig.aws_user_files_s3_bucket_region
+                        }
+                }
+    
+                const publicDetails = {
+                    id: user.attributes.sub, 
+                    username: username, 
+                    position: job, 
+                    location: location, 
+                    bio: bio,
+                    avatarImgFile: ((avatarImgJson != "") ? avatarImgJson : loadProfileData.avatarImgFile ),
+                    bannerImgFile: ((bannerImgJson != "") ? bannerImgJson : loadProfileData.bannerImgFile )
+                }
+    
+                // console.log(publicDetails)
+    
+                const publicProfileUpdate = await API.graphql({ query: mutations.updatePublicUserProfile, variables: {input: publicDetails}})
+                setProfileSuccess({isSuccess: true, message: "Profile details updated successfully"})
+            }
         }
         catch(err) {
             console.log(err)
-            setProfileError(err)
+            setProfileError({isError: true, message: err})
         }
     }
 
-    function updatePassword() {
-        Auth.currentAuthenticatedUser()
-            .then(user => {
-                return Auth.changePassword(user, currPassword, newPassword);
-            })
-            .then(data => {console.log(data); setPasswordSuccess({isSuccess: true, message: data});})
-            .catch(err => {console.log(err); setPasswordError({isSuccess: true, message: err});});
+    const updatePassword = async() => {
+        let passwordNumberRegEx = new RegExp('[0-9]')
+        let passwordLetterRegEx = new RegExp('[a-z]')
+        try {
+            if((currPassword == undefined) ||  currPassword == "")
+            {
+                throw "Enter current password"
+            }
+            if(((newPassword || newPasswordConfirm) == undefined) || ((newPassword || newPasswordConfirm) == ""))
+            {
+                throw "New password must not be empty"
+            }
+            else if(newPassword != newPasswordConfirm)
+            {
+                throw "New passwords must match!"
+            }
+            else if(newPassword.length < 8)
+            {
+                throw "New password must be at least 8 characters"
+            }
+            else if(!((newPassword.match(passwordNumberRegEx)) && (newPassword.match(passwordLetterRegEx))))
+            {
+                throw "New password must contain lowercase characters and numbers"
+            }
+            else
+            {
+                const user = await Auth.currentAuthenticatedUser()
+                const passwordChange = await Auth.changePassword(user, currPassword, newPassword);
+                console.log(passwordChange)
+                setPasswordSuccess({isSuccess: true, message: passwordChange});}
+        }
+        catch (error) {
+            console.log(error); 
+            if(typeof(error) == "object")
+            {
+                setPasswordError({isError: true, message: error.message});
+            }
+            else
+            {
+                setPasswordError({isError: true, message: error});
+            }
+        }
+
+
+
     }
 
     const uploadNewAvatarImage = async(inputFile) => {
@@ -245,6 +297,7 @@ function ProfileUpdatePage(props) {
                     setJob={setJob}
                     setCurrPassword={setCurrPassword}
                     setNewPassword={setNewPassword}
+                    setNewPasswordConfirm={setNewPasswordConfirm}
                     setUsername={setUsername}
                     updateSocial={updateSocial}
                     updateProfile={updateProfile}

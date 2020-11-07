@@ -38,15 +38,22 @@ export default function ProjectModule(props) {
 
     const createNewComment = async () => {
         try {
-            const commentData = {
-                revisionID: props.projectDetails.revisions.items[currentProjectState.currentId].id,
-                comment: props.comment,
-                likeCount: 0
+            if(props.comment == undefined || props.comment == "")
+            {
+                throw "You must enter comment text"
             }
-            const commentCall = await API.graphql({query: mutations.createComment, variables: {input: commentData}})
-            console.log('Success creating comment: ', commentCall)
-            setCommentSuccess({isSuccess: true, message: "Success!"})
-            setTimeout(() => {reloadPage();}, 3000);
+            else
+            {
+                const commentData = {
+                    revisionID: props.projectDetails.revisions.items[currentProjectState.currentId].id,
+                    comment: props.comment,
+                    likeCount: 0
+                }
+                const commentCall = await API.graphql({query: mutations.createComment, variables: {input: commentData}})
+                console.log('Success creating comment: ', commentCall)
+                setCommentSuccess({isSuccess: true, message: "Success!"})
+                setTimeout(() => {reloadPage();}, 3000);
+            }
         }
         catch (error) {
             console.log('Error creating comment: ', error)
@@ -128,6 +135,7 @@ export default function ProjectModule(props) {
                 </>
             }
             {
+                
                 props.projectRevisionData[currentProjectState.currentId].comments.items.map(item => {
                     return (
                         <CommentCard

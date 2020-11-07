@@ -57,16 +57,33 @@ function NewProjectPage(props) {
 
     const createNewProject = async () => {
         try {
-            const projectData = {
-                //projectId: uuidv4(),
-                projectName: projectName,
-                projectDescription: projectDescription,
-                contentType: "project"
+            if (projectName == ''){
+                throw "Provide a valid project name"
             }
-        
-            const projectCall = await API.graphql({query: mutations.createProject, variables: {input: projectData}})
-            console.log('Success creating project: ', projectCall)
-            setCreatedProject(projectCall)
+            else if (projectDescription == '') {
+                throw "Provide a project description"
+            }
+            else if (revisionName == '') {
+                throw "Provide a revision name"
+            }
+            else if (revisionDescription == '') {
+                throw "Provide a revision description"
+            }
+            else if (revisionImageURL == undefined) {
+                throw "Provide an initial revision image"
+            }
+            else {
+                const projectData = {
+                    //projectId: uuidv4(),
+                    projectName: projectName,
+                    projectDescription: projectDescription,
+                    contentType: "project"
+                }
+            
+                const projectCall = await API.graphql({query: mutations.createProject, variables: {input: projectData}})
+                console.log('Success creating project: ', projectCall)
+                setCreatedProject(projectCall)
+            }
         }
         catch (error) {
             console.log('Error creating project: ', error)

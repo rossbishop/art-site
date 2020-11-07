@@ -24,12 +24,13 @@ export default function ProjectCard(props) {
         </Link>
         <div className="card-body">
           <div>
-            <h5 className="project-name">{props.name} </h5>
+            <Link className={projectCardStyles.links} to="/loading" onClick={event => { props.setLoading(true); props.setDestinationPage(props.link) }}>
+              <h5 className="project-name">{props.name} </h5>
+            </Link>
             <h5 className="project-author text-muted">by <Link to="/loading" onClick={event => { props.setLoading(true); props.setDestinationPage(`/user/${props.username}`) }}>{props.username}</Link></h5>
           </div>
           <p className={cx("card-text", projectCardStyles.projectDescription)}>{props.description}</p>
-          <div className="card-text">
-            
+          <div className="card-text">  
             <div className="d-flex justify-content-between align-items-center">
             <small className="text-muted">{props.date}</small>
               <small className={projectCardStyles.projectInfoIcons}><span>{props.commentcount}</span>

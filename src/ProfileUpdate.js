@@ -109,7 +109,7 @@ export default function ProfileUpdate(props) {
                         <label for="inputNewPassword" className="sr-only">New Password</label>
                         <input type="password" id="inputNewPassword" className={cx(ProfileUpdateStyles.formControl,"my-3", "py-2", "pl-0")} placeholder="Enter New Password" onChange={event => props.setNewPassword(event.target.value)} required/>
                         <label for="inputConfirmPassword" className="sr-only">Password Confirmation</label>
-                        <input type="password" id="inputConfirmPassword" className={cx(ProfileUpdateStyles.formControl,"my-3", "py-2", "pl-0")} placeholder="Confirm New Password" required/>
+                        <input type="password" id="inputConfirmPassword" className={cx(ProfileUpdateStyles.formControl,"my-3", "py-2", "pl-0")} placeholder="Confirm New Password" onChange={event => props.setNewPasswordConfirm(event.target.value)} required/>
                         {props.passwordSuccess.isSuccess && (
                             <div className="alert alert-success" role="alert">Updated password successfully</div>
                         )

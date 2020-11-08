@@ -14,6 +14,8 @@ function UserPage(props) {
     const [profileData, setProfileData] = useState(null)
     const [avatarURL, setAvatarURL] = useState()
     const [bannerURL, setBannerURL] = useState()
+    const [noAvatar, setNoAvatar] = useState()
+    const [noBanner, setNoBanner] = useState()
     const [isLoaded, setLoaded] = useState(false)
 
     const getUserProjects = async () => {
@@ -42,10 +44,23 @@ function UserPage(props) {
 
     const getProfileImages = async() => {
         try {
-            const signedAvatarURL = await Storage.get(profileData.avatarImgFile.key, {level: 'public'})
-            setAvatarURL(signedAvatarURL)
-            const signedBannerURL = await Storage.get(profileData.bannerImgFile.key, {level: 'public'})
-            setBannerURL(signedBannerURL)
+            if(profileData.avatarImgFile != null)
+            {
+                const signedAvatarURL = await Storage.get(profileData.avatarImgFile.key, {level: 'public'})
+                setAvatarURL(signedAvatarURL)
+            }
+            else
+            {
+                setNoAvatar(true)
+            }
+            if(profileData.bannerImgFile != null){
+                const signedBannerURL = await Storage.get(profileData.bannerImgFile.key, {level: 'public'})
+                setBannerURL(signedBannerURL)
+            }
+            else
+            {
+                setNoBanner(true)
+            }
         }
         catch (error) {
             console.log(error)
@@ -80,6 +95,8 @@ function UserPage(props) {
                 profileData={profileData}
                 avatarURL={avatarURL}
                 bannerURL={bannerURL}
+                noBanner={noBanner}
+                noAvatar={noAvatar}
                 />
             }
             {projectData &&

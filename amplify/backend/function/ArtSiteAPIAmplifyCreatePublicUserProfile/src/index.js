@@ -39,7 +39,6 @@ exports.handler = async (event, context) => {
                 'instagram': {S: ''},
                 'twitter': {S: ''},
                 'facebook': {S: ''},
-                'avatarImg': {S: ''},
                 'createdAt': {S: date.toISOString()},
                 'updatedAt': {S: date.toISOString()},
             },

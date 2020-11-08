@@ -15,9 +15,11 @@ export default function UserBanner(props) {
             let banner = document.getElementById('banner')
             banner.style = "padding: 0; margin-bottom: 3em; background-image: url(" + props.bannerURL + "); background-repeat: no-repeat; background-size: 100%; color: #fff;"
         }
-        else
+        else if(((document.getElementById('banner')) != null) && (props.bannerURL == null))
         {
             console.log("AMPLIFY IMAGE DOESN'T EXIST!!!")
+            let banner = document.getElementById('banner')
+            banner.style = "padding: 0; margin-bottom: 3em; background-color: #858585; background-repeat: no-repeat; background-size: 100%; color: #fff;"
         }
     },[props.bannerURL])
 
@@ -29,7 +31,14 @@ export default function UserBanner(props) {
                         <div className="col-6">
                             <div className="row">
                                 <div className="col-4 pr-3">
-                                    <img className={userBannerStyles.profileImg} src={props.avatarURL} />
+                                    {props.avatarURL && 
+                                        <img className={userBannerStyles.profileImg} src={props.avatarURL} />
+                                    }
+                                    {props.noAvatar && (
+                                        <div className={userBannerStyles.noProfileImg}>
+                                            <p>{props.profileData.username.substring(0,1)}</p>
+                                        </div>
+                                    )}
                                 </div>
                                 <div className="col-8">
                                     <h1>{props.profileData.username}</h1>

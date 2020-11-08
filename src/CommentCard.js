@@ -12,6 +12,7 @@ import AmplifyImage from './AmplifyImage'
 export default function CommentCard(props) {
 
     const [avatarKey, setAvatarKey] = useState()
+    const [noAvatar, setNoAvatar] = useState()
 
     useEffect(() => {
         if(props.username != undefined)
@@ -23,7 +24,13 @@ export default function CommentCard(props) {
     const getAvatar = async () => {
         try {
             let apiCall = await API.graphql({query: queries.publicUserProfileByUser, variables: {owner: props.username}})
-            setAvatarKey(apiCall.data.publicUserProfileByUser.items[0].avatarImgFile.key)
+            if((apiCall.data.publicUserProfileByUser.items[0].avatarImgFile == undefined) || (apiCall.data.publicUserProfileByUser.items[0].avatarImgFile == null) || (apiCall.data.publicUserProfileByUser.items[0].avatarImgFile == ""))
+            {
+                setNoAvatar(true)
+            }
+            else {
+                setAvatarKey(apiCall.data.publicUserProfileByUser.items[0].avatarImgFile.key)
+            }
         }
         catch (error) {
             console.log(error)
@@ -42,6 +49,12 @@ export default function CommentCard(props) {
                         imgKey={avatarKey}
                         style={commentCardStyles.profileImgSmall}
                     />
+                )}
+                {noAvatar && (
+                    <div className={commentCardStyles.commentBlankAvatar}>
+                        <p>{props.username.substring(0,1)}</p>
+                    </div>
+                    
                 )}
                 {/* <img className={commentCardStyles.profileImgSmall} src='https://via.placeholder.com/96' /> */}
                 <div className="d-flex align-items-start flex-column" />

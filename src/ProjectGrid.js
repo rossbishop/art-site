@@ -29,7 +29,7 @@ export default function ProjectGrid(props) {
               return (
                 <ProjectCard
                   name={item.projectName}
-                  img={item.revisions.items[0].imgSrc}
+                  img={item.revisions.items[item.revisions.items.length-1].imgSrc}
                   description={item.projectDescription}
                   date={item.createdAt.split('T')[0]}
                   commentcount={calculateCounts(index)}
@@ -39,7 +39,7 @@ export default function ProjectGrid(props) {
                   link={`/project/${item.id}`}
                   setLoading={props.setLoading}
                   setDestinationPage={props.setDestinationPage}
-                  imgKey={item.revisions.items[0].imgFile.key}    
+                  imgKey={item.revisions.items[item.revisions.items.length-1].imgFile.key}    
                 />
               )
             }

@@ -2,12 +2,10 @@ import React from 'react'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import LogoutStyles from './css/logout.module.css'
+
 import cx from 'classnames'
-import {Link} from './Imports'
 
 export default function Logout(props) {
-
-    const getError=props.getError
 
     return (
         <div className="container">

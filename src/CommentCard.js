@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import commentCardStyles from './css/commentcard.module.css'
-import {Link} from "react-router-dom";
+
+import AmplifyImage from './AmplifyImage'
 import cx from 'classnames'
 
-import { API, graphqlOperation } from 'aws-amplify'
+import { API } from 'aws-amplify'
 import * as queries from './graphql/queries'
-import AmplifyImage from './AmplifyImage'
+
+import {Link} from "react-router-dom";
 
 export default function CommentCard(props) {
 
@@ -56,7 +58,6 @@ export default function CommentCard(props) {
                     </div>
                     
                 )}
-                {/* <img className={commentCardStyles.profileImgSmall} src='https://via.placeholder.com/96' /> */}
                 <div className="d-flex align-items-start flex-column" />
                 <div className="mb-auto">{props.comment}
                     {/* <div className={commentCardStyles.commentReply}>Like</div> */}

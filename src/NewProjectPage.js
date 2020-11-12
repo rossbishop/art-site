@@ -1,11 +1,15 @@
-import { Header, ProjectGrid, Footer } from './Imports.js'
 import React, { useState, useEffect } from 'react';
+
 import NewProject from './NewProject'
-import { API, graphqlOperation, Storage } from 'aws-amplify'
-import * as mutations from './graphql/mutations'
-import { Redirect } from "react-router-dom";
-import { v4 as uuidv4 } from 'uuid';
+import { Header, Footer } from './Imports.js'
+
 import awsconfig from './aws-exports';
+import { API, Storage } from 'aws-amplify'
+import * as mutations from './graphql/mutations'
+
+import { v4 as uuidv4 } from 'uuid';
+
+import { Redirect } from "react-router-dom";
 
 function NewProjectPage(props) {
 
@@ -32,8 +36,6 @@ function NewProjectPage(props) {
     }
 
     const uploadNewProjectImage = async(inputFile) => {
-        console.log("Start Image Upload")
-        //const file = e.target.files[0];
         const file = inputFile;
         const imageuuid = uuidv4();
         try {
@@ -44,15 +46,11 @@ function NewProjectPage(props) {
                     console.log(`Uploaded: ${progress.loaded}/${progress.total}`)
                 }
             });
-            console.log(result)
             setRevisionImageKey(result.key)
         }
         catch (error) {
             console.log(error)
         }
-        // finally {
-        //     console.log(result)
-        // }
     }
 
     const createNewProject = async () => {
@@ -74,14 +72,12 @@ function NewProjectPage(props) {
             }
             else {
                 const projectData = {
-                    //projectId: uuidv4(),
                     projectName: projectName,
                     projectDescription: projectDescription,
                     contentType: "project"
                 }
             
                 const projectCall = await API.graphql({query: mutations.createProject, variables: {input: projectData}})
-                console.log('Success creating project: ', projectCall)
                 setCreatedProject(projectCall)
             }
         }
@@ -95,7 +91,6 @@ function NewProjectPage(props) {
     const createNewRevision = async () => {
         try {
             const revisionData = {
-                //revisionId: uuidv4(),
                 projectID: createdProject.data.createProject.id,
                 imgSrc: "https://i.imgur.com/BlbUQz7.jpg",
                 name: revisionName,
@@ -109,7 +104,6 @@ function NewProjectPage(props) {
             }
             const revisionCall = await API.graphql({query: mutations.createRevision, variables: {input: revisionData}})
             setProjectSuccess({isSuccess: true, message: "Success!"})
-            console.log('Success creating revision: ', revisionCall)
         }
         catch (error) {
             console.log('Error creating revision: ', error)

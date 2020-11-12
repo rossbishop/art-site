@@ -1,23 +1,22 @@
 import React, { useEffect } from 'react'
-import UserSocialIcon from './UserSocialIcon'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import userBannerStyles from './css/userbanner.module.css'
+
+import UserSocialIcon from './UserSocialIcon'
+
 import cx from 'classnames'
-import { Checkbox } from 'aws-amplify-react'
 
 export default function UserBanner(props) {
 
     useEffect(() => {
         if(((document.getElementById('banner')) != null) && (props.bannerURL != null))
         {
-            console.log("AMPLIFY IMAGE EXISTS!!!!")
             let banner = document.getElementById('banner')
             banner.style = "padding: 0; margin-bottom: 3em; background-image: url(" + props.bannerURL + "); background-repeat: no-repeat; background-size: 100%; color: #fff;"
         }
         else if(((document.getElementById('banner')) != null) && (props.bannerURL == null))
         {
-            console.log("AMPLIFY IMAGE DOESN'T EXIST!!!")
             let banner = document.getElementById('banner')
             banner.style = "padding: 0; margin-bottom: 3em; background-color: #858585; background-repeat: no-repeat; background-size: 100%; color: #fff;"
         }

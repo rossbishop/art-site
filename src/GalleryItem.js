@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import galleryItemStyles from './css/galleryitem.module.css'
 import './css/carousel.css'
-import { AmplifyS3Image } from '@aws-amplify/ui-react';
+
 import AmplifyImage from './AmplifyImage'
 
 export default function GalleryItem(props) {

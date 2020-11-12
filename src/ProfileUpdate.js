@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import ProfileUpdateStyles from './css/profileupdate.module.css'
+
 import cx from 'classnames'
 
 export default function ProfileUpdate(props) {
@@ -15,7 +16,6 @@ export default function ProfileUpdate(props) {
                         <div className="row d-flex align-items-center">
                             <div className="d-flex flex-column col-4">
                                 <h6>Avatar Image:</h6>
-                                {/* <img className={ProfileUpdateStyles.profileImgSmall} src={props.userData.profilepicsrc} /> */}
                                 {props.avatarImageURL && (
                                     <img className={ProfileUpdateStyles.profileImgSmall} src={props.avatarImageURL} />
                                 )}
@@ -23,23 +23,16 @@ export default function ProfileUpdate(props) {
                             <div className="d-flex flex-column col-8">
                                 <div className="d-flex flex-row">
                                     <div className="d-flex flex-column col-12">
-                                        {/* <input type="userDetail" id="inputUsername" className={cx(ProfileUpdateStyles.formControl,"my-3", "py-2", "pl-0")} placeholder="Local Path" defaultValue="" required autofocus/> */}
+                                        
                                         <input type="userDetail" type="file" accept="image/png" onChange={event => props.setAvatarFile(event.target.files[0])} id="inputFile" className={cx(ProfileUpdateStyles.formControl,"my-3", "py-2", "pl-0")} placeholder="Local Path" defaultValue="" required autofocus/>
                                         <button type="button" className={cx('btn', 'btn-secondary', ProfileUpdateStyles.imgButton)} onClick={(e) => {e.preventDefault();props.uploadNewAvatarImage(props.avatarFile);}} >Upload</button>
                                     </div>
-                                    {/* <div className="d-flex flex-column col-6">
-                                        <input type="userDetail" id="inputUsername" className={cx(ProfileUpdateStyles.formControl,"my-3", "py-2", "pl-0")} placeholder="Web Path" defaultValue="" required autofocus/>
-                                    </div> */}
                                 </div>
-                                {/* <div className="d-flex flex-row justify-content-center">
-                                    <button type="button" className={cx('btn', 'btn-info', ProfileUpdateStyles.imgButton)}>Save</button>
-                                </div> */}
                             </div>
                         </div>
                         <div className="row d-flex align-items-center">
                             <div className="d-flex flex-column col-4">
                                 <h6>Banner Image:</h6>
-                                {/* <img className={ProfileUpdateStyles.profileImgSmall} src={props.userData.profilepicsrc} /> */}
                                 {props.bannerImageURL && (
                                     <img className={ProfileUpdateStyles.profileImgSmall} src={props.bannerImageURL} />
                                 )}
@@ -47,17 +40,10 @@ export default function ProfileUpdate(props) {
                             <div className="d-flex flex-column col-8">
                                 <div className="d-flex flex-row">
                                     <div className="d-flex flex-column col-12">
-                                        {/* <input type="userDetail" id="inputUsername" className={cx(ProfileUpdateStyles.formControl,"my-3", "py-2", "pl-0")} placeholder="Local Path" defaultValue="" required autofocus/> */}
                                         <input type="userDetail" type="file" accept="image/png" onChange={event => props.setBannerFile(event.target.files[0])} id="inputFile" className={cx(ProfileUpdateStyles.formControl,"my-3", "py-2", "pl-0")} placeholder="Local Path" defaultValue="" required autofocus/>
                                         <button type="button" className={cx('btn', 'btn-secondary', ProfileUpdateStyles.imgButton)} onClick={(e) => {e.preventDefault();props.uploadNewBannerImage(props.bannerFile);}} >Upload</button>
                                     </div>
-                                    {/* <div className="d-flex flex-column col-6">
-                                        <input type="userDetail" id="inputUsername" className={cx(ProfileUpdateStyles.formControl,"my-3", "py-2", "pl-0")} placeholder="Web Path" defaultValue="" required autofocus/>
-                                    </div> */}
                                 </div>
-                                {/* <div className="d-flex flex-row justify-content-center">
-                                    <button type="button" className={cx('btn', 'btn-info', ProfileUpdateStyles.imgButton)}>Save</button>
-                                </div> */}
                             </div>
                         </div>
                         <h6 className="mt-3">Change Username:</h6>
@@ -121,11 +107,6 @@ export default function ProfileUpdate(props) {
                     </form>
                 </div>
             </div>
-            {/* <div class="row">
-                <div class="col-6">
-
-                </div>
-            </div> */}
         </div>
     )
 }

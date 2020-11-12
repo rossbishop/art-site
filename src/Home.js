@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
+
 import Header from './Header'
 import ProjectGrid from './ProjectGrid'
 import Footer from './Footer'
 
-import { API, graphqlOperation } from 'aws-amplify'
+import { API } from 'aws-amplify'
 import * as queries from './graphql/queries'
 
 function Home(props) {
@@ -12,8 +13,6 @@ function Home(props) {
 
     const getUserProjects = async () => {
         try {
-            //const owner = (window.location.pathname.split('/'))[2]
-            //const apiCall = await API.graphql({query: queries.projectByOwnerByDate, variables: {owner: "Russbo", limit: 10, sortDirection: "DESC"}})
             const apiCall = await API.graphql({query: queries.listProjects, variables: {limit: 10}})
             console.log(apiCall)
             setProjectData(apiCall.data.listProjects.items)

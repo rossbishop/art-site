@@ -2,23 +2,13 @@ import React from 'react'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import headerStyles from './css/header.module.css'
-import cx from 'classnames'
-import {Link} from './Imports'
 
-import { Auth } from 'aws-amplify';
+import cx from 'classnames'
+
+import { Link } from './Imports'
 
 export default function Header(props) 
 {
-    
-    const signOut = async (props) => {
-        await Auth.signOut()
-        .then((response) => {
-            console.log("Success: " + response)
-        })
-        .catch((error) => {
-            console.log('error signing out: ', error);
-        });
-    }
 
     return (
         <>

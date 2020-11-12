@@ -1,16 +1,19 @@
 import React, {Fragment, useState, useEffect} from 'react' 
-import CommentCard from './CommentCard'
-import GalleryListItem from './GalleryListItem'
-import GalleryItem from './GalleryItem'
-import { API, graphqlOperation } from 'aws-amplify'
-import * as mutations from './graphql/mutations'
-
-import {Link, Redirect} from "react-router-dom";
 
 import 'bootstrap/dist/css/bootstrap.css'
 import './css/carousel.css'
 import projectModuleStyles from './css/projectmodule.module.css'
+
+import CommentCard from './CommentCard'
+import GalleryListItem from './GalleryListItem'
+import GalleryItem from './GalleryItem'
+
 import cx from 'classnames'
+
+import { API } from 'aws-amplify'
+import * as mutations from './graphql/mutations'
+
+import {Link} from "react-router-dom";
 
 export default function ProjectModule(props) {
 
@@ -18,8 +21,6 @@ export default function ProjectModule(props) {
     const [doesOwnProject, setOwnProject] = useState(false)
     const [commentSuccess, setCommentSuccess] = useState({isSuccess: false, message: ""})
     const [commentError, setCommentError] = useState({isError: false, message: ""})
-    const [shouldRevisionRedirect, setRedirect] = useState(false)
-
 
     function reloadPage() {
         window.location.reload()
@@ -50,7 +51,6 @@ export default function ProjectModule(props) {
                     likeCount: 0
                 }
                 const commentCall = await API.graphql({query: mutations.createComment, variables: {input: commentData}})
-                console.log('Success creating comment: ', commentCall)
                 setCommentSuccess({isSuccess: true, message: "Success!"})
                 setTimeout(() => {reloadPage();}, 3000);
             }
@@ -131,7 +131,6 @@ export default function ProjectModule(props) {
                         <div className="alert alert-danger" role="alert">{commentError.message}</div>)
                     }
                     <button type="button" className={cx("btn", "btn-primary", projectModuleStyles.commentButton)} type="submit" onClick={(e) => {e.preventDefault();createNewComment();}}>Submit</button>
-                    {/*<button type="button" className={cx("btn", "btn-danger", projectModuleStyles.commentButton)}>Cancel</button>*/}
                 </>
             }
             {

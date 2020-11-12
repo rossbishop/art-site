@@ -2,6 +2,7 @@ import React from 'react'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import RegisterStyles from './css/register.module.css'
+
 import cx from 'classnames'
 
 export default function RegisterUser(props) {

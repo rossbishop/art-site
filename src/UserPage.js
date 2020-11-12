@@ -1,12 +1,11 @@
-import {Header, Gallery, Comments, Footer, ProjectModule} from './Imports.js'
-import React, { useState, useCallback, useEffect } from 'react';
-import data from './RevisionDummyData'
-import projectDataImport from './ProjectDummyData'
-import { API, graphqlOperation, Storage } from 'aws-amplify'
-import * as queries from './graphql/queries'
+import React, { useState, useEffect } from 'react';
+
 import UserBanner from './UserBanner'
 import ProjectGrid from './ProjectGrid'
-import UserData from './UserDummyData'
+import { Header, Footer } from './Imports.js'
+
+import { API, Storage } from 'aws-amplify'
+import * as queries from './graphql/queries'
 
 function UserPage(props) {
 
@@ -16,13 +15,11 @@ function UserPage(props) {
     const [bannerURL, setBannerURL] = useState()
     const [noAvatar, setNoAvatar] = useState()
     const [noBanner, setNoBanner] = useState()
-    const [isLoaded, setLoaded] = useState(false)
 
     const getUserProjects = async () => {
         try {
             const owner = (window.location.pathname.split('/'))[2]
             const apiCall = await API.graphql({query: queries.projectsByUserByDate, variables: {owner: owner, limit: 20, sortDirection: "DESC"}})
-            console.log(apiCall)
             setProjectData(apiCall.data.projectsByUserByDate.items)
         }
         catch (error) {
@@ -34,7 +31,6 @@ function UserPage(props) {
         try {
             const owner = (window.location.pathname.split('/'))[2]
             const apiCall = await API.graphql({query: queries.publicUserProfileByUser, variables: {owner: owner}})
-            console.log(apiCall)
             setProfileData(apiCall.data.publicUserProfileByUser.items[0])
         }
         catch (error) {
@@ -73,7 +69,6 @@ function UserPage(props) {
     }, [])
 
     useEffect(() => {
-        console.log("GETTING PROFILE IMAGES")
         if(profileData != undefined)
         {
             getProfileImages()
@@ -91,12 +86,11 @@ function UserPage(props) {
             />
             {profileData &&
                 <UserBanner 
-                userData={UserData[0]}
-                profileData={profileData}
-                avatarURL={avatarURL}
-                bannerURL={bannerURL}
-                noBanner={noBanner}
-                noAvatar={noAvatar}
+                    profileData={profileData}
+                    avatarURL={avatarURL}
+                    bannerURL={bannerURL}
+                    noBanner={noBanner}
+                    noAvatar={noAvatar}
                 />
             }
             {projectData &&

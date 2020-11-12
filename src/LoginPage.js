@@ -1,7 +1,8 @@
-import {Header, ProjectGrid, Footer} from './Imports.js'
 import React, { useState } from 'react';
+
+import {Header,  Footer} from './Imports.js'
+
 import Login from './Login'
-import { useHistory } from "react-router-dom";
 
 import { Auth } from 'aws-amplify';
 
@@ -11,10 +12,8 @@ function LoginPage(props) {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [success, setSuccess] = useState({isSuccess: false, message: ''})
-    const history=useHistory();
 
     function getRedirectPage() {
-        //history.goBack();
         window.location.href="/"
     }
 
@@ -22,8 +21,6 @@ function LoginPage(props) {
 
         await Auth.signIn(username, password)
         .then((response) => {
-            console.log('Signed in: ');
-            console.log(response);
             setSuccess({isSuccess: true, message: "You are now logged in. Redirecting to previous page..."})
             setTimeout(() => {getRedirectPage();}, 3000);
         })

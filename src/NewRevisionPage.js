@@ -1,11 +1,13 @@
-import {Header, ProjectGrid, Footer} from './Imports.js'
 import React, { useEffect, useState } from 'react';
+
 import NewRevision from './NewRevision'
-import UserData from './UserDummyData' 
-import { API, graphqlOperation, Storage } from 'aws-amplify'
+import { Header, Footer } from './Imports.js'
+
+import { API, Storage } from 'aws-amplify'
 import * as mutations from './graphql/mutations'
-import { v4 as uuidv4 } from 'uuid';
 import awsconfig from './aws-exports';
+
+import { v4 as uuidv4 } from 'uuid';
 
 function NewRevisionPage(props) {
 
@@ -33,7 +35,6 @@ function NewRevisionPage(props) {
     }
 
     const uploadNewRevisionImage = async(inputFile) => {
-        console.log("Start Image Upload")
         const file = inputFile;
         const imageuuid = uuidv4();
         try {
@@ -44,7 +45,6 @@ function NewRevisionPage(props) {
                     console.log(`Uploaded: ${progress.loaded}/${progress.total}`)
                 }
             });
-            console.log(result)
             setRevisionImageKey(result.key)
         }
         catch (error) {
@@ -88,7 +88,6 @@ function NewRevisionPage(props) {
                     }
                 }
                 const revisionCall = await API.graphql({query: mutations.createRevision, variables: {input: revisionData}})
-                console.log('Success creating revision: ', revisionCall)
                 setRevisionSuccess({isSuccess: true, message: "Success!"})
                 setTimeout(() => {getRedirectPage();}, 3000);
             }
@@ -110,7 +109,6 @@ function NewRevisionPage(props) {
             />
             {projectID &&
                 <NewRevision 
-                    userData={UserData[0]}
                     createNewRevision={createNewRevision}
                     setRevisionName={setRevisionName}
                     setRevisionDescription={setRevisionDescription}

@@ -1,11 +1,11 @@
-import {Header, ProjectGrid, Footer} from './Imports.js'
 import React, { useState } from 'react';
+
+import { Header, Footer } from './Imports.js'
+
 import Register from './Register'
 import RegisterConfirm from './RegisterConfirm'
 
 import { Auth } from 'aws-amplify';
-import { API, graphqlOperation } from 'aws-amplify'
-import * as mutations from './graphql/mutations'
 
 function RegisterPage(props) {
     
@@ -78,16 +78,10 @@ function RegisterPage(props) {
                         email,
                         birthdate,
                         preferred_username: username
-                        //"custom:instagram":"Enter Instagram Account",
-                        //"custom:facebook":"Enter Facebook Account",
-                        //"custom:twitter":"Enter Twitter Account",
-                        //"custom:job":"Enter Job Title",
-                        //"custom:bio":"Tell everyone about yourself"
                     },
                 })
                 setUser(response)
                 setUserCreated(true);
-                console.log(response);
             }
         }
         catch (error) {
@@ -97,12 +91,10 @@ function RegisterPage(props) {
     };   
 
     const confirmSignUp = async (props) => {
-        console.log('Confirming...')
         const { username, confirmationCode } = props;
         await Auth.confirmSignUp(username, confirmationCode)
         .then((response) => {
             setUserConfirmed(true);
-            console.log(response);
         })
         .catch((error) => {
             console.log('error confirming sign up: ', error);
@@ -119,13 +111,11 @@ function RegisterPage(props) {
         {
             currentAge--
         }
-        console.log("AGE: " + currentAge)
         return currentAge
     }
 
     function isValidEmail(email) {
         const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        console.log("TESTING EMAIL: " + re.test(String(email).toLowerCase()))
         return re.test(String(email).toLowerCase());
     }
 
@@ -166,12 +156,8 @@ function RegisterPage(props) {
                     setConfirmationCode={setConfirmationCode}
                     getUserConfirmed={isUserConfirmed}
                 />
-                    // <div className="alert alert-success" role="alert">User account has been created.</div>
                 )
             }
-            {/* {isError.isError && (
-                <div className="alert alert-danger" role="alert">{isError.message.log}</div>)
-            } */}
             <Footer /> 
         </>
     )

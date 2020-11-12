@@ -1,18 +1,16 @@
-import React, {useState} from 'react'
+import React from 'react'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import LoginStyles from './css/login.module.css'
+
 import cx from 'classnames'
-import {Link} from './Imports'
-import {Redirect} from"react-router-dom";
+
+import { Link } from './Imports'
 
 export default function Login(props) {
 
     const username=props.getUsername
     const password=props.getPassword
-    const getError=props.getError
-
-    const [redirectRegister, setRedirectRegister] = useState(false)
 
     return (
         <>

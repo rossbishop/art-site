@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import 'bootstrap/dist/css/bootstrap.css'
-import { useState, useEffect } from 'react';
 import RegisterStyles from './css/register.module.css'
+
 import cx from 'classnames'
 
 export default function Register(props) {
@@ -10,7 +10,6 @@ export default function Register(props) {
     const username=props.getUsername
     const email=props.getEmail
     const password=props.getPassword
-    const birthdate=props.getBirthdate
     const passwordConfirm=props.getPasswordConfirm
 
     useEffect(() => {

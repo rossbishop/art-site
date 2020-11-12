@@ -1,7 +1,6 @@
 import {Header, ProjectGrid, Footer} from './Imports.js'
 import React, { useState, useEffect } from 'react';
 import ProfileUpdate from './ProfileUpdate'
-import UserData from './UserDummyData'
 
 import { Auth } from 'aws-amplify';
 import { API, graphqlOperation, Storage } from 'aws-amplify'
@@ -289,7 +288,6 @@ function ProfileUpdatePage(props) {
                     userDetails={props.userDetails}
                     userAttribs={props.userAttribs}
                     publicUserAttribs={loadProfileData}
-                    userData={UserData[0]}
                     setInstagram={setInstagram}
                     setFacebook={setFacebook}
                     setTwitter={setTwitter}

@@ -2,8 +2,8 @@ import React from 'react'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import NewProjectStyles from './css/newproject.module.css'
+
 import cx from 'classnames'
-import { createProject } from './graphql/mutations'
 
 export default function NewProject(props) {
 
@@ -17,7 +17,6 @@ export default function NewProject(props) {
                         <div className="row d-flex align-items-center">
                             <div className="d-flex flex-column col-4">
                                 <h6>Uploaded Content:</h6>
-                                {/* <img className={NewProjectStyles.profileImgSmall} src="https://via.placeholder.com/150" /> */}
                                 {props.revisionImageURL && (
                                     <img className={NewProjectStyles.profileImgSmall} src={props.revisionImageURL} />
                                 )}
@@ -25,7 +24,6 @@ export default function NewProject(props) {
                             </div>
                             <div className="d-flex flex-column col-12">
                                 <input type="userDetail" type="file" accept="image/png" onChange={event => props.setRevisionFile(event.target.files[0])} id="inputFile" className={cx(NewProjectStyles.formControl,"my-3", "py-2", "pl-0")} placeholder="Local Path" defaultValue="" required autofocus/>
-                                {/* <button type="button" className={cx('btn', 'btn-secondary', NewProjectStyles.imgButton)}>Choose</button> */}
                                 <button type="button" className={cx('btn', 'btn-info', NewProjectStyles.imgButton)} onClick={(e) => {e.preventDefault();props.uploadNewProjectImage(props.revisionFile);}} >Upload</button>
                             </div>
                         </div>

@@ -2,6 +2,7 @@ import React from 'react'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import userSocialIconStyles from './css/usersocialicon.module.css'
+
 import cx from 'classnames'
 
 export default function UserSocialIcon(props) {
@@ -10,23 +11,10 @@ export default function UserSocialIcon(props) {
         <div className="icon-container">
             <div className="row">
                 <p className={userSocialIconStyles.iconTag}>{props.username}</p>
-                {/* <a href={socialString(props.socialtype)}> */}
                     <img className={userSocialIconStyles.socialImg} src={socialImage(props.socialtype)}/>
-                {/* </a> */}
             </div>
         </div>
     )
-}
-
-function socialString(socialtype){
-    switch(socialtype) {
-        case "instagram":
-            return "http://instagram.com/";
-        case "twitter":
-            return "http://twitter.com/";
-        case "facebook":
-            return "http://facebook.com/";
-    }
 }
 
 function socialImage(socialtype){

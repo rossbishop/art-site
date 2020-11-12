@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import projectCardStyles from './css/projectcard.module.css'
-import cx from 'classnames'
-import { AmplifyS3Image } from '@aws-amplify/ui-react';
-import AmplifyImage from './AmplifyImage'
 
+import AmplifyImage from './AmplifyImage'
 import { Link } from './Imports'
+
+import cx from 'classnames'
 
 export default function ProjectCard(props) {
 
@@ -43,7 +43,6 @@ export default function ProjectCard(props) {
         </div>
       </div>
     </div>
-
 
   )
 }

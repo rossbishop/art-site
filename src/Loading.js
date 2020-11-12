@@ -2,8 +2,8 @@ import React from 'react'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import LoadingStyles from './css/loading.module.css'
+
 import cx from 'classnames'
-import {Link} from './Imports'
 
 export default function Loading(props) {
 

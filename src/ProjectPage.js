@@ -1,41 +1,21 @@
-import {Header, Gallery, Comments, Footer, ProjectModule} from './Imports.js'
-import React, { useState, useCallback, useEffect} from 'react';
-import data from './RevisionDummyData'
-import projectDataImport from './ProjectDummyData'
-import { API, graphqlOperation } from 'aws-amplify'
+import React, { useState, useEffect } from 'react';
+
+import { Header, Footer, ProjectModule } from './Imports.js'
+
+import { API } from 'aws-amplify'
 import * as queries from './graphql/queries'
-import { propStyle } from 'aws-amplify-react';
+
 import { withRouter } from 'react-router-dom'
 
 function ProjectPage(props) {
 
     const [projectData, setProjectData] = useState(false)
     const [comment, setComment] = useState()
-    const [revisionImages, setRevisionImages] = useState()
-    const [revisionImageKey, setRevisionImageKey] = useState()
-    const [publicImage, setPublicImage] = useState()
-
-    const getRevisionImages = async() => {
-        var revisionKeys;
-        for(var i = 0; i < projectData.revisions.items.length; i++){
-            revisionKeys[i] = projectData.revisions.items[i].imgFile.key;
-        }
-
-        try {
-            const signedURL = await Storage.get(revisionImageKey, {level: 'public'})
-            //setRevisionImageURL(signedURL)
-        }
-        catch (error) {
-            console.log("Error getting project image: " + error)
-        }
-    }
 
     const getProject = async () => {
         try {
             const uuid = await (window.location.pathname.split('/'))[2]
-            console.log(uuid)
             const apiCall = await API.graphql({query: queries.getProject, variables: {id: uuid}})
-            console.log(apiCall)
             setProjectData(apiCall.data.getProject)
         }
         catch (error) {

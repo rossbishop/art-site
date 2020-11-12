@@ -1,32 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import {Header, ProjectGrid, Footer} from './Imports.js'
+
 import Home from './Home'
 import ProjectPage from './ProjectPage'
 import UserPage from './UserPage'
 import ProfileUpdatePage from './ProfileUpdatePage'
 import NewProjectPage from './NewProjectPage'
-import TestCss from './TestCss'
 import LoginPage from './LoginPage'
 import LogoutPage from './LogoutPage'
 import LoadingPage from './Loading'
 import RegisterPage from './RegisterPage'
 import ForgotPage from './ForgotPage'
-import Amplify, { Auth, API, graphqlOperation } from 'aws-amplify';
+import NewRevisionPage from './NewRevisionPage';
+
+import Amplify, { Auth, API } from 'aws-amplify';
 import awsconfig from './aws-exports';
 import AWSAppSyncClient, { AUTH_TYPE } from 'aws-appsync';
 import * as queries from './graphql/queries'
 
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
-  Link,
-  useHistory,
   Redirect,
   withRouter
 } from"react-router-dom";
-import NewRevisionPage from './NewRevisionPage.js';
-import Loading from './Loading';
 
 const client = new AWSAppSyncClient({
   url: awsconfig.aws_appsync_graphqlEndpoint,
@@ -44,24 +40,19 @@ function App() {
   const [userDetails, setUserDetails] = useState();
   const [userAttribs, setUserAttribs] = useState();
   const [projectData, setProjectData] = useState();
-  const [projectDataLoaded, setProjectDataLoaded] = useState();
   const [isNewRevisionPage, setIsNewRevisionPage] = useState(false);
-  const [isRedirecting, setIsRedirecting] = useState(false);
-  //const [isNavigating, setIsNavigating] = useState(false);
   const [destinationPage, setDestinationPage] = useState();
 
   //Invoke this function only once at first page load (hence empty deps array [])
   useEffect(() => {
     if(isLoggedIn == undefined || isLoading)
     {
-      console.log("1. Start auth check")
       checkLoggedIn()
     }
     if(destinationPage != undefined)
     {
       if(destinationPage.split('/')[1] == "newrevision")
       {
-        console.log("GETTING PROJECT!!!!")
         setIsNewRevisionPage(true)
         getProject()
       }
@@ -75,7 +66,6 @@ function App() {
 
   //Use effect dep is userAttribs as was getting odd issues trying to grab them from the full userDetails state
   useEffect(() => {
-    console.log("USEEFFECT RUNNING!!!")
     if(userAttribs != undefined){
       setLoggedIn(true);
       if(isNewRevisionPage)
@@ -89,7 +79,6 @@ function App() {
       {
         setLoading(false);
       }
-      console.log('checkLoggedIn SUCCESS: ' + isLoggedIn)  
     }
     
   },[userAttribs,projectData])
@@ -99,8 +88,6 @@ function App() {
       const user = await Auth.currentAuthenticatedUser({
         bypassCache: false  // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
       })
-      console.log(user);
-      console.log("CHECKING LOGGED IN!!!")
       setUserDetails(user);
       setUserAttribs(user.attributes);
     }
@@ -113,48 +100,6 @@ function App() {
     }
 
   }
-
-  //Amplify.configure(awsconfig);
-  // Amplify.configure({
-  //   "aws_project_region": "eu-west-2",
-  //   "aws_cognito_identity_pool_id": "eu-west-2:1b6cba9b-86c2-4801-8fe1-f65c9fb7137a",
-  //   "aws_cognito_region": "eu-west-2",
-  //   "aws_user_pools_id": "eu-west-2_jjmGjKRfN",
-  //   "aws_user_pools_web_client_id": "35bhchbkg3g73ipjahfuqoe097",
-  //   "oauth": {},
-  //   "aws_appsync_graphqlEndpoint": "https://b5yt7lrlsbbwpbjwk47la7zjgy.appsync-api.eu-west-2.amazonaws.com/graphql",
-  //   "aws_appsync_region": "eu-west-2",
-  //   "aws_appsync_authenticationType": isLoggedIn ? "AMAZON_COGNITO_USER_POOLS" : "AWS_IAM",
-  //   "aws_appsync_apiKey" : "config.aws_appsync_apiKey",
-  //   "aws_cloud_logic_custom": [
-  //       {
-  //           "name": "AdminQueries",
-  //           "endpoint": "https://qkp4snpqb6.execute-api.eu-west-2.amazonaws.com/dev",
-  //           "region": "eu-west-2"
-  //       }
-  //   ]
-  // })
-
-//   Amplify.configure({
-//     "aws_project_region": "eu-west-2",
-//     "aws_cloud_logic_custom": [
-//         {
-//             "name": "AdminQueries",
-//             "endpoint": "https://kmyvxsvwaj.execute-api.eu-west-2.amazonaws.com/devnew",
-//             "region": "eu-west-2"
-//         }
-//     ],
-//     "aws_appsync_graphqlEndpoint": "https://b5yt7lrlsbbwpbjwk47la7zjgy.appsync-api.eu-west-2.amazonaws.com/graphql",
-//     "aws_appsync_region": "eu-west-2",
-//     "aws_appsync_authenticationType": isLoggedIn ? "AMAZON_COGNITO_USER_POOLS" : "AWS_IAM",
-//     "aws_cognito_identity_pool_id": "eu-west-2:b084fc1e-fdae-4ddc-a13b-587ca1f5f550",
-//     "aws_cognito_region": "eu-west-2",
-//     "aws_user_pools_id": "eu-west-2_60hxfeWpC",
-//     "aws_user_pools_web_client_id": "3cmddfi26mh03clu3pjqilslh9",
-//     "oauth": {},
-//     "aws_user_files_s3_bucket": "artsiteimagebucket193639-devgithub",
-//     "aws_user_files_s3_bucket_region": "eu-west-2"
-// });
 
   Amplify.configure({    
     "aws_project_region": "eu-west-2",
@@ -206,19 +151,11 @@ function App() {
       <Route
         {...rest}
           render={({ props }) => {
-
-            // if(props.isRedirecting == true) {
-
-            // }
-
             if(isLoggedIn) {
-              console.log("CONFIRMED LOGGED IN!")
               if(userDetails.username == projectData.owner) {
-                console.log("IS PROJECT OWNER!!!")
                 return(children)
               }
               else {
-                console.log("NOT PROJECT OWNER!!!")
                 return(
                   <Redirect
                     to={{
@@ -255,11 +192,8 @@ function App() {
         else
         {
           uuid = await window.location.pathname.split('/')[2]
-          //console.log("UUID: " + uuid)
         }
-        console.log(uuid)
         const apiCall = await API.graphql({query: queries.getProject, variables: {id: uuid}})
-        console.log(apiCall)
         setProjectData(apiCall.data.getProject)
     }
     catch (error) {
@@ -278,11 +212,6 @@ function App() {
         <Route 
           path="/loading"
           render={({props}) => {
-            //setDestinationPage(props.state.routePath)
-            // if(window.location.state != undefined)
-            // {
-            //   console.log("ROUTEPATH: " + window.location.state.routePath)
-            // }
             if(isLoading){
               return(
                 <LoadingPage
@@ -295,8 +224,7 @@ function App() {
               return(
                 <Redirect
                   to={{
-                    pathname: destinationPage//,
-                    //state: { from: location }
+                    pathname: destinationPage
                   }}
                 />
               )
@@ -510,7 +438,6 @@ function App() {
               />
             </Route>            
           )}
-
 
         </Switch>
     </>

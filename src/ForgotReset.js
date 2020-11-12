@@ -2,8 +2,10 @@ import React from 'react'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import ForgotStyles from './css/forgot.module.css'
-import { Redirect } from 'react-router-dom'
+
 import cx from 'classnames'
+
+import { Redirect } from 'react-router-dom'
 
 export default function ForgotReset(props) {
 
@@ -13,7 +15,6 @@ export default function ForgotReset(props) {
     const success=props.getSuccess.message
     const error=props.getError.message
     const isResetComplete=props.isResetComplete
-    const setResetComplete=props.setResetComplete
 
     return (
         <div className="container">

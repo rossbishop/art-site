@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import 'bootstrap/dist/css/bootstrap.css'
+
 import { Storage } from 'aws-amplify';
 
 export default function AmplifyImage(props) {

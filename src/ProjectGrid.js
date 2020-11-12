@@ -1,5 +1,5 @@
 import React from 'react'
-import data from './FrontPageDummyData'
+
 import ProjectCard from './ProjectCard'
 
 export default function ProjectGrid(props) {
@@ -8,11 +8,9 @@ export default function ProjectGrid(props) {
   {
     
     var commentCount = 0;
-    //console.log("REVISIONS LENGTH: " + props.projectData[projectId].revisions.items.length)
     for(var revisions = 0; revisions < props.projectData[projectId].revisions.items.length; revisions++)
     {
       var commentLength = props.projectData[projectId].revisions.items[revisions].comments.items.length
-      console.log("COMMENT LENGTH" + commentLength)
       commentCount += commentLength
     }
 

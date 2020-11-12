@@ -2,8 +2,8 @@ import React from 'react'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import ForgotStyles from './css/forgot.module.css'
+
 import cx from 'classnames'
-import {Link} from './Imports'
 
 export default function Forgot(props) {
 

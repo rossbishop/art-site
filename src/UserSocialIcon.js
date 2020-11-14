@@ -1,29 +1,28 @@
-import React from 'react'
+import React from "react"
 
-import 'bootstrap/dist/css/bootstrap.css'
-import userSocialIconStyles from './css/usersocialicon.module.css'
+import "bootstrap/dist/css/bootstrap.css"
+import userSocialIconStyles from "./css/usersocialicon.module.css"
 
-import cx from 'classnames'
+import cx from "classnames"
 
 export default function UserSocialIcon(props) {
-
-    return (
-        <div className="icon-container">
-            <div className="row">
-                <p className={userSocialIconStyles.iconTag}>{props.username}</p>
-                    <img className={userSocialIconStyles.socialImg} src={socialImage(props.socialtype)}/>
-            </div>
-        </div>
-    )
+	return (
+		<div className="icon-container">
+			<div className="row">
+				<p className={userSocialIconStyles.iconTag}>{props.username}</p>
+				<img className={userSocialIconStyles.socialImg} src={socialImage(props.socialtype)} />
+			</div>
+		</div>
+	)
 }
 
-function socialImage(socialtype){
-    switch(socialtype) {
-        case "instagram":
-            return "https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Instagram-Icon.png/1025px-Instagram-Icon.png";
-        case "twitter":
-            return "https://cdn4.iconfinder.com/data/icons/social-media-icons-the-circle-set/48/twitter_circle-512.png";
-        case "facebook":
-            return "https://cdn3.iconfinder.com/data/icons/transparent-on-dark-grey/500/icon-02-512.png";
-    }    
+function socialImage(socialtype) {
+	switch (socialtype) {
+		case "instagram":
+			return "https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Instagram-Icon.png/1025px-Instagram-Icon.png"
+		case "twitter":
+			return "https://cdn4.iconfinder.com/data/icons/social-media-icons-the-circle-set/48/twitter_circle-512.png"
+		case "facebook":
+			return "https://cdn3.iconfinder.com/data/icons/transparent-on-dark-grey/500/icon-02-512.png"
+	}
 }

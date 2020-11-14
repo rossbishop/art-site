@@ -1,20 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react"
+import ReactDOM from "react-dom"
 
-import App from './App';
+import App from "./App"
 
-import 'bootstrap'
-import 'bootstrap/dist/css/bootstrap.css'
+import "bootstrap"
+import "bootstrap/dist/css/bootstrap.css"
 
-import {
-  BrowserRouter as Router
-} from"react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom"
 
 ReactDOM.render(
-  <Router>
-    <React.StrictMode>
-      <App/>
-    </React.StrictMode>
-  </Router>,
-  document.getElementById('root')
+	<Router>
+		<React.StrictMode>
+			<App />
+		</React.StrictMode>
+	</Router>,
+	document.getElementById("root")
 )

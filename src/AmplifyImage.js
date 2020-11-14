@@ -1,33 +1,24 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react"
 
-import 'bootstrap/dist/css/bootstrap.css'
+import "bootstrap/dist/css/bootstrap.css"
 
-import { Storage } from 'aws-amplify';
+import { Storage } from "aws-amplify"
 
 export default function AmplifyImage(props) {
+	const [imageURL, setImageURL] = useState()
 
-    const [imageURL, setImageURL] = useState()
+	const getImageURL = async () => {
+		try {
+			const signedURL = await Storage.get(props.imgKey, { level: "public" })
+			setImageURL(signedURL)
+		} catch (error) {
+			console.log("Error getting image: " + error)
+		}
+	}
 
-    const getImageURL = async() => {
-        try {
-            const signedURL = await Storage.get(props.imgKey, {level: 'public'})
-            setImageURL(signedURL)
-        }
-        catch (error) {
-            console.log("Error getting image: " + error)
-        }        
-    }
+	useEffect(() => {
+		getImageURL()
+	}, [])
 
-    useEffect(() => {
-        getImageURL()
-    }, [])
-
-    return (
-        <>
-            {imageURL && (
-                    <img className={props.style} src={imageURL}/>
-                ) 
-            }
-        </>    
-    )
+	return <>{imageURL && <img className={props.style} src={imageURL} />}</>
 }

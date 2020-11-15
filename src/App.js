@@ -37,7 +37,6 @@ function App() {
 	const [isNewRevisionPage, setIsNewRevisionPage] = useState(false)
 	const [destinationPage, setDestinationPage] = useState()
 
-	//Invoke this function only once at first page load (hence empty deps array [])
 	useEffect(() => {
 		if (isLoggedIn === undefined || isLoading) {
 			checkLoggedIn()
@@ -51,9 +50,9 @@ function App() {
 			setIsNewRevisionPage(true)
 			getProject()
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isLoading])
 
-	//Use effect dep is userAttribs as was getting odd issues trying to grab them from the full userDetails state
 	useEffect(() => {
 		if (userAttribs !== undefined) {
 			setLoggedIn(true)
@@ -65,12 +64,13 @@ function App() {
 				setLoading(false)
 			}
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [userAttribs, projectData])
 
 	const checkLoggedIn = async () => {
 		try {
 			const user = await Auth.currentAuthenticatedUser({
-				bypassCache: false // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
+				bypassCache: false
 			})
 			setUserDetails(user)
 			setUserAttribs(user.attributes)

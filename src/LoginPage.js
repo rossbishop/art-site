@@ -17,18 +17,17 @@ function LoginPage(props) {
 	}
 
 	const signIn = async props => {
-		await Auth.signIn(username, password)
-			.then(response => {
-				setSuccess({ isSuccess: true, message: "You are now logged in. Redirecting to previous page..." })
-				setTimeout(() => {
-					getRedirectPage()
-				}, 3000)
-			})
-			.catch(error => {
-				console.log("error signing in", error)
-				console.log(error.message)
-				setError({ isError: true, message: error.message })
-			})
+		try {
+			await Auth.signIn(username, password)
+			setSuccess({ isSuccess: true, message: "You are now logged in. Redirecting to previous page..." })
+			setTimeout(() => {
+				getRedirectPage()
+			}, 3000)
+		} catch (error) {
+			console.log("error signing in", error)
+			console.log(error.message)
+			setError({ isError: true, message: error.message })
+		}
 	}
 
 	return (

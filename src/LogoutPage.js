@@ -14,17 +14,16 @@ function LogoutPage(props) {
 	}
 
 	const signOut = async props => {
-		await Auth.signOut()
-			.then(response => {
-				setSuccess({ isSuccess: true, message: "You are now logged out. Redirecting to previous page..." })
-				setTimeout(() => {
-					getRedirectPage()
-				}, 3000)
-			})
-			.catch(error => {
-				console.log("error signing out: ", error)
-				setError({ isError: true, message: error.message })
-			})
+		try {
+			await Auth.signOut()
+			setSuccess({ isSuccess: true, message: "You are now logged out. Redirecting to previous page..." })
+			setTimeout(() => {
+				getRedirectPage()
+			}, 3000)
+		} catch (error) {
+			console.log("error signing out: ", error)
+			setError({ isError: true, message: error.message })
+		}
 	}
 
 	useEffect(() => {

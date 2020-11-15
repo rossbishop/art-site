@@ -15,30 +15,31 @@ export default function CommentCard(props) {
 	const [avatarKey, setAvatarKey] = useState()
 	const [noAvatar, setNoAvatar] = useState()
 
-	useEffect(() => {
-		const getAvatar = async () => {
-			try {
-				let apiCall = await API.graphql({
-					query: queries.publicUserProfileByUser,
-					variables: { owner: props.username }
-				})
-				if (
-					apiCall.data.publicUserProfileByUser.items[0].avatarImgFile === undefined ||
-					apiCall.data.publicUserProfileByUser.items[0].avatarImgFile === null ||
-					apiCall.data.publicUserProfileByUser.items[0].avatarImgFile === ""
-				) {
-					setNoAvatar(true)
-				} else {
-					setAvatarKey(apiCall.data.publicUserProfileByUser.items[0].avatarImgFile.key)
-				}
-			} catch (error) {
-				console.log(error)
+	const getAvatar = async () => {
+		try {
+			let apiCall = await API.graphql({
+				query: queries.publicUserProfileByUser,
+				variables: { owner: props.username }
+			})
+			if (
+				apiCall.data.publicUserProfileByUser.items[0].avatarImgFile === undefined ||
+				apiCall.data.publicUserProfileByUser.items[0].avatarImgFile === null ||
+				apiCall.data.publicUserProfileByUser.items[0].avatarImgFile === ""
+			) {
+				setNoAvatar(true)
+			} else {
+				setAvatarKey(apiCall.data.publicUserProfileByUser.items[0].avatarImgFile.key)
 			}
+		} catch (error) {
+			console.log(error)
 		}
+	}
 
+	useEffect(() => {
 		if (props.username !== undefined) {
 			getAvatar()
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [props.username])
 
 	return (

@@ -51,12 +51,14 @@ function NewRevisionPage(props) {
 
 	useEffect(() => {
 		setProjectID(window.location.pathname.split("/")[2])
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	useEffect(() => {
 		if (revisionImageKey !== undefined) {
 			getNewRevisionImage()
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [revisionImageKey])
 
 	const createNewRevision = async () => {

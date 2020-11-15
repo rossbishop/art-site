@@ -21,62 +21,56 @@ function ForgotPage(props) {
 	const [isUserConfirmed, setUserConfirmed] = useState(false)
 	const [confirmationCode, setConfirmationCode] = useState("")
 
-	const forgotPassword = props => {
-		Auth.forgotPassword(props)
-			.then(data => {
-				setSuccess({ isSuccess: true, message: "Verification code resent successfully - Check your email" })
-				setTimeout(() => {
-					setSuccess({ isSuccess: false, message: "" })
-					setForgot(false)
-					setReset(true)
-				}, 3000)
-			})
-			.catch(err => {
-				console.log(err)
-			})
+	const forgotPassword = async props => {
+		try {
+			await Auth.forgotPassword(props)
+			setSuccess({ isSuccess: true, message: "Verification code resent successfully - Check your email" })
+			setTimeout(() => {
+				setSuccess({ isSuccess: false, message: "" })
+				setForgot(false)
+				setReset(true)
+			}, 3000)
+		} catch (error) {
+			console.log(error)
+		}
 	}
 
-	const forgotPasswordSubmit = props => {
-		// Collect confirmation code and new password, then
-		Auth.forgotPasswordSubmit(props.username, props.code, props.new_password)
-			.then(data => {
-				setSuccess({ isSuccess: true, message: "Password reset successfully - Login using new password" })
-				setTimeout(() => {
-					setResetComplete(true)
-				}, 3000)
-			})
-			.catch(err => {
-				console.log(err)
-				setError({ isError: true, message: err })
-			})
+	const forgotPasswordSubmit = async props => {
+		try {
+			await Auth.forgotPasswordSubmit(props.username, props.code, props.new_password)
+			setSuccess({ isSuccess: true, message: "Password reset successfully - Login using new password" })
+			setTimeout(() => {
+				setResetComplete(true)
+			}, 3000)
+		} catch (error) {
+			console.log(error)
+			setError({ isError: true, message: error })
+		}
 	}
 
 	const resendConfirmationCode = async props => {
-		await Auth.resendSignUp(props)
-			.then(response => {
-				setSuccess({ isSuccess: true, message: "Verification Code Resent Successfully - Check your email" })
-				setTimeout(() => {
-					setForgot(false)
-					setConfirm(true)
-				}, 3000)
-			})
-			.catch(err => {
-				console.log("error resending code: ", err)
-				setError({ isError: true, message: err.message })
-			})
+		try {
+			await Auth.resendSignUp(props)
+			setSuccess({ isSuccess: true, message: "Verification Code Resent Successfully - Check your email" })
+			setTimeout(() => {
+				setForgot(false)
+				setConfirm(true)
+			}, 3000)
+		} catch (error) {
+			console.log("error resending code: ", error)
+			setError({ isError: true, message: error.message })
+		}
 	}
 
 	const confirmSignUp = async props => {
 		const { username, confirmationCode } = props
-		await Auth.confirmSignUp(username, confirmationCode)
-			.then(response => {
-				setUserConfirmed(true)
-				console.log(response)
-			})
-			.catch(error => {
-				console.log("error confirming sign up: ", error)
-				setError({ isError: true, message: error.message })
-			})
+		try {
+			await Auth.confirmSignUp(username, confirmationCode)
+			setUserConfirmed(true)
+		} catch (error) {
+			console.log("error confirming sign up: ", error)
+			setError({ isError: true, message: error.message })
+		}
 	}
 
 	return (

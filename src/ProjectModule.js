@@ -31,6 +31,7 @@ export default function ProjectModule(props) {
 				setOwnProject(true)
 			}
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	const createNewComment = async () => {

@@ -74,14 +74,13 @@ function RegisterPage(props) {
 
 	const confirmSignUp = async props => {
 		const { username, confirmationCode } = props
-		await Auth.confirmSignUp(username, confirmationCode)
-			.then(response => {
-				setUserConfirmed(true)
-			})
-			.catch(error => {
-				console.log("error confirming sign up: ", error)
-				setError({ isError: true, message: error })
-			})
+		try {
+			await Auth.confirmSignUp(username, confirmationCode)
+			setUserConfirmed(true)
+		} catch (error) {
+			console.log("error confirming sign up: ", error)
+			setError({ isError: true, message: error })
+		}
 	}
 
 	function getAge(date) {

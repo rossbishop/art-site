@@ -18,6 +18,7 @@ export default function AmplifyImage(props) {
 
 	useEffect(() => {
 		getImageURL()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	return <>{imageURL && <img className={props.style} src={imageURL} alt="Content" />}</>

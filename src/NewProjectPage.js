@@ -112,6 +112,7 @@ function NewProjectPage(props) {
 		if (revisionImageKey !== undefined) {
 			getNewProjectImage()
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [createdProject, revisionImageKey])
 
 	return (

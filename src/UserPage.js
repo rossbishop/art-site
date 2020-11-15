@@ -62,12 +62,14 @@ function UserPage(props) {
 	useEffect(() => {
 		getUserProjects()
 		getUserProfileData()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	useEffect(() => {
 		if (profileData !== undefined) {
 			getProfileImages()
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [profileData])
 
 	return (

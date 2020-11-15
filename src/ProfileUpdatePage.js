@@ -225,6 +225,7 @@ function ProfileUpdatePage(props) {
 
 	useEffect(() => {
 		getUserProfileData()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	useEffect(() => {
@@ -237,6 +238,7 @@ function ProfileUpdatePage(props) {
 		if (loadProfileData !== undefined && (avatarImageKey || bannerImageKey) === undefined) {
 			loadExistingProfileImages()
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [avatarImageKey, bannerImageKey, loadProfileData])
 
 	return (

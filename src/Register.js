@@ -22,9 +22,9 @@ export default function Register(props) {
 			month.appendChild(option)
 		}
 		var day = document.getElementById("day")
-		for (var i = 0; i < 31; i++) {
-			var option = document.createElement("option")
-			var optVal = i + 1
+		for (i = 0; i < 31; i++) {
+			option = document.createElement("option")
+			optVal = i + 1
 			option.value = String(String(optVal).padStart(2, "0"))
 			option.text = i + 1
 			day.appendChild(option)
@@ -37,12 +37,12 @@ export default function Register(props) {
 				<div className="col-12">
 					<form className={RegisterStyles.formProfileUpdate}>
 						<h1 className="h3 mb-3 mt-4 font-weight-normal">Register</h1>
-						{props.getError.isError && props.errorType == "aws" && (
+						{props.getError.isError && props.errorType === "aws" && (
 							<div className="alert alert-danger" role="alert">
 								{props.getError.message.log}
 							</div>
 						)}
-						{props.getError.isError && props.errorType == "local" && (
+						{props.getError.isError && props.errorType === "local" && (
 							<div className="alert alert-danger" role="alert">
 								{props.getError.message}
 							</div>

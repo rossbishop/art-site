@@ -1,15 +1,13 @@
 import React from "react"
 
 import "bootstrap/dist/css/bootstrap.css"
-import LogoutStyles from "./css/logout.module.css"
-
-import cx from "classnames"
+// import LogoutStyles from "./css/logout.module.css"
 
 export default function Logout(props) {
 	return (
 		<div className="container">
-			<div class="row">
-				<div class="col-12 mt-5 mb-2">
+			<div className="row">
+				<div className="col-12 mt-5 mb-2">
 					{!props.getSuccess.isSuccess && (
 						<div className="alert alert-secondary" role="alert">
 							"Logging out..."

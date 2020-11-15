@@ -10,8 +10,8 @@ export default function Forgot(props) {
 
 	return (
 		<div className="container">
-			<div class="row">
-				<div class="col-12">
+			<div className="row">
+				<div className="col-12">
 					<form className={ForgotStyles.formProfileUpdate}>
 						<h1 className="h3 mb-3 mt-4 font-weight-normal">Forgot Password</h1>
 						{props.getError.isError && (
@@ -24,7 +24,7 @@ export default function Forgot(props) {
 								{props.getSuccess.message}
 							</div>
 						)}
-						<label for="inputUsername" className="sr-only">
+						<label htmlFor="inputUsername" className="sr-only">
 							Enter username
 						</label>
 						<input
@@ -34,7 +34,7 @@ export default function Forgot(props) {
 							placeholder="Enter Username"
 							onChange={event => props.setUsername(event.target.value)}
 							required
-							autofocus
+							autoFocus
 						/>
 						<button
 							className={cx(ForgotStyles.btnLogin, "btn", "btn-lg", "btn-primary", "btn-block", "mt-2")}

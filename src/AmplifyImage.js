@@ -20,5 +20,5 @@ export default function AmplifyImage(props) {
 		getImageURL()
 	}, [])
 
-	return <>{imageURL && <img className={props.style} src={imageURL} />}</>
+	return <>{imageURL && <img className={props.style} src={imageURL} alt="Content" />}</>
 }

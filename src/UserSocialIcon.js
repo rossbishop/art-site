@@ -3,14 +3,12 @@ import React from "react"
 import "bootstrap/dist/css/bootstrap.css"
 import userSocialIconStyles from "./css/usersocialicon.module.css"
 
-import cx from "classnames"
-
 export default function UserSocialIcon(props) {
 	return (
 		<div className="icon-container">
 			<div className="row">
 				<p className={userSocialIconStyles.iconTag}>{props.username}</p>
-				<img className={userSocialIconStyles.socialImg} src={socialImage(props.socialtype)} />
+				<img className={userSocialIconStyles.socialImg} src={socialImage(props.socialtype)} alt="Social Icon" />
 			</div>
 		</div>
 	)
@@ -24,5 +22,7 @@ function socialImage(socialtype) {
 			return "https://cdn4.iconfinder.com/data/icons/social-media-icons-the-circle-set/48/twitter_circle-512.png"
 		case "facebook":
 			return "https://cdn3.iconfinder.com/data/icons/transparent-on-dark-grey/500/icon-02-512.png"
+		default:
+		// Don't return anything
 	}
 }

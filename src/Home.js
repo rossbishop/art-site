@@ -13,7 +13,6 @@ function Home(props) {
 	const getUserProjects = async () => {
 		try {
 			const apiCall = await API.graphql({ query: queries.listProjects, variables: { limit: 10 } })
-			console.log(apiCall)
 			setProjectData(apiCall.data.listProjects.items)
 		} catch (error) {
 			console.log("Error getting list of projects: ", error)

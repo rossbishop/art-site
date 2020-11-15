@@ -8,8 +8,8 @@ import cx from "classnames"
 export default function NewProject(props) {
 	return (
 		<div className="container">
-			<div class="row">
-				<div class="col-12">
+			<div className="row">
+				<div className="col-12">
 					<form className={NewProjectStyles.formProfileUpdate}>
 						<h1 className="h3 mb-3 mt-4 font-weight-normal">Create New Project</h1>
 						<h4 className="mt-3">Upload First Revision</h4>
@@ -17,12 +17,15 @@ export default function NewProject(props) {
 							<div className="d-flex flex-column col-4">
 								<h6>Uploaded Content:</h6>
 								{props.revisionImageURL && (
-									<img className={NewProjectStyles.profileImgSmall} src={props.revisionImageURL} />
+									<img
+										className={NewProjectStyles.profileImgSmall}
+										src={props.revisionImageURL}
+										alt="Revision Content"
+									/>
 								)}
 							</div>
 							<div className="d-flex flex-column col-12">
 								<input
-									type="userDetail"
 									type="file"
 									accept="image/png"
 									onChange={event => props.setRevisionFile(event.target.files[0])}
@@ -31,7 +34,7 @@ export default function NewProject(props) {
 									placeholder="Local Path"
 									defaultValue=""
 									required
-									autofocus
+									autoFocus
 								/>
 								<button
 									type="button"
@@ -46,7 +49,7 @@ export default function NewProject(props) {
 							</div>
 						</div>
 						<h4 className="mt-3">Project Name</h4>
-						<label for="inputProjectName" className="sr-only">
+						<label htmlFor="inputProjectName" className="sr-only">
 							Enter New Project Name
 						</label>
 						<input
@@ -56,10 +59,10 @@ export default function NewProject(props) {
 							placeholder="Enter new project name"
 							onChange={event => props.setProjectName(event.target.value)}
 							required
-							autofocus
+							autoFocus
 						/>
 						<h4>Project Description:</h4>
-						<label for="inputProjectDescription" className="sr-only">
+						<label htmlFor="inputProjectDescription" className="sr-only">
 							Enter Project Description
 						</label>
 						<input
@@ -69,10 +72,10 @@ export default function NewProject(props) {
 							placeholder="Enter new project description"
 							onChange={event => props.setProjectDescription(event.target.value)}
 							required
-							autofocus
+							autoFocus
 						/>
 						<h4>Initial Revision Name:</h4>
-						<label for="inputRevisionName" className="sr-only">
+						<label htmlFor="inputRevisionName" className="sr-only">
 							Enter Revision Name
 						</label>
 						<input
@@ -82,7 +85,7 @@ export default function NewProject(props) {
 							placeholder="Enter new project name"
 							onChange={event => props.setRevName(event.target.value)}
 							required
-							autofocus
+							autoFocus
 						/>
 						<h4>Initial Revision Description:</h4>
 						<textarea

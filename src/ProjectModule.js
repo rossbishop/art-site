@@ -26,8 +26,8 @@ export default function ProjectModule(props) {
 	}
 
 	useEffect(() => {
-		if (props.userDetails != false) {
-			if (props.userDetails.username == props.projectDetails.owner) {
+		if (props.userDetails !== false) {
+			if (props.userDetails.username === props.projectDetails.owner) {
 				setOwnProject(true)
 			}
 		}
@@ -35,15 +35,15 @@ export default function ProjectModule(props) {
 
 	const createNewComment = async () => {
 		try {
-			if (props.comment == undefined || props.comment == "") {
-				throw "You must enter comment text"
+			if (props.comment === undefined || props.comment === "") {
+				throw new Error("You must enter comment text")
 			} else {
 				const commentData = {
 					revisionID: props.projectDetails.revisions.items[currentProjectState.currentId].id,
 					comment: props.comment,
 					likeCount: 0
 				}
-				const commentCall = await API.graphql({ query: mutations.createComment, variables: { input: commentData } })
+				await API.graphql({ query: mutations.createComment, variables: { input: commentData } })
 				setCommentSuccess({ isSuccess: true, message: "Success!" })
 				setTimeout(() => {
 					reloadPage()
@@ -64,6 +64,7 @@ export default function ProjectModule(props) {
 							{props.projectRevisionData.map((item, index) => {
 								return (
 									<GalleryListItem
+										key={index}
 										id={index}
 										isLatest={props.projectRevisionData.length}
 										selected={currentProjectState.currentId}
@@ -76,6 +77,7 @@ export default function ProjectModule(props) {
 							{props.projectRevisionData.map((item, index) => {
 								return (
 									<GalleryItem
+										key={index}
 										id={index + 1}
 										isLatest={props.projectRevisionData.length}
 										selected={currentProjectState.currentId}
@@ -156,7 +158,6 @@ export default function ProjectModule(props) {
 							</div>
 						)}
 						<button
-							type="button"
 							className={cx("btn", "btn-primary", projectModuleStyles.commentButton)}
 							type="submit"
 							onClick={e => {
@@ -168,9 +169,10 @@ export default function ProjectModule(props) {
 						</button>
 					</>
 				)}
-				{props.projectRevisionData[currentProjectState.currentId].comments.items.map(item => {
+				{props.projectRevisionData[currentProjectState.currentId].comments.items.map((item, index) => {
 					return (
 						<CommentCard
+							key={index}
 							id={item.id}
 							username={item.owner}
 							time={item.time}

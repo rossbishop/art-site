@@ -5,8 +5,6 @@ import userBannerStyles from "./css/userbanner.module.css"
 
 import UserSocialIcon from "./UserSocialIcon"
 
-import cx from "classnames"
-
 export default function UserBanner(props) {
 	useEffect(() => {
 		if (document.getElementById("banner") != null && props.bannerURL != null) {
@@ -30,7 +28,9 @@ export default function UserBanner(props) {
 						<div className="col-6">
 							<div className="row">
 								<div className="col-4 pr-3">
-									{props.avatarURL && <img className={userBannerStyles.profileImg} src={props.avatarURL} />}
+									{props.avatarURL && (
+										<img className={userBannerStyles.profileImg} src={props.avatarURL} alt="User Avatar" />
+									)}
 									{props.noAvatar && (
 										<div className={userBannerStyles.noProfileImg}>
 											<p>{props.profileData.username.substring(0, 1)}</p>

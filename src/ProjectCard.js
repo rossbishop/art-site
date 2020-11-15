@@ -57,11 +57,13 @@ export default function ProjectCard(props) {
 								<img
 									className={projectCardStyles.commsImg}
 									src="https://systemuicons.com/images/icons/message_writing.svg"
+									alt="Comment Count"
 								/>
 								<span> / {props.revisioncount}</span>
 								<img
 									className={projectCardStyles.commsImg}
 									src="https://systemuicons.com/images/icons/write.svg"
+									alt="Revision Count"
 								/>{" "}
 								{/*<span> / {props.viewcount}</span>*/}
 								{/*<img className={projectCardStyles.commsImg} src="https://systemuicons.com/images/icons/user_male.svg"/>*/}

@@ -20,6 +20,7 @@ export default function ProjectGrid(props) {
 					{props.projectData.map((item, index) => {
 						return (
 							<ProjectCard
+								key={index}
 								name={item.projectName}
 								img={item.revisions.items[item.revisions.items.length - 1].imgSrc}
 								description={item.projectDescription}

@@ -54,19 +54,19 @@ function NewRevisionPage(props) {
 	}, [])
 
 	useEffect(() => {
-		if (revisionImageKey != undefined) {
+		if (revisionImageKey !== undefined) {
 			getNewRevisionImage()
 		}
 	}, [revisionImageKey])
 
 	const createNewRevision = async () => {
 		try {
-			if (revisionName == "") {
-				throw "Provide a revision name"
-			} else if (revisionDescription == "") {
-				throw "Provide a revision description"
-			} else if (revisionImageURL == undefined) {
-				throw "Provide a revision image"
+			if (revisionName === "") {
+				throw new Error("Provide a revision name")
+			} else if (revisionDescription === "") {
+				throw new Error("Provide a revision description")
+			} else if (revisionImageURL === undefined) {
+				throw new Error("Provide a revision image")
 			} else {
 				const revisionData = {
 					projectID: projectID,
@@ -80,7 +80,7 @@ function NewRevisionPage(props) {
 						region: awsconfig.aws_user_files_s3_bucket_region
 					}
 				}
-				const revisionCall = await API.graphql({ query: mutations.createRevision, variables: { input: revisionData } })
+				await API.graphql({ query: mutations.createRevision, variables: { input: revisionData } })
 				setRevisionSuccess({ isSuccess: true, message: "Success!" })
 				setTimeout(() => {
 					getRedirectPage()

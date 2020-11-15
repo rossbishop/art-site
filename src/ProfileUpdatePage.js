@@ -1,9 +1,9 @@
-import { Header, ProjectGrid, Footer } from "./Imports.js"
+import { Header, Footer } from "./Imports.js"
 import React, { useState, useEffect } from "react"
 import ProfileUpdate from "./ProfileUpdate"
 
 import { Auth } from "aws-amplify"
-import { API, graphqlOperation, Storage } from "aws-amplify"
+import { API, Storage } from "aws-amplify"
 import { v4 as uuidv4 } from "uuid"
 import * as mutations from "./graphql/mutations"
 import * as queries from "./graphql/queries"
@@ -23,8 +23,6 @@ function ProfileUpdatePage(props) {
 	const [newPassword, setNewPassword] = useState()
 	const [newPasswordConfirm, setNewPasswordConfirm] = useState()
 
-	const [loadProfileSuccess, setLoadProfileSuccess] = useState({ isSuccess: false, message: "" })
-	const [loadProfileError, setLoadProfileError] = useState({ isError: false, message: "" })
 	const [loadProfileData, setLoadProfileData] = useState()
 
 	const [socialSuccess, setSocialSuccess] = useState({ isSuccess: false, message: "" })
@@ -44,21 +42,16 @@ function ProfileUpdatePage(props) {
 	const [bannerImageURL, setBannerImageURL] = useState()
 	const [bannerFile, setBannerFile] = useState()
 
-	const [errorType, setErrorType] = useState("local")
-
 	const getUserProfileData = async () => {
 		try {
-			let user = await Auth.currentAuthenticatedUser()
+			await Auth.currentAuthenticatedUser()
 			const apiCall = await API.graphql({
 				query: queries.publicUserProfileByUser,
 				variables: { owner: props.userDetails.username }
 			})
-			console.log(apiCall)
-			setLoadProfileSuccess({ isSuccess: true, message: "Profile data loaded" })
 			setLoadProfileData(apiCall.data.publicUserProfileByUser.items[0])
 		} catch (error) {
 			console.log("Error getting profile: ", error)
-			setLoadProfileError({ isError: true, message: error })
 		}
 	}
 
@@ -66,7 +59,7 @@ function ProfileUpdatePage(props) {
 		try {
 			let user = await Auth.currentAuthenticatedUser()
 			const publicDetails = { id: user.attributes.sub, facebook: facebook, instagram: instagram, twitter: twitter }
-			const publicProfileUpdate = await API.graphql({
+			await API.graphql({
 				query: mutations.updatePublicUserProfile,
 				variables: { input: publicDetails }
 			})
@@ -79,22 +72,22 @@ function ProfileUpdatePage(props) {
 
 	const updateProfile = async () => {
 		try {
-			if (username == undefined || username == "") {
-				throw "You must enter a username"
-			} else if (avatarImageURL == undefined || avatarImageURL == "") {
-				throw "You must provide an avatar image"
-			} else if (bannerImageURL == undefined || bannerImageURL == "") {
-				throw "You must provide a banner image"
+			if (username === undefined || username === "") {
+				throw new Error("You must enter a username")
+			} else if (avatarImageURL === undefined || avatarImageURL === "") {
+				throw new Error("You must provide an avatar image")
+			} else if (bannerImageURL === undefined || bannerImageURL === "") {
+				throw new Error("You must provide a banner image")
 			} else {
 				let user = await Auth.currentAuthenticatedUser()
-				let cognitoUpdate = await Auth.updateUserAttributes(user, {
+				await Auth.updateUserAttributes(user, {
 					preferred_username: username
 				})
 
 				let avatarImgJson = ""
 				let bannerImgJson = ""
 
-				if (avatarImageKey != undefined) {
+				if (avatarImageKey !== undefined) {
 					avatarImgJson = {
 						bucket: awsconfig.aws_user_files_s3_bucket,
 						key: avatarImageKey,
@@ -102,7 +95,7 @@ function ProfileUpdatePage(props) {
 					}
 				}
 
-				if (bannerImageKey != undefined) {
+				if (bannerImageKey !== undefined) {
 					bannerImgJson = {
 						bucket: awsconfig.aws_user_files_s3_bucket,
 						key: bannerImageKey,
@@ -116,13 +109,11 @@ function ProfileUpdatePage(props) {
 					position: job,
 					location: location,
 					bio: bio,
-					avatarImgFile: avatarImgJson != "" ? avatarImgJson : loadProfileData.avatarImgFile,
-					bannerImgFile: bannerImgJson != "" ? bannerImgJson : loadProfileData.bannerImgFile
+					avatarImgFile: avatarImgJson !== "" ? avatarImgJson : loadProfileData.avatarImgFile,
+					bannerImgFile: bannerImgJson !== "" ? bannerImgJson : loadProfileData.bannerImgFile
 				}
 
-				// console.log(publicDetails)
-
-				const publicProfileUpdate = await API.graphql({
+				await API.graphql({
 					query: mutations.updatePublicUserProfile,
 					variables: { input: publicDetails }
 				})
@@ -138,17 +129,17 @@ function ProfileUpdatePage(props) {
 		let passwordNumberRegEx = new RegExp("[0-9]")
 		let passwordLetterRegEx = new RegExp("[a-z]")
 		try {
-			if (currPassword == undefined || currPassword == "") {
-				throw "Enter current password"
+			if (currPassword === undefined || currPassword === "") {
+				throw new Error("Enter current password")
 			}
-			if ((newPassword || newPasswordConfirm) == undefined || (newPassword || newPasswordConfirm) == "") {
-				throw "New password must not be empty"
-			} else if (newPassword != newPasswordConfirm) {
-				throw "New passwords must match!"
+			if ((newPassword || newPasswordConfirm) === undefined || (newPassword || newPasswordConfirm) === "") {
+				throw new Error("New password must not be empty")
+			} else if (newPassword !== newPasswordConfirm) {
+				throw new Error("New passwords must match!")
 			} else if (newPassword.length < 8) {
-				throw "New password must be at least 8 characters"
+				throw new Error("New password must be at least 8 characters")
 			} else if (!(newPassword.match(passwordNumberRegEx) && newPassword.match(passwordLetterRegEx))) {
-				throw "New password must contain lowercase characters and numbers"
+				throw new Error("New password must contain lowercase characters and numbers")
 			} else {
 				const user = await Auth.currentAuthenticatedUser()
 				const passwordChange = await Auth.changePassword(user, currPassword, newPassword)
@@ -167,7 +158,6 @@ function ProfileUpdatePage(props) {
 
 	const uploadNewAvatarImage = async inputFile => {
 		console.log("Start Image Upload")
-		//const file = e.target.files[0];
 		const file = inputFile
 		const imageuuid = uuidv4()
 		try {
@@ -187,7 +177,6 @@ function ProfileUpdatePage(props) {
 
 	const uploadNewBannerImage = async inputFile => {
 		console.log("Start Image Upload")
-		//const file = e.target.files[0];
 		const file = inputFile
 		const imageuuid = uuidv4()
 		try {
@@ -239,13 +228,13 @@ function ProfileUpdatePage(props) {
 	}, [])
 
 	useEffect(() => {
-		if (avatarImageKey != undefined) {
+		if (avatarImageKey !== undefined) {
 			getNewAvatarImage()
 		}
-		if (bannerImageKey != undefined) {
+		if (bannerImageKey !== undefined) {
 			getNewBannerImage()
 		}
-		if (loadProfileData != undefined && (avatarImageKey || bannerImageKey) == undefined) {
+		if (loadProfileData !== undefined && (avatarImageKey || bannerImageKey) === undefined) {
 			loadExistingProfileImages()
 		}
 	}, [avatarImageKey, bannerImageKey, loadProfileData])

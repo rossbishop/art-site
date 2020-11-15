@@ -40,17 +40,19 @@ function UserPage(props) {
 
 	const getProfileImages = async () => {
 		try {
-			if (profileData.avatarImgFile != null) {
-				const signedAvatarURL = await Storage.get(profileData.avatarImgFile.key, { level: "public" })
-				setAvatarURL(signedAvatarURL)
-			} else {
-				setNoAvatar(true)
-			}
-			if (profileData.bannerImgFile != null) {
-				const signedBannerURL = await Storage.get(profileData.bannerImgFile.key, { level: "public" })
-				setBannerURL(signedBannerURL)
-			} else {
-				setNoBanner(true)
+			if (profileData !== null) {
+				if (profileData.avatarImgFile != null) {
+					const signedAvatarURL = await Storage.get(profileData.avatarImgFile.key, { level: "public" })
+					setAvatarURL(signedAvatarURL)
+				} else {
+					setNoAvatar(true)
+				}
+				if (profileData.bannerImgFile != null) {
+					const signedBannerURL = await Storage.get(profileData.bannerImgFile.key, { level: "public" })
+					setBannerURL(signedBannerURL)
+				} else {
+					setNoBanner(true)
+				}
 			}
 		} catch (error) {
 			console.log(error)
@@ -63,7 +65,7 @@ function UserPage(props) {
 	}, [])
 
 	useEffect(() => {
-		if (profileData != undefined) {
+		if (profileData !== undefined) {
 			getProfileImages()
 		}
 	}, [profileData])

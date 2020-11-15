@@ -16,27 +16,30 @@ export default function CommentCard(props) {
 	const [noAvatar, setNoAvatar] = useState()
 
 	useEffect(() => {
-		if (props.username != undefined) {
+		const getAvatar = async () => {
+			try {
+				let apiCall = await API.graphql({
+					query: queries.publicUserProfileByUser,
+					variables: { owner: props.username }
+				})
+				if (
+					apiCall.data.publicUserProfileByUser.items[0].avatarImgFile === undefined ||
+					apiCall.data.publicUserProfileByUser.items[0].avatarImgFile === null ||
+					apiCall.data.publicUserProfileByUser.items[0].avatarImgFile === ""
+				) {
+					setNoAvatar(true)
+				} else {
+					setAvatarKey(apiCall.data.publicUserProfileByUser.items[0].avatarImgFile.key)
+				}
+			} catch (error) {
+				console.log(error)
+			}
+		}
+
+		if (props.username !== undefined) {
 			getAvatar()
 		}
 	}, [props.username])
-
-	const getAvatar = async () => {
-		try {
-			let apiCall = await API.graphql({ query: queries.publicUserProfileByUser, variables: { owner: props.username } })
-			if (
-				apiCall.data.publicUserProfileByUser.items[0].avatarImgFile == undefined ||
-				apiCall.data.publicUserProfileByUser.items[0].avatarImgFile == null ||
-				apiCall.data.publicUserProfileByUser.items[0].avatarImgFile == ""
-			) {
-				setNoAvatar(true)
-			} else {
-				setAvatarKey(apiCall.data.publicUserProfileByUser.items[0].avatarImgFile.key)
-			}
-		} catch (error) {
-			console.log(error)
-		}
-	}
 
 	return (
 		<div className={cx(commentCardStyles.comment, "card", "d-flex")}>

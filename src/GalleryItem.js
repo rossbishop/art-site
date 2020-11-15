@@ -8,7 +8,7 @@ import AmplifyImage from "./AmplifyImage"
 
 export default function GalleryItem(props) {
 	return (
-		<div className={props.selected == props.id - 1 ? "carousel-item active" : "carousel-item"}>
+		<div className={props.selected === props.id - 1 ? "carousel-item active" : "carousel-item"}>
 			<AmplifyImage imgKey={props.imgKey} style={galleryItemStyles.galleryImg} />
 			<div className="container">
 				<div className="carousel-caption">

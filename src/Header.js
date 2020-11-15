@@ -64,7 +64,7 @@ export default function Header(props) {
 									<li className="nav-item dropdown">
 										<a
 											className="nav-link dropdown-toggle"
-											href="#"
+											href="/#"
 											id="dropdown05"
 											data-toggle="dropdown"
 											aria-haspopup="true"

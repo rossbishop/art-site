@@ -19,7 +19,7 @@ import * as queries from "./graphql/queries"
 
 import { Switch, Route, Redirect, withRouter } from "react-router-dom"
 
-const client = new AWSAppSyncClient({
+new AWSAppSyncClient({
 	url: awsconfig.aws_appsync_graphqlEndpoint,
 	region: awsconfig.aws_appsync_region,
 	auth: {
@@ -39,15 +39,15 @@ function App() {
 
 	//Invoke this function only once at first page load (hence empty deps array [])
 	useEffect(() => {
-		if (isLoggedIn == undefined || isLoading) {
+		if (isLoggedIn === undefined || isLoading) {
 			checkLoggedIn()
 		}
-		if (destinationPage != undefined) {
-			if (destinationPage.split("/")[1] == "newrevision") {
+		if (destinationPage !== undefined) {
+			if (destinationPage.split("/")[1] === "newrevision") {
 				setIsNewRevisionPage(true)
 				getProject()
 			}
-		} else if (window.location.pathname.split("/")[1] == "newrevision") {
+		} else if (window.location.pathname.split("/")[1] === "newrevision") {
 			setIsNewRevisionPage(true)
 			getProject()
 		}
@@ -55,10 +55,10 @@ function App() {
 
 	//Use effect dep is userAttribs as was getting odd issues trying to grab them from the full userDetails state
 	useEffect(() => {
-		if (userAttribs != undefined) {
+		if (userAttribs !== undefined) {
 			setLoggedIn(true)
 			if (isNewRevisionPage) {
-				if (projectData != undefined) {
+				if (projectData !== undefined) {
 					setLoading(false)
 				}
 			} else {
@@ -132,7 +132,7 @@ function App() {
 				{...rest}
 				render={({ props }) => {
 					if (isLoggedIn) {
-						if (userDetails.username == projectData.owner) {
+						if (userDetails.username === projectData.owner) {
 							return children
 						} else {
 							return (
@@ -162,7 +162,7 @@ function App() {
 	const getProject = async () => {
 		try {
 			let uuid = ""
-			if (destinationPage != undefined) {
+			if (destinationPage !== undefined) {
 				uuid = await destinationPage.split("/")[2]
 			} else {
 				uuid = await window.location.pathname.split("/")[2]

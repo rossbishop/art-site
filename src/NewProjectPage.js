@@ -52,16 +52,16 @@ function NewProjectPage(props) {
 
 	const createNewProject = async () => {
 		try {
-			if (projectName == "") {
-				throw "Provide a valid project name"
-			} else if (projectDescription == "") {
-				throw "Provide a project description"
-			} else if (revisionName == "") {
-				throw "Provide a revision name"
-			} else if (revisionDescription == "") {
-				throw "Provide a revision description"
-			} else if (revisionImageURL == undefined) {
-				throw "Provide an initial revision image"
+			if (projectName === "") {
+				throw new Error("Provide a valid project name")
+			} else if (projectDescription === "") {
+				throw new Error("Provide a project description")
+			} else if (revisionName === "") {
+				throw new Error("Provide a revision name")
+			} else if (revisionDescription === "") {
+				throw new Error("Provide a revision description")
+			} else if (revisionImageURL === undefined) {
+				throw new Error("Provide an initial revision image")
 			} else {
 				const projectData = {
 					projectName: projectName,
@@ -92,7 +92,7 @@ function NewProjectPage(props) {
 					region: awsconfig.aws_user_files_s3_bucket_region
 				}
 			}
-			const revisionCall = await API.graphql({ query: mutations.createRevision, variables: { input: revisionData } })
+			await API.graphql({ query: mutations.createRevision, variables: { input: revisionData } })
 			setProjectSuccess({ isSuccess: true, message: "Success!" })
 		} catch (error) {
 			console.log("Error creating revision: ", error)
@@ -105,11 +105,11 @@ function NewProjectPage(props) {
 	}
 
 	useEffect(() => {
-		if (createdProject != undefined) {
+		if (createdProject !== undefined) {
 			createNewRevision()
 		}
 
-		if (revisionImageKey != undefined) {
+		if (revisionImageKey !== undefined) {
 			getNewProjectImage()
 		}
 	}, [createdProject, revisionImageKey])

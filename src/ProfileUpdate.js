@@ -8,31 +8,30 @@ import cx from "classnames"
 export default function ProfileUpdate(props) {
 	return (
 		<div className="container">
-			<div class="row">
-				<div class="col-6">
+			<div className="row">
+				<div className="col-6">
 					<form className={ProfileUpdateStyles.formProfileUpdate}>
 						<h1 className="h3 mb-3 mt-4 font-weight-normal">Update Profile Details</h1>
 						<div className="row d-flex align-items-center">
 							<div className="d-flex flex-column col-4">
 								<h6>Avatar Image:</h6>
 								{props.avatarImageURL && (
-									<img className={ProfileUpdateStyles.profileImgSmall} src={props.avatarImageURL} />
+									<img className={ProfileUpdateStyles.profileImgSmall} src={props.avatarImageURL} alt="User Avatar" />
 								)}
 							</div>
 							<div className="d-flex flex-column col-8">
 								<div className="d-flex flex-row">
 									<div className="d-flex flex-column col-12">
 										<input
-											type="userDetail"
 											type="file"
 											accept="image/png"
 											onChange={event => props.setAvatarFile(event.target.files[0])}
-											id="inputFile"
+											id="inputAvatar"
 											className={cx(ProfileUpdateStyles.formControl, "my-3", "py-2", "pl-0")}
 											placeholder="Local Path"
 											defaultValue=""
 											required
-											autofocus
+											autoFocus
 										/>
 										<button
 											type="button"
@@ -52,23 +51,22 @@ export default function ProfileUpdate(props) {
 							<div className="d-flex flex-column col-4">
 								<h6>Banner Image:</h6>
 								{props.bannerImageURL && (
-									<img className={ProfileUpdateStyles.profileImgSmall} src={props.bannerImageURL} />
+									<img className={ProfileUpdateStyles.profileImgSmall} src={props.bannerImageURL} alt="User Banner" />
 								)}
 							</div>
 							<div className="d-flex flex-column col-8">
 								<div className="d-flex flex-row">
 									<div className="d-flex flex-column col-12">
 										<input
-											type="userDetail"
 											type="file"
 											accept="image/png"
 											onChange={event => props.setBannerFile(event.target.files[0])}
-											id="inputFile"
+											id="inputBanner"
 											className={cx(ProfileUpdateStyles.formControl, "my-3", "py-2", "pl-0")}
 											placeholder="Local Path"
 											defaultValue=""
 											required
-											autofocus
+											autoFocus
 										/>
 										<button
 											type="button"
@@ -85,7 +83,7 @@ export default function ProfileUpdate(props) {
 							</div>
 						</div>
 						<h6 className="mt-3">Change Username:</h6>
-						<label for="inputUsername" className="sr-only">
+						<label htmlFor="inputUsername" className="sr-only">
 							Current Username
 						</label>
 						<input
@@ -96,10 +94,10 @@ export default function ProfileUpdate(props) {
 							onChange={event => props.setUsername(event.target.value)}
 							defaultValue={props.userAttribs.preferred_username}
 							required
-							autofocus
+							autoFocus
 						/>
 						<h6>Change Position:</h6>
-						<label for="inputPosition" className="sr-only">
+						<label htmlFor="inputPosition" className="sr-only">
 							Current Position Title
 						</label>
 						<input
@@ -110,10 +108,10 @@ export default function ProfileUpdate(props) {
 							onChange={event => props.setJob(event.target.value)}
 							defaultValue={props.publicUserAttribs.position}
 							required
-							autofocus
+							autoFocus
 						/>
 						<h6>Change Location:</h6>
-						<label for="inputLocation" className="sr-only">
+						<label htmlFor="inputLocation" className="sr-only">
 							Current Location
 						</label>
 						<input
@@ -124,7 +122,7 @@ export default function ProfileUpdate(props) {
 							onChange={event => props.setLocation(event.target.value)}
 							defaultValue={props.publicUserAttribs.location}
 							required
-							autofocus
+							autoFocus
 						/>
 						<h6>Change Bio:</h6>
 						<textarea
@@ -132,9 +130,8 @@ export default function ProfileUpdate(props) {
 							id="bioTextArea"
 							rows="5"
 							onChange={event => props.setBio(event.target.value)}
-						>
-							{props.publicUserAttribs.bio}
-						</textarea>
+							defaultValue={props.publicUserAttribs.bio}
+						></textarea>
 						{props.profileSuccess.isSuccess && (
 							<div className="alert alert-success" role="alert">
 								Updated profile details successfully
@@ -157,11 +154,11 @@ export default function ProfileUpdate(props) {
 						</button>
 					</form>
 				</div>
-				<div class="col-6">
+				<div className="col-6">
 					<form className={ProfileUpdateStyles.formProfileUpdate}>
 						<h2 className="h3 mb-3 mt-4 font-weight-normal">Update Social Media</h2>
 						<h6 className="mt-3">Change Instagram Handle:</h6>
-						<label for="inputInstagram" className="sr-only">
+						<label htmlFor="inputInstagram" className="sr-only">
 							Instagram
 						</label>
 						<input
@@ -174,7 +171,7 @@ export default function ProfileUpdate(props) {
 							required
 						/>
 						<h6>Change Twitter Handle:</h6>
-						<label for="inputTwitter" className="sr-only">
+						<label htmlFor="inputTwitter" className="sr-only">
 							Twitter
 						</label>
 						<input
@@ -187,7 +184,7 @@ export default function ProfileUpdate(props) {
 							required
 						/>
 						<h6>Change Facebook Handle:</h6>
-						<label for="inputFacebook" className="sr-only">
+						<label htmlFor="inputFacebook" className="sr-only">
 							Facebook
 						</label>
 						<input
@@ -222,7 +219,7 @@ export default function ProfileUpdate(props) {
 					</form>
 					<form className={ProfileUpdateStyles.formProfileUpdate}>
 						<h2 className="h3 mb-3 mt-4 font-weight-normal">Update Password</h2>
-						<label for="inputCurrentPassword" className="sr-only">
+						<label htmlFor="inputCurrentPassword" className="sr-only">
 							Current Password
 						</label>
 						<input
@@ -233,7 +230,7 @@ export default function ProfileUpdate(props) {
 							onChange={event => props.setCurrPassword(event.target.value)}
 							required
 						/>
-						<label for="inputNewPassword" className="sr-only">
+						<label htmlFor="inputNewPassword" className="sr-only">
 							New Password
 						</label>
 						<input
@@ -244,7 +241,7 @@ export default function ProfileUpdate(props) {
 							onChange={event => props.setNewPassword(event.target.value)}
 							required
 						/>
-						<label for="inputConfirmPassword" className="sr-only">
+						<label htmlFor="inputConfirmPassword" className="sr-only">
 							Password Confirmation
 						</label>
 						<input

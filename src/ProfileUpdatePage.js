@@ -1,6 +1,8 @@
-import { Header, Footer } from "./Imports.js"
 import React, { useState, useEffect } from "react"
+
+import Header from "./Header"
 import ProfileUpdate from "./ProfileUpdate"
+import Footer from "./Footer"
 
 import { Auth } from "aws-amplify"
 import { API, Storage } from "aws-amplify"

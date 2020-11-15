@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react"
 
+import Header from "./Header"
 import NewRevision from "./NewRevision"
-import { Header, Footer } from "./Imports.js"
+import Footer from "./Footer"
 
 import { API, Storage } from "aws-amplify"
 import * as mutations from "./graphql/mutations"

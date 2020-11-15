@@ -5,7 +5,7 @@ import LoginStyles from "./css/login.module.css"
 
 import cx from "classnames"
 
-import { Link } from "./Imports"
+import { Link } from "react-router-dom"
 
 export default function Login(props) {
 	const username = props.getUsername

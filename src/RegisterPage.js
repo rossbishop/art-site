@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 
-import { Header, Footer } from "./Imports.js"
-
+import Header from "./Header"
 import Register from "./Register"
 import RegisterConfirm from "./RegisterConfirm"
+import Footer from "./Footer"
 
 import { Auth } from "aws-amplify"
 

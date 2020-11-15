@@ -1,7 +1,8 @@
 import React from "react"
 
+import Header from "./Header"
 import Loading from "./Loading"
-import { Header, Footer } from "./Imports.js"
+import Footer from "./Footer"
 
 function LoadingPage(props) {
 	return (

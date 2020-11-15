@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react"
 
+import Header from "./Header"
 import UserBanner from "./UserBanner"
 import ProjectGrid from "./ProjectGrid"
-import { Header, Footer } from "./Imports.js"
+import Footer from "./Footer"
 
 import { API, Storage } from "aws-amplify"
 import * as queries from "./graphql/queries"

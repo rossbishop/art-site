@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react"
 
-import { Header, Footer, ProjectModule } from "./Imports.js"
+import Header from "./Header"
+import ProjectModule from "./ProjectModule"
+import Footer from "./Footer"
 
 import { API } from "aws-amplify"
 import * as queries from "./graphql/queries"

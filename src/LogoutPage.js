@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react"
 
+import Header from "./Header"
 import Logout from "./Logout"
-import { Header, Footer } from "./Imports.js"
+import Footer from "./Footer"
 
 import { Auth } from "aws-amplify"
 

@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.css"
 import projectCardStyles from "./css/projectcard.module.css"
 
 import AmplifyImage from "./AmplifyImage"
-import { Link } from "./Imports"
+import { Link } from "react-router-dom"
 
 import cx from "classnames"
 

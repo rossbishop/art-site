@@ -1,3 +1,9 @@
+/*
+	Filename: 		Loading.js
+	Description: 	A React functional component used for display during initial page loads and transitions between pages
+	Author: 		Ross Bishop
+*/
+
 import React from "react"
 
 import "bootstrap/dist/css/bootstrap.css"

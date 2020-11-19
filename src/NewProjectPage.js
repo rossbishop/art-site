@@ -1,3 +1,9 @@
+/*
+	Filename: 		NewProjectPage.js
+	Description: 	A React page functional component used to create new user projects
+	Author: 		Ross Bishop
+*/
+
 import React, { useState, useEffect } from "react"
 
 import Header from "./Header"
@@ -25,6 +31,7 @@ function NewProjectPage(props) {
 	const [revisionFile, setRevisionFile] = useState()
 	const [shouldRedirect, setRedirect] = useState(false)
 
+	// Gets the newly uploaded project image from the S3 storage bucket via the Amplify Storage API and stores the URL in state so the image can be displayed
 	const getNewProjectImage = async () => {
 		try {
 			const signedURL = await Storage.get(revisionImageKey, { level: "public" })
@@ -34,6 +41,8 @@ function NewProjectPage(props) {
 		}
 	}
 
+	// Uploads new user image content to an Amazon S3 bucket via the Amplify Storage API
+	// Then on success, provide a message to the user and store the uploaded image in state
 	const uploadNewProjectImage = async inputFile => {
 		const file = inputFile
 		const imageuuid = uuidv4()
@@ -51,6 +60,9 @@ function NewProjectPage(props) {
 		}
 	}
 
+	// Creates a new user project in the form of a GraphQL model via the Amplify API
+	// First checks that input data is valid
+	// Then on success signal that the project revision should now be created
 	const createNewProject = async () => {
 		try {
 			if (projectName === "") {
@@ -79,6 +91,8 @@ function NewProjectPage(props) {
 		}
 	}
 
+	// Creates a new user project revision in the form of a GraphQL model via the Amplify API
+	// Then on success, notify the user the project has been created and after 3 seconds redirect to the newly created project
 	const createNewRevision = async () => {
 		try {
 			const revisionData = {
@@ -105,6 +119,8 @@ function NewProjectPage(props) {
 		}
 	}
 
+	// Once project is created, start creating the initial revision
+	// Once revision image has been uploaded, get the image URL so it can be displayed
 	useEffect(() => {
 		if (createdProject !== undefined) {
 			createNewRevision()
@@ -125,6 +141,7 @@ function NewProjectPage(props) {
 				setLoading={props.setLoading}
 				setDestinationPage={props.setDestinationPage}
 			/>
+			{/* On initial page load, display project creation component */}
 			{!shouldRedirect && (
 				<NewProject
 					projectName={projectName}
@@ -145,6 +162,7 @@ function NewProjectPage(props) {
 					revisionImageURL={revisionImageURL}
 				/>
 			)}
+			{/* Once project is fully created, redirect to created project page */}
 			{shouldRedirect && (
 				<Redirect
 					to={{

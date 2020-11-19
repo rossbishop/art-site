@@ -1,3 +1,9 @@
+/*
+	Filename: 		ProfileUpdatePage.js
+	Description: 	A React page functional component used to modify user profile information
+	Author: 		Ross Bishop
+*/
+
 import React, { useState, useEffect } from "react"
 
 import Header from "./Header"
@@ -44,6 +50,8 @@ function ProfileUpdatePage(props) {
 	const [bannerImageURL, setBannerImageURL] = useState()
 	const [bannerFile, setBannerFile] = useState()
 
+	// Retrieves user profile data using a GraphQL query via the Amplify API
+	// Then on success, store the user profile data in state
 	const getUserProfileData = async () => {
 		try {
 			await Auth.currentAuthenticatedUser()
@@ -57,6 +65,8 @@ function ProfileUpdatePage(props) {
 		}
 	}
 
+	// Updates user social information using a GraphQL mutation via the Amplify API
+	// Then on success, notifies the user
 	const updateSocial = async () => {
 		try {
 			let user = await Auth.currentAuthenticatedUser()
@@ -72,6 +82,9 @@ function ProfileUpdatePage(props) {
 		}
 	}
 
+	// Updates user personal details using a GraphQL mutation via the Amplify API
+	// Verifies input data is present
+	// Then on success, notifies the user
 	const updateProfile = async () => {
 		try {
 			if (username === undefined || username === "") {
@@ -127,6 +140,9 @@ function ProfileUpdatePage(props) {
 		}
 	}
 
+	// Updates user password via the Amplify Auth API
+	// Verifies validity of password
+	// Then on success, notifies the user
 	const updatePassword = async () => {
 		let passwordNumberRegEx = new RegExp("[0-9]")
 		let passwordLetterRegEx = new RegExp("[a-z]")
@@ -158,6 +174,8 @@ function ProfileUpdatePage(props) {
 		}
 	}
 
+	// Uploads new user avatar image to Amazon S3 bucket via Amplify Storage API
+	// Then on success, stores image key in state
 	const uploadNewAvatarImage = async inputFile => {
 		console.log("Start Image Upload")
 		const file = inputFile
@@ -177,6 +195,8 @@ function ProfileUpdatePage(props) {
 		}
 	}
 
+	// Uploads new banner image to Amazon S3 bucket via Amplify Storage API
+	// Then on success, stores image key in state
 	const uploadNewBannerImage = async inputFile => {
 		console.log("Start Image Upload")
 		const file = inputFile
@@ -196,6 +216,8 @@ function ProfileUpdatePage(props) {
 		}
 	}
 
+	// Retrieves newly uploaded avatar image from Amazon S3 bucket via Amplify Storage API
+	// Then on success, stores the URL in state so a preview can be displayed on the page
 	const getNewAvatarImage = async () => {
 		try {
 			const signedURL = await Storage.get(avatarImageKey, { level: "public" })
@@ -205,6 +227,8 @@ function ProfileUpdatePage(props) {
 		}
 	}
 
+	// Retrieves newly uploaded banner image from Amazon S3 bucket via Amplify Storage API
+	// Then on success, stores the URL in state so a preview can be displayed on the page
 	const getNewBannerImage = async () => {
 		try {
 			const signedURL = await Storage.get(bannerImageKey, { level: "public" })
@@ -214,6 +238,8 @@ function ProfileUpdatePage(props) {
 		}
 	}
 
+	// Retrieves existing profile images using stored keys images from Amazon S3 bucket via Amplify Storage API
+	// Then on success, stores URLs in state so previews can be displayed on page
 	const loadExistingProfileImages = async () => {
 		try {
 			const signedAvatarURL = await Storage.get(loadProfileData.avatarImgFile.key, { level: "public" })
@@ -225,11 +251,14 @@ function ProfileUpdatePage(props) {
 		}
 	}
 
+	// Get user profile data on page load
 	useEffect(() => {
 		getUserProfileData()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
+	// Get existing profile images on page load if they exist
+	// When any new image is uploaded, get the image URL and store in state for display
 	useEffect(() => {
 		if (avatarImageKey !== undefined) {
 			getNewAvatarImage()
@@ -252,6 +281,7 @@ function ProfileUpdatePage(props) {
 				setLoading={props.setLoading}
 				setDestinationPage={props.setDestinationPage}
 			/>
+			{/* Once profile data is loaded, display the profile update component */}
 			{loadProfileData && (
 				<ProfileUpdate
 					userDetails={props.userDetails}

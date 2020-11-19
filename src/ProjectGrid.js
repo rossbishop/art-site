@@ -1,7 +1,14 @@
+/*
+	Filename: 		ProjectGrid.js
+	Description: 	A React functional component used to display a grid of user project cards
+	Author: 		Ross Bishop
+*/
+
 import React from "react"
 
 import ProjectCard from "./ProjectCard"
 
+// Calculate the total number of comments on a project across all revisions and return the calculated result
 export default function ProjectGrid(props) {
 	function calculateCounts(projectId) {
 		var commentCount = 0
@@ -17,6 +24,7 @@ export default function ProjectGrid(props) {
 		<div className="album mt-3 mb-5 bg-light">
 			<div className="container">
 				<div className="row">
+					{/* For each project in array of loaded data, display a project card */}
 					{props.projectData.map((item, index) => {
 						return (
 							<ProjectCard

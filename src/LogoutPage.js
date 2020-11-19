@@ -1,3 +1,9 @@
+/*
+	Filename: 		LogoutPage.js
+	Description: 	A React page functional component which acts as the site logout page
+	Author: 		Ross Bishop
+*/
+
 import React, { useState, useEffect } from "react"
 
 import Header from "./Header"
@@ -10,10 +16,13 @@ function LogoutPage(props) {
 	const [isError, setError] = useState({ isError: false, message: "" })
 	const [success, setSuccess] = useState({ isSuccess: false, message: "" })
 
+	// When called, redirect to site index
 	function getRedirectPage() {
 		window.location.href = "/"
 	}
 
+	// Ends an existing cognito authentication session via the Amplify API
+	// On success, provide a message to the user and redirect to the index after 3 seconds
 	const signOut = async props => {
 		try {
 			await Auth.signOut()
@@ -27,6 +36,7 @@ function LogoutPage(props) {
 		}
 	}
 
+	// Automatically sign out 3 seconds after loading this page
 	useEffect(() => {
 		setTimeout(() => {
 			signOut()

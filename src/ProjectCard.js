@@ -1,3 +1,9 @@
+/*
+	Filename: 		ProjectCard.js
+	Description: 	A React functional component used to display an overview of user projects
+	Author: 		Ross Bishop
+*/
+
 import React from "react"
 
 import "bootstrap/dist/css/bootstrap.css"
@@ -16,6 +22,7 @@ export default function ProjectCard(props) {
 				<Link
 					className={projectCardStyles.links}
 					to="/loading"
+					// When user clicks the link, route to the project page
 					onClick={event => {
 						props.setLoading(true)
 						props.setDestinationPage(props.link)
@@ -28,6 +35,7 @@ export default function ProjectCard(props) {
 						<Link
 							className={projectCardStyles.links}
 							to="/loading"
+							// When user clicks the card, route to the project page
 							onClick={event => {
 								props.setLoading(true)
 								props.setDestinationPage(props.link)
@@ -39,6 +47,7 @@ export default function ProjectCard(props) {
 							by{" "}
 							<Link
 								to="/loading"
+								// When user clicks the link, route to the project owner's profile page
 								onClick={event => {
 									props.setLoading(true)
 									props.setDestinationPage(`/user/${props.username}`)

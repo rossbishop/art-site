@@ -1,3 +1,9 @@
+/*
+	Filename: 		LoadingPage.js
+	Description: 	A React page functional component which acts as the site loading page
+	Author: 		Ross Bishop
+*/
+
 import React from "react"
 
 import Header from "./Header"

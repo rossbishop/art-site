@@ -1,3 +1,9 @@
+/*
+	Filename: 		CommentCard.js
+	Description: 	A React functional component used to display the contents of a single user comment.
+	Author: 		Ross Bishop
+*/
+
 import React, { useEffect, useState } from "react"
 
 import "bootstrap/dist/css/bootstrap.css"
@@ -15,6 +21,7 @@ export default function CommentCard(props) {
 	const [avatarKey, setAvatarKey] = useState()
 	const [noAvatar, setNoAvatar] = useState()
 
+	// Gets the user's avatar image key if they have one and stores in state, otherwise indicate no avatar is present
 	const getAvatar = async () => {
 		try {
 			let apiCall = await API.graphql({
@@ -35,6 +42,7 @@ export default function CommentCard(props) {
 		}
 	}
 
+	// Once user details have loaded, get the user's avatar image key
 	useEffect(() => {
 		if (props.username !== undefined) {
 			getAvatar()
@@ -58,6 +66,7 @@ export default function CommentCard(props) {
 				</div>
 			</div>
 			<div className={cx(commentCardStyles.commentText, "card-body", "d-flex")}>
+				{/* If the user has an avatar, load the image from the stored key, otherwise display a placeholder */}
 				{avatarKey && <AmplifyImage imgKey={avatarKey} style={commentCardStyles.profileImgSmall} />}
 				{noAvatar && (
 					<div className={commentCardStyles.commentBlankAvatar}>

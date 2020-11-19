@@ -1,3 +1,9 @@
+/*
+	Filename: 		RegisterPage.js
+	Description: 	A React page functional component used to sign up new users
+	Author: 		Ross Bishop
+*/
+
 import React, { useState } from "react"
 
 import Header from "./Header"
@@ -22,6 +28,9 @@ function RegisterPage(props) {
 	const [birthMonth, setBirthMonth] = useState("01")
 	const [birthYear, setBirthYear] = useState()
 
+	// Creates a new Cognito user via the Amplify Auth API
+	// Check for valid user details on the front end
+	// Then on success, signal that the user has been created
 	const signUp = async props => {
 		const { username, password, email } = props
 		try {
@@ -72,6 +81,8 @@ function RegisterPage(props) {
 		}
 	}
 
+	// Confirms a new Cognito user via the Amplify Auth API
+	// Then on success, signal that the user has been confirmed
 	const confirmSignUp = async props => {
 		const { username, confirmationCode } = props
 		try {
@@ -83,6 +94,8 @@ function RegisterPage(props) {
 		}
 	}
 
+	// Takes date in the form of birth year, birth month and birth date#
+	// Returns the age of that date
 	function getAge(date) {
 		var now = new Date()
 		var birthDate = new Date(date)
@@ -94,6 +107,8 @@ function RegisterPage(props) {
 		return currentAge
 	}
 
+	// Uses regex to verify whether or not email address is valid
+	// Returns true if valid, else false
 	function isValidEmail(email) {
 		const re = /^((^<>()\[\]\\.,;:\s@"]+(\.^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 		return re.test(String(email).toLowerCase())
@@ -108,6 +123,7 @@ function RegisterPage(props) {
 				setLoading={props.setLoading}
 				setDestinationPage={props.setDestinationPage}
 			/>
+			{/* If user isn't yet created, display registration form */}
 			{!isUserCreated && (
 				<Register
 					setUsername={setUsername}
@@ -128,6 +144,7 @@ function RegisterPage(props) {
 					setBirthYear={setBirthYear}
 				/>
 			)}
+			{/* If user is created, display confirmation form */}
 			{isUserCreated && (
 				<RegisterConfirm
 					confirmSignUp={confirmSignUp}

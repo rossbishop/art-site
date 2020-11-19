@@ -1,3 +1,9 @@
+/*
+	Filename: 		UserPage.js
+	Description: 	A React page functional component used to display user profiles
+	Author: 		Ross Bishop
+*/
+
 import React, { useState, useEffect } from "react"
 
 import Header from "./Header"
@@ -16,6 +22,7 @@ function UserPage(props) {
 	const [noAvatar, setNoAvatar] = useState()
 	const [noBanner, setNoBanner] = useState()
 
+	// Get latest projects belonging to a user by GraphQL query via the Amplify API and store the data in state
 	const getUserProjects = async () => {
 		try {
 			const owner = window.location.pathname.split("/")[2]
@@ -29,6 +36,7 @@ function UserPage(props) {
 		}
 	}
 
+	// Get profile data belonging to a user by GraphQL query via the Amplify API and store the data in state
 	const getUserProfileData = async () => {
 		try {
 			const owner = window.location.pathname.split("/")[2]
@@ -39,6 +47,7 @@ function UserPage(props) {
 		}
 	}
 
+	// Get profile image URLs belonging to a user via the Amplify Storage API and store the data in state
 	const getProfileImages = async () => {
 		try {
 			if (profileData !== null) {
@@ -60,12 +69,14 @@ function UserPage(props) {
 		}
 	}
 
+	// Load user profile data and projects on page load
 	useEffect(() => {
 		getUserProjects()
 		getUserProfileData()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
+	// Once user profile data has loaded, get user profile images
 	useEffect(() => {
 		if (profileData !== undefined) {
 			getProfileImages()
@@ -82,6 +93,7 @@ function UserPage(props) {
 				setLoading={props.setLoading}
 				setDestinationPage={props.setDestinationPage}
 			/>
+			{/* Once user profile data has loaded, display banner */}
 			{profileData && (
 				<UserBanner
 					profileData={profileData}
@@ -91,6 +103,7 @@ function UserPage(props) {
 					noAvatar={noAvatar}
 				/>
 			)}
+			{/* Once user project data has loaded, display grid populated with user data */}
 			{projectData && (
 				<ProjectGrid
 					projectData={projectData}

@@ -1,3 +1,9 @@
+/*
+	Filename: 		GalleryItem.js
+	Description: 	A React functional component used for displaying user revision content on project pages in a carousel
+	Author: 		Ross Bishop
+*/
+
 import React from "react"
 
 import "bootstrap/dist/css/bootstrap.css"

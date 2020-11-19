@@ -1,3 +1,9 @@
+/*
+	Filename: 		Header.js
+	Description: 	A React functional component used on every page as a navigation bar
+	Author: 		Ross Bishop
+*/
+
 import React from "react"
 
 import "bootstrap/dist/css/bootstrap.css"

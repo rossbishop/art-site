@@ -1,3 +1,9 @@
+/*
+	Filename: 		index.js
+	Description: 	A React root component which acts as the site index
+	Author: 		Ross Bishop
+*/
+
 import React from "react"
 import ReactDOM from "react-dom"
 

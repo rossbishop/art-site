@@ -1,10 +1,16 @@
+/*
+	Filename: 		ForgotPage.js
+	Description: 	A React page functional component for resetting user passwords
+	Author: 		Ross Bishop
+*/
+
 import React, { useState } from "react"
 
 import Header from "./Header"
-import Footer from "./Footer"
 import Forgot from "./Forgot"
-import RegisterConfirm from "./RegisterConfirm"
 import ForgotReset from "./ForgotReset"
+import RegisterConfirm from "./RegisterConfirm"
+import Footer from "./Footer"
 
 import { Auth } from "aws-amplify"
 
@@ -17,10 +23,11 @@ function ForgotPage(props) {
 	const [isResetComplete, setResetComplete] = useState(false)
 	const [username, setUsername] = useState("")
 	const [password, setPassword] = useState("")
-
 	const [isUserConfirmed, setUserConfirmed] = useState(false)
 	const [confirmationCode, setConfirmationCode] = useState("")
 
+	// Request a password reset for the input username via the Amplify API
+	// On success, provide a message and signal for a component switch for new password entry after 3 seconds
 	const forgotPassword = async props => {
 		try {
 			await Auth.forgotPassword(props)
@@ -35,6 +42,8 @@ function ForgotPage(props) {
 		}
 	}
 
+	// Submit the new user password and confirmation code to the Amplify API
+	// On success, provide a message and signal for a redirect to the login page after 3 seconds
 	const forgotPasswordSubmit = async props => {
 		try {
 			await Auth.forgotPasswordSubmit(props.username, props.code, props.new_password)
@@ -48,6 +57,8 @@ function ForgotPage(props) {
 		}
 	}
 
+	// Request a new confirmation code to be sent to the email address associated with the given username
+	// On success, provide a message and signal a component switch for confirmation code entry after 3 seconds
 	const resendConfirmationCode = async props => {
 		try {
 			await Auth.resendSignUp(props)
@@ -62,6 +73,7 @@ function ForgotPage(props) {
 		}
 	}
 
+	// Confirm the new user via the Amplify API using an email supplied confirmation code
 	const confirmSignUp = async props => {
 		const { username, confirmationCode } = props
 		try {
@@ -82,6 +94,7 @@ function ForgotPage(props) {
 				setLoading={props.setLoading}
 				setDestinationPage={props.setDestinationPage}
 			/>
+			{/* When password request has been sent, display component for entering new password */}
 			{isReset && (
 				<ForgotReset
 					setConfirmationCode={setConfirmationCode}
@@ -96,6 +109,7 @@ function ForgotPage(props) {
 					setResetComplete={setResetComplete}
 				/>
 			)}
+			{/* On page load, display component so user can request a password reset or a new confirmation code */}
 			{!isConfirm && isForgot && (
 				<Forgot
 					getError={isError}
@@ -107,6 +121,7 @@ function ForgotPage(props) {
 					setForgot={setForgot}
 				/>
 			)}
+			{/* When user has requested a new confirmation code, display component so user can confirm their account */}
 			{isConfirm && (
 				<RegisterConfirm
 					confirmSignUp={confirmSignUp}

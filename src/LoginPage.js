@@ -1,3 +1,9 @@
+/*
+	Filename: 		LoginPage.js
+	Description: 	A React page functional component which acts as the site login page
+	Author: 		Ross Bishop
+*/
+
 import React, { useState } from "react"
 
 import Header from "./Header"
@@ -12,10 +18,13 @@ function LoginPage(props) {
 	const [password, setPassword] = useState("")
 	const [success, setSuccess] = useState({ isSuccess: false, message: "" })
 
+	// When called, redirect to site index
 	function getRedirectPage() {
 		window.location.href = "/"
 	}
 
+	// Generates a new Cognito authentication session via the Amplify Auth API
+	// On success, provide a message to the user and redirect to the index after 3 seconds
 	const signIn = async props => {
 		try {
 			await Auth.signIn(username, password)

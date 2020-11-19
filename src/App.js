@@ -1,3 +1,9 @@
+/*
+	Filename: 		App.js
+	Description: 	Primary React functional component used to configure most application settings and perform page routing
+	Author: 		Ross Bishop
+*/
+
 import React, { useEffect, useState } from "react"
 
 import Home from "./Home"
@@ -19,6 +25,7 @@ import * as queries from "./graphql/queries"
 
 import { Switch, Route, Redirect, withRouter } from "react-router-dom"
 
+// Create AppSync client
 new AWSAppSyncClient({
 	url: awsconfig.aws_appsync_graphqlEndpoint,
 	region: awsconfig.aws_appsync_region,
@@ -37,6 +44,9 @@ function App() {
 	const [isNewRevisionPage, setIsNewRevisionPage] = useState(false)
 	const [destinationPage, setDestinationPage] = useState()
 
+	// Run auth checks on every fresh page load or if the user auth state is unknown
+	// If navigating to new revision page, pre-emptively get user project revision is to be associated with
+	// Do this for either React routing or direct URL navigation
 	useEffect(() => {
 		if (isLoggedIn === undefined || isLoading) {
 			checkLoggedIn()
@@ -53,6 +63,9 @@ function App() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isLoading])
 
+	// If user attributes are loaded, signal user is logged in with state
+	// Then check whether page is new revision page or not
+	// If new revision page, only disable loading once project data has loaded
 	useEffect(() => {
 		if (userAttribs !== undefined) {
 			setLoggedIn(true)
@@ -67,6 +80,9 @@ function App() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [userAttribs, projectData])
 
+	// Checks user authentication status via Amplify Auth API
+	// If user is authenticated, stores user data in state
+	// Otherwise signals user isn't logged in and finishes page load
 	const checkLoggedIn = async () => {
 		try {
 			const user = await Auth.currentAuthenticatedUser({
@@ -83,6 +99,7 @@ function App() {
 		}
 	}
 
+	// Configures all Amplify settings
 	Amplify.configure({
 		aws_project_region: "eu-west-2",
 		aws_cloud_logic_custom: [
@@ -104,6 +121,7 @@ function App() {
 		aws_user_files_s3_bucket_region: "eu-west-2"
 	})
 
+	// Route which will redirect to login if a user isn't logged in
 	function PrivateRoute({ children, ...rest }) {
 		return (
 			<Route
@@ -126,6 +144,7 @@ function App() {
 		)
 	}
 
+	// Route which will check for project ownership as well as login status
 	function PrivatePermissionRoute({ children, ...rest }) {
 		return (
 			<Route
@@ -159,6 +178,8 @@ function App() {
 		)
 	}
 
+	// Gets project specified by uuid in URL using a GraphQL query via the Amplify API
+	// On success, stores project data in state
 	const getProject = async () => {
 		try {
 			let uuid = ""
@@ -171,7 +192,6 @@ function App() {
 			setProjectData(apiCall.data.getProject)
 		} catch (error) {
 			console.log("Error getting project REVISIONPAGE: ", error)
-		} finally {
 		}
 	}
 
@@ -180,6 +200,8 @@ function App() {
 			<Switch>
 				<Route
 					path="/loading"
+					// Loading route used for navigation between all pages, returns loading page while authentication happens
+					// After authentication, user is redirected to the page they wished to navigate to
 					render={({ props }) => {
 						if (isLoading) {
 							return <LoadingPage userDetails={userDetails} userAttribs={userAttribs} isLoggedIn={isLoggedIn} />
@@ -196,11 +218,13 @@ function App() {
 					}}
 				/>
 
+				{/* While loading, display loading page */}
 				{isLoading && (
 					<Route path="/newrevision/:id">
 						<LoadingPage userDetails={userDetails} userAttribs={userAttribs} isLoggedIn={isLoggedIn} />
 					</Route>
 				)}
+				{/* Once loaded, display the desired page */}
 				{!isLoading && (
 					<PrivatePermissionRoute path="/newrevision/:id">
 						<NewRevisionPage

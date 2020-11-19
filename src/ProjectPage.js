@@ -1,3 +1,9 @@
+/*
+	Filename: 		ProjectPage.js
+	Description: 	A React page functional component used to display a user project, its revisions and comments
+	Author: 		Ross Bishop
+*/
+
 import React, { useState, useEffect } from "react"
 
 import Header from "./Header"
@@ -13,6 +19,7 @@ function ProjectPage(props) {
 	const [projectData, setProjectData] = useState(false)
 	const [comment, setComment] = useState()
 
+	// Get project specified in the URL by GraphQL query via the Amplify API and store the data in state
 	const getProject = async () => {
 		try {
 			const uuid = await window.location.pathname.split("/")[2]
@@ -23,6 +30,7 @@ function ProjectPage(props) {
 		}
 	}
 
+	// Get project on page data load
 	useEffect(() => {
 		getProject()
 	}, [])
@@ -36,6 +44,7 @@ function ProjectPage(props) {
 				setLoading={props.setLoading}
 				setDestinationPage={props.setDestinationPage}
 			/>
+			{/* Once project data has loaded, display it in project module component */}
 			{projectData && (
 				<ProjectModule
 					userDetails={props.userDetails}

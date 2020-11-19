@@ -1,3 +1,9 @@
+/*
+	Filename: 		Login.js
+	Description: 	A React functional component used to authenticate users 
+	Author: 		Ross Bishop
+*/
+
 import React from "react"
 
 import "bootstrap/dist/css/bootstrap.css"
@@ -18,11 +24,13 @@ export default function Login(props) {
 					<div className="col-12">
 						<form className={LoginStyles.formProfileUpdate}>
 							<h1 className="h3 mb-3 mt-4 font-weight-normal">Login</h1>
+							{/* If the user authenticates successfully, notify them */}
 							{props.getSuccess.isSuccess && (
 								<div className="alert alert-success" role="alert">
 									{props.getSuccess.message}
 								</div>
 							)}
+							{/* If there is an error authenticating the user, notify them */}
 							{props.getError.isError && (
 								<div className="alert alert-danger" role="alert">
 									{props.getError.message}
@@ -36,6 +44,7 @@ export default function Login(props) {
 								id="inputUsername"
 								className={cx(LoginStyles.formControl, "mb-3", "py-2", "pl-0")}
 								placeholder="Enter Username"
+								// As user types in username, update state in parent component
 								onChange={event => props.setUsername(event.target.value)}
 								required
 								autoFocus
@@ -48,6 +57,7 @@ export default function Login(props) {
 								id="inputPassword"
 								className={cx(LoginStyles.formControl, "mb-3", "py-2", "pl-0")}
 								placeholder="Enter Password"
+								// As user types in password, update state in parent component
 								onChange={event => props.setPassword(event.target.value)}
 								required
 								autoFocus
@@ -55,6 +65,7 @@ export default function Login(props) {
 							<button
 								className={cx(LoginStyles.btnLogin, "btn", "btn-lg", "btn-primary", "btn-block", "mt-4")}
 								type="submit"
+								// When the user clicks the login button, begin authentication process
 								onClick={e => {
 									e.preventDefault()
 									props.signIn({ username, password })
@@ -64,6 +75,7 @@ export default function Login(props) {
 							</button>
 							<Link
 								to="/loading"
+								// When the user clicks the register button, link them to the register page
 								onClick={event => {
 									props.setLoading(true)
 									props.setDestinationPage("/register")
@@ -80,6 +92,7 @@ export default function Login(props) {
 						<div className={cx(LoginStyles.forgotPassword, "mt-2", "mb-3")}>
 							<Link
 								to="/loading"
+								// When the user clicks the forgot password button, link them to the forgot password page
 								onClick={event => {
 									props.setLoading(true)
 									props.setDestinationPage("/forgot")

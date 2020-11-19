@@ -1,3 +1,9 @@
+/*
+	Filename: 		ProjectModule.js
+	Description: 	A React functional component used to display user project information
+	Author: 		Ross Bishop
+*/
+
 import React, { Fragment, useState, useEffect } from "react"
 
 import "bootstrap/dist/css/bootstrap.css"
@@ -21,10 +27,12 @@ export default function ProjectModule(props) {
 	const [commentSuccess, setCommentSuccess] = useState({ isSuccess: false, message: "" })
 	const [commentError, setCommentError] = useState({ isError: false, message: "" })
 
+	// Reload page on call
 	function reloadPage() {
 		window.location.reload()
 	}
 
+	// If the current user's details match that of the project owner, note this in state
 	useEffect(() => {
 		if (props.userDetails !== false) {
 			if (props.userDetails.username === props.projectDetails.owner) {
@@ -34,6 +42,8 @@ export default function ProjectModule(props) {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
+	// Creates a new comment on a given revision in the form of a GraphQL model via the Amplify API
+	// Then on success, notify the user the comment has been created and after 3 seconds reload the page to display the new comment
 	const createNewComment = async () => {
 		try {
 			if (props.comment === undefined || props.comment === "") {
@@ -62,6 +72,7 @@ export default function ProjectModule(props) {
 				<div className="container-fluid d-flex justify-content-center carousel-container">
 					<div id="myCarousel" className="carousel slide" data-ride="carousel" data-interval="0">
 						<ol className="carousel-indicators">
+							{/* For each revision in array of loaded data, display a carousel list item */}
 							{props.projectRevisionData.map((item, index) => {
 								return (
 									<GalleryListItem
@@ -75,6 +86,7 @@ export default function ProjectModule(props) {
 							})}
 						</ol>
 						<div className="carousel-inner">
+							{/* For each revision in array of loaded data, display a carousel item */}
 							{props.projectRevisionData.map((item, index) => {
 								return (
 									<GalleryItem
@@ -107,6 +119,7 @@ export default function ProjectModule(props) {
 					{props.projectDetails.projectName} by{" "}
 					<Link
 						to="/loading"
+						// When the user clicks the link, route to the project owner's user page
 						onClick={event => {
 							props.setLoading(true)
 							props.setDestinationPage(`/user/${props.projectDetails.owner}`)
@@ -119,6 +132,7 @@ export default function ProjectModule(props) {
 					<button
 						type="button"
 						className={cx("btn", "btn-success", projectModuleStyles.commentButton)}
+						// When the user clicks the add revision button, route to the add revision page for this project
 						onClick={event => {
 							props.setLoading(true)
 							props.setDestinationPage(`/newrevision/${props.projectDetails.id}`)
@@ -137,6 +151,7 @@ export default function ProjectModule(props) {
 				)}
 				<p className={projectModuleStyles.projectText}>{props.projectDetails.projectDescription}</p>
 				<h4>Comments</h4>
+				{/* If user is logged in, display the comment form */}
 				{props.isLoggedIn && (
 					<>
 						<div className="form-group">
@@ -145,14 +160,17 @@ export default function ProjectModule(props) {
 								className={cx(projectModuleStyles.commentBox, "form-control")}
 								id="commentFormTextArea1"
 								rows="1"
+								// As user types in comment, update state in parent component
 								onChange={event => props.setComment(event.target.value)}
 							></textarea>
 						</div>
+						{/* If comment is successfully posted, nofitfy the user */}
 						{commentSuccess.isSuccess && (
 							<div className="alert alert-success" role="alert">
 								Comment posted successfully
 							</div>
 						)}
+						{/* If there is an error posting a comment, nofitfy the user */}
 						{commentError.isError && (
 							<div className="alert alert-danger" role="alert">
 								{commentError.message}
@@ -161,6 +179,7 @@ export default function ProjectModule(props) {
 						<button
 							className={cx("btn", "btn-primary", projectModuleStyles.commentButton)}
 							type="submit"
+							// When the user clicks the submit button, initiate the GraphQL mutation via the Amplify API
 							onClick={e => {
 								e.preventDefault()
 								createNewComment()
@@ -170,6 +189,7 @@ export default function ProjectModule(props) {
 						</button>
 					</>
 				)}
+				{/* For each revision in array of loaded data, display each comment for the revision in a comment card */}
 				{props.projectRevisionData[currentProjectState.currentId].comments.items.map((item, index) => {
 					return (
 						<CommentCard

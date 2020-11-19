@@ -1,3 +1,9 @@
+/*
+	Filename: 		ForgotReset.js
+	Description: 	A React functional component used for resetting user passwords
+	Author: 		Ross Bishop
+*/
+
 import React from "react"
 
 import "bootstrap/dist/css/bootstrap.css"
@@ -21,11 +27,13 @@ export default function ForgotReset(props) {
 				<div className="col-12">
 					<form className={ForgotStyles.formProfileUpdate}>
 						<h1 className="h3 mb-3 mt-4 font-weight-normal">Reset Password</h1>
+						{/* If password reset is successful, notify the user */}
 						{props.getSuccess.isSuccess && (
 							<div className="alert alert-success" role="alert">
 								{success}
 							</div>
 						)}
+						{/* If an error occurs, notify the user */}
 						{props.getError.isError && (
 							<div className="alert alert-danger" role="alert">
 								{error}
@@ -50,6 +58,7 @@ export default function ForgotReset(props) {
 							id="inputPasswordConfirm"
 							className={cx(ForgotStyles.formControl, "mb-3", "py-2", "pl-0")}
 							placeholder="Confirm Password"
+							// As user types in password, update state in parent component
 							onChange={event => props.setPassword(event.target.value)}
 							required
 							autoFocus
@@ -62,6 +71,7 @@ export default function ForgotReset(props) {
 							id="inputConfirmationCode"
 							className={cx(ForgotStyles.formControl, "mb-3", "py-2", "pl-0")}
 							placeholder="Confirmation Code"
+							// As user types in confirmation code, update state in parent component
 							onChange={event => props.setConfirmationCode(event.target.value)}
 							required
 							autoFocus
@@ -77,6 +87,7 @@ export default function ForgotReset(props) {
 								"mt-4"
 							)}
 							type="submit"
+							// When the reset button is clicked, submit the confirmation code and new password to the Amplify API
 							onClick={e => {
 								e.preventDefault()
 								props.forgotPasswordSubmit({ username, code, new_password })
@@ -84,6 +95,7 @@ export default function ForgotReset(props) {
 						>
 							Reset Password
 						</button>
+						{/* When the reset has completed successfully, redirect to the login page */}
 						{isResetComplete && <Redirect to="/login" />}
 					</form>
 				</div>

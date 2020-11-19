@@ -1,3 +1,9 @@
+/*
+	Filename: 		NewRevisionPage.js
+	Description: 	A React page functional component used to create new user revisions
+	Author: 		Ross Bishop
+*/
+
 import React, { useEffect, useState } from "react"
 
 import Header from "./Header"
@@ -20,10 +26,12 @@ function NewRevisionPage(props) {
 	const [revisionImageURL, setRevisionImageURL] = useState()
 	const [revisionFile, setRevisionFile] = useState()
 
+	// When called, redirect to new project id
 	function getRedirectPage() {
 		window.location.href = `/project/${projectID}`
 	}
 
+	// Gets the newly uploaded revision image from the S3 storage bucket via the Amplify Storage API and stores the URL in state so the image can be displayed
 	const getNewRevisionImage = async () => {
 		try {
 			const signedURL = await Storage.get(revisionImageKey, { level: "public" })
@@ -33,6 +41,8 @@ function NewRevisionPage(props) {
 		}
 	}
 
+	// Uploads new user image content to an Amazon S3 bucket via the Amplify Storage API
+	// Then on success, provide a message to the user and store the uploaded image in state
 	const uploadNewRevisionImage = async inputFile => {
 		const file = inputFile
 		const imageuuid = uuidv4()
@@ -50,11 +60,13 @@ function NewRevisionPage(props) {
 		}
 	}
 
+	// Get project ID from the URL, as we were linked to it from the project page
 	useEffect(() => {
 		setProjectID(window.location.pathname.split("/")[2])
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
+	// Once revision image has been uploaded, get the image URL so it can be displayed
 	useEffect(() => {
 		if (revisionImageKey !== undefined) {
 			getNewRevisionImage()
@@ -62,6 +74,8 @@ function NewRevisionPage(props) {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [revisionImageKey])
 
+	// Creates a new user project revision in the form of a GraphQL model via the Amplify API
+	// Then on success, notify the user the revision has been created and after 3 seconds redirect to the newly updated project
 	const createNewRevision = async () => {
 		try {
 			if (revisionName === "") {
@@ -104,6 +118,7 @@ function NewRevisionPage(props) {
 				setLoading={props.setLoading}
 				setDestinationPage={props.setDestinationPage}
 			/>
+			{/* Once project ID has been grabbed from URL, display revision creation component */}
 			{projectID && (
 				<NewRevision
 					createNewRevision={createNewRevision}

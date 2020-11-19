@@ -1,3 +1,9 @@
+/*
+	Filename: 		UserBanner.js
+	Description: 	A React functional component used to display user profile information on the user page
+	Author: 		Ross Bishop
+*/
+
 import React, { useEffect } from "react"
 
 import "bootstrap/dist/css/bootstrap.css"
@@ -6,6 +12,8 @@ import userBannerStyles from "./css/userbanner.module.css"
 import UserSocialIcon from "./UserSocialIcon"
 
 export default function UserBanner(props) {
+	// If banner element exists and there is a user image associated with this profile, use the image as the background
+	// Otherwise, use placeholder styling
 	useEffect(() => {
 		if (document.getElementById("banner") != null && props.bannerURL != null) {
 			let banner = document.getElementById("banner")
@@ -28,9 +36,11 @@ export default function UserBanner(props) {
 						<div className="col-6">
 							<div className="row">
 								<div className="col-4 pr-3">
+									{/* If user has an avatar, display it */}
 									{props.avatarURL && (
 										<img className={userBannerStyles.profileImg} src={props.avatarURL} alt="User Avatar" />
 									)}
+									{/* If user has no avatar, display a placeholder */}
 									{props.noAvatar && (
 										<div className={userBannerStyles.noProfileImg}>
 											<p>{props.profileData.username.substring(0, 1)}</p>
@@ -46,6 +56,7 @@ export default function UserBanner(props) {
 							</div>
 						</div>
 						<div className="col-6 d-flex align-items-end flex-column">
+							{/* If the user profile contains an Instagram, Facebook or Twitter, display the handle and a corresponding icon */}
 							{props.profileData.instagram && (
 								<UserSocialIcon socialtype="instagram" username={props.profileData.instagram} />
 							)}

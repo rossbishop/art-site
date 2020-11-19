@@ -1,3 +1,9 @@
+/*
+	Filename: 		Home.js
+	Description: 	A React page functional component which acts as the site landing page
+	Author: 		Ross Bishop
+*/
+
 import React, { useState, useEffect } from "react"
 
 import Header from "./Header"
@@ -10,6 +16,7 @@ import * as queries from "./graphql/queries"
 function Home(props) {
 	const [projectData, setProjectData] = useState(null)
 
+	// Gets projects uploaded by all users and stores in state
 	const getUserProjects = async () => {
 		try {
 			const apiCall = await API.graphql({ query: queries.listProjects, variables: { limit: 10 } })
@@ -19,6 +26,7 @@ function Home(props) {
 		}
 	}
 
+	// Gets user projects on page load
 	useEffect(() => {
 		getUserProjects()
 	}, [])
@@ -39,6 +47,7 @@ function Home(props) {
 					</div>
 				</div>
 			</div>
+			{/* When project data loads, display the projects in a grid */}
 			{projectData && (
 				<ProjectGrid
 					projectData={projectData}

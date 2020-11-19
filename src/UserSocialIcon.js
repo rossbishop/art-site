@@ -1,3 +1,9 @@
+/*
+	Filename: 		UserSocialIcon.js
+	Description: 	A React functional component used to display a user's social media handle and a suitable icon
+	Author: 		Ross Bishop
+*/
+
 import React from "react"
 
 import "bootstrap/dist/css/bootstrap.css"
@@ -14,6 +20,7 @@ export default function UserSocialIcon(props) {
 	)
 }
 
+// Return icon image URL based on what type of handle needs to be displayed
 function socialImage(socialtype) {
 	switch (socialtype) {
 		case "instagram":

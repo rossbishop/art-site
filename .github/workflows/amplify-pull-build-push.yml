@@ -28,17 +28,26 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_REGION: eu-west-2
 
-    - name: Install, build and test
+    - name: Install and build
       run: |
         npm install
         # build and test
-        # npm run build
+        npm run build
         # npm run test
+
+    # Install NPM dependencies, cache them correctly
+    # and run all Cypress tests
+    - name: Cypress run
+      uses: cypress-io/github-action@v2
+      with:
+        start: npm start
+        wait-on: 'http://localhost:3000'
+        wait-on-timeout: 30
     
     - name: Push code
       uses: ambientlight/amplify-cli-action@0.2.1
       with:
-        amplify_command: push
+        amplify_command: publish
         amplify_env: devgithub
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}

@@ -46,6 +46,7 @@ export default function Login(props) {
 								placeholder="Enter Username"
 								// As user types in username, update state in parent component
 								onChange={event => props.setUsername(event.target.value)}
+								data-cy="inputUsername"
 								required
 								autoFocus
 							/>
@@ -59,12 +60,14 @@ export default function Login(props) {
 								placeholder="Enter Password"
 								// As user types in password, update state in parent component
 								onChange={event => props.setPassword(event.target.value)}
+								data-cy="inputPassword"
 								required
 								autoFocus
 							/>
 							<button
 								className={cx(LoginStyles.btnLogin, "btn", "btn-lg", "btn-primary", "btn-block", "mt-4")}
 								type="submit"
+								data-cy="submit"
 								// When the user clicks the login button, begin authentication process
 								onClick={e => {
 									e.preventDefault()

@@ -36,9 +36,10 @@ function RegisterPage(props) {
 		try {
 			let passwordNumberRegEx = new RegExp("[0-9]")
 			let passwordLetterRegEx = new RegExp("[a-z]")
-			setBirthdate(birthMonth + "/" + birthDay + "/" + birthYear)
+			let birthdate = birthMonth + "/" + birthDay + "/" + birthYear
+			//setBirthdate(birthMonth + "/" + birthDay + "/" + birthYear)
 			setErrorType("local")
-			if (email === undefined || !isValidEmail(email)) {
+			if ((email === undefined) | (email === "") | !isValidEmail(email)) {
 				throw new Error("You must provide a valid email address")
 			}
 			if (username === undefined || username.length < 3) {
@@ -64,6 +65,7 @@ function RegisterPage(props) {
 				throw new Error("Password must contain lowercase characters and numbers")
 			} else {
 				setErrorType("aws")
+				console.log("BIRTHDATE: " + birthdate)
 				await Auth.signUp({
 					username,
 					password,
@@ -107,11 +109,28 @@ function RegisterPage(props) {
 		return currentAge
 	}
 
-	// Uses regex to verify whether or not email address is valid
+	// Use(d to use) regex to verify whether or not email address is valid
 	// Returns true if valid, else false
 	function isValidEmail(email) {
-		const re = /^((^<>()\[\]\\.,;:\s@"]+(\.^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-		return re.test(String(email).toLowerCase())
+		var emailname = email.split("@")[0]
+		var emaildomain = email.split("@")[1]
+		var atcheck = email.split("@")[2]
+		var emailtld = email.split(".")[1]
+
+		if (emailname === undefined) {
+			return false
+		} else if (atcheck !== undefined) {
+			return false
+		} else if (emaildomain === undefined) {
+			return false
+		} else if (emailtld === undefined) {
+			return false
+		} else {
+			return true
+		}
+
+		//const re = /^((^<>()\[\]\\.,;:\s@"]+(\.^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+		//return re.test(String(email).toLowerCase())
 	}
 
 	return (

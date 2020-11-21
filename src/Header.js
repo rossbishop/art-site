@@ -138,6 +138,7 @@ export default function Header(props) {
 									<Link
 										className="nav-link"
 										to="/loading"
+										data-cy="logout"
 										onClick={event => {
 											props.setLoading(true)
 											props.setDestinationPage("/logout")

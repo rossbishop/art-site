@@ -53,7 +53,7 @@ export default function Register(props) {
 						{/* If there is a local verification error, present it to the user */}
 						{props.getError.isError && props.errorType === "local" && (
 							<div className="alert alert-danger" role="alert">
-								{props.getError.message}
+								{props.getError.message.toString()}
 							</div>
 						)}
 						<label htmlFor="inputEmail" className="sr-only">

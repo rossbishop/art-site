@@ -1,9 +1,9 @@
-name: 'Amplify Pull Build Push'
+name: 'Amplify Pull, Build, Test, Publish'
 on: [push]
 
 jobs:
-  test:
-    name: amplify pull-build-push
+  deploy:
+    name: amplify pull-build-test-publish
     runs-on: ubuntu-latest
 
     strategy:
@@ -11,13 +11,16 @@ jobs:
         node-version: [12.x]
 
     steps:
+    # Checkout code
     - uses: actions/checkout@v2
 
+    # Setup node
     - name: Use Node.js ${{ matrix.node_version }}
       uses: actions/setup-node@v1
       with:
         version: ${{ matrix.node_version }}
 
+    # Ensure correct amplify environment is configured on machine
     - name: Configure amplify
       uses: ambientlight/amplify-cli-action@0.2.1
       with:
@@ -28,23 +31,22 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_REGION: eu-west-2
 
+    # Install npm and build react app
     - name: Install and build
       run: |
         npm install
-        # build and test
         npm run build
-        # npm run test
 
-    # Install NPM dependencies, cache them correctly
-    # and run all Cypress tests
+    # Start development server and run cypress tests
     - name: Cypress run
       uses: cypress-io/github-action@v2.3.8
       with:
         start: npm start
         wait-on: 'http://localhost:3000'
         wait-on-timeout: 30
-    
-    - name: Push code
+
+    # Push amplify configuration and front end to amplify hosting 
+    - name: Publish amplify configuration
       uses: ambientlight/amplify-cli-action@0.2.1
       with:
         amplify_command: publish

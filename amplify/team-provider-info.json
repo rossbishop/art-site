@@ -1,66 +1,72 @@
 {
-  "dev": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-artsite-dev-210725-authRole",
-      "UnauthRoleArn": "arn:aws:iam::381257970460:role/amplify-artsite-dev-210725-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::381257970460:role/amplify-artsite-dev-210725-authRole",
-      "Region": "eu-west-2",
-      "DeploymentBucketName": "amplify-artsite-dev-210725-deployment",
-      "UnauthRoleName": "amplify-artsite-dev-210725-unauthRole",
-      "StackName": "amplify-artsite-dev-210725",
-      "StackId": "arn:aws:cloudformation:eu-west-2:381257970460:stack/amplify-artsite-dev-210725/dfbe9b20-130f-11eb-a0be-06ae276eb0f0",
-      "AmplifyAppId": "d2cqkv8axy8sys"
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-artsite-dev-210725-authRole",
+            "UnauthRoleArn": "arn:aws:iam::381257970460:role/amplify-artsite-dev-210725-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::381257970460:role/amplify-artsite-dev-210725-authRole",
+            "Region": "eu-west-2",
+            "DeploymentBucketName": "amplify-artsite-dev-210725-deployment",
+            "UnauthRoleName": "amplify-artsite-dev-210725-unauthRole",
+            "StackName": "amplify-artsite-dev-210725",
+            "StackId": "arn:aws:cloudformation:eu-west-2:381257970460:stack/amplify-artsite-dev-210725/dfbe9b20-130f-11eb-a0be-06ae276eb0f0",
+            "AmplifyAppId": "d2cqkv8axy8sys"
+        },
+        "categories": {
+            "auth": {
+                "ArtSiteAPIAmplify": {}
+            }
+        }
     },
-    "categories": {
-      "auth": {
-        "ArtSiteAPIAmplify": {}
-      }
-    }
-  },
-  "devnew": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-artsite-devnew-214504-authRole",
-      "UnauthRoleArn": "arn:aws:iam::381257970460:role/amplify-artsite-devnew-214504-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::381257970460:role/amplify-artsite-devnew-214504-authRole",
-      "Region": "eu-west-2",
-      "DeploymentBucketName": "amplify-artsite-devnew-214504-deployment",
-      "UnauthRoleName": "amplify-artsite-devnew-214504-unauthRole",
-      "StackName": "amplify-artsite-devnew-214504",
-      "StackId": "arn:aws:cloudformation:eu-west-2:381257970460:stack/amplify-artsite-devnew-214504/cc03cc40-1639-11eb-9c6a-0aabefb3624a",
-      "AmplifyAppId": "d2cqkv8axy8sys"
+    "devnew": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-artsite-devnew-214504-authRole",
+            "UnauthRoleArn": "arn:aws:iam::381257970460:role/amplify-artsite-devnew-214504-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::381257970460:role/amplify-artsite-devnew-214504-authRole",
+            "Region": "eu-west-2",
+            "DeploymentBucketName": "amplify-artsite-devnew-214504-deployment",
+            "UnauthRoleName": "amplify-artsite-devnew-214504-unauthRole",
+            "StackName": "amplify-artsite-devnew-214504",
+            "StackId": "arn:aws:cloudformation:eu-west-2:381257970460:stack/amplify-artsite-devnew-214504/cc03cc40-1639-11eb-9c6a-0aabefb3624a",
+            "AmplifyAppId": "d2cqkv8axy8sys"
+        },
+        "categories": {
+            "auth": {
+                "ArtSiteAPIAmplify": {}
+            },
+            "function": {
+                "AdminQueries5f6c1bb4": {},
+                "ArtSiteAPIAmplifyCreatePublicUserProfile": {},
+                "ArtSiteAPIAmplifyPostConfirmation": {}
+            }
+        }
     },
-    "categories": {
-      "auth": {
-        "ArtSiteAPIAmplify": {}
-      },
-      "function": {
-        "AdminQueries5f6c1bb4": {},
-        "ArtSiteAPIAmplifyCreatePublicUserProfile": {},
-        "ArtSiteAPIAmplifyPostConfirmation": {}
-      }
+    "devgithub": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-artsite-devgithub-193639-authRole",
+            "UnauthRoleArn": "arn:aws:iam::381257970460:role/amplify-artsite-devgithub-193639-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::381257970460:role/amplify-artsite-devgithub-193639-authRole",
+            "Region": "eu-west-2",
+            "DeploymentBucketName": "amplify-artsite-devgithub-193639-deployment",
+            "UnauthRoleName": "amplify-artsite-devgithub-193639-unauthRole",
+            "StackName": "amplify-artsite-devgithub-193639",
+            "StackId": "arn:aws:cloudformation:eu-west-2:381257970460:stack/amplify-artsite-devgithub-193639/48982020-1794-11eb-b769-0a80095a196a",
+            "AmplifyAppId": "d2cqkv8axy8sys"
+        },
+        "categories": {
+            "auth": {
+                "ArtSiteAPIAmplify": {}
+            },
+            "function": {
+                "AdminQueries5f6c1bb4": {},
+                "ArtSiteAPIAmplifyCreatePublicUserProfile": {},
+                "ArtSiteAPIAmplifyPostConfirmation": {}
+            },
+            "hosting": {
+                "amplifyhosting": {
+                    "appId": "d2cqkv8axy8sys",
+                    "type": "manual"
+                }
+            }
+        }
     }
-  },
-  "devgithub": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-artsite-devgithub-193639-authRole",
-      "UnauthRoleArn": "arn:aws:iam::381257970460:role/amplify-artsite-devgithub-193639-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::381257970460:role/amplify-artsite-devgithub-193639-authRole",
-      "Region": "eu-west-2",
-      "DeploymentBucketName": "amplify-artsite-devgithub-193639-deployment",
-      "UnauthRoleName": "amplify-artsite-devgithub-193639-unauthRole",
-      "StackName": "amplify-artsite-devgithub-193639",
-      "StackId": "arn:aws:cloudformation:eu-west-2:381257970460:stack/amplify-artsite-devgithub-193639/48982020-1794-11eb-b769-0a80095a196a",
-      "AmplifyAppId": "d2cqkv8axy8sys"
-    },
-    "categories": {
-      "auth": {
-        "ArtSiteAPIAmplify": {}
-      },
-      "function": {
-        "AdminQueries5f6c1bb4": {},
-        "ArtSiteAPIAmplifyCreatePublicUserProfile": {},
-        "ArtSiteAPIAmplifyPostConfirmation": {}
-      }
-    }
-  }
 }

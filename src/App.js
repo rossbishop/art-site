@@ -105,19 +105,19 @@ function App() {
 		aws_cloud_logic_custom: [
 			{
 				name: "AdminQueries",
-				endpoint: "https://35wfco8lk0.execute-api.eu-west-2.amazonaws.com/devgithub",
+				endpoint: "https://d7632j9wag.execute-api.eu-west-2.amazonaws.com/dev",
 				region: "eu-west-2"
 			}
 		],
-		aws_appsync_graphqlEndpoint: "https://nljmq4ky4bfavb43bjic7t5ohe.appsync-api.eu-west-2.amazonaws.com/graphql",
+		aws_appsync_graphqlEndpoint: "https://ilrrcdnwizhyrjrtlaody6laj4.appsync-api.eu-west-2.amazonaws.com/graphql",
 		aws_appsync_region: "eu-west-2",
 		aws_appsync_authenticationType: isLoggedIn ? "AMAZON_COGNITO_USER_POOLS" : "AWS_IAM",
-		aws_cognito_identity_pool_id: "eu-west-2:22687550-9667-4484-844b-dbbdcef04dc9",
+		aws_cognito_identity_pool_id: "eu-west-2:7f795de0-0f2a-4330-845c-7b3c0ff0299c",
 		aws_cognito_region: "eu-west-2",
-		aws_user_pools_id: "eu-west-2_coy8PlFAm",
-		aws_user_pools_web_client_id: "45n017qv1agn40ppl2mt2l45n5",
+		aws_user_pools_id: "eu-west-2_XVa1uKsF4",
+		aws_user_pools_web_client_id: "kmrtiqketfq05fa6abo3sosji",
 		oauth: {},
-		aws_user_files_s3_bucket: "artsiteimagebucket193639-devgithub",
+		aws_user_files_s3_bucket: "artsiteimages211106-dev",
 		aws_user_files_s3_bucket_region: "eu-west-2"
 	})
 

@@ -5,9 +5,9 @@
     "env": {
       "Type": "String"
     },
-    "authArtSiteAPIAmplifyUserPoolId": {
+    "authArtSiteAuthAmplifyUserPoolId": {
       "Type": "String",
-      "Default": "authArtSiteAPIAmplifyUserPoolId"
+      "Default": "authArtSiteAuthAmplifyUserPoolId"
     }
   },
   "Conditions": {
@@ -32,12 +32,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "AdminQueries5f6c1bb4",
+            "AdminQueries6a64df5f",
             {
               "Fn::Join": [
                 "",
                 [
-                  "AdminQueries5f6c1bb4",
+                  "AdminQueries6a64df5f",
                   "-",
                   {
                     "Ref": "env"
@@ -54,7 +54,7 @@
             },
             "GROUP": "Admin",
             "USERPOOL": {
-              "Ref": "authArtSiteAPIAmplifyUserPoolId"
+              "Ref": "authArtSiteAuthAmplifyUserPoolId"
             }
           }
         },
@@ -67,8 +67,8 @@
         "Runtime": "nodejs10.x",
         "Timeout": "25",
         "Code": {
-          "S3Bucket": "amplify-artsite-devgithub-193639-deployment",
-          "S3Key": "amplify-builds/AdminQueries5f6c1bb4-44373853776163446433-build.zip"
+          "S3Bucket": "amplify-artsite-dev-211106-deployment",
+          "S3Key": "amplify-builds/AdminQueries6a64df5f-4c39626579394f76646c-build.zip"
         }
       }
     },
@@ -78,12 +78,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "AdminQueries5f6c1bb4LambdaRole",
+            "AdminQueries6a64df5fLambdaRole",
             {
               "Fn::Join": [
                 "",
                 [
-                  "AdminQueries5f6c1bb4LambdaRole",
+                  "AdminQueries6a64df5fLambdaRole",
                   "-",
                   {
                     "Ref": "env"
@@ -178,7 +178,7 @@
                     },
                     ":userpool/",
                     {
-                      "Ref": "authArtSiteAPIAmplifyUserPoolId"
+                      "Ref": "authArtSiteAuthAmplifyUserPoolId"
                     }
                   ]
                 ]

@@ -1,7 +1,7 @@
 {
     "identityPoolName": "ArtSiteIdentityPoolAmplify",
     "allowUnauthenticatedIdentities": true,
-    "resourceNameTruncated": "artsita6920f31",
+    "resourceNameTruncated": "artsitd6eb0ceb",
     "userPoolName": "ArtSiteUserPoolAmplify",
     "autoVerifiedAttributes": [
         "email"
@@ -67,10 +67,10 @@
         "email_verified",
         "phone_number_verified"
     ],
-    "userpoolClientLambdaRole": "ArtSita6920f31_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "ArtSitd6eb0ceb_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": true,
-    "sharedId": "a6920f31",
-    "resourceName": "ArtSiteAPIAmplify",
+    "sharedId": "d6eb0ceb",
+    "resourceName": "ArtSiteAuthAmplify",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
@@ -100,7 +100,7 @@
     "dependsOn": [
         {
             "category": "function",
-            "resourceName": "ArtSiteAPIAmplifyPostConfirmation",
+            "resourceName": "ArtSiteAuthAmplifyPostConfirmation",
             "triggerProvider": "Cognito",
             "attributes": [
                 "Arn",

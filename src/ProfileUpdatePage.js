@@ -89,11 +89,12 @@ function ProfileUpdatePage(props) {
 		try {
 			if (username === undefined || username === "") {
 				throw new Error("You must enter a username")
-			} else if (avatarImageURL === undefined || avatarImageURL === "") {
-				throw new Error("You must provide an avatar image")
-			} else if (bannerImageURL === undefined || bannerImageURL === "") {
-				throw new Error("You must provide a banner image")
-			} else {
+			// } else if (avatarImageURL === undefined || avatarImageURL === "") {
+			// 	throw new Error("You must provide an avatar image")
+			// } else if (bannerImageURL === undefined || bannerImageURL === "") {
+			// 	throw new Error("You must provide a banner image")
+			} 
+			else {
 				let user = await Auth.currentAuthenticatedUser()
 				await Auth.updateUserAttributes(user, {
 					preferred_username: username
@@ -136,7 +137,7 @@ function ProfileUpdatePage(props) {
 			}
 		} catch (err) {
 			console.log(err)
-			setProfileError({ isError: true, message: err })
+			setProfileError({ isError: true, message: err.message })
 		}
 	}
 
@@ -266,7 +267,7 @@ function ProfileUpdatePage(props) {
 		if (bannerImageKey !== undefined) {
 			getNewBannerImage()
 		}
-		if (loadProfileData !== undefined && (avatarImageKey || bannerImageKey) === undefined) {
+		if ((loadProfileData !== undefined) && ((avatarImageKey || bannerImageKey) !== undefined)) {
 			loadExistingProfileImages()
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps

@@ -1,33 +1,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getPlaceHolder = /* GraphQL */ `
-  query GetPlaceHolder($id: ID!) {
-    getPlaceHolder(id: $id) {
-      id
-      placeHolderID
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listPlaceHolders = /* GraphQL */ `
-  query ListPlaceHolders(
-    $filter: ModelPlaceHolderFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listPlaceHolders(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        placeHolderID
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
 export const getProject = /* GraphQL */ `
   query GetProject($id: ID!) {
     getProject(id: $id) {

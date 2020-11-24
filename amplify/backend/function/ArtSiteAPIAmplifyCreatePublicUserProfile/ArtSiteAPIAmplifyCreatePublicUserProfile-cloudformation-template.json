@@ -108,8 +108,8 @@
         "Layers": [],
         "Timeout": "25",
         "Code": {
-          "S3Bucket": "amplify-artsite-devgithub-193639-deployment",
-          "S3Key": "amplify-builds/ArtSiteAPIAmplifyCreatePublicUserProfile-7a746b49794b56354271-build.zip"
+          "S3Bucket": "amplify-artsite-dev-211106-deployment",
+          "S3Key": "amplify-builds/ArtSiteAPIAmplifyCreatePublicUserProfile-67557a4f4a764264776c-build.zip"
         }
       }
     },
@@ -119,12 +119,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "artsiteLambdaRole064acdb5",
+            "artsiteLambdaRolef9a00773",
             {
               "Fn::Join": [
                 "",
                 [
-                  "artsiteLambdaRole064acdb5",
+                  "artsiteLambdaRolef9a00773",
                   "-",
                   {
                     "Ref": "env"

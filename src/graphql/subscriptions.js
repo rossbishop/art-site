@@ -1,36 +1,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreatePlaceHolder = /* GraphQL */ `
-  subscription OnCreatePlaceHolder {
-    onCreatePlaceHolder {
-      id
-      placeHolderID
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdatePlaceHolder = /* GraphQL */ `
-  subscription OnUpdatePlaceHolder {
-    onUpdatePlaceHolder {
-      id
-      placeHolderID
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeletePlaceHolder = /* GraphQL */ `
-  subscription OnDeletePlaceHolder {
-    onDeletePlaceHolder {
-      id
-      placeHolderID
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const onCreateProject = /* GraphQL */ `
   subscription OnCreateProject {
     onCreateProject {

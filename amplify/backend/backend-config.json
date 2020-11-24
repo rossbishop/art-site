@@ -1,10 +1,23 @@
 {
     "function": {
-        "AdminQueries5f6c1bb4": {
+        "ArtSiteAuthAmplifyPostConfirmation": {
+            "build": true,
+            "providerPlugin": "awscloudformation",
+            "service": "Lambda"
+        },
+        "AdminQueries6a64df5f": {
             "service": "Lambda",
             "providerPlugin": "awscloudformation",
             "build": true,
-            "dependsOn": []
+            "dependsOn": [
+                {
+                    "category": "auth",
+                    "resourceName": "ArtSiteAuthAmplify",
+                    "attributes": [
+                        "UserPoolId"
+                    ]
+                }
+            ]
         },
         "ArtSiteAPIAmplifyCreatePublicUserProfile": {
             "build": true,
@@ -20,12 +33,6 @@
                     ]
                 }
             ]
-        },
-        "ArtSiteAPIAmplifyPostConfirmation": {
-            "build": true,
-            "providerPlugin": "awscloudformation",
-            "service": "Lambda",
-            "dependsOn": []
         }
     },
     "api": {
@@ -35,14 +42,14 @@
             "dependsOn": [
                 {
                     "category": "auth",
-                    "resourceName": "ArtSiteAPIAmplify",
+                    "resourceName": "ArtSiteAuthAmplify",
                     "attributes": [
                         "UserPoolId"
                     ]
                 },
                 {
                     "category": "function",
-                    "resourceName": "AdminQueries5f6c1bb4",
+                    "resourceName": "AdminQueries6a64df5f",
                     "attributes": [
                         "Arn",
                         "Name"
@@ -58,7 +65,7 @@
                     "defaultAuthentication": {
                         "authenticationType": "AMAZON_COGNITO_USER_POOLS",
                         "userPoolConfig": {
-                            "userPoolId": "authArtSiteAPIAmplify"
+                            "userPoolId": "authArtSiteAuthAmplify"
                         }
                     },
                     "additionalAuthenticationProviders": [
@@ -71,13 +78,13 @@
         }
     },
     "auth": {
-        "ArtSiteAPIAmplify": {
+        "ArtSiteAuthAmplify": {
             "service": "Cognito",
             "providerPlugin": "awscloudformation",
             "dependsOn": [
                 {
                     "category": "function",
-                    "resourceName": "ArtSiteAPIAmplifyPostConfirmation",
+                    "resourceName": "ArtSiteAuthAmplifyPostConfirmation",
                     "triggerProvider": "Cognito",
                     "attributes": [
                         "Arn",

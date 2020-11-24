@@ -25,17 +25,16 @@ jobs:
       uses: ambientlight/amplify-cli-action@0.2.1
       with:
         amplify_command: configure
-        amplify_env: devgithub
+        amplify_env: dev
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_REGION: eu-west-2
 
-    # Install npm and build react app
-    - name: Install and build
+    # Install npm
+    - name: Install npm
       run: |
         npm install
-        npm run build
 
     # Start development server and run cypress tests
     - name: Cypress run
@@ -45,12 +44,12 @@ jobs:
         wait-on: 'http://localhost:3000'
         wait-on-timeout: 30
 
-    # Push amplify configuration and front end to amplify hosting 
+    # Push amplify configuration, build and publish front end to amplify hosting 
     - name: Publish amplify configuration
       uses: ambientlight/amplify-cli-action@0.2.1
       with:
         amplify_command: publish
-        amplify_env: devgithub
+        amplify_env: dev
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

@@ -1,42 +1,3 @@
-# type AllProject @model
-#   @auth(
-#   rules: [ 
-#       { allow: owner, provider: userPools, ownerField: "owner" },
-#       { allow: public, provider: iam, operations: [read] }
-#     ]
-#   )
-# {
-#   allProjectId: ID!
-
-# }
-
-# type Project @model 
-#   @auth(
-#     rules: [ 
-#         { allow: owner, provider: userPools, ownerField: "owner" },
-#         { allow: private, provider: userPools, operations: [read]},
-#         { allow: public, provider: iam, operations: [read] }
-#       ]
-#     )
-#   @key(fields: ["projectId", "createdAt"])
-#   #@key(name: "projectByIdByDate", fields: ["createdAt"], queryField: "projectByIdByDate")
-#   @key(name: "projectByOwnerByDate", fields: ["owner"], queryField: "projectByOwnerByDate")
-#   # @key(name: "projectByAllProjectByDate", fields: ["allProjectConnId", "createdAt"], queryField: "projectByAllProjectByDate") 
-#   {
-#   projectId: ID!
-#   # allProjectConnId: ID!
-#   projectName: String!
-#   projectDescription: String!
-#   owner: ID
-#   createdAt: AWSDateTime!
-#   revisions: [Revision] @connection(keyName: "revisionByProjectByDate", fields: ["projectId"])
-#     # @auth(rules: [
-#     #   { allow: owner, ownerField: "owner"},
-#     #   { allow: public, provider: iam, operations: [read]}
-#     #   ]
-#     # )
-# }
-
 type Project @model
   @auth(rules: [
       { allow: owner, provider: userPools },
@@ -151,8 +112,3 @@ type S3Object {
   region: String!
   key: String!
 }
-
-type PlaceHolder @model
-  {
-    placeHolderID: ID!
-  }

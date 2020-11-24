@@ -14,23 +14,23 @@
         },
         
         
-          "authArtSiteAPIAmplifyUserPoolId": {
+          "authArtSiteAuthAmplifyUserPoolId": {
             "Type": "String",
-            "Default": "authArtSiteAPIAmplifyUserPoolId"
+            "Default": "authArtSiteAuthAmplifyUserPoolId"
           },
         
           
           
         
-          "functionAdminQueries5f6c1bb4Arn": {
+          "functionAdminQueries6a64df5fArn": {
             "Type": "String",
-            "Default": "functionAdminQueries5f6c1bb4Arn"
+            "Default": "functionAdminQueries6a64df5fArn"
           },
         
           
-          "functionAdminQueries5f6c1bb4Name": {
+          "functionAdminQueries6a64df5fName": {
             "Type": "String",
-            "Default": "functionAdminQueries5f6c1bb4Name"
+            "Default": "functionAdminQueries6a64df5fName"
           }
         
           
@@ -176,7 +176,7 @@
                                 ":lambda:path/2015-03-31/functions/",
                                 {
                                     
-                                    "Ref": "functionAdminQueries5f6c1bb4Arn"
+                                    "Ref": "functionAdminQueries6a64df5fArn"
                                 },
                                 "/invocations"
                               ]
@@ -217,7 +217,7 @@
                                   ":userpool/",
                                   {
                                                   
-                                    "Ref": "authArtSiteAPIAmplifyUserPoolId"
+                                    "Ref": "authArtSiteAuthAmplifyUserPoolId"
                                   }
 
                                 ]
@@ -268,7 +268,7 @@
         "Properties": {
             "FunctionName": 
                 {
-                  "Ref": "functionAdminQueries5f6c1bb4Name"
+                  "Ref": "functionAdminQueries6a64df5fName"
                 },
                 
                 "Action": "lambda:InvokeFunction",

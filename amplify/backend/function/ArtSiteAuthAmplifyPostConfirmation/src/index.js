@@ -1,8 +1,3 @@
-/* Amplify Params - DO NOT EDIT
-	ENV
-	REGION
-Amplify Params - DO NOT EDIT */
-
 /*
   this file will loop through all js modules which are uploaded to the lambda resource,
   provided that the file names (without extension) are included in the "MODULES" env variable.

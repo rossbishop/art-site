@@ -1,29 +1,29 @@
 {
-    "dev": {
-        "awscloudformation": {
-            "AuthRoleName": "amplify-artsite-dev-211106-authRole",
-            "UnauthRoleArn": "arn:aws:iam::381257970460:role/amplify-artsite-dev-211106-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::381257970460:role/amplify-artsite-dev-211106-authRole",
-            "Region": "eu-west-2",
-            "DeploymentBucketName": "amplify-artsite-dev-211106-deployment",
-            "UnauthRoleName": "amplify-artsite-dev-211106-unauthRole",
-            "StackName": "amplify-artsite-dev-211106",
-            "StackId": "arn:aws:cloudformation:eu-west-2:381257970460:stack/amplify-artsite-dev-211106/a0046a50-2e99-11eb-97a8-061b8a4fe7a6",
-            "AmplifyAppId": "d2y6i9811awrit"
-        },
-        "categories": {
-            "function": {
-                "ArtSiteAuthAmplifyPostConfirmation": {}
-            },
-            "auth": {
-                "ArtSiteAuthAmplify": {}
-            },
-            "hosting": {
-                "amplifyhosting": {
-                    "appId": "d2y6i9811awrit",
-                    "type": "manual"
-                }
-            }
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-artsite-dev-211106-authRole",
+      "UnauthRoleArn": "arn:aws:iam::381257970460:role/amplify-artsite-dev-211106-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::381257970460:role/amplify-artsite-dev-211106-authRole",
+      "Region": "eu-west-2",
+      "DeploymentBucketName": "amplify-artsite-dev-211106-deployment",
+      "UnauthRoleName": "amplify-artsite-dev-211106-unauthRole",
+      "StackName": "amplify-artsite-dev-211106",
+      "StackId": "arn:aws:cloudformation:eu-west-2:381257970460:stack/amplify-artsite-dev-211106/a0046a50-2e99-11eb-97a8-061b8a4fe7a6",
+      "AmplifyAppId": "d2y6i9811awrit"
+    },
+    "categories": {
+      "function": {
+        "ArtSiteAuthAmplifyPostConfirmation": {}
+      },
+      "auth": {
+        "ArtSiteAuthAmplify": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d2y6i9811awrit",
+          "type": "manual"
         }
+      }
     }
+  }
 }

@@ -35,6 +35,9 @@ jobs:
     - name: Install npm
       run: |
         npm install
+        npm install react-scripts --save
+
+
 
     # Start development server and run cypress tests
     - name: Cypress run

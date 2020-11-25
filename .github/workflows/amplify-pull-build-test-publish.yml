@@ -20,40 +20,51 @@ jobs:
       with:
         version: ${{ matrix.node_version }}
 
-    # Ensure correct amplify environment is configured on machine
-    - name: Configure amplify
-      uses: ambientlight/amplify-cli-action@0.2.1
-      with:
-        amplify_command: configure
-        amplify_env: dev
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_REGION: eu-west-2
-
-    # Install npm
+    # Setup npm
     - name: Install npm
       run: |
         npm install
         npm install react-scripts --save
 
+    # Setup amplify
+    - name: Install amplify
+      run: |
+        npm install -g @aws-amplify/cli
 
+    - name: Init amplify env
+      run: |
+        set -e
+        echo 'ENV_FILE<<EOF' >> $GITHUB_ENV
+        cat amplify_vars.txt >> $GITHUB_ENV
+        amplify init --amplify $AMPLIFY --frontend $FRONTEND --providers $PROVIDERS --yes
+        amplify env pull 
 
-    # Start development server and run cypress tests
-    - name: Cypress run
-      uses: cypress-io/github-action@v2.3.8
-      with:
-        start: npm start
-        wait-on: 'http://localhost:3000'
-        wait-on-timeout: 30
+    # Ensure correct amplify environment is configured on machine
+    # - name: Configure amplify
+    #   uses: ambientlight/amplify-cli-action@0.2.1
+    #   with:
+    #     amplify_command: configure
+    #     amplify_env: dev
+    #   env:
+    #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    #     AWS_REGION: eu-west-2
 
-    # Push amplify configuration, build and publish front end to amplify hosting 
-    - name: Publish amplify configuration
-      uses: ambientlight/amplify-cli-action@0.2.1
-      with:
-        amplify_command: publish
-        amplify_env: dev
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_REGION: eu-west-2
+    # # Start development server and run cypress tests
+    # - name: Cypress run
+    #   uses: cypress-io/github-action@v2.3.8
+    #   with:
+    #     start: npm start
+    #     wait-on: 'http://localhost:3000'
+    #     wait-on-timeout: 30
+
+    # # Push amplify configuration, build and publish front end to amplify hosting 
+    # - name: Publish amplify configuration
+    #   uses: ambientlight/amplify-cli-action@0.2.1
+    #   with:
+    #     amplify_command: publish
+    #     amplify_env: dev
+    #   env:
+    #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    #     AWS_REGION: eu-west-2

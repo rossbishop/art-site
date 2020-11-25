@@ -1,0 +1,27 @@
+REACTCONFIG="{\
+\"SourceDir\":\"src\",\
+\"DistributionDir\":\"build\",\
+\"BuildCommand\":\"npm run-script build\",\
+\"StartCommand\":\"npm run-script start\"\
+}"
+AWSCLOUDFORMATIONCONFIG="{\
+\"configLevel\":\"project\",\
+\"useProfile\":false,\
+\"profileName\":\"default\",\
+\"accessKeyId\":${{ secrets.AWS_ACCESS_KEY_ID }},\
+\"secretAccessKey\":${{ secrets.AWS_SECRET_ACCESS_KEY }},\
+\"region\":\"eu-west-2\"\
+}"
+AMPLIFY="{\
+\"projectName\":\"art-site\",\
+\"envName\":\"dev\",\
+\"defaultEditor\":\"code\"\
+}"
+FRONTEND="{\
+\"frontend\":\"javascript\",\
+\"framework\":\"react\",\
+\"config\":$REACTCONFIG\
+}"
+PROVIDERS="{\
+\"awscloudformation\":$AWSCLOUDFORMATIONCONFIG\
+}"

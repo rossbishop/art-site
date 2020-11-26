@@ -80,9 +80,9 @@ jobs:
           \"config\":$REACTCONFIG\
           }"
         PROVIDERS: |
-          "{\
+          "'{\
           \"awscloudformation\":$AWSCLOUDFORMATIONCONFIG\
-          }"
+          }''"
     
     # Configure amplify, pull existing cloud down
     - name: Init amplify

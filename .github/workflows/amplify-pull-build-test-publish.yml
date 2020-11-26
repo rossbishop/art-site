@@ -34,11 +34,44 @@ jobs:
     - name: Init environment
       run: |
         set -x
-        echo 'ENV_FILE<<EOF' >> $GITHUB_ENV
-        cat amplify_vars.txt >> $GITHUB_ENV
-        echo 'EOF' >> $GITHUB_ENV
-    #   amplify init --amplify $AMPLIFY --frontend $FRONTEND --providers $PROVIDERS --yes
-    #   amplify env pull 
+        echo "$REACTCONFIG"
+        echo "$AWSCLOUDFORMATIONCONFIG"
+        echo "$AMPLIFY"
+        echo "$FRONTEND"
+    #    echo 'ENV_FILE<<EOF' >> $GITHUB_ENV
+    #    cat amplify_vars.txt >> $GITHUB_ENV
+    #    echo 'EOF' >> $GITHUB_ENV
+    #    amplify init --amplify $AMPLIFY --frontend $FRONTEND --providers $PROVIDERS --yes
+    #    amplify env pull
+      env:
+        REACTCONFIG: |
+          "{\
+          \"SourceDir\":\"src\",\
+          \"DistributionDir\":\"build\",\
+          \"BuildCommand\":\"npm run-script build\",\
+          \"StartCommand\":\"npm run-script start\"\
+          }"
+        AWSCLOUDFORMATIONCONFIG: |
+          "{\
+          \"configLevel\":\"project\",\
+          \"useProfile\":false,\
+          \"profileName\":\"default\",\
+          \"accessKeyId\":${{ secrets.AWS_ACCESS_KEY_ID }},\
+          \"secretAccessKey\":${{ secrets.AWS_SECRET_ACCESS_KEY }},\
+          \"region\":\"eu-west-2\"\
+          }"
+        AMPLIFY: |
+          "{\
+          \"projectName\":\"art-site\",\
+          \"envName\":\"dev\",\
+          \"defaultEditor\":\"code\"\
+          }"
+        FRONTEND: |
+          "{\
+          \"frontend\":\"javascript\",\
+          \"framework\":\"react\",\
+          \"config\":$REACTCONFIG\
+          }"
     
     - name: Test environment
       run: |

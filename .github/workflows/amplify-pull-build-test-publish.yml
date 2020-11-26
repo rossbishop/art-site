@@ -15,29 +15,33 @@ jobs:
     - uses: actions/checkout@v2
 
     # Setup node
-    - name: Use Node.js ${{ matrix.node_version }}
-      uses: actions/setup-node@v1
-      with:
-        version: ${{ matrix.node_version }}
+    # - name: Use Node.js ${{ matrix.node_version }}
+    #  uses: actions/setup-node@v1
+    #  with:
+    #    version: ${{ matrix.node_version }}
 
     # Setup npm
-    - name: Install npm
-      run: |
-        npm install
-        npm install react-scripts --save
+    # - name: Install npm
+    #  run: |
+    #    npm install
+    #    npm install react-scripts --save
 
     # Setup amplify
-    - name: Install amplify
-      run: |
-        npm install -g @aws-amplify/cli
+    # - name: Install amplify
+    #  run: |
+    #    npm install -g @aws-amplify/cli
 
     - name: Init amplify env
       run: |
         set -e
         echo 'ENV_FILE<<EOF' >> $GITHUB_ENV
         cat amplify_vars.txt >> $GITHUB_ENV
-        amplify init --amplify $AMPLIFY --frontend $FRONTEND --providers $PROVIDERS --yes
-        amplify env pull 
+        echo 'EOF' >> $GITHUB_ENV
+        echo $AMPLIFY
+        echo $FRONTEND
+        echo $PROVIDERS
+    #   amplify init --amplify $AMPLIFY --frontend $FRONTEND --providers $PROVIDERS --yes
+    #   amplify env pull 
 
     # Ensure correct amplify environment is configured on machine
     # - name: Configure amplify

@@ -35,7 +35,7 @@ jobs:
       run: |
         set -x
         echo 'REACTCONFIG<<EOF' >> $GITHUB_ENV
-        echo '$REACTCONFIG' >> $GITHUB_ENV
+        echo $REACTCONFIG >> $GITHUB_ENV
         echo 'EOF' >> $GITHUB_ENV
     #    amplify init --amplify $AMPLIFY --frontend $FRONTEND --providers $PROVIDERS --yes
     #    amplify env pull

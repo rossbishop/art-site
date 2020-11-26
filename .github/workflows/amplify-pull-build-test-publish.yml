@@ -34,7 +34,6 @@ jobs:
     - name: Init environment
       run: |
         set -x
-        cat amplify_vars.txt
         echo 'ENV_FILE<<EOF' >> $GITHUB_ENV
         cat amplify_vars.txt >> $GITHUB_ENV
         echo 'EOF' >> $GITHUB_ENV
@@ -43,6 +42,7 @@ jobs:
     
     - name: Test environment
       run: |
+        echo $GITHUB_ENV
         echo $AMPLIFY
         echo $FRONTEND
         echo $PROVIDERS

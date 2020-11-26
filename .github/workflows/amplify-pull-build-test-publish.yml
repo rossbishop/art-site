@@ -36,19 +36,23 @@ jobs:
       run: |
         set -x
         echo 'REACTCONFIG<<EOF' >> $GITHUB_ENV
-        echo $REACTCONFIG >> $GITHUB_ENV
+        echo $REACTCONFIG | envsubst >> $GITHUB_ENV
         echo 'EOF' >> $GITHUB_ENV
+
         echo 'AWSCLOUDFORMATIONCONFIG<<EOF' >> $GITHUB_ENV
-        echo $AWSCLOUDFORMATIONCONFIG >> $GITHUB_ENV
+        echo $AWSCLOUDFORMATIONCONFIG | envsubst >> $GITHUB_ENV
         echo 'EOF' >> $GITHUB_ENV
+
         echo 'AMPLIFY<<EOF' >> $GITHUB_ENV
-        echo $AMPLIFY >> $GITHUB_ENV
+        echo $AMPLIFY | envsubst >> $GITHUB_ENV
         echo 'EOF' >> $GITHUB_ENV
+
         echo 'FRONTEND<<EOF' >> $GITHUB_ENV
-        echo $FRONTEND >> $GITHUB_ENV
+        echo $FRONTEND | envsubst >> $GITHUB_ENV
         echo 'EOF' >> $GITHUB_ENV
+
         echo 'PROVIDERS<<EOF' >> $GITHUB_ENV
-        echo $PROVIDERS >> $GITHUB_ENV
+        echo $PROVIDERS | envsubst >> $GITHUB_ENV
         echo 'EOF' >> $GITHUB_ENV        
       env:
         AWS_ACCESS_KEY_ID: |

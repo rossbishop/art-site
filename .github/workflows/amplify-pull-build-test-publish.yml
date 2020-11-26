@@ -34,13 +34,9 @@ jobs:
     - name: Init environment
       run: |
         set -x
-        echo "::set-env name=REACTCONFIG::$REACTCONFIG"
-        echo "::set-env name=AWSCLOUDFORMATIONCONFIG::$AWSCLOUDFORMATIONCONFIG"
-        echo "::set-env name=AMPLIFY::$AMPLIFY"
-        echo "::set-env name=FRONTEND::$FRONTEND" 
-    #    echo 'ENV_FILE<<EOF' >> $GITHUB_ENV
-    #    cat amplify_vars.txt >> $GITHUB_ENV
-    #    echo 'EOF' >> $GITHUB_ENV
+        echo 'REACTCONFIG<<EOF' >> $GITHUB_ENV
+        echo '$REACTCONFIG' >> $GITHUB_ENV
+        echo 'EOF' >> $GITHUB_ENV
     #    amplify init --amplify $AMPLIFY --frontend $FRONTEND --providers $PROVIDERS --yes
     #    amplify env pull
       env:
@@ -79,7 +75,6 @@ jobs:
     
     - name: Test environment
       run: |
-        echo $GITHUB_ENV
         echo "$REACTCONFIG"
         echo "$AWSCLOUDFORMATIONCONFIG"        
         echo "$AMPLIFY"

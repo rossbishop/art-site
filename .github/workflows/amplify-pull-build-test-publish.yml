@@ -37,6 +37,18 @@ jobs:
         echo 'REACTCONFIG<<EOF' >> $GITHUB_ENV
         echo $REACTCONFIG >> $GITHUB_ENV
         echo 'EOF' >> $GITHUB_ENV
+        echo 'AWSCLOUDFORMATIONCONFIG<<EOF' >> $GITHUB_ENV
+        echo $AWSCLOUDFORMATIONCONFIG >> $GITHUB_ENV
+        echo 'EOF' >> $GITHUB_ENV
+        echo 'AMPLIFY<<EOF' >> $GITHUB_ENV
+        echo $AMPLIFY >> $GITHUB_ENV
+        echo 'EOF' >> $GITHUB_ENV
+        echo 'FRONTEND<<EOF' >> $GITHUB_ENV
+        echo $FRONTEND >> $GITHUB_ENV
+        echo 'EOF' >> $GITHUB_ENV
+        echo 'PROVIDERS<<EOF' >> $GITHUB_ENV
+        echo $PROVIDERS >> $GITHUB_ENV
+        echo 'EOF' >> $GITHUB_ENV        
     #    amplify init --amplify $AMPLIFY --frontend $FRONTEND --providers $PROVIDERS --yes
     #    amplify env pull
       env:

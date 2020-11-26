@@ -34,10 +34,10 @@ jobs:
     - name: Init environment
       run: |
         set -x
-        echo "$REACTCONFIG"
-        echo "$AWSCLOUDFORMATIONCONFIG"
-        echo "$AMPLIFY"
-        echo "$FRONTEND"
+        echo "::set-env name=REACTCONFIG::$REACTCONFIG"
+        echo "::set-env name=AWSCLOUDFORMATIONCONFIG::$AWSCLOUDFORMATIONCONFIG"
+        echo "::set-env name=AMPLIFY::$AMPLIFY"
+        echo "::set-env name=FRONTEND::$FRONTEND" 
     #    echo 'ENV_FILE<<EOF' >> $GITHUB_ENV
     #    cat amplify_vars.txt >> $GITHUB_ENV
     #    echo 'EOF' >> $GITHUB_ENV
@@ -72,13 +72,19 @@ jobs:
           \"framework\":\"react\",\
           \"config\":$REACTCONFIG\
           }"
+        PROVIDERS: |
+          "{\
+          \"awscloudformation\":$AWSCLOUDFORMATIONCONFIG\
+          }"
     
     - name: Test environment
       run: |
         echo $GITHUB_ENV
-        echo $AMPLIFY
-        echo $FRONTEND
-        echo $PROVIDERS
+        echo "$REACTCONFIG"
+        echo "$AWSCLOUDFORMATIONCONFIG"        
+        echo "$AMPLIFY"
+        echo "$FRONTEND"
+        echo "$PROVIDERS"
 
     # Ensure correct amplify environment is configured on machine
     # - name: Configure amplify

@@ -31,17 +31,21 @@ jobs:
     #  run: |
     #    npm install -g @aws-amplify/cli
 
-    - name: Init amplify env
+    - name: Init environment
       run: |
-        set -e
+        set -x
+        echo amplify_vars.txt
         echo 'ENV_FILE<<EOF' >> $GITHUB_ENV
         cat amplify_vars.txt >> $GITHUB_ENV
         echo 'EOF' >> $GITHUB_ENV
+    #   amplify init --amplify $AMPLIFY --frontend $FRONTEND --providers $PROVIDERS --yes
+    #   amplify env pull 
+    
+    - name: Test environment
+      run: |
         echo $AMPLIFY
         echo $FRONTEND
         echo $PROVIDERS
-    #   amplify init --amplify $AMPLIFY --frontend $FRONTEND --providers $PROVIDERS --yes
-    #   amplify env pull 
 
     # Ensure correct amplify environment is configured on machine
     # - name: Configure amplify

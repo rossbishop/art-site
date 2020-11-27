@@ -74,7 +74,7 @@ jobs:
     - name: Init amplify
       run: |
         set -x
-        ./amplify-pull-push.sh $AWS_ACCESS_KEY_ID $AWS_SECRET_ACCESS_KEY
+        sh amplify-pull-push.sh $AWS_ACCESS_KEY_ID $AWS_SECRET_ACCESS_KEY
       # amplify init --amplify $AMPLIFY --frontend $FRONTEND --providers $PROVIDERS --yes
       # amplify pull --amplify $AMPLIFY --frontend $FRONTEND --providers $PROVIDERS --yes
       #  amplify status

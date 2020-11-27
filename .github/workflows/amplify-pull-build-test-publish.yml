@@ -35,7 +35,7 @@ jobs:
     - name: Init amplify
       run: |
         set -x
-        sh amplify-pull-push.sh ${{ secrets.AWS_ACCESS_KEY_ID }} ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        sh amplify-init-pull.sh ${{ secrets.AWS_ACCESS_KEY_ID }} ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
     # Start development server and run cypress tests
     - name: Cypress run

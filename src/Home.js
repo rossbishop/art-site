@@ -43,7 +43,7 @@ function Home(props) {
 			<div className="container">
 				<div className="row">
 					<div className="col-12 mt-4 mb-0">
-						<h2>Latest User Projects</h2>
+						<h2>Latest Projects</h2>
 					</div>
 				</div>
 			</div>

@@ -30,81 +30,23 @@ jobs:
     - name: Install amplify
       run: |
         npm install -g @aws-amplify/cli
-
-    # Set up env vars and make persistent for amplify
-    - name: Init amplify environment
-      run: |
-        set -x
-        echo 'REACTCONFIG<<EOF' >> $GITHUB_ENV
-        echo $REACTCONFIG | envsubst >> $GITHUB_ENV
-        echo 'EOF' >> $GITHUB_ENV
-
-        echo 'AWSCLOUDFORMATIONCONFIG<<EOF' >> $GITHUB_ENV
-        echo $AWSCLOUDFORMATIONCONFIG | envsubst >> $GITHUB_ENV
-        echo 'EOF' >> $GITHUB_ENV
-
-        echo 'AMPLIFY<<EOF' >> $GITHUB_ENV
-        echo $AMPLIFY | envsubst >> $GITHUB_ENV
-        echo 'EOF' >> $GITHUB_ENV
-
-        echo 'FRONTEND<<EOF' >> $GITHUB_ENV
-        echo $FRONTEND | envsubst >> $GITHUB_ENV
-        echo 'EOF' >> $GITHUB_ENV
-
-        echo 'PROVIDERS<<EOF' >> $GITHUB_ENV
-        echo $PROVIDERS | envsubst >> $GITHUB_ENV
-        echo 'EOF' >> $GITHUB_ENV        
-      env:
-        AWS_ACCESS_KEY_ID: |
-          ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: |
-          ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        REACTCONFIG: |
-          {\"SourceDir\":\"src\",\"DistributionDir\":\"build\",\"BuildCommand\":\"npm run-script build\",\"StartCommand\":\"npm run-script start\"}
-        AWSCLOUDFORMATIONCONFIG: |
-          {\"configLevel\":\"project\",\"useProfile\":false,\"profileName\":\"default\",\"accessKeyId\":$AWS_ACCESS_KEY_ID,\"secretAccessKey\":$AWS_SECRET_ACCESS_KEY,\"region\":\"eu-west-2\"}
-        AMPLIFY: |
-          {\"projectName\":\"art-site\",\"envName\":\"dev\",\"defaultEditor\":\"code\"}
-        FRONTEND: |
-          {\"frontend\":\"javascript\",\"framework\":\"react\",\"config\":$REACTCONFIG}
-        PROVIDERS: |
-          {\"awscloudformation\":$AWSCLOUDFORMATIONCONFIG}
     
     # Configure amplify, pull existing cloud down
     - name: Init amplify
       run: |
         set -x
         sh amplify-pull-push.sh ${{ secrets.AWS_ACCESS_KEY_ID }} ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      # amplify init --amplify $AMPLIFY --frontend $FRONTEND --providers $PROVIDERS --yes
-      # amplify pull --amplify $AMPLIFY --frontend $FRONTEND --providers $PROVIDERS --yes
-      #  amplify status
 
-    # Ensure correct amplify environment is configured on machine
-    # - name: Configure amplify
-    #   uses: ambientlight/amplify-cli-action@0.2.1
-    #   with:
-    #     amplify_command: configure
-    #     amplify_env: dev
-    #   env:
-    #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-    #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    #     AWS_REGION: eu-west-2
+    # Start development server and run cypress tests
+    - name: Cypress run
+      uses: cypress-io/github-action@v2.3.8
+      with:
+        start: npm start
+        wait-on: 'http://localhost:3000'
+        wait-on-timeout: 30
 
-    # # Start development server and run cypress tests
-    # - name: Cypress run
-    #   uses: cypress-io/github-action@v2.3.8
-    #   with:
-    #     start: npm start
-    #     wait-on: 'http://localhost:3000'
-    #     wait-on-timeout: 30
-
-    # # Push amplify configuration, build and publish front end to amplify hosting 
-    # - name: Publish amplify configuration
-    #   uses: ambientlight/amplify-cli-action@0.2.1
-    #   with:
-    #     amplify_command: publish
-    #     amplify_env: dev
-    #   env:
-    #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-    #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    #     AWS_REGION: eu-west-2
+    # Push updated cloud
+    - name: Publish to amplify
+      run: |
+        set -x
+        sh amplify-publish.sh

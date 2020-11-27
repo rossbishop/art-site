@@ -1,3 +1,12 @@
+#!/bin/bash
+
+set -e
+set -x
+IFS='|'
+
+AWS_ACCESS_KEY_ID=$1
+AWS_SECRET_ACCESS_KEY=$2
+
 REACTCONFIG="{\
 \"SourceDir\":\"src\",\
 \"DistributionDir\":\"build\",\
@@ -8,8 +17,8 @@ AWSCLOUDFORMATIONCONFIG="{\
 \"configLevel\":\"project\",\
 \"useProfile\":false,\
 \"profileName\":\"default\",\
-\"accessKeyId\":${{ secrets.AWS_ACCESS_KEY_ID }},\
-\"secretAccessKey\":${{ secrets.AWS_SECRET_ACCESS_KEY }},\
+\"accessKeyId\":\"$AWS_ACCESS_KEY_ID\",\
+\"secretAccessKey\":\"$AWS_SECRET_ACCESS_KEY\",\
 \"region\":\"eu-west-2\"\
 }"
 AMPLIFY="{\
@@ -25,3 +34,15 @@ FRONTEND="{\
 PROVIDERS="{\
 \"awscloudformation\":$AWSCLOUDFORMATIONCONFIG\
 }"
+
+amplify init \
+--amplify $AMPLIFY \
+--frontend $FRONTEND \
+--providers $PROVIDERS \
+--yes
+
+amplify pull \
+--amplify $AMPLIFY \
+--frontend $FRONTEND \
+--providers $PROVIDERS \
+--yes

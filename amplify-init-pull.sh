@@ -46,3 +46,5 @@ amplify pull \
 --frontend $FRONTEND \
 --providers $PROVIDERS \
 --yes
+
+amplify version

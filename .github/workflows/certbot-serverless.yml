@@ -29,10 +29,13 @@ jobs:
         working-directory: ./certbot-setup
       - name: Install serverless python requirements
         uses: serverless/github-action@v2.1.0
+        working-directory: ./certbot-setup
         with:
-          args: plugin install -n serverless-python-requirements    
+          args: plugin install -n serverless-python-requirements
+
       - name: Serverless deploy
         uses: serverless/github-action@v2.1.0
+        working-directory: ./certbot-setup
         with:
           args: deploy --config certbot-setup/serverless.yml
         env:

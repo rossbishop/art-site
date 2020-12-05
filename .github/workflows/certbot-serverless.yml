@@ -28,7 +28,7 @@ jobs:
           npm install
         working-directory: ./certbot-setup
       - name: Serverless deploy
-        uses: serverless/github-action@v1.53.0
+        uses: serverless/github-action@v2.1.0
         with:
           args: deploy --config certbot-setup/serverless.yml
         env:

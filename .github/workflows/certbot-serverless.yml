@@ -27,6 +27,10 @@ jobs:
         run: |
           npm install
         working-directory: ./certbot-setup
+      - name: Install serverless python requirements
+        uses: serverless/github-action@v2.1.0
+        with:
+          args: plugin install -n serverless-python-requirements    
       - name: Serverless deploy
         uses: serverless/github-action@v2.1.0
         with:

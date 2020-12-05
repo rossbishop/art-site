@@ -1,0 +1,37 @@
+name: "Certbot Serverless Deploy"
+
+on: 
+  push:
+    branches:
+      - dev
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: "3.8"
+      - name: Install dependencies
+        run: |
+          pip install -U pip pipenv
+          pipenv sync
+        working-directory: ./certbot-setup
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12"
+      - name: Install node dependencies
+        run: |
+          npm install
+        working-directory: ./certbot-setup
+      - name: Serverless deploy
+        uses: serverless/github-action@v1.53.0
+        with:
+          args: deploy --config certbot-setup/serverless.yml
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          DOMAIN_EMAIL: ${{ secrets.DOMAIN_EMAIL }}

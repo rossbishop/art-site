@@ -1,5 +1,9 @@
 name: 'Amplify Pull, Build, Test, Publish'
-on: [push]
+
+on:
+  push:
+    branches:
+      - dev
 
 jobs:
   deploy:

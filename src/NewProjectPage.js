@@ -87,7 +87,7 @@ function NewProjectPage(props) {
 			}
 		} catch (error) {
 			console.log("Error creating project: ", error)
-			setProjectError({ isError: true, message: error })
+			setProjectError({ isError: true, message: error.message })
 		}
 	}
 

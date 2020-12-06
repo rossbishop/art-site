@@ -59,6 +59,7 @@ export default function Header(props) {
 										<Link
 											className="nav-link"
 											to="/loading"
+											data-cy="create"
 											onClick={event => {
 												props.setLoading(true)
 												props.setDestinationPage("/new")
@@ -110,6 +111,7 @@ export default function Header(props) {
 										<Link
 											className="nav-link"
 											to="/loading"
+											data-cy="login"
 											onClick={event => {
 												props.setLoading(true)
 												props.setDestinationPage("/login")

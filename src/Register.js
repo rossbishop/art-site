@@ -131,6 +131,7 @@ export default function Register(props) {
 							required
 							autoFocus
 						/>
+						<p>Passwords must contain at least 8 characters consisting of lowercase letters and numbers</p>
 						<button
 							className={cx(RegisterStyles.btnLogin, "btn", "btn-lg", "btn-primary", "btn-block", "mt-4")}
 							type="submit"

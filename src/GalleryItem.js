@@ -18,8 +18,8 @@ export default function GalleryItem(props) {
 			<AmplifyImage imgKey={props.imgKey} style={galleryItemStyles.galleryImg} />
 			<div className="container">
 				<div className="carousel-caption">
-					<h5>{props.name}</h5>
-					<p>{props.description}</p>
+					<h5 data-cy="revisionName">{props.name}</h5>
+					<p data-cy="revisionDescription">{props.description}</p>
 				</div>
 			</div>
 		</div>

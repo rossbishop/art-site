@@ -26,6 +26,7 @@ export default function NewProject(props) {
 								{props.revisionImageURL && (
 									<img
 										className={NewProjectStyles.profileImgSmall}
+										data-cy="uploadedImage"
 										src={props.revisionImageURL}
 										alt="Revision Content"
 									/>
@@ -35,6 +36,7 @@ export default function NewProject(props) {
 								<input
 									type="file"
 									accept="image/png"
+									data-cy="fileSelector"
 									// When the user chooses file, store it in parent component state
 									onChange={event => props.setRevisionFile(event.target.files[0])}
 									id="inputFile"
@@ -45,6 +47,7 @@ export default function NewProject(props) {
 									autoFocus
 								/>
 								<button
+									data-cy="uploadButton"
 									type="button"
 									className={cx("btn", "btn-info", NewProjectStyles.imgButton)}
 									// When the user clicks the upload button, start uploading the file they have chosen to the S3 bucket
@@ -64,6 +67,7 @@ export default function NewProject(props) {
 						<input
 							type="projectDetail"
 							id="inputProjectName"
+							data-cy="projectName"
 							className={cx(NewProjectStyles.formControl, "mb-3", "py-2", "pl-0")}
 							placeholder="Enter new project name"
 							// As user types in project name, update state in parent component
@@ -78,6 +82,7 @@ export default function NewProject(props) {
 						<input
 							type="projectDetail"
 							id="inputProjectDescription"
+							data-cy="projectDescription"
 							className={cx(NewProjectStyles.formControl, "mb-3", "py-2", "pl-0")}
 							placeholder="Enter new project description"
 							// As user types in project description, update state in parent component
@@ -91,7 +96,8 @@ export default function NewProject(props) {
 						</label>
 						<input
 							type="projectDetail"
-							id="inputRevisionName"
+							id="inputRevisionName" 
+							data-cy="revisionName"
 							className={cx(NewProjectStyles.formControl, "mb-3", "py-2", "pl-0")}
 							placeholder="Enter new project name"
 							// As user types in revision name, update state in parent component
@@ -103,6 +109,7 @@ export default function NewProject(props) {
 						<textarea
 							className={cx(NewProjectStyles.formControl, NewProjectStyles.revDescBox)}
 							id="bioTextArea"
+							data-cy="revisionDescription"
 							rows="5"
 							placeholder="Enter a concise description for your initial revision"
 							// As user types in revision description, update state in parent component
@@ -122,6 +129,7 @@ export default function NewProject(props) {
 						)}
 						<button
 							className={cx(NewProjectStyles.btnProjectCreate, "btn", "btn-lg", "btn-primary", "btn-block", "mt-4")}
+							data-cy="createButton"
 							type="submit"
 							// When user clicks the create project button, initiate the GraphQL mutation via the Amplify API
 							onClick={e => {

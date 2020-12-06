@@ -149,7 +149,7 @@ export default function ProjectModule(props) {
 						</Link>
 					</button>
 				)}
-				<p className={projectModuleStyles.projectText}>{props.projectDetails.projectDescription}</p>
+				<p className={projectModuleStyles.projectText} data-cy="projectDescription">{props.projectDetails.projectDescription}</p>
 				<h4>Comments</h4>
 				{/* If user is logged in, display the comment form */}
 				{props.isLoggedIn && (

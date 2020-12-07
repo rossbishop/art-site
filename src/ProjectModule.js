@@ -129,25 +129,25 @@ export default function ProjectModule(props) {
 					</Link>
 				</h3>
 				{doesOwnProject && (
-					<button
-						type="button"
-						className={cx("btn", "btn-success", projectModuleStyles.commentButton)}
-						// When the user clicks the add revision button, route to the add revision page for this project
-						onClick={event => {
-							props.setLoading(true)
-							props.setDestinationPage(`/newrevision/${props.projectDetails.id}`)
+					<Link
+						className={projectModuleStyles.links}
+						to={{
+							pathname: "/loading",
+							state: { routePath: `/newrevision/${window.location.pathname.split("/")[2]}` }
 						}}
 					>
-						<Link
-							className={projectModuleStyles.links}
-							to={{
-								pathname: "/loading",
-								state: { routePath: `/newrevision/${window.location.pathname.split("/")[2]}` }
+						<button
+							type="button"
+							className={cx("btn", "btn-success", projectModuleStyles.commentButton)}
+							// When the user clicks the add revision button, route to the add revision page for this project
+							onClick={event => {
+								props.setLoading(true)
+								props.setDestinationPage(`/newrevision/${props.projectDetails.id}`)
 							}}
 						>
 							Add Revision
-						</Link>
-					</button>
+						</button>
+					</Link>
 				)}
 				<p className={projectModuleStyles.projectText} data-cy="projectDescription">{props.projectDetails.projectDescription}</p>
 				<h4>Comments</h4>

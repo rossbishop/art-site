@@ -27,6 +27,12 @@ function LoginPage(props) {
 	// On success, provide a message to the user and redirect to the index after 3 seconds
 	const signIn = async props => {
 		try {
+			if(username === "") {
+				throw new Error("Enter username")
+			}
+			else if (password === ""){
+				throw new Error("Enter password")
+			}
 			await Auth.signIn(username, password)
 			setSuccess({ isSuccess: true, message: "You are now logged in. Redirecting to previous page..." })
 			setTimeout(() => {

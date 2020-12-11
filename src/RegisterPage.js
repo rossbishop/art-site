@@ -39,10 +39,11 @@ function RegisterPage(props) {
 			let birthdate = birthMonth + "/" + birthDay + "/" + birthYear
 			//setBirthdate(birthMonth + "/" + birthDay + "/" + birthYear)
 			setErrorType("local")
-			if ((email === undefined) | (email === "") | !isValidEmail(email)) {
+			if ((email === undefined) || (email === "")) {
 				throw new Error("You must provide a valid email address")
-			}
-			if (username === undefined || username.length < 3) {
+			} else if (!isValidEmail(email)) {
+				throw new Error("You must provide a valid email address")
+			} else if (username === undefined || username.length < 3) {
 				throw new Error("Username must be at 3 three characters")
 			} else if (birthDay === undefined || isNaN(birthDay) || birthDay > 31 || birthDay < 1) {
 				throw new Error("Valid day of birth must be specified")

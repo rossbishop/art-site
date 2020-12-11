@@ -105,7 +105,7 @@ function NewRevisionPage(props) {
 			}
 		} catch (error) {
 			console.log("Error creating revision: ", error)
-			setRevisionError({ isError: true, message: error })
+			setRevisionError({ isError: true, message: error.message })
 		}
 	}
 

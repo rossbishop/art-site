@@ -39,6 +39,7 @@ function ForgotPage(props) {
 			}, 3000)
 		} catch (error) {
 			console.log(error)
+			setError({ isError: true, message: error.message })
 		}
 	}
 
@@ -53,7 +54,7 @@ function ForgotPage(props) {
 			}, 3000)
 		} catch (error) {
 			console.log(error)
-			setError({ isError: true, message: error })
+			setError({ isError: true, message: error.message })
 		}
 	}
 

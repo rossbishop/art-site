@@ -62,7 +62,7 @@ export default function ProjectModule(props) {
 			}
 		} catch (error) {
 			console.log("Error creating comment: ", error)
-			setCommentError({ isError: true, message: error })
+			setCommentError({ isError: true, message: error.message })
 		}
 	}
 

@@ -5,6 +5,8 @@
 */
 
 import React from "react"
+import cx from "classnames"
+import ProjectCardStyles from "./css/projectcard.module.css"
 
 import ProjectCard from "./ProjectCard"
 
@@ -21,7 +23,7 @@ export default function ProjectGrid(props) {
 	}
 
 	return (
-		<div className="album mt-3 mb-5 bg-light">
+		<div className={cx("album", "mt-3", "mb-5", ProjectCardStyles.gridBg)}>
 			<div className="container">
 				<div className="row">
 					{/* For each project in array of loaded data, display a project card */}

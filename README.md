@@ -1,5 +1,8 @@
 # Art Site
 Website used to share, improve and critique art - See the live demo site at https://artshare.rossbishop.dev
+
+**NOTE: The current iteration of the site is a proof of concept only and as such is only deployed in a development environment for demonstrative purposes. There are a number of improvements that need to be made to push this project to a production environment**
+
 ## Introduction
 Art Site (or ArtShare) is a proof of concept website intended to satisfy the needs of creators who wish to receive critique on their work as it progresses. As such, the website facilitates uploading user generated content, separated out into different "projects" and "revisions", which can be critiqued by other users.
 
@@ -10,8 +13,6 @@ When a user creates a project, they will name and describe the project as well a
 Users can customise a user profile with personal details such as a biography, job title and location as well as custom avatar and banner images. A user's profile page will display a collection of all of the projects they have created to date.
 
 Users of the site are able to comment per revision on other user's work to help give constructive feedback. Users can browse the different revisions of a project via an image carousel which displays the content along with its description and other user comments associated with that revision. Comments are separated per revision, such that the dialogue remains focussed on the each iteration of content.
-
-**NOTE: The current iteration of the site is a proof of concept only and as such is only deployed in a development environment for demonstrative purposes. There are a number of improvements that need to be made to push this project to a production environment**
 
 ## Live demo site
 Feel free to test any provided functionality such as user account creation, projects, comments etc. Databases are wiped and restored from a default state daily.
@@ -58,8 +59,10 @@ The folder structure of the project is as follows:
 - Serverless
 
 ### Clone repository, switch to dev branch
-`git clone https://github.com/rossbishop/art-site`
-`git checkout dev`
+```
+git clone https://github.com/rossbishop/art-site
+git checkout dev
+```
 
 ### Build project locally
 `npm run-script build`
@@ -79,8 +82,10 @@ The folder structure of the project is as follows:
 
 or, manually following prompts:
 
-`amplify init`
-`amplify pull`
+```
+amplify init
+amplify pull
+```
 
 ### Push Amplify backend locally
 `amplify push`
@@ -93,19 +98,23 @@ or, manually following prompts:
 `amplify publish`
 
 ### Deploy serverless functions locally
-#### To deploy certificate lambda 
-`cd certbot-setup`
-`serverless deploy`
+#### To deploy certificate lambda
+```
+cd certbot-setup
+serverless deploy
+```
 
 #### To deploy database clearance function 
-`cd database-clear`
-`serverless deploy`
+```
+cd database-clear
+serverless deploy
+```
 
 ### Running Cypress tests locally
 #### To run all tests without GUI:
-`npm start` in one command line
-`npx cypress run` in another command line once server is running
+1. `npm start` in one command line
+2. `npx cypress run` in another command line once server is running
 
 #### To open cypress GUI and selectively run tests:
-`npm start` in one command line
-`npx cypress open` in another command line once server is running
+1. `npm start` in one command line
+2. `npx cypress open` in another command line once server is running

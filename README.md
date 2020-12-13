@@ -3,6 +3,8 @@ Website used to share, improve and critique art - See the live demo site at http
 
 **NOTE: The current iteration of the site is a proof of concept only and as such is only deployed in a development environment for demonstrative purposes. There are a number of improvements that need to be made to push this project to a production environment**
 
+![Site Preview](/public/sitescreenshot.png?raw=true)
+
 ## Introduction
 Art Site (or ArtShare) is a proof of concept website intended to satisfy the needs of creators who wish to receive critique on their work as it progresses. As such, the website facilitates uploading user generated content, separated out into different "projects" and "revisions", which can be critiqued by other users.
 

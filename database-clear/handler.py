@@ -121,21 +121,21 @@ def lambda_handler(event, context):
     print("Starting table restoration")
     dynamodbClient.restore_table_from_backup(
         TargetTableName=projectTableString,
-        BackupArn='arn:aws:dynamodb:eu-west-2:381257970460:table/Project-qahekpx6dbcwnhlrizcgf7zbmy-dev/backup/01607683982493-9c8ffd7d',
+        BackupArn='arn:aws:dynamodb:eu-west-2:381257970460:table/Project-qahekpx6dbcwnhlrizcgf7zbmy-dev/backup/01607881349958-b81cf496',
         BillingModeOverride='PAY_PER_REQUEST',
         GlobalSecondaryIndexOverride=projectGSIs
     )
     
     dynamodbClient.restore_table_from_backup(
         TargetTableName=revisionTableString,
-        BackupArn='arn:aws:dynamodb:eu-west-2:381257970460:table/Revision-qahekpx6dbcwnhlrizcgf7zbmy-dev/backup/01607683990256-fea56658',
+        BackupArn='arn:aws:dynamodb:eu-west-2:381257970460:table/Revision-qahekpx6dbcwnhlrizcgf7zbmy-dev/backup/01607881341645-7e996adf',
         BillingModeOverride='PAY_PER_REQUEST',
         GlobalSecondaryIndexOverride=revisionGSIs
     )
         
     dynamodbClient.restore_table_from_backup(
         TargetTableName=commentTableString,
-        BackupArn='arn:aws:dynamodb:eu-west-2:381257970460:table/Comment-qahekpx6dbcwnhlrizcgf7zbmy-dev/backup/01607683967960-ae4044ec',
+        BackupArn='arn:aws:dynamodb:eu-west-2:381257970460:table/Comment-qahekpx6dbcwnhlrizcgf7zbmy-dev/backup/01607881357988-61352e16',
         BillingModeOverride='PAY_PER_REQUEST',
         GlobalSecondaryIndexOverride=commentGSIs
     )

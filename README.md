@@ -1,3 +1,5 @@
+# Art Site
+Website used to share, improve and critique art - See the live demo site at https://artshare.rossbishop.dev
 ## Introduction
 Art Site (or ArtShare) is a proof of concept website intended to satisfy the needs of creators who wish to receive critique on their work as it progresses. As such, the website facilitates uploading user generated content, separated out into different "projects" and "revisions", which can be critiqued by other users.
 
@@ -11,13 +13,27 @@ Users of the site are able to comment per revision on other user's work to help 
 
 **NOTE: The current iteration of the site is a proof of concept only and as such is only deployed in a development environment for demonstrative purposes. There are a number of improvements that need to be made to push this project to a production environment**
 
+## Live demo site
+Feel free to test any provided functionality such as user account creation, projects, comments etc. Databases are wiped and restored from a default state daily.
+
+## Folder structure
+The folder structure of the project is as follows:
+
+- `.github/workflows` - GitHub Actions automation workflows
+- `amplify/` - Amazon Amplify backend configuration (CloudFormation templates, json config, Node.js Lambda triggers)
+- `certbot-setup/` - Serverless framework project which sets up an AWS Lambda function (Python 3.8) that renews an SSL certificate and stores it in Amazon S3
+- `cypress/` - Automated end to end tests and fixtures
+- `database-clear/` - Serverless framework project which sets up an AWS Lambda function (Python 3.8) that clears DynamoDB databases and restores from a backup
+- `public/` - Static site content
+- `src/` - Front end React modules, CSS and GraphQL functions
+
 ## Technology
 - Frontend:
   - HTML5/CSS3 static components built with Bootstrap
   - Pages rendered using React.js
   - Backend access facilitated by Amazon Amplify API
 - Backend:
-  - Infrastructure created, updated and deployed with Amazon Amplify CLI
+  - Infrastructure created, updated and deployed with Amazon Amplify CLI (Node.js)
     - CRUD API generated from GraphQL schema by Amazon AppSync
     - User created text content (Project, revision, user profile text etc.) stored in one Amazon DynamoDB table per GraphQL model
     - User created binary content (Project revision, avatars, banner images etc.) stored in Amazon S3 bucket  
@@ -33,39 +49,63 @@ Users of the site are able to comment per revision on other user's work to help 
     - Dynamic SSL cert generation using AWS Lambda and Certbot, run on monthly cadence with CloudWatch (not currently in use due to Amplify limitations)
     - Database cleansing and restoration from known good backup for development demo Amplify environment, run on daily cadence with CloudWatch (bot protection measure) 
 
-## Design choices
-### Amazon Amplify
-Amplify was initially chosen to simplify the development of the project, for a developer new to cloud infrastructure and deployment. Amplify appeared to provide a neat interface to a wide array of Amazon services that are essential in creating a basic CRUD app such as ArtShare. What actually transpired is a series of frustrating events that resulted in a large amount of wasted time and missed opportunities.
+## Working with Art Site
+### Prerequisites
+- Node.js/npm
+- Amazon AWS CLI
+- Amazon Amplify CLI
+- Cypress
+- Serverless
 
-At a surface level, Amplify is a neat tool, as it allows one to create and deploy some simple infrastructure quickly. If one sticks absolutely to the beaten path, it works well. The Amplify documentation is pretty comprehensive and integration of the backend within the front end using the Amplify API is seamless. Just copy and paste the exemplar code, alter a few parameters and it does "just work". The integration of Amazon Cognito is great for handling users, as are S3 buckets for storing configuration/user binary content and DynamoDB for storing text data.
+### Clone repository, switch to dev branch
+`git clone https://github.com/rossbishop/art-site`
+`git checkout dev`
 
-The issues begin to come out of the woodwork as one tries to do anything even mildly "creative". Here is a summary of the problems faced during development:
+### Build project locally
+`npm run-script build`
 
-- Amplify CLI is poor - a fair few actions are prohibitive or even impossible to carry out without falling back to the console (e.g. setting up rewrites/redirects) which is really bad for automation. Something truly asinine is that some CLI commands use switches that take JSON as input, which is horrible to set up in bash, let alone a GitHub action.
-- Amplify is buggy and lacking a lot of basic functionality - there are issues stemming back 2 years on GitHub issues that cover pretty simplistic functionality that still hasn't been added
-- Initial setup of resources via the CLI is very manual. A user has to follow numerous prompts to set up resources, rather than using a script. This is very poor for repeatibility in the event infrastructure needs to be destroyed and spun up again
-- Cyclical dependencies with Lambda triggers can lead to awkward bodges - for example using a Lambda to invoke another Lambda
-- Error messages often give next to no information about problems at hand
-- A lot of settings are set in stone once an app is created - this often requires apps to be completely destroyed and recreated to change basic settings e.g. manual vs automated deployment of the Amplify front end once a repository has already been connected to the service
-- The Amplify automated CI/CD flow is very fragile - the Art Site front end deployment would freeze on every push, resulting in reversion to manually setup automated deployment, which required the deletion and recreation of the app
-- Defaults can be nonsensical - a default setting for npm build commands lead me in circles for a few days before I realised that the build commands were Windows specific if you create your app on a Windows machine, despite the generic Linux commands working absolutely fine under Powershell/CMD
+### Run automated dev branch pipeline
+`git push origin dev` - actions will run remotely:
 
-Based on even just these issues, it would be hard to recommend Amplify to anybody, even a newbie, as they would quickly outgrow the potential of the tool. It would make sense to invest the extra time learning how to interface with the utilised Amazon services manually, as the eventual result would be far more robust. Further work on this project would see Amplify replaced by a more robust approach, using perhaps a service such as Serverless to create and deploy infrastructure.
+- Clones repository 
+- Installs prerequisites
+- Pulls Amplify environment from cloud
+- Runs E2E tests
+- Publishes Amplify environment (frontend and backend)
+- Deploys serverless functions
 
-### Amazon AppSync and GraphQL
-GraphQL is a tool that was stumbled upon perhaps a third of the way through development of the app, just before work on the backend started - It essentially turned what would have been a rather arduous process of manually creating the site API using Lambda and API gateway into a very speedy process - essentially one defines a schema containing "Models" that describe the data which will be utilised and any required relationships between models.
+### Sync Amplify with cloud locally
+`./amplify-init-pull.sh`
 
-For instance, Project, Revision and Comment models were defined, with connecting fields between them which defined their relationships i.e. one project has many revisions which in turn can have many comments. The GraphQL implemtation also offers configuration of access permissions, keys which can be used to sort more advanced queries and more.
+or, manually following prompts:
 
-When the schema is deployed using Amplify, AWS AppSync creates all of the "queries", "mutations" and "subscriptions" required to implement the models seamlessly, which forms the basis for the CRUD app. No boilerplate required. There is perhaps an argument to say this might be an overkill approach for an application this simple, but the time savings and quality of the final implementation make it an invaluable tool. Where Amplify would be ditched in favour of a proper automation tool, the GraphQL/AppSync flow would be worth continuing to use.
+`amplify init`
+`amplify pull`
 
-### Serverless
-Serverless was chosen for miscellanious resource deployment that fell outside the remit of Amplify. It offers a simple but powerful workflow for deploying cloud infrastructure such as Lambda, S3 buckets and so on.
+### Push Amplify backend locally
+`amplify push`
 
-One particular advantage leveraged during development for this project, was the automated python requirements configuration plugin. This enables the developer to include prerequisite packages for their lambda that might need to be built for a specific machine architecture. Certbot was required for this project; upon deployment of the SSL certification Lambda, Serverless will spin up a Docker container which will build the packages in Amazon Linux such that the built binaries are compatible with the hardware the Lambda will be run on in the cloud. This is a process that can be achieved using other tools, but the way in which Serverless handles it is very elegant, saving a great deal of code and time.
+### Push Amplify frontend and backend locally
+`./amplify-publish.sh`
 
-### GitHub Actions
-GitHub Actions are used to perform continuous deployment of the Amplify front and backend environments, as well as continuous E2E testing using Cypress on every push to the development branch. As the git repository for this project is hosted on GitHub, it was a natural choice to take advantage of this powerful automation pipeline.
+or, manually following prompts:
 
-### Cypress
-Cypress makes E2E testing incredibly easy, with extensive GUI and command line tools and diagnostics provided. The writing and integration of tests into a project is very straightforward and it was advantageous to get to develop tests in a visual desktop environment before integrating them into the automated pipeline.
+`amplify publish`
+
+### Deploy serverless functions locally
+#### To deploy certificate lambda 
+`cd certbot-setup`
+`serverless deploy`
+
+#### To deploy database clearance function 
+`cd database-clear`
+`serverless deploy`
+
+### Running Cypress tests locally
+#### To run all tests without GUI:
+`npm start` in one command line
+`npx cypress run` in another command line once server is running
+
+#### To open cypress GUI and selectively run tests:
+`npm start` in one command line
+`npx cypress open` in another command line once server is running

@@ -9,10 +9,7 @@ provider:
   iamRoleStatements:
     - Effect: 'Allow'
       Action:
-        - 'dynamodb:DeleteTable'
-        - 'dynamodb:DescribeTable'
-        - 'dynamodb:ListTables'
-        - 'dynamodb:RestoreTableFromBackup'
+        - 'dynamodb:*'
       Resource:
         - '*'
 

@@ -14,12 +14,17 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: "3.8"
+      - name: Install node dependencies
+        run: |
+          npm install
+          npm install -g serverless@2.1.0
+        working-directory: ./database-clear          
       - name: Serverless deploy 
-        working-directory: ./database-clear
         run: |
           serverless deploy
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           DOMAIN_EMAIL: ${{ secrets.DOMAIN_EMAIL }}
+        working-directory: ./database-clear 
 

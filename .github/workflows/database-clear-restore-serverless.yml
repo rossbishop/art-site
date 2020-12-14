@@ -4,9 +4,10 @@ on:
   push:
     branches:
       - dev
+      - devClean
 
 jobs:
-  deploy:
+  deploy-database-clear:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

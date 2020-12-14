@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  test:
+  test-merge-pr:
     name: cypress-test-merge-pr-master
     runs-on: ubuntu-20.04
 

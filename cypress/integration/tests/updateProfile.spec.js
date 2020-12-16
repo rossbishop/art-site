@@ -1,6 +1,6 @@
 /*
-	Filename: 		create.spec.js
-	Description: 	A cypress E2E test used to confirm content creation functionality is working
+	Filename: 		updateProfile.spec.js
+	Description: 	A cypress E2E test used to verify profile update functionality is working
 	Author: 		Ross Bishop
 */
 
@@ -11,7 +11,7 @@ describe("Authentication:", function () {
 	})
 
 	describe("Create Project:", () => {
-		it("Allows a user to create a project", () => {
+		it("Allows a user to update their profile", () => {
 			// Visit login page
 			cy.visit("/login")
 			// Take an action (Sign in)

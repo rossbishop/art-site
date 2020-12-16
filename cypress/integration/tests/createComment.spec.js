@@ -1,6 +1,6 @@
 /*
-	Filename: 		create.spec.js
-	Description: 	A cypress E2E test used to confirm content creation functionality is working
+	Filename: 		createComment.spec.js
+	Description: 	A cypress E2E test used to confirm comment creation functionality is working
 	Author: 		Ross Bishop
 */
 
@@ -10,8 +10,8 @@ describe("Authentication:", function () {
 		cy.visit("/")
 	})
 
-	describe("Create Project:", () => {
-		it("Allows a user to create a project", () => {
+	describe("Create Comment:", () => {
+		it("Allows a user to create a comment", () => {
 			// Visit login page
 			cy.visit("/login")
 			// Take an action (Sign in)
@@ -26,12 +26,20 @@ describe("Authentication:", function () {
             cy.get(selectors.projectName).contains("Test Project").click()
             // Wait for page to load
             cy.wait(2000)
+            // Select correct revision
+            cy.get(selectors.listItem).contains("1").click()
+            // Wait briefly
+            cy.wait(500)
             // Enter comment
             cy.get(selectors.commentBox).type("Test Comment")
             // Submit comment
             cy.get(selectors.commentButton).click()
             // Wait for page to reload
             cy.wait(5000)
+            // Select correct revision
+            cy.get(selectors.listItem).contains("1").click()
+            // Wait briefly
+            cy.wait(500)            
             // Check comment has been added
             cy.get(selectors.comment).contains("Test Comment")
 		})
@@ -48,6 +56,7 @@ export const selectors = {
     commentBox: '[data-cy="commentInput"]',
     commentButton: '[data-cy="commentButton"]',
     comment: '[data-cy="commentContent"]',
-    projectName: '[data-cy="projectName"]'
+    projectName: '[data-cy="projectName"]',
+    listItem: '[data-cy="carouselLi"]'
 
 }

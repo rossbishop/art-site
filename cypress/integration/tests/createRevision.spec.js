@@ -1,6 +1,6 @@
 /*
-	Filename: 		create.spec.js
-	Description: 	A cypress E2E test used to confirm content creation functionality is working
+	Filename: 		createRevision.spec.js
+	Description: 	A cypress E2E test used to confirm revision functionality is working
 	Author: 		Ross Bishop
 */
 
@@ -10,8 +10,8 @@ describe("Authentication:", function () {
 		cy.visit("/")
 	})
 
-	describe("Create Project:", () => {
-		it("Allows a user to create a project", () => {
+	describe("Create Revision:", () => {
+		it("Allows a user to create a revision", () => {
 			// Visit login page
 			cy.visit("/login")
 			// Take an action (Sign in)

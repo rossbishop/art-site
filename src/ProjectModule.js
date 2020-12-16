@@ -138,6 +138,7 @@ export default function ProjectModule(props) {
 					>
 						<button
 							type="button"
+							data-cy="addRevisionButton"
 							className={cx("btn", "btn-success", projectModuleStyles.commentButton)}
 							// When the user clicks the add revision button, route to the add revision page for this project
 							onClick={event => {
@@ -158,6 +159,7 @@ export default function ProjectModule(props) {
 							<label form="commentFormInput1">Type a comment:</label>
 							<textarea
 								className={cx(projectModuleStyles.commentBox, "form-control")}
+								data-cy="commentInput"
 								id="commentFormTextArea1"
 								rows="1"
 								// As user types in comment, update state in parent component
@@ -179,6 +181,7 @@ export default function ProjectModule(props) {
 						<button
 							className={cx("btn", "btn-primary", projectModuleStyles.commentButton)}
 							type="submit"
+							data-cy="commentButton"
 							// When the user clicks the submit button, initiate the GraphQL mutation via the Amplify API
 							onClick={e => {
 								e.preventDefault()

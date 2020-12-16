@@ -20,6 +20,7 @@ export default function ProjectCard(props) {
 			<div className="card mb-4 shadow-sm">
 				<title>Placeholder</title>
 				<Link
+					data-cy="projectImageLink"
 					className={projectCardStyles.links}
 					to="/loading"
 					// When user clicks the link, route to the project page
@@ -41,7 +42,7 @@ export default function ProjectCard(props) {
 								props.setDestinationPage(props.link)
 							}}
 						>
-							<h5 className="project-name">{props.name} </h5>
+							<h5 className="project-name" data-cy="projectName">{props.name} </h5>
 						</Link>
 						<h5 className="project-author text-muted">
 							by{" "}

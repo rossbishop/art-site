@@ -13,6 +13,7 @@ export default function GalleryListItem(props) {
 		<li data-target="#galleryCarousel" data-slide-to={props.id} className={props.selected === props.id ? "active" : ""}>
 			<button
 				type="button"
+				data-cy="carouselLi"
 				className={props.isLatest - 1 === props.id ? "btn btn-info btn-sm" : "btn btn-secondary btn-sm"}
 				// When list item is clicked, set current selected revision to the selected id in the parent component
 				onClick={() => {

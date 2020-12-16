@@ -101,6 +101,7 @@ export default function ProfileUpdate(props) {
 						<input
 							type="userDetail"
 							id="inputUsername"
+							data-cy="usernameInput"
 							className={cx(ProfileUpdateStyles.formControl, "mb-3", "py-2", "pl-0")}
 							placeholder="Enter new username"
 							// As user types in username, update state in parent component
@@ -116,6 +117,7 @@ export default function ProfileUpdate(props) {
 						<input
 							type="userDetail"
 							id="inputPosition"
+							data-cy="positionInput"
 							className={cx(ProfileUpdateStyles.formControl, "mb-3", "py-2", "pl-0")}
 							placeholder="Enter new position title"
 							// As user types in position, update state in parent component
@@ -131,6 +133,7 @@ export default function ProfileUpdate(props) {
 						<input
 							type="userDetail"
 							id="inputLocation"
+							data-cy="locationInput"
 							className={cx(ProfileUpdateStyles.formControl, "mb-3", "py-2", "pl-0")}
 							placeholder="Enter new location"
 							// As user types in their location, update state in parent component
@@ -143,6 +146,7 @@ export default function ProfileUpdate(props) {
 						<textarea
 							className={cx(ProfileUpdateStyles.formControl, ProfileUpdateStyles.bioBox)}
 							id="bioTextArea"
+							data-cy="bioInput"
 							rows="5"
 							// As user types in their bio, update state in parent component
 							onChange={event => props.setBio(event.target.value)}
@@ -150,7 +154,7 @@ export default function ProfileUpdate(props) {
 						></textarea>
 						{/* If profile details update successfully, notify the user */}
 						{props.profileSuccess.isSuccess && (
-							<div className="alert alert-success" role="alert">
+							<div className="alert alert-success" role="alert" data-cy="profileSuccess">
 								Updated profile details successfully
 							</div>
 						)}
@@ -168,6 +172,7 @@ export default function ProfileUpdate(props) {
 								props.updateProfile()
 							}}
 							type="submit"
+							data-cy="updateProfileButton"
 						>
 							Update Profile
 						</button>
@@ -183,6 +188,7 @@ export default function ProfileUpdate(props) {
 						<input
 							type="userDetail"
 							id="inputInstagram"
+							data-cy="instagramInput"
 							className={cx(ProfileUpdateStyles.formControl, "mb-3", "py-2", "pl-0")}
 							placeholder="Enter Instagram Handle"
 							// As user types in their instagram handle, update state in parent component
@@ -197,6 +203,7 @@ export default function ProfileUpdate(props) {
 						<input
 							type="userDetail"
 							id="inputTwitter"
+							data-cy="twitterInput"
 							className={cx(ProfileUpdateStyles.formControl, "mb-3", "py-2", "pl-0")}
 							placeholder="Enter Twitter Handle"
 							// As user types in their twitter handle, update state in parent component
@@ -211,6 +218,7 @@ export default function ProfileUpdate(props) {
 						<input
 							type="userDetail"
 							id="inputFacebook"
+							data-cy="facebookInput"
 							className={cx(ProfileUpdateStyles.formControl, "mb-3", "py-2", "pl-0")}
 							placeholder="Enter Facebook Handle"
 							// As user types in their facebook handle, update state in parent component
@@ -220,7 +228,7 @@ export default function ProfileUpdate(props) {
 						/>
 						{/* If social details update successfully, notify the user */}
 						{props.socialSuccess.isSuccess && (
-							<div className="alert alert-success" role="alert">
+							<div className="alert alert-success" role="alert" data-cy="socialSuccess">
 								Updated social details successfully
 							</div>
 						)}
@@ -237,6 +245,7 @@ export default function ProfileUpdate(props) {
 								e.preventDefault()
 								props.updateSocial()
 							}}
+							data-cy="updateSocialButton"
 							type="submit"
 						>
 							Update Social Media

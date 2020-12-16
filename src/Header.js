@@ -73,6 +73,7 @@ export default function Header(props) {
 											className="nav-link dropdown-toggle"
 											href="/#"
 											id="dropdown05"
+											data-cy="userToggle"
 											data-toggle="dropdown"
 											aria-haspopup="true"
 											aria-expanded="false"
@@ -83,6 +84,7 @@ export default function Header(props) {
 											<Link
 												className="dropdown-item"
 												to="/loading"
+												data-cy="profilePageButton"
 												onClick={event => {
 													props.setLoading(true)
 													props.setDestinationPage(`/user/${props.userDetails.username}`)
@@ -94,6 +96,7 @@ export default function Header(props) {
 											<Link
 												className="dropdown-item"
 												to="/loading"
+												data-cy="profileUpdateButton"
 												onClick={event => {
 													props.setLoading(true)
 													props.setDestinationPage("/profileupdate")

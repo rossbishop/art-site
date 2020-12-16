@@ -74,7 +74,7 @@ export default function CommentCard(props) {
 					</div>
 				)}
 				<div className="d-flex align-items-start flex-column" />
-				<div className="mb-auto">
+				<div className="mb-auto" data-cy="commentContent">
 					{props.comment}
 					{/* <div className={commentCardStyles.commentReply}>Like</div> */}
 				</div>

@@ -49,13 +49,13 @@ export default function UserBanner(props) {
 								</div>
 								<div className="col-8">
 									<h1>{props.profileData.username}</h1>
-									<h6>{props.profileData.position}</h6>
-									<h6>{props.profileData.location}</h6>
-									<p>{props.profileData.bio}</p>
+									<h6 data-cy="positionDetail">{props.profileData.position}</h6>
+									<h6 data-cy="locationDetail">{props.profileData.location}</h6>
+									<p data-cy="bioDetail">{props.profileData.bio}</p>
 								</div>
 							</div>
 						</div>
-						<div className="col-6 d-flex align-items-end flex-column">
+						<div className="col-6 d-flex align-items-end flex-column" data-cy="socialDetails">
 							{/* If the user profile contains an Instagram, Facebook or Twitter, display the handle and a corresponding icon */}
 							{props.profileData.instagram && (
 								<UserSocialIcon socialtype="instagram" username={props.profileData.instagram} />

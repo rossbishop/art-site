@@ -27,6 +27,7 @@ export default function NewRevision(props) {
 									<img
 										className={NewProjectStyles.profileImgSmall}
 										src={props.revisionImageURL}
+										data-cy="uploadedImage"
 										alt="Revision Content"
 									/>
 								)}
@@ -35,6 +36,7 @@ export default function NewRevision(props) {
 								<input
 									type="file"
 									accept="image/png"
+									data-cy="fileSelector"
 									// When the user chooses file, store it in parent component state
 									onChange={event => props.setRevisionFile(event.target.files[0])}
 									id="inputFile"
@@ -46,6 +48,7 @@ export default function NewRevision(props) {
 								/>
 								<button
 									type="button"
+									data-cy="uploadButton"
 									className={cx("btn", "btn-info", NewProjectStyles.imgButton)}
 									// When the user clicks the upload button, start uploading the file they have chosen to the S3 bucket
 									onClick={e => {
@@ -59,11 +62,12 @@ export default function NewRevision(props) {
 						</div>
 						<h4 className="mt-3">New Revision Name</h4>
 						<label htmlFor="inputProjectName" className="sr-only">
-							Enter New Project Name
+							Enter New Revision Name
 						</label>
 						<input
 							type="projectDetail"
 							id="inputProjectName"
+							data-cy="revisionName"
 							className={cx(NewProjectStyles.formControl, "mb-3", "py-2", "pl-0")}
 							placeholder="Enter new revision name"
 							// As user types in revision name, update state in parent component
@@ -75,6 +79,7 @@ export default function NewRevision(props) {
 						<textarea
 							className={cx(NewProjectStyles.formControl, NewProjectStyles.revDescBox)}
 							id="bioTextArea"
+							data-cy="revisionDescription"
 							rows="5"
 							placeholder="Enter a concise description for your new revision"
 							// As user types in revision description, update state in parent component
@@ -95,6 +100,7 @@ export default function NewRevision(props) {
 						<button
 							className={cx(NewProjectStyles.btnProjectCreate, "btn", "btn-lg", "btn-primary", "btn-block", "mt-4")}
 							type="submit"
+							data-cy="createButton"
 							// When user clicks the create revision button, initiate the GraphQL mutation via the Amplify API
 							onClick={e => {
 								e.preventDefault()

@@ -19,6 +19,13 @@
     width: 100%;
 }
 
+.formProfileUpdate input[type="birthdate"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    width: 100%;
+}
+
 .formProfileUpdate input[type="email"] {
     margin-bottom: -1px;
     border-bottom-right-radius: 0;
@@ -27,6 +34,13 @@
 }
 
 .formProfileUpdate input[type="password"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    width: 100%;
+}
+
+.formProfileUpdate input[type="confirmation"] {
     margin-bottom: -1px;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
@@ -47,4 +61,8 @@
     background-color: black;
     font-size: 16px;
     color: white;
+}
+
+.dateDropdown {
+    margin-right: 5px;
 }

@@ -2,3 +2,10 @@
     max-width: 100%;
 }
 
+.sneff {
+    max-width: max-content;
+    margin: auto;
+    width: 100%;
+    height: auto;
+    display: block;
+}

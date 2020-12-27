@@ -1,22 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+/*
+	Filename: 		index.js
+	Description: 	A React root component which acts as the site index
+	Author: 		Ross Bishop
+*/
 
-import 'bootstrap'
-import 'bootstrap/dist/css/bootstrap.css'
+import React from "react"
+import ReactDOM from "react-dom"
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from"react-router-dom";
+import App from "./App"
+
+import "bootstrap"
+import "bootstrap/dist/css/bootstrap.css"
+
+import { BrowserRouter as Router } from "react-router-dom"
 
 ReactDOM.render(
-  <Router>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </Router>,
-  document.getElementById('root')
+	<Router>
+		<React.StrictMode>
+			<App />
+		</React.StrictMode>
+	</Router>,
+	document.getElementById("root")
 )

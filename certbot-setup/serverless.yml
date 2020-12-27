@@ -1,0 +1,64 @@
+service: certbot-setup
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: python3.8
+  region: eu-west-2
+  stage: dev
+  iamRoleStatements:
+    - Effect: 'Allow'
+      Action:
+        - 'route53:ListHostedZones'
+        - 'route53:GetChange'
+      Resource:
+        - '*'
+    - Effect: 'Allow'
+      Action:
+        - 'route53:ChangeResourceRecordSets'
+      Resource:
+        - "arn:aws:route53:::hostedzone/Z03168903GBNTSG9ARBWC"
+    - Effect: 'Allow'
+      Action:
+        - 's3:ListBucket'
+      Resource:
+        Fn::Join:
+          - ''
+          - - 'arn:aws:s3:::'
+            - Ref: certbotBucket
+    - Effect: 'Allow'
+      Action:
+        - 's3:PutObject'
+      Resource:
+        Fn::Join:
+          - ''
+          - - 'arn:aws:s3:::'
+            - Ref: certbotBucket
+            - /*                         
+
+functions:
+  certbot-run:
+    handler: handler.lambda_handler
+    environment:
+      S3_BUCKET: artsite-certs
+      S3_PREFIX: certs
+      S3_REGION: eu-west-2
+      DOMAINS: "*.artshare.rossbishop.dev, artshare.rossbishop.dev"
+      EMAILS: ${env:DOMAIN_EMAIL}
+    events:
+      - schedule: cron(0 16 L * ? *)
+    timeout: 300
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: non-linux
+
+resources:
+  Resources:
+    certbotBucket:
+      Type: AWS::S3::Bucket
+      Properties: 
+        BucketName: artsite-certs

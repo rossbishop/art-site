@@ -3,8 +3,8 @@
     float: left;
     margin-right: 15px;
     margin-bottom: 0px;
-    height: 100%;
-    width: auto;
+    height: 96px;
+    width: 96px;
 }
 
 .commentReply {
@@ -23,4 +23,23 @@
 
 .comment {
     margin-bottom: 10px;
+}
+
+.links {
+    color: black;
+}
+
+.commentBlankAvatar {
+    border-radius: 5px;
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 0px;
+    height: 96px;
+    width: 96px;
+    background-color: #212529;
+    color: #fff;
+    text-align: center;
+    line-height: 96px;
+    text-transform: capitalize;
+    font-size: 28px;
 }

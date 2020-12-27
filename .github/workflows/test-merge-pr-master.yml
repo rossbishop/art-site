@@ -1,0 +1,39 @@
+name: 'Run tests, merge PR to master branch'
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  test-merge-pr:
+    name: cypress-test-merge-pr-master
+    runs-on: ubuntu-20.04
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+    # Checkout code
+    - uses: actions/checkout@v2
+
+    # Setup node
+    - name: Use Node.js ${{ matrix.node_version }}
+      uses: actions/setup-node@v1
+      with:
+        version: ${{ matrix.node_version }}
+
+    # Setup npm
+    - name: Install npm
+      run: |
+        npm install
+        npm install react-scripts --save
+
+    # Start development server and run cypress tests
+    - name: Cypress run
+      uses: cypress-io/github-action@v2.3.8
+      with:
+        start: npm start
+        wait-on: 'http://localhost:3000'
+        wait-on-timeout: 30

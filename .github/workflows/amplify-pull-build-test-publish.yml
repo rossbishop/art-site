@@ -1,0 +1,57 @@
+name: 'Amplify Pull, Build, Test, Publish'
+
+on:
+  push:
+    branches:
+      - dev
+      - devClean
+
+jobs:
+  deploy:
+    name: amplify pull-build-test-publish
+    runs-on: ubuntu-20.04
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+    # Checkout code
+    - uses: actions/checkout@v2
+
+    # Setup node
+    - name: Use Node.js ${{ matrix.node_version }}
+      uses: actions/setup-node@v1
+      with:
+        version: ${{ matrix.node_version }}
+
+    # Setup npm
+    - name: Install npm
+      run: |
+        npm install
+        npm install react-scripts --save
+
+    # Setup amplify
+    - name: Install amplify
+      run: |
+        npm install -g @aws-amplify/cli
+    
+    # Configure amplify, pull existing cloud down
+    - name: Init amplify
+      run: |
+        set -x
+        sh amplify-init-pull.sh ${{ secrets.AWS_ACCESS_KEY_ID }} ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+    # Start development server and run cypress tests
+    - name: Cypress run
+      uses: cypress-io/github-action@v2.3.8
+      with:
+        start: npm start
+        wait-on: 'http://localhost:3000'
+        wait-on-timeout: 30
+
+    # Push updated cloud
+    - name: Publish to amplify
+      run: |
+        set -x
+        sh amplify-publish.sh

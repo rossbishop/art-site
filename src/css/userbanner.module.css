@@ -15,6 +15,18 @@
     border-radius: 5px;
 }
 
+.noProfileImg {
+    height: 100px;
+    width: 100px;
+    border-radius: 5px;
+    background-color: #212529;
+    color: #fff;
+    text-align: center;
+    line-height: 96px;
+    text-transform: capitalize;
+    font-size: 28px;
+}
+
 .jumbotron {
     padding: 0;
     margin-bottom: 0;
@@ -22,5 +34,4 @@
     background-repeat: no-repeat;
     background-size: 100%;
     color: #fff;
-
 }

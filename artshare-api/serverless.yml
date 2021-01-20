@@ -9,7 +9,10 @@ provider:
   iamRoleStatements:
     - Effect: 'Allow'
       Action:
-        - 'dynamodb:*'
+        - 'dynamodb:PutItem'
+        - 'dynamodb:GetItem'
+        - 'dynamodb:UpdateItem'
+        - 'dynamodb:DeleteItem'
       Resource:
         - '*'
 
@@ -19,103 +22,105 @@ functions:
     memorySize: 128
     events:
       - http:
-        path: project
-        method: post
-        request:
-          schema:
-            application/json: ${file(requestSchemas/createProject.json)}
-          parameters:
-            headers:
-              Content-Type: true
-              Authorization: true
-        authorizer: 
-          name: UserPoolAuthorizer
-          type: COGNITO_USER_POOLS
-          arn:
-            Fn::GetAtt:
-              - ArtShareUserPool
-              - Arn
+          path: project
+          method: post
+          request:
+            schema:
+              application/json: ${file(requestSchemas/createProject.json)}
+            parameters:
+              headers:
+                Content-Type: true
+                Authorization: true
+          authorizer: 
+            name: UserPoolAuthorizer
+            scopes: artshare-api-serverless/createProject
+            type: COGNITO_USER_POOLS
+            arn:
+              Fn::GetAtt:
+                - ArtShareUserPool
+                - Arn
 
   readProject:
     handler: api/project.read
     memorySize: 128
     events:
       - http:
-        path: project/{id}
-        method: get
-        request:
-          parameters:
-            headers:
-              Content-Type: true
-            paths:
-              id: true
+          path: project/{id}
+          method: get
+          request:
+            parameters:
+              headers:
+                Content-Type: true
+              paths:
+                id: true
 
   updateProject:
     handler: api/project.update
     memorySize: 128
     events:
       - http:
-        path: project/{id}
-        method: put
-        request:
-          schema:
-            application/json: ${file(requestSchemas/updateProject.json)}
-          parameters:
-            headers:
-              Content-Type: true
-              Authorization: true
-            paths:
-              id: true          
-        authorizer: 
-          name: UserPoolAuthorizer
-          type: COGNITO_USER_POOLS
-          arn:
-            Fn::GetAtt:
-              - ArtShareUserPool
-              - Arn
+          path: project/{id}
+          method: put
+          request:
+            schema:
+              application/json: ${file(requestSchemas/updateProject.json)}
+            parameters:
+              headers:
+                Content-Type: true
+                Authorization: true
+              paths:
+                id: true          
+          authorizer: 
+            name: UserPoolAuthorizer
+            scopes: artshare-api-serverless/updateProject
+            type: COGNITO_USER_POOLS
+            arn:
+              Fn::GetAtt:
+                - ArtShareUserPool
+                - Arn
 
   deleteProject:
     handler: api/project.delete
     memorySize: 128
     events:
       - http:
-        path: project/{id}
-        method: delete
-        request:
-          parameters:
-            querystrings:
-              accessToken: true
-            headers:
-              Content-Type: true
-              Authorization: true
-            paths:
-              id: true        
-        authorizer: 
-          name: UserPoolAuthorizer
-          type: COGNITO_USER_POOLS
-          arn:
-            Fn::GetAtt:
-              - ArtShareUserPool
-              - Arn        
+          path: project/{id}
+          method: delete
+          request:
+            parameters:
+              querystrings:
+                accessToken: true
+              headers:
+                Content-Type: true
+                Authorization: true
+              paths:
+                id: true        
+          authorizer: 
+            name: UserPoolAuthorizer
+            scopes: artshare-api-serverless/deleteProject
+            type: COGNITO_USER_POOLS
+            arn:
+              Fn::GetAtt:
+                - ArtShareUserPool
+                - Arn        
 
 resources:
   Resources:
     ArtShareProjectTable:
-      Type: 'AWS::DynamoDB::Table'
+      Type: AWS::DynamoDB::Table
       Properties:
-        BillingMode: PAY_PER_REQUEST
         AttributeDefinitions:
           - AttributeName: id
             AttributeType: S
         KeySchema: 
           - AttributeName: id
-            AttributeType: HASH
+            KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
         TableName: ArtShareProjectTable
     ArtShareUserPool:
-      Type: 'AWS::Cognito::UserPool'
+      Type: AWS::Cognito::UserPool
       Properties:
         MfaConfiguration: OFF
         UserPoolName: ArtShareUserPool
@@ -129,18 +134,21 @@ resources:
             RequireSymbols: false
             RequireUppercase: false
     ArtShareUserPoolResourceServer:
-      Type: 'AWS::Cognito::UserPoolResourceServer'
+      Type: AWS::Cognito::UserPoolResourceServer
       Properties:
-        Identifier: artshare-api
-        Name: artshare-api
+        Identifier: artshare-api-serverless
+        Name: ArtShare API Serverless
         Scopes:
-          - createProject: Create an existing project
-          - updateProject: Update an existing project
-          - deleteProject: Delete an existing project  
+          - ScopeDescription: Create a new project
+            ScopeName: createProject
+          - ScopeDescription: Update an existing project
+            ScopeName: updateProject
+          - ScopeDescription: Delete an existing project 
+            ScopeName: deleteProject
         UserPoolId:
           Ref: ArtShareUserPool         
     ArtShareUserPoolClient:
-      Type: 'AWS::Cognito::UserPoolClient'
+      Type: AWS::Cognito::UserPoolClient
       Properties:
         ClientName: ArtShareUserPoolClient
         GenerateSecret: true
@@ -153,14 +161,16 @@ resources:
           - email
           - openid
           - profile
-          - artshare-api/createProject  
-          - artshare-api/updateProject
-          - artshare-api/deleteProjet
+          - artshare-api-serverless/createProject  
+          - artshare-api-serverless/updateProject
+          - artshare-api-serverless/deleteProject
+        CallbackURLs:
+          - http://localhost/callback
     ArtShareUserPoolDomain:
-      Type:
+      Type: AWS::Cognito::UserPoolDomain
       Properties:
-        Domain: artsharetestserverless.auth.eu-west-2.amazoncognito.com
-      UserPoolId:
-        Ref: ArtShareUserPool 
+        Domain: artsharetestserverless
+        UserPoolId:
+          Ref: ArtShareUserPool 
 
 

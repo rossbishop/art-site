@@ -1,4 +1,4 @@
-service: database-clear
+service: artshare-api
 frameworkVersion: '2'
 
 provider:
@@ -88,8 +88,6 @@ functions:
           method: delete
           request:
             parameters:
-              querystrings:
-                accessToken: true
               headers:
                 Content-Type: true
                 Authorization: true
@@ -126,6 +124,10 @@ resources:
         UserPoolName: ArtShareUserPool
         UsernameAttributes:
           - email
+        AccountRecoverySetting:
+          RecoveryMechanisms:
+            - Name: verified_email
+              Priority: 1
         Policies:
           PasswordPolicy:
             MinimumLength: 8
@@ -166,6 +168,8 @@ resources:
           - artshare-api-serverless/deleteProject
         CallbackURLs:
           - http://localhost/callback
+        SupportedIdentityProviders:
+          - COGNITO
     ArtShareUserPoolDomain:
       Type: AWS::Cognito::UserPoolDomain
       Properties:

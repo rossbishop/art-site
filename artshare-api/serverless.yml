@@ -25,8 +25,6 @@ functions:
           schema:
             application/json: ${file(requestSchemas/createProject.json)}
           parameters:
-            querystrings:
-              accessToken: true
             headers:
               Content-Type: true
               Authorization: true
@@ -46,23 +44,11 @@ functions:
         path: project/{id}
         method: get
         request:
-          schema:
-            application/json: ${file(requestSchemas/readProject.json)}
           parameters:
-            querystrings:
-              accessToken: true
             headers:
               Content-Type: true
-              Authorization: true
             paths:
-              id: true        
-        authorizer: 
-          name: UserPoolAuthorizer
-          type: COGNITO_USER_POOLS
-          arn:
-            Fn::GetAtt:
-              - ArtShareUserPool
-              - Arn
+              id: true
 
   updateProject:
     handler: api/project.update
@@ -75,8 +61,6 @@ functions:
           schema:
             application/json: ${file(requestSchemas/updateProject.json)}
           parameters:
-            querystrings:
-              accessToken: true
             headers:
               Content-Type: true
               Authorization: true
@@ -98,8 +82,6 @@ functions:
         path: project/{id}
         method: delete
         request:
-          schema:
-            application/json: ${file(requestSchemas/deleteProject.json)}
           parameters:
             querystrings:
               accessToken: true
@@ -118,6 +100,67 @@ functions:
 
 resources:
   Resources:
+    ArtShareProjectTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema: 
+          - AttributeName: id
+            AttributeType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ArtShareProjectTable
     ArtShareUserPool:
       Type: 'AWS::Cognito::UserPool'
       Properties:
+        MfaConfiguration: OFF
+        UserPoolName: ArtShareUserPool
+        UsernameAttributes:
+          - email
+        Policies:
+          PasswordPolicy:
+            MinimumLength: 8
+            RequireLowercase: true
+            RequireNumbers: true
+            RequireSymbols: false
+            RequireUppercase: false
+    ArtShareUserPoolResourceServer:
+      Type: 'AWS::Cognito::UserPoolResourceServer'
+      Properties:
+        Identifier: artshare-api
+        Name: artshare-api
+        Scopes:
+          - createProject: Create an existing project
+          - updateProject: Update an existing project
+          - deleteProject: Delete an existing project  
+        UserPoolId:
+          Ref: ArtShareUserPool         
+    ArtShareUserPoolClient:
+      Type: 'AWS::Cognito::UserPoolClient'
+      Properties:
+        ClientName: ArtShareUserPoolClient
+        GenerateSecret: true
+        UserPoolId:
+          Ref: ArtShareUserPool
+        AllowedOAuthFlows:
+          - code
+        AllowedOAuthFlowsUserPoolClient: true
+        AllowedOAuthScopes:
+          - email
+          - openid
+          - profile
+          - artshare-api/createProject  
+          - artshare-api/updateProject
+          - artshare-api/deleteProjet
+    ArtShareUserPoolDomain:
+      Type:
+      Properties:
+        Domain: artsharetestserverless.auth.eu-west-2.amazoncognito.com
+      UserPoolId:
+        Ref: ArtShareUserPool 
+
+

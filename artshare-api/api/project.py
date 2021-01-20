@@ -53,7 +53,7 @@ def responseError(error):
 # create a new user project
 def create(event, context):
     # Check whether access token is valid and therefore allowed to post
-    user = checkToken(event['queryStringParameters']['accessToken'])
+    user = checkToken(event['headers']['Authorization'])
     # If an error is returned, simply return it
     if "response" in user:
         return responseError(user)
@@ -90,38 +90,41 @@ def create(event, context):
 # read existing user project
 def read(event, context):
     # Check whether access token is valid and therefore allowed to read
-    user = checkToken(event['queryStringParameters']['accessToken'])
+    #user = checkToken(event['queryStringParameters']['accessToken'])
+    #user = checkToken(event['headers']['Authorization'])
     # If an error is returned, simply return it
-    if "response" in user:
-        return responseError(user)
-    else:
-        response = table.get_item(
-            TableName=tableName,
-            Key={'id':str(event['pathParameters']['id'])}
-        )
-        return {
-            'isBase64Encoded': "false",
-            'statusCode': 200,
-            'headers':{
-                "Content-Type": "application/json"
-            },
-            'body': json.dumps(response['Item'])
-        }    
+    #if "response" in user:
+    #    return responseError(user)
+    #else:
+
+    response = table.get_item(
+        TableName=tableName,
+        Key={'id':str(event['pathParameters']['id'])}
+    )
+    return {
+        'isBase64Encoded': "false",
+        'statusCode': 200,
+        'headers':{
+            "Content-Type": "application/json"
+        },
+        'body': json.dumps(response['Item'])
+    }    
 
 # update existing user project
 def update(event, context):
     # Check whether access token is valid and therefore allowed to update
-    user = checkToken(event['queryStringParameters']['accessToken'])
-    
+    #user = checkToken(event['queryStringParameters']['accessToken'])
+    user = checkToken(event['headers']['Authorization'])
     # If an error is returned, simply return it
     if "response" in user:
         return responseError(user)
     # Otherwise, check whether the user owns the requested item or not
     else:
+        requestData = json.loads(event['body'])
         # First get the project
         response = table.get_item(
             TableName=tableName,
-            Key={'id':str(event['id'])}
+            Key={'id':str(event['pathParameters']['id'])}
         )
     
         # Then check the owner name is the same as that in the access token
@@ -129,7 +132,7 @@ def update(event, context):
             # Make the desired changes
             response = table.update_item(
                 TableName=tableName,
-                Key={'id':str(event['id'])},
+                Key={'id':str(event['pathParameters']['id'])},
                 UpdateExpression="set projectName = :pn, projectDescription = :pd, updatedAt = :t",
                 ExpressionAttributeValues={
                     ':pn': requestData['projectName'],
@@ -158,8 +161,8 @@ def update(event, context):
 
 def delete(event, context):
     # Check whether access token is valid and therefore allowed to update
-    user = checkToken(event['accessToken'])
-    
+    #user = checkToken(event['accessToken'])
+    user = checkToken(event['headers']['Authorization'])
     # If an error is returned, simply return it
     if "response" in user:
         return responseError(user)
@@ -168,15 +171,14 @@ def delete(event, context):
         # First get the project
         response = table.get_item(
             TableName=tableName,
-            Key={'id':str(event['id'])}
+            Key={'id':str(event['pathParameters']['id'])}
         )
-    
         # Then check the owner name is the same as that in the access token
         if response['Item']['owner'] == user['Username']:
             # Make the deletion
             response = table.delete_item(
                 TableName=tableName,
-                Key={'id':str(requestData['id'])}
+                Key={'id':str(event['pathParameters']['id'])}
             )
             return {
                 'isBase64Encoded': "false",

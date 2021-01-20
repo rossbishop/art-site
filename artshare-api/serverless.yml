@@ -1,0 +1,123 @@
+service: database-clear
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: python3.8
+  region: eu-west-2
+  stage: dev
+  iamRoleStatements:
+    - Effect: 'Allow'
+      Action:
+        - 'dynamodb:*'
+      Resource:
+        - '*'
+
+functions:
+  createProject:
+    handler: api/project.create
+    memorySize: 128
+    events:
+      - http:
+        path: project
+        method: post
+        request:
+          schema:
+            application/json: ${file(requestSchemas/createProject.json)}
+          parameters:
+            querystrings:
+              accessToken: true
+            headers:
+              Content-Type: true
+              Authorization: true
+        authorizer: 
+          name: UserPoolAuthorizer
+          type: COGNITO_USER_POOLS
+          arn:
+            Fn::GetAtt:
+              - ArtShareUserPool
+              - Arn
+
+  readProject:
+    handler: api/project.read
+    memorySize: 128
+    events:
+      - http:
+        path: project/{id}
+        method: get
+        request:
+          schema:
+            application/json: ${file(requestSchemas/readProject.json)}
+          parameters:
+            querystrings:
+              accessToken: true
+            headers:
+              Content-Type: true
+              Authorization: true
+            paths:
+              id: true        
+        authorizer: 
+          name: UserPoolAuthorizer
+          type: COGNITO_USER_POOLS
+          arn:
+            Fn::GetAtt:
+              - ArtShareUserPool
+              - Arn
+
+  updateProject:
+    handler: api/project.update
+    memorySize: 128
+    events:
+      - http:
+        path: project/{id}
+        method: put
+        request:
+          schema:
+            application/json: ${file(requestSchemas/updateProject.json)}
+          parameters:
+            querystrings:
+              accessToken: true
+            headers:
+              Content-Type: true
+              Authorization: true
+            paths:
+              id: true          
+        authorizer: 
+          name: UserPoolAuthorizer
+          type: COGNITO_USER_POOLS
+          arn:
+            Fn::GetAtt:
+              - ArtShareUserPool
+              - Arn
+
+  deleteProject:
+    handler: api/project.delete
+    memorySize: 128
+    events:
+      - http:
+        path: project/{id}
+        method: delete
+        request:
+          schema:
+            application/json: ${file(requestSchemas/deleteProject.json)}
+          parameters:
+            querystrings:
+              accessToken: true
+            headers:
+              Content-Type: true
+              Authorization: true
+            paths:
+              id: true        
+        authorizer: 
+          name: UserPoolAuthorizer
+          type: COGNITO_USER_POOLS
+          arn:
+            Fn::GetAtt:
+              - ArtShareUserPool
+              - Arn        
+
+resources:
+  Resources:
+    ArtShareUserPool:
+      Type: 'AWS::Cognito::UserPool'
+      Properties:

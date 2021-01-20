@@ -1,0 +1,10 @@
+{
+    "$schema" : "http://json-schema.org/draft-04/schema#",
+    "title" : "Create Project Schema",
+    "type" : "object",
+    "required" : ["projectName", "projectDescription"],
+    "properties" : {
+      "projectName" : { "type" : "string" },
+      "projectDescription" : { "type" : "string"}
+    }
+  }
